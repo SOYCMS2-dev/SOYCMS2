@@ -1,0 +1,98 @@
+<div id="main-window1" class="main-window">
+	
+<div class="window-title">
+	<h2 class="title-text">ラベルの削除</h2>
+</div>
+
+<div class="window-content">
+
+<div id="main-section1" class="section">
+
+
+					<ul class="crumbs">
+						<li><a soy:link="./" title="管理画面トップ" class="home_btn">管理画面トップ</a></li>
+						<li><a soy:link="page/label">ラベル・タグの管理</a></li>
+						<li><a soy:id="detail_link"><!-- soy:id="label_name_text*" /--> ラベルの詳細</a></li>
+						<li>ラベルの削除</li>
+					</ul>
+	
+
+		
+	<div class="content">
+		
+		<p class="intro">このラベルを削除してもよろしいですか？この操作は戻せません。</p>
+
+		<form soy:id="form">
+			
+		<div class="form-section">
+			<div class="label">
+				<h4>ラベル名称</h4>
+			</div>
+			<div class="item">
+				<p class="l"><!-- soy:id="label_name_text" /--></p>
+			</div>
+		</div>
+		<div class="form-section">
+			<div class="label">
+				<h4>ラベル説明</h4>
+			</div>
+			<div class="item">
+				<!-- soy:id="label_description_text" /-->
+			</div>
+		</div>
+		
+		<div class="form-btn ce">
+			<p class="intro">
+				<input type="submit" value="削除" class="l-btn" />
+			</p>
+		</div>
+		
+		</form>
+	</div><!-- // .content -->
+</div>
+</div>
+
+</div>
+
+<script soy:src="../common/wysiwyg/default/colorpicker/js/colorpicker.js" type="text/javascript"></script>
+<script type="text/javascript">
+var update_label_color_preview = function(){
+	$("#color_preview").css({
+		backgroundColor : $("#label_bgcolor").val(),
+		color : $("#label_color").val()
+	});
+};
+update_label_color_preview();
+
+$('.colorSelector').ColorPicker({
+	onBeforeShow : function(colpkr){
+		color = $(this).find("input").val();
+		$(this).ColorPickerSetColor(color.replace("#","").toLowerCase());
+	},
+	onShow: function (colpkr) {
+		$(colpkr).fadeIn(100);
+		return false;
+	},
+	onHide: function (colpkr) {
+		$(colpkr).fadeOut(100);
+		return false;
+	},
+	onChange: function (hsb, hex, rgb) {
+		ele = $(this).data('colorpicker').el;
+		$(ele).find("input").val('#' + hex);
+		
+		update_label_color_preview();
+	}
+});
+
+
+var url = SOYCMS_ROOT_URL + "common/wysiwyg/default/colorpicker/css/colorpicker.css";
+	var heads = document.getElementsByTagName("head");
+	
+	if(heads.length > 0){
+		link = document.createElement("link");
+		link.setAttribute("rel","stylesheet");
+		link.setAttribute("href",url); 
+		heads[0].appendChild(link);
+	}
+</script>

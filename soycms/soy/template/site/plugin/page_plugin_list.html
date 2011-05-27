@@ -1,0 +1,50 @@
+<div id="main-window2" class="main-window"> 
+				
+<div class="window-title"> 
+	<h2>プラグイン管理</h2> 
+</div> 
+
+<div class="window-content"> 
+
+	<div class="form-section section">
+		<div class="title">
+			<h3>全てのプラグイン</h3>
+		</div>
+		<div class="content">
+			
+			<table class="list-table sortable"> 
+				<thead> 
+					<tr> 
+						<th width="13%" class="s-cell" scope="col">状態</th>
+						<th width="67%" scope="col">名称</th>
+						<th width="20%" class="s-cell" scope="col">設定</th> 
+					</tr> 
+				</thead> 
+				<tbody> 
+					<!-- soy:id="plugin_list" -->
+					<tr>
+						<td>
+							<!-- soy:id="status_text" /-->
+						</td>
+						<td>
+							<p class="xxl"><!-- soy:id="plugin_name" -->プラグイン名<!-- /soy:id="plugin_name" --></p>
+							<p class="s"><!-- soy:id="plugin_description" /--></p>
+						</td>
+						<td>
+							<a soy:id="detail_link" class="sh-btn"><em>詳細</em></a>
+						</td> 
+					</tr> 
+					<!-- /soy:id="plugin_list" --> 
+				</tbody> 
+			</table>
+			
+		</div><!-- // .content -->
+	</div><!-- //. section -->
+
+	
+	
+</div> 
+<!--  // .window-content --> 
+</div> 
+<!--  // #main-window2 -->
+

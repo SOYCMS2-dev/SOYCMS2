@@ -1,0 +1,102 @@
+<div id="main-window1" class="main-window"> 
+					
+	<div class="window-title"> 
+		<h2>コンテンツのインポート</h2>
+	</div> 
+	
+	<div class="window-content">
+		<form soy:id="form"> 
+		
+		<div class="section">
+			<div class="title">
+				<h3>コンテンツのインポート</h3>
+			</div>
+			<div class="content">
+				<p soy:id="zip_error_message" class="error xxl">
+					この環境ではコンテンツのインポートを使用出来ません。Zip拡張を有効にして下さい。
+				</p>
+				
+				<p class="intro">インポートする内容を設定して下さい</p>
+				
+				<div class="form-section">
+					<div class="label">
+						<h4>コンテンツ</h4>
+					</div>
+					<div class="item">
+						<p>
+							<input type="checkbox" name="entries" id="import_entries" value="1" checked />
+							<label for="import_entries">記事をインポートする(<!-- soy:id="entry_count" /-->) - ディレクトリの設定もインポートされます</label>
+						</p>
+						<p>
+							<input type="checkbox" name="attachments" id="import_attachments" value="1" checked />
+							<label for="import_attachments">添付ファイルをインポートする</label>
+						</p>
+					</div>
+				</div>
+				
+				<div class="form-section">
+					<div class="label">
+						<h4>ディレクトリ</h4>
+					</div>
+					<div class="item">
+						<p>
+							<input type="checkbox" name="config" id="import_config" value="1" checked />
+							<label for="import_config">ディレクトリの設定をインポートする</label>
+						</p>
+					</div>
+				</div>
+				
+				
+				
+				<div class="form-btn ce">
+					<input type="submit" name="uncompress" class="l-btn" value="インポートの実行" onclick="return confirm('この処理は戻せません。よろしいですか？');" />
+				</div>
+		
+				
+			</div> 
+		</div> 
+		<!--  // .section -->
+		
+		</form>
+
+	</div> 
+	<!--  // .window-content --> 
+</div> 
+<!--  // #main-window1 -->
+
+<style type="text/css">
+.check_list_wrap li{
+	padding:8px;
+	margin:2px;
+	background-color:#eee;
+}
+.check_list_wrap li label{
+	padding-left:5px;
+	font-weight:bold;
+}
+li.checked_list{
+	background-color:#ffdf85;
+}
+#download_message{
+	border:solid 3px #8f8f90;
+	padding:5px;
+}
+</style> 
+<script type="text/javascript">
+$(function(){
+	$(".check_list").each(function(){
+		if($(this).find("input[type=checkbox]").attr("checked")){
+			$(this).addClass("checked_list");
+		}else{
+			$(this).removeClass("checked_list");
+		}
+	});
+	$(".check_list_wrap .check_list input[type=checkbox]").bind("change",function(){
+		$(this).parents("li").toggleClass("checked_list");
+	});
+	$(".toggle_check").bind("change",function(){
+		$(this).parents(".check_list_wrap").find(".check_list input[type=checkbox]").trigger("change");
+	});
+});
+</script>
+

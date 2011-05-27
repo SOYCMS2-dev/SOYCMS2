@@ -1,0 +1,253 @@
+<div class="main-window"> 
+<div class="window-title"> 
+	<h2>ようこそ SOY CMS2へ</h2>
+</div> 
+
+
+<div class="window-content content">
+					
+	<iframe name="target_fr" style="width:0px;height:0px;border:0;" src="about:blank;"></iframe>
+	<form id="init_form" target="target_fr" soy:id="init_form">	
+	
+	<div id="wizard1" class="section content">
+	
+	<!-- soy:id="php_version_error" -->	
+	<div class="form-section">
+		<div class="item">
+			<p class="xxl" style="color:red;">PHPのバージョンが古いか、必須モジュールが足りないためインストールが完了しない可能性があります。(<!-- soy:id="php_version" /-->)</p>
+			<p>PHP5.2以上であること、及び以下のモジュールがあるか確認して下さい</p>
+			<ul>
+				<!-- soy:id="pdo_error" -->
+				<li>PDO</li>
+				<!-- /soy:id="pdo_error" -->
+				<!-- soy:id="sqlite_error" -->
+				<li>PDO-SQLite</li>
+				<!-- /soy:id="sqlite_error" -->
+				<!-- soy:id="mysql_error" -->
+				<li>PDO-MySQL</li>
+				<!-- /soy:id="mysql_error" -->
+				<!-- soy:id="refelection_error" -->
+				<li>Standard PHP Library (SPL)</li>
+				<!-- /soy:id="refelection_error" -->
+				<!-- soy:id="mb_error" -->
+				<li>mbstring</li>
+				<!-- /soy:id="mb_error" -->
+				<!-- soy:id="json_error" -->
+				<li>JSON</li>
+				<!-- /soy:id="json_error" -->
+				<!-- soy:id="simplexml_error" -->
+				<li>SimpleXML</li>
+				<!-- /soy:id="simplexml_error" -->
+			</ul>
+		</div>
+	</div>
+	<!-- /soy:id="php_version_error" -->
+	
+	<!-- soy:id="permission_error" -->	
+	<div class="form-section">
+		<div class="item">
+			<p class="xl" style="color:red;">
+			書き込み権限が無いため、インストールが完了しない可能性があります。以下
+			</p>
+			<p>以下のディレクトリの書き込み権限を確認して下さい</p>
+			<ul>
+				<li><!-- soy:id="root_path*" /-->soy/conf/user/</li>
+				<li><!-- soy:id="root_path*" /-->content/</li>
+				<li><!-- soy:id="root_path*" /-->tmp/</li>
+			</ul>
+		</div>
+	</div>
+	<!-- /soy:id="permission_error" -->
+	
+	
+	
+	<div id="mod_rewrite_fix_error" class="form-section ce" style="display:none;">
+		<div class="item">
+			<p class="xl error_access" style="color:red;">
+			お使いの環境では.htaccessの設定が必要です。
+			</p>
+			<p class="xl check_access" style="display:none;">
+				<strong>→設定が確認出来ました。</strong>
+			</p>
+			<p>
+				<a href="http://www.soycms2.net/manual/faq/multi_domain_htaccess.html" target="_blank">マルチドメイン環境での.htaccessの設定について(SOY CMS2公式サイト)</a>
+				<br />を参考に設定を行い、この画面を<a href="javascript:location.reload();">リロード</a>してください。
+			</p>
+			
+			
+		</div>
+	</div>
+		
+	<div class="title">
+		<h3>設定ファイルの配置場所</h3>
+	</div>
+	
+	<div class="form-section">
+		<div class="item">
+			<p class="intro">※サーバーによってはドキュメントルートより上に設置することも可能です。</p>
+			<p><input id="config_dir_input" class="m-area liq-area" type="text" soy:id="config_dir" name="post1-2" value="" /></p>
+		</div>
+		
+	</div>
+	
+	<div class="form-btn ce break">
+		<input type="button" value="次へ" class="l-btn" id="post1-btn1" name="post1-btn1" onclick="check_wizard1();"/>
+	</div>
+	
+	<p class="ce"><a target="_blank" calss="external" href="http://www.soycms2.net/manual/servers/">レンタルサーバー別のインストールマニュアル(SOY CMS2公式サイト)</a></p>
+	
+		
+	
+	</div><!-- /wizard1 -->
+	
+	<div id="wizard2" class="section" style="display:none;">
+	
+	<div class="title">
+		<h3>初期管理者の追加</h3>
+	</div>
+	
+	<div class="form-section">
+		<div class="label">
+			<h4><label for="user_id">管理者ID</label></h4>
+		</div>
+		<div class="item">
+			<p><input class="m-area liq-area" type="text" soy:id="user_id" id="user_id_input" value="" /></p>
+		</div>
+	</div>
+	
+	<div class="form-section">
+		<div class="label">
+			<h4><label for="password_input">パスワード</label></h4>
+		</div>
+		<div class="item">
+			<p><input class="m-area liq-area" type="password" soy:id="password" id="password_input" value="" /></p>
+		</div>
+		<div class="label">
+			<h4><label for="password_input">パスワード(確認)</label></h4>
+		</div>
+		<div class="item">
+			<p><input class="m-area liq-area" type="password" soy:id="password_confirm" id="password_confirm" value="" /></p>
+		</div>
+	</div>
+	
+	<div class="form-section intro">
+		<div class="label">
+			<h4><label for="mail_address_input">管理者メールアドレス　※パスワードリマインダ機能を使う場合は必須入力</label></h4>
+		</div>
+		<div class="item">
+			<p><input class="m-area liq-area" type="text" soy:id="mail_address" id="mail_address_input" value="" /></p>
+		</div>
+	</div>
+	
+	<div class="form-btn ce">
+		<p class="intro">
+			<a soy:link="mail" class="m-btn" onclick="common_open_popup($(this).attr('href'));return false;">メールサーバーの設定</a>
+		</p>
+		
+		<input class="l-btn" type="button" value="戻る" id="post1-btn1" name="post1-btn1" onclick="back_wizard1();"/>
+		<input class="l-btn" type="button" value="次へ" id="post1-btn1" name="post1-btn1" onclick="finish_wizard();"/>
+	</div>
+	
+	</div><!-- /wizard2 -->
+	
+	<div id="initializing" class="section" style="display:none;">
+		<p class="l">現在初期化中</p>
+	</div>
+	
+	<input type="hidden" id="mode" name="mode" value="null" />
+	<input type="hidden" id="notify" name="notify" value="null" />
+	
+	</form soy:id="init_form">
+	
+	</div><!-- /window-content -->
+
+</div>
+</div>
+
+
+<script type="text/javascript">
+function check_wizard1(){
+	
+	$("#mode").val("check_config_dir");
+	$("#notify").val("wizard1_notify");
+	$("#init_form").submit();
+	
+}
+
+function wizard1_notify(value){
+	if (value == "-1") {
+		alert($("#config_dir_input").val() + "へ書き込めませんでした。配置場所を確認してください。");
+		return;
+	}
+	
+	$('#wizard1').hide();
+	$('#wizard2').show();
+	$("#post1-2").val(value);
+}
+
+function back_wizard1(){
+	$('#wizard1').show();
+	$('#wizard2').hide();
+}
+
+function finish_wizard(){
+	if ($("#password_confirm").val().length > 0 &&
+	$("#password_input").val().length > 0 &&
+	$("#password_confirm").val() == $("#password_input").val() &&
+	$("#user_id_input").val().length > 0) {
+	
+		$("#mode").val("init");
+		$("#notify").val("wizard_finish");
+		$('#wizard2').hide();
+		$('#initializing').show();
+		
+		$("#init_form").submit();
+	}
+}
+
+function wizard_finish(value){
+	if(value == -1){
+		alert("initialize is failed.(read init.log)");
+		return;
+	}
+	
+	//reload
+	location.href=location.pathname + "?inited";
+}
+
+$(function(){
+	$("#password_confirm").bind("blur",function(){
+		if($(this).val() != $("#password_input").val()){
+			if(!$(this).hasClass("error_password")){
+				$(this).addClass("error_password");
+				$(this).focus();
+				return false;
+			}
+		}
+	},false).bind("keydown",function(){
+		$(this).removeClass("error_password");
+	});
+	
+	//multi domain check
+	$.ajax({
+		url : "./check",
+		success : function(req){
+			if(!req.match(/^0$/)){
+				$("#mod_rewrite_fix_error").show();
+			}
+			
+			$("#mod_rewrite_fix_error .check_access").show();
+			$("#mod_rewrite_fix_error .error_access").css("color","black");
+		},
+		error : function(){
+			$("#mod_rewrite_fix_error").show();
+		}
+	});
+});
+</script>
+<style type="text/css">
+.error_password{
+	background-color:#FF0000;
+}
+</style>
+

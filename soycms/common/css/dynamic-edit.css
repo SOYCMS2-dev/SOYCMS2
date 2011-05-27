@@ -1,0 +1,286 @@
+@charset "utf-8";
+/* author：Lebe Inc. */
+/* SOY CMS2 */
+
+#soycms_dynamic_edit_menu {
+	position: relative;
+	width:100%;
+	min-height:28px;
+	background: #D5D5D5 url(../img/dynamic-edit-menu-bg3.gif) left bottom repeat-x;
+	color: #FFF;
+	font-family: "メイリオ",Meiryo,"ヒラギノ角ゴ Pro W3","Hiragino Kaku Gothic Pro","ＭＳ Ｐゴシック","MS P Gothic", Osaka,Verdana,Helvetica,sans-serif;
+	text-align:left;
+}
+
+* html #soycms_dynamic_edit_menu {
+	height:28px;
+	font-family: "ＭＳ Ｐゴシック","MS P Gothic", Verdana,Helvetica,sans-serif;
+}
+
+*:first-child+html #soycms_dynamic_edit_menu * {
+	letter-spacing: 0;
+}
+
+#soycms_dynamic_edit_menu p {
+	position: relative;
+	float: left;
+	line-height: 1.4;
+	padding: 5px 5px 5px 3px;
+	color: #000;
+	font-size: 12px;
+	font-weight: bold;
+}
+
+#soycms_dynamic_edit_menu ul {
+	position: relative;
+	float: right;
+	line-height: 0;
+	margin: 2px 0 0 0;
+	padding: 0;
+	list-style: none;
+}
+
+#soycms_dynamic_edit_menu ul li {
+	display: inline;
+	float: left;
+	height: 24px;
+	line-height: 24px;
+	margin: 0 3px 0 0;
+	padding: 0 1px 0 0;
+	background: url(../img/dynamic-edit-menu-bg2.gif) right top no-repeat;
+	font-size: 12px;
+	list-style: none;
+}
+
+#soycms_dynamic_edit_menu ul li a, #soycms_dynamic_edit_menu ul li em {
+	display: inline;
+	float: left;
+	height: 24px;
+	background: url(../img/dynamic-edit-menu-bg1.gif) 0 0 no-repeat;
+}
+
+#soycms_dynamic_edit_menu ul li a, #soycms_dynamic_edit_menu ul li a:link, #soycms_dynamic_edit_menu ul li a:visited {
+	color: #000;
+	text-decoration: none;
+}
+
+#soycms_dynamic_edit_menu ul li a:hover, #soycms_dynamic_edit_menu ul li a:focus, #soycms_dynamic_edit_menu ul li a:active {
+	color: #FF6600;
+	text-decoration: none;
+}
+
+#soycms_dynamic_edit_menu ul li a em {
+	overflow: hidden;
+	padding: 0 7px 0 23px;
+	background-image: url(../img/dynamic-edit-menu-icon.gif);
+	background-position: 1px 0;
+	background-repeat: no-repeat;
+	cursor: pointer;
+}
+
+#soycms_dynamic_edit_menu ul li.soycms_dynamic_edit_menu-directory_edit a em {
+	background-position: 1px -24px;
+}
+
+#soycms_dynamic_edit_menu ul li.soycms_dynamic_edit_menu-template_edit a em {
+	background-position: 1px -48px;
+}
+
+#soycms_dynamic_edit_menu ul li.soycms_dynamic_edit_menu_preview a em {
+	background-position: 1px -72px;
+}
+
+#soycms_dynamic_edit_menu ul li.soycms_dynamic_edit_close a em {
+	width: 23px;
+	overflow: hidden;
+	padding: 0;
+	background-position: 1px -96px;
+	text-indent: -10000em;
+}
+
+#soycms_dynamic_edit_menu ul li a:hover em, #soycms_dynamic_edit_menu ul li a:focus em, #soycms_dynamic_edit_menu ul li a:active em {
+	background-position: 1px -120px;
+}
+
+#soycms_dynamic_edit_menu ul li.soycms_dynamic_edit_menu-directory_edit a:hover em, #soycms_dynamic_edit_menu ul li.soycms_dynamic_edit_menu-directory_edit a:focus em, #soycms_dynamic_edit_menu ul li.soycms_dynamic_edit_menu-directory_edit a:active em {
+	background-position: 1px -144px;
+}
+
+#soycms_dynamic_edit_menu ul li.soycms_dynamic_edit_menu-template_edit a:hover em, #soycms_dynamic_edit_menu ul li.soycms_dynamic_edit_menu-template_edit a:focus em, #soycms_dynamic_edit_menu ul li.soycms_dynamic_edit_menu-template_edit a:active em {
+	background-position: 1px -168px;
+}
+
+#soycms_dynamic_edit_menu ul li.soycms_dynamic_edit_menu_preview a:hover em, #soycms_dynamic_edit_menu ul li.soycms_dynamic_edit_menu_preview a:focus em, #soycms_dynamic_edit_menu ul li.soycms_dynamic_edit_menu_preview a:active em {
+	background-position: 1px -192px;
+}
+
+#soycms_dynamic_edit_menu ul li.soycms_dynamic_edit_close a:hover em, #soycms_dynamic_edit_menu ul li.soycms_dynamic_edit_close a:focus em, #soycms_dynamic_edit_menu ul li.soycms_dynamic_edit_close a:active em {
+	background-position: 1px -216px;
+}
+
+
+.soycms_item_wrap {	
+	overflow:hidden;
+	padding: 1px;
+	border:1px dotted #999;
+}
+
+.soycms_item_wrap .soycms_wrap_title {
+	position: relative;
+	background-color:#666;
+	color: #FFF;
+	font-family: "メイリオ",Meiryo,"ヒラギノ角ゴ Pro W3","Hiragino Kaku Gothic Pro","ＭＳ Ｐゴシック","MS P Gothic", Osaka,Verdana,Helvetica,sans-serif;
+	text-align:left;
+}
+
+* html .soycms_item_wrap .soycms_wrap_title {
+	font-family: "ＭＳ Ｐゴシック","MS P Gothic", Verdana,Helvetica,sans-serif;
+}
+
+*:first-child+html .soycms_item_wrap .soycms_wrap_title * {
+	letter-spacing: 0;
+}
+
+.soycms_item_wrap .soycms_wrap_title p {
+	line-height: 1.2 !important;
+	margin: 0 !important;
+	padding: 5px !important;
+	border: none !important;
+	background: none !important;
+	color: #FFF !important;
+	font-size: 12px !important;
+	font-weight:bold !important;
+	text-align:left !important;
+}
+
+.soycms_item_wrap .soycms_wrap_title ul {
+	position: relative !important;
+	float: right !important;
+	top: 4px !important;
+	width: 36px !important;
+	height: 16px !important;
+	line-height: 0 !important;
+	margin: 0 !important;
+	padding: 0 !important;
+	border: none !important;
+	background: none !important;
+	text-align:left !important;
+	list-style: none !important;
+}
+
+.soycms_item_wrap .soycms_wrap_title ul li {
+	display: inline !important;
+	float: right !important;
+	width: 16px !important;
+	height: 16px;
+	margin: 0 2px 0 0 !important;
+	padding: 0 !important;
+	border: none !important;
+	background: none !important;
+	text-align:left !important;
+	list-style: none !important;
+}
+
+.soycms_item_wrap .soycms_wrap_title ul li a {
+	display: block !important;
+	width: 16px !important;
+	height: 16px !important;
+	overflow: hidden !important;
+	text-indent: -10000em !important;
+	background-image: url(../img/dynamic-edit-titlemenu.gif) !important;
+	background-position: 0 0 !important;
+	background-repeat: no-repeat !important;
+}
+
+.soycms_item_wrap .soycms_wrap_title ul li.soycms_item_wrap_menu_edit a {
+	background-position: -16px 0 !important;
+}
+
+.soycms_item_wrap .soycms_wrap_title ul li a:hover, .soycms_item_wrap .soycms_wrap_title ul li a:focus, .soycms_item_wrap .soycms_wrap_title ul li a:active {
+	background-position: 0 -16px !important;	
+}
+
+.soycms_item_wrap .soycms_wrap_title ul li.soycms_item_wrap_menu_edit a:hover, .soycms_item_wrap .soycms_wrap_title ul li.soycms_item_wrap_menu_edit a:focus, .soycms_item_wrap .soycms_wrap_title ul li.soycms_item_wrap_menu_edit a:active {
+	background-position: -16px -16px !important;	
+}
+
+
+.soycms_item_wrap_navigation {
+	border: 1px dotted #669900;
+}
+
+.soycms_item_wrap_navigation:hover{
+	padding: 0;
+	border: 2px solid #669900;
+}
+
+.soycms_item_wrap_navigation > .soycms_wrap_title{
+	background: #669900;
+}
+
+.soycms_item_wrap_library {
+	border: 1px dotted #3399CC;
+}
+
+.soycms_item_wrap_library:hover{
+	padding: 0;
+	border: 2px solid #3399CC;
+}
+
+.soycms_item_wrap_library > .soycms_wrap_title{
+	background: #3399CC;
+}
+
+.soycms_item_wrap_block {
+	border: 1px dotted #EC799E;
+}
+
+.soycms_item_wrap_block:hover{
+	padding: 0;
+	border: 2px solid #EC799E;
+}
+
+.soycms_item_wrap_block > .soycms_wrap_title{
+	background: #EC799E;
+}
+
+.soycms_item_wrap_entry {
+	border: 1px dotted #F4970B;
+}
+
+.soycms_item_wrap_entry:hover{
+	padding: 0;
+	border: 2px solid #F4970B;
+}
+
+.soycms_item_wrap_entry > .soycms_wrap_title {
+	background: #F4970B;
+}
+
+/****---------- clearfix ----------****/
+#soycms_dynamic_edit_menu,
+.soycms_item_wrap .soycms_wrap_title {	
+	display: inline-block; 
+}
+
+/*\*/
+* html .soycms_item_wrap .soycms_wrap_title:after {
+	height: 1px;
+}	
+
+#soycms_dynamic_edit_menu,
+.soycms_item_wrap .soycms_wrap_title { 
+	display: block; 
+}
+
+/**/
+#soycms_dynamic_edit_menu:after,
+.soycms_item_wrap .soycms_wrap_title:after {
+	display: block; 
+	clear: both; 
+	height: 0;
+	line-height:0; 
+	visibility: hidden;	
+	font-size:0.1em;
+	content: "."; 
+}

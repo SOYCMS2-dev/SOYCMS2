@@ -1,0 +1,76 @@
+@charset "utf-8";
+/* author：Lebe Inc. */
+/* SOY CMS2 */
+
+#dynamic-edit, #dynamic-edit p {
+	margin: 0 !important;
+	padding: 3px 0 !important;
+}
+
+#dynamic-edit p {
+	line-height: 1.2;
+	font-size: 12px !important;
+}
+
+#dynamic-edit p a {
+	display: inline;
+	float: right;
+	height: auto !important;
+	height: 10px;
+	min-height: 10px;
+	padding: 5px 5px 3px 3px;
+	background: #F93;
+	color: #FFF;
+	font-weight: bold;
+	text-decoration: underline;
+}
+
+#dynamic-edit p a:link, #dynamic-edit p a:visited {
+	color: #FFF;
+}
+
+#dynamic-edit p a:hover, #dynamic-edit p a:focus, #dynamic-edit p a:active {
+	background: #F63;
+	color: #FFF;
+}
+
+#dynamic-edit p a strong {
+	display: inline;
+	float: left;
+	height: 100%;
+	padding: 0 0 0 20px;
+	background: url(../img/site-dynamic-edit-icon.gif) 0 0 no-repeat;
+	font-weight: bold;
+}
+
+#dynamic-edit p a:hover strong, #dynamic-edit p a:focus strong, #dynamic-edit p a:active strong {
+	background: url(../img/site-dynamic-edit-icon.gif) 0 -200px no-repeat;
+}
+
+
+/****---------- clearfix ----------****/
+#dynamic-edit p {	
+	display: inline-block; 
+}
+
+/*\*/
+* html #dynamic-edit p {
+	height: 1px;
+}	
+
+#dynamic-edit p { 
+	display: block; 
+}
+
+/**/
+#dynamic-edit p:after {
+	display: block; 
+	clear: both; 
+	height: 0;
+	line-height:0; 
+	visibility: hidden;	
+	font-size:0.1em;
+	content: "."; 
+}
+
+

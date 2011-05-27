@@ -1,0 +1,182 @@
+<div id="main-window1" class="main-window">
+	
+<div class="window-title">
+	<h2 class="title-text">ラベル用カスタムフィールド設定</h2>
+</div>
+
+<div class="window-content">
+	
+<div class="section">
+
+					<ul class="crumbs">
+						<li><a soy:link="./" title="管理画面トップ" class="home_btn">管理画面トップ</a></li>
+						<li><a soy:link="page/label">ラベル・タグの管理</a></li>
+						<li>ラベル用カスタムフィールド設定</li>
+					</ul>
+
+	
+	<div class="title"> 
+		<h3>カスタムフィールド項目の追加</h3> 
+	</div>	
+	<div class="content">
+		
+	
+	<form soy:id="add_form"> 
+				
+		<div class="form-section"> 
+		
+			
+			
+			<table class="form-table"> 
+				<tr> 
+					<th scope="row"><label for="post1-1">種別</label></th> 
+					<td>
+						<select soy:id="field_type_select"></select>	
+					</td>
+					 
+					<th scope="row"><label for="post1-1">項目ID</label></th> 
+					<td><input soy:id="field_id_input" type="text" id="post1-1" name="post1-1" value="" class="s-area liq-area" placeholder="c-name" /></td> 
+				
+					<th scope="row"><label for="post1-2">ラベル</label></th> 
+					<td><input soy:id="field_label_input" type="text" id="post1-2" name="post1-2" value="" class="s-area liq-area" placeholder="項目名" /></td> 
+				</tr> 
+			</table>
+			
+			<div class="form-btn ce break"> 
+				<input type="submit" value="追加" id="post1-submit" name="add" class="l-btn" /> 
+			</div> 
+		</div>
+		
+	</form>
+
+
+		<p class="intro ce">
+			<a class="s-btn" onclick="return common_open_popup($(this).attr('href'));" soy:link="page/field/code?config=label"><em>テンプレート用HTML生成</em></a>		
+		</p>
+
+
+	</div>
+	
+</div>
+
+<div class="section"> 
+	<div class="title">
+		<h3>カスタムフィールド一覧</h3>
+		
+		<p class="fr">
+			<a class="popup-btn s-btn" href="#field_order">表示順を変更する</a>
+		</p> 
+	</div>	
+	<div class="content"> 
+		<!-- soy:id="field_list" -->
+			<h4><!-- soy:id="list_field_name" /--> - (<!-- soy:id="list_field_id*" /-->)</h4>
+			<a name="field_<!-- soy:id="list_field_id*"/-->"></a>
+			
+			<div soy:id="column_config">
+			<form soy:id="config_form">
+				
+				<table class="form-table"> 
+					<tr> 
+						<th scope="row"><label for="post1-1">種別</label></th> 
+						<td>
+							<select soy:id="child_field_type_select"></select>	
+						</td>
+					</tr>
+					<tr>	 
+						<th scope="row"><label for="post1-1">項目ID</label></th> 
+						<td>
+							<input soy:id="field_id_old" type="hidden" />
+							<input soy:id="field_id" type="text" id="post1-1" name="post1-1" value="" class="s-area liq-area" />
+						</td> 
+					</tr>
+					<tr>
+						<th scope="row">名前</th> 
+						<td>
+							<input soy:id="field_name" type="text" value="" class="s-area liq-area" />
+						</td> 
+					</tr>
+					<tr>
+						<th scope="row">ラベル</th> 
+						<td>
+							<input soy:id="field_label" type="text" value="" class="s-area liq-area" />
+						</td> 
+					</tr>
+					<tr>	 
+						<th scope="row">説明</th> 
+						<td>
+							<textarea class="m-area liq-area" soy:id="field_description" rows="3"></textarea>
+						</td> 
+					</tr> 
+					<tr>
+						<th scope="row">オプション</th> 
+						<td>
+							<textarea soy:id="field_option" type="text" value="" class="s-area liq-area"></textarea>
+						</td> 
+					</tr>
+					<tr>
+						<th scope="row">初期値</th> 
+						<td>
+							<input soy:id="field_default" type="text" value="" class="s-area liq-area" />
+						</td> 
+					</tr>
+				</table>
+				
+				<div class="form-btn ce">
+					<input type="submit" class="m-btn" name="save_config" value="保存" />
+					<input type="submit" value="削除" id="post1-submit" name="remove" class="m-btn ri" onclick="return confirm('この項目を削除して良いですか？');" />
+				</div>
+				
+			</form>
+		</div>
+		<!-- /soy:id="field_list" -->
+		
+		<div id="field_order" class="popup-content" style="display:none;">
+			<h3>表示順の変更</h3>
+			<form soy:id="list_form">
+				<div class="form-btn ce">
+					<input type="submit" class="m-btn-red" name="save_orders" value="保存" />
+				</div>
+				
+				<table class="list-table">
+					<thead> 
+						<tr>
+							<th scope="col" width="13%">種別</th> 
+							<th scope="col">項目ID</th>
+							<th scope="col">ラベル</th>
+							<th width="13%;" scope="col">表示順</th>
+						</tr>
+					</thead>
+					<tbody>
+					<!-- soy:id="field_list*" -->
+					<tr>
+						<td>
+							<!-- soy:id="list_field_type" /-->
+						</td>
+						<td>
+							<!-- soy:id="list_field_id" /-->
+						</td>
+						<td>
+							<!-- soy:id="list_field_name" /-->
+						</td>
+						<td class="ce">
+							<input type="hidden" soy:id="order_input" />
+							<input type="button" value="▲" id="post1-btn3" name="post1-btn3" class="s-btn up_btn" /> 
+							<input type="button" value="▼" id="post1-btn3" name="post1-btn3" class="s-btn down_btn" />
+						</td>
+					</tr>
+					<!-- /soy:id="field_list*" -->
+					</tbody>
+				</table>
+				
+				<div class="under form-btn ce">
+					<input type="submit" class="m-btn-red" name="save_orders" value="保存" />
+				</div>
+			</form>
+		</div>
+		
+	</div><!-- // .content -->
+</div><!-- // .section -->
+
+</div><!-- // .window-content -->
+
+</div><!-- // .main-window -->

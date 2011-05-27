@@ -1,0 +1,123 @@
+<div id="main-window2" class="main-window"> 
+				
+<div class="window-title"> 
+	<h2>サイトユーザー管理 - 権限詳細</h2> 
+</div> 
+
+<div class="window-content">
+	
+	<form soy:id="form">
+		
+	<div class="form-section section">
+		
+		<div class="pagelist-menu"> 
+			<ul> 
+				<li class="back"><a soy:link="user">ユーザーの管理に戻る</a></li> 
+			</ul> 
+		</div>
+		
+		<!-- soy:id="role_exists*" -->
+		<div class="title">
+			<h3><!-- soy:id="user_name" /-->の権限一覧</h3>
+		</div>
+		<!-- /soy:id="role_exists*" -->
+		
+		<div class="content">
+			
+			<!-- soy:id="role_not_exists*" -->
+			<h3>権限を選択して下さい。</h3>
+			<!-- /soy:id="role_not_exists*" -->
+			
+			<ul>
+			<!-- soy:id="role_list" -->
+				<dt class="role l">
+					<input class="role_check" type="checkbox" soy:id="role_check" />
+				</dt>
+				<dd class="role_description">
+					<!-- soy:id="role_description" /-->
+				</dd>
+			<!-- /soy:id="role_list" -->
+			</ul>
+			
+		</div><!-- // .content -->
+	</div><!-- //. section -->
+	
+	<!-- soy:id="group_exists" -->
+	<div class="section">
+		<div class="title">
+			<h3>グループ設定</h3>
+		</div>
+		<div class="content">
+			<table class="list-table"> 
+				<thead> 
+					<tr>
+						<th width="20%" class="s-cell" scope="col">
+							<input type="checkbox" onclick="$('.group_check').attr('checked',$(this).attr('checked'));" />
+						</th>
+						<th width="17%" scope="col">グループID</th> 
+						<th width="17%" scope="col">グループ名称</th>
+						<th width="16%" scope="col">説明</th>  
+					</tr> 
+				</thead> 
+				<tbody> 
+					<!-- soy:id="group_list" -->
+					<tr>
+						<td class="ce">
+							<input type="hidden" name="group_ids" />
+							<input type="checkbox" soy:id="group_check" class="group_check" />
+						</td> 
+						
+						<td>
+							<!-- soy:id="group_id" /-->
+						</td>
+						<td>
+							<a soy:id="detail_link">
+								<!-- soy:id="group_name" /-->
+							</a>
+						</td>
+						<td>
+							<!-- soy:id="group_description" /-->
+						</td> 
+						
+					</tr> 
+					<!-- /soy:id="group_list" --> 
+				</tbody> 
+			</table>
+		</div>
+	</div><!-- // .section -->
+	<!-- /soy:id="group_exists" -->
+	
+	<div class="section">
+		<div class="content">
+			<!-- soy:id="role_exists" -->
+			<div class="form-btn ce">
+				<input type="submit" class="l-btn" name="save" value="保存" />
+			</div>
+			<!-- /soy:id="role_exists" -->
+			
+			<!-- soy:id="role_not_exists" -->
+			<div class="form-btn ce">
+				<input type="submit" class="l-btn" name="save" value="<!-- soy:id="user_name*" /-->を追加する" onclick="if($('.role_check:checked').size()<1){alert('権限を設定してください');return false;}" />
+			</div>
+			<!-- /soy:id="role_not_exists" -->
+		</div>
+	</div><!-- // .section -->
+	
+	</form>
+	
+</div> 
+<!--  // .window-content --> 
+</div> 
+<!--  // #main-window2 -->
+
+<style type="text/css">
+.role{
+	padding:3px 8px;
+	margin:5px;
+	background-color:#eee;
+}
+.role_description{
+	margin-left:20px;
+}
+</style>
+

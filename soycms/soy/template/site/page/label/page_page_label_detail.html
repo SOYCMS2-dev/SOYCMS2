@@ -1,0 +1,177 @@
+<div id="main-window1" class="main-window">
+	
+<div class="window-title">
+	<h2 class="title-text"><!-- soy:id="label_name_text*" /--> ラベル詳細</h2>
+</div>
+
+<div class="window-content">
+
+<div id="main-section1" class="section">
+	
+					<ul class="crumbs">
+						<li><a soy:link="./" title="管理画面トップ" class="home_btn">管理画面トップ</a></li>
+						<li><a soy:link="page/label">ラベル・タグの管理</a></li>
+						<li><!-- soy:id="label_name_text*" /--> ラベルの詳細</li>
+					</ul>
+		
+	<div class="content">
+
+		<form soy:id="form">
+			
+		<div class="form-section">
+			<div class="label">
+				<h4>ラベル名</h4>
+			</div>
+			<div class="item">
+				<p class="intro" class="s">「/」を入れることでラベルを入れ子に設定出来ます</p>
+				<input type="text" class="m-area liq-area" soy:id="label_name" name="post1-1" value="" />
+			</div>
+		</div>
+		
+		<div class="form-section">
+			<div class="label">
+				<h4><label for="post1-1">ラベル説明</label></h4>
+			</div>
+			<div class="item">
+				<textarea type="text" class="s-area liq-area" soy:id="label_description"></textarea>
+			</div>
+		</div>
+		
+		<!-- soy:id="is_directory_label" -->
+		<div class="form-section">
+			<div class="label">
+				<h4>ディレクトリ</h4>
+			</div>
+			<div class="item">
+				<!-- soy:id="directory_name" /-->
+				<a soy:id="directory_config_link">詳細</a>
+			</div>
+		</div>
+		<!-- /soy:id="is_directory_label" -->
+		
+		<div class="form-section">
+			<div class="label">
+				<h4><label for="post1-1">URL</label></h4>
+			</div>
+			<div class="item">
+				<span soy:id="directory_url_text"></span>
+				<input type="text" class="m-area" soy:id="label_alias" value="" />
+				<a soy:id="label_index_link" target="_blank" class="external"></a>
+			</div>
+		</div>
+		
+		<div class="form-section">
+			<div class="label">
+				<h4>タイトルタグの設定</h4>
+			</div>
+			<div class="item">
+				<input type="text" class="m-area" soy:id="title_format" value="" style="width:400px" />
+				<p class="s">サイト名 #SiteName#  ディレクトリ名 #DirName#  ページ名 #PageName#  ラベル名 #LabelName#</p>
+			</div>
+		</div>
+		
+		<div class="form-section">
+			<div class="label">
+				<h4>色設定 (管理画面用)</h4>
+			</div>
+			<div class="item">
+				<table class="form-table"> 
+					<tr> 
+						<th scope="row">背景色</th>
+						<td class="colorSelector">
+							<input type="text" class="s-area" id="label_bgcolor" soy:id="label_bg_color" size="7" />
+						</td>
+						<th rowspan="2">プレビュー</th>
+						<td rowspan="2" class="liq-area">
+							<div style="padding:10px;font-size:134%;font-weight:bold;">
+								<span id="color_preview" style="border:solid 1px black;padding:10px;"><!-- soy:id="label_name_text" /--></span>
+							</div>
+						</td>
+					</tr>
+					<tr> 
+						<th scope="row">文字色</th>
+						<td class="colorSelector">
+							<input type="text" class="s-area" id="label_color" soy:id="label_color" size="7" />
+						</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+		
+		<!-- soy:id="customfile_exists" -->
+		<div class="form-section">
+			<div class="item">
+				<table class="form-table"> 
+					<!-- soy:id="field_list" -->
+					<tr> 
+						<th scope="row"><!-- soy:id="field_label" /--></th>
+						<td>
+							<!-- soy:id="field_form" /-->
+						</td>
+					</tr>
+					<!-- /soy:id="field_list" -->
+				</table>
+			</div>
+		</div>
+		<!-- /soy:id="customfile_exists" -->
+		
+		<div class="form-btn ce">
+			<p class="intro">
+				<input type="submit" value="更新" class="l-btn" />
+			</p>
+			<p>
+				<a soy:id="remove_link" >このラベルを削除する</a>
+			</p>
+		</div>
+		
+		</form>
+	</div><!-- // .content -->
+</div>
+</div>
+
+</div>
+
+<script type="text/javascript" soy:src="../common/wysiwyg/aobata.js"></script>
+<script type="text/javascript" soy:src="../common/js/soycms_entry/editor.js"></script>
+<script soy:src="../common/wysiwyg/default/colorpicker/js/colorpicker.js" type="text/javascript"></script>
+<script type="text/javascript">
+var update_label_color_preview = function(){
+	$("#color_preview").css({
+		backgroundColor : $("#label_bgcolor").val(),
+		color : $("#label_color").val()
+	});
+};
+update_label_color_preview();
+
+$('.colorSelector').ColorPicker({
+	onBeforeShow : function(colpkr){
+		color = $(this).find("input").val();
+		$(this).ColorPickerSetColor(color.replace("#","").toLowerCase());
+	},
+	onShow: function (colpkr) {
+		$(colpkr).fadeIn(100);
+		return false;
+	},
+	onHide: function (colpkr) {
+		$(colpkr).fadeOut(100);
+		return false;
+	},
+	onChange: function (hsb, hex, rgb) {
+		ele = $(this).data('colorpicker').el;
+		$(ele).find("input").val('#' + hex);
+		
+		update_label_color_preview();
+	}
+});
+
+
+var url = SOYCMS_ROOT_URL + "common/wysiwyg/default/colorpicker/css/colorpicker.css";
+	var heads = document.getElementsByTagName("head");
+	
+	if(heads.length > 0){
+		link = document.createElement("link");
+		link.setAttribute("rel","stylesheet");
+		link.setAttribute("href",url); 
+		heads[0].appendChild(link);
+	}
+</script>

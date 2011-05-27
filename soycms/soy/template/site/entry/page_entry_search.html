@@ -1,0 +1,231 @@
+<div id="main-window1" class="main-window"> 
+				
+<div class="window-title"> 
+	<h2>記事の検索</h2>
+</div> 
+
+<div class="window-content"> 
+	
+	<div id="main-section1" class="section">
+		
+		<div class="pagelist-menu"> 
+			<ul> 
+				<li class="back"><a soy:link="entry">記事の管理に戻る</a></li> 
+			</ul> 
+		</div>
+		 
+		<div class="title">
+			<h3>記事の検索</h3>
+		</div>
+		
+		<div class="content"> 
+			<form soy:id="searchform">
+				<table class="form-table">
+					<tr>
+						<th>キーワード</th>
+						<td colspan="3">
+							<input soy:id="word" type="text" class="m-area liq-area" size="30" />
+						</td>
+					</tr>
+					<!-- soy:id="label_exists" -->
+					<tr>
+						<th>ラベル</th>
+						<td>
+							<select soy:id="label_select" multiple="multiple" size="5"></select>
+						</td>
+					</tr>
+					<!-- /soy:id="label_exists" -->
+					<!-- soy:id="tag_exists" -->
+					<tr>
+						<th>タグ</th>
+						<td>
+							<div class="item">
+								<p class="intro">
+									タグで絞り込みを行います。
+									
+									<input name="tag_option" type="radio" soy:id="tag_option_and" id="tag_option_and" />
+									<tag for="tag_option_and">全てのタグ</tag>
+									
+									<input name="tag_option" type="radio" soy:id="tag_option_or" id="tag_option_or" />
+									<tag for="tag_option_or">いずれかのタグ</tag>
+								</p>
+								
+								<textarea soy:id="tags" id="tag_textarea" class="m-area liq-area"></textarea>
+								
+								<div>
+									<!-- soy:id="tag_list" -->
+									<span class="tag_list" soy:id="tag_name">タグ名</span>
+									<!-- /soy:id="tag_list" --> 
+									｜<span class="tag_list noinput" onclick="$('#tag_textarea').val('');">クリア</span>
+								</div>
+							</div>
+	
+						</td>
+					</tr>
+					<!-- /soy:id="tag_exists" -->
+					<tr>
+						<th>ステータス</th>
+						<td>
+							<select soy:id="status_select">
+								<option value="">ステータス</option>								
+							</select>
+						</td>
+					</tr>
+				</table>
+				
+				<div class="ce">
+					<input type="submit" name="search" value="検索" class="l-btn" />
+				</div>
+			</form>
+		</div>
+	</div>
+	
+	<div class="section">
+		
+		<div class="content"> 
+
+			<form soy:id="form">
+				<input type="hidden" soy:id="directory_id" id="directory_id" value="" />
+			
+				<div id="post1-section1" class="form-section"> 
+				
+				<table class="list-table"> 
+					<thead> 
+						<tr> 
+							<th width="4%" class="s-cell" scope="col"><input type="checkbox" onclick="$('.entry_check').attr('checked',$(this).attr('checked'));" /></th> 
+							<th width="39%" scope="col">記事名</th> 
+							<th width="10%" scope="col">公開状態</th> 
+							<th width="16%" scope="col">作成/編集者<span></span></th> 
+							<th width="13%" scope="col">メモ</th> 
+							<th width="9%" scope="col">更新時刻</th>
+							<!-- soy:display="sort_type_order" -->
+							<th width="9%" class="s-cell" scope="col">表示順</th>
+							<!-- /soy:display="sort_type_order" --> 
+							<th width="9%" class="s-cell" scope="col">設定</th> 
+						</tr> 
+					</thead> 
+					<tbody> 
+						<!-- soy:id="entry_list" -->
+						<tr soy:id="entry_list_row"> 
+							<td class="ce">
+								<input soy:id="entry_checkbox" type="checkbox" class="entry_check" />
+							</td> 
+							<td>
+								<p>
+									<a class="entry_link" soy:id="entry_detail_link"><strong soy:id="entry_title">記事名A</strong></a><br> 
+									<a soy:id="entry_preview_link"><!-- soy:id="entry_url" /--></a><br> 
+								</p>
+							</td> 
+							<td class="ce"><!-- soy:id="entry_status" /--></td> 
+							<td>
+								<!-- soy:id="entry_author" /-->
+								<!-- soy:id="entry_editor" /-->
+							</td> 
+							<td>
+								<!-- soy:id="entry_memo" /-->
+							</td> 
+							<td>
+								<!-- soy:id="entry_update_date" -->2010-06-10 14:25:43<!-- /entry_update_date -->
+							</td> 
+							<!-- soy:display="sort_type_order" -->
+							<td>
+								<a soy:id="sort_up_link" class="sh-btn up_btn"><em>↑</em></a>
+								<a soy:id="sort_down_link" class="sh-btn down_btn"><em>↓</em></a>
+							</td>
+							<!-- /soy:display="sort_type_order" -->
+							<td><a soy:id="entry_detail_link*" class="sh-btn"><em>編集</em></a></td> 
+						</tr> 
+						<!-- /entry_list -->
+					</tbody>
+					<tfoot class="entry_check_option" style="display:none;">
+						<tr>
+							<td colspan="8">
+								<input id="entry_all" type="checkbox" value="1" />
+								<label for="entry_all">全ての記事を対象にする(全<!-- soy:id="count_max*" /-->件)</label>
+							</td>
+						</tr>
+					</tfoot>
+				</table> 
+				
+				<p class="ri intro"><!-- soy:id="count_max" /-->件中<!-- soy:id="count_start" /-->～<!-- soy:id="count_end" /-->件の記事を表示</p>
+
+				<p>
+					<input type="button" value="ごみ箱" class="m-btn set_trash" /> 
+					<input type="button" value="公開" class="m-btn set_open" />
+					<input type="button" value="非公開" class="m-btn set_close" />
+				</p> 
+
+
+				<!-- soy:id="pager" -->
+				<div class="pager">
+					<p class="back" soy:id="prev_link_wrap"><a soy:id="prev_link">&lt;&nbsp;前へ</a></p>
+					<ol><!-- soy:id="pager_list" --><li><a soy:id="page_link"><!-- soy:id="page_text" /--></a></li><!-- /soy:id="pager_list" --></ol>
+					<p class="next" soy:id="next_link_wrap"><a soy:id="next_link">次へ&nbsp;&gt;</a></p>
+				</div> 
+				<!-- /pager -->
+
+
+
+				</div> 
+				
+
+			</form> 
+		</div> 
+	</div> 
+	<!--  // #main-section1 --> 
+
+</div> 
+<!--  // .window-content --> 
+</div> 
+<!--  // #main-window1 -->
+
+<script soy:src="../common/js/soycms_entry/list.js" type="text/javascript"></script>
+<script type="text/javascript">
+function change_tag_value(value){
+	var textarea = $("#tag_textarea");
+	
+	try {
+		values = textarea.val().split(" ");
+		
+		//空要素は削除する
+		values = jQuery.grep(values,function(n){
+			return (n.length > 0);
+		});
+		
+		if ($.inArray(value,values) >= 0) {
+			
+			values = jQuery.grep(values,function(n){
+				return (n != value);
+			});
+			
+		} else {
+			values.push(value);	
+		}
+		
+		textarea.val(values.join(" "));
+	}catch(e){
+		alert(e);
+	}
+}
+$(function(){
+	$("#tag_textarea").attr("readonly",true);
+	
+	$(".tag_list").click(function(){
+		if($(this).hasClass("noinput"))return;
+		
+		var tag_value = $(this).html();
+		change_tag_value(tag_value);
+		return false;
+	});
+});
+</script>
+<style type="text/css">
+.tag_list{
+	cursor:pointer;
+	padding:2px;
+	border:solid 1px black;
+}
+.tag_list:hover{
+	background-color:yellow;
+}
+</style>

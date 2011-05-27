@@ -1,0 +1,178 @@
+<div id="main-window1" class="main-window"> 
+					
+<div id="window-title-layout" class="window-title">
+	<h2><span>ナビゲーション：<!-- soy:id="navigation_name_text*" /-->の編集</span></h2> 
+</div> 
+
+<div class="window-content"> 
+	
+	<form soy:id="form" method="post" action="xxx" id="post1" name="post1">
+	
+	<div class="tab-menu"> 
+		<ul class="tab-index"> 
+			<li><a href="#navi_config">ナビゲーションの設定</a></li> 
+			<li><a href="#navi_template">ナビゲーションのHTML</a></li> 
+		</ul> 
+		<ul class="tab-contents"> 
+
+			<li id="navi_config_contents">
+				
+				<div class="content">
+					
+					<div class="section">
+						
+						<ul class="crumbs">
+							<li><a soy:link="./" title="管理画面トップ" class="home_btn">管理画面トップ</a></li>
+							<li><a soy:link="page/template">テンプレートの管理</a></li>
+							<li><a soy:link="page/navigation">ナビゲーションの管理</a></li>
+							<li><!-- soy:id="navigation_name_text*" /-->の設定</li>
+						</ul>
+						
+						 
+						<div id="post1-section1" class="form-section">
+							
+							
+							<div class="title"> 
+								<h3>ナビゲーションID</h3> 
+							</div> 
+ 
+							<div class="item">
+								<p class="xxl"> 
+									ID名: <strong><!-- soy:id="navigation_id_text" /--></strong> 
+								</p> 
+							</div> 
+							
+							 
+							<div class="label"> 
+								<h4>ナビゲーション名</h4> 
+							</div> 
+							
+							<div class="item"> 
+								<p> 
+									<input name="tpml-name" type="text" class="m-area" soy:id="navigation_name"" value="テンプレート名A" size="50" /> 
+								</p> 
+							</div>
+							
+							<div class="label"> 
+								<h4>説明</h4> 
+							</div>
+							
+							<div class="item">
+								<textarea soy:id="navigation_description" rows="2" cols="70" class="liq-area" style="font-size:13px;"></textarea>
+							</div>
+						
+
+					
+					
+					
+						
+							
+						<div class="title"> 
+							<h3><!-- soy:id="navigation_name_text" /-->内の要素</h3> 
+						</div> 
+
+							<!-- soy:id="navigation_item_manager" -->
+							レイアウトとか入るよ
+							<!-- /soy:id="navigation_item_manager" -->							
+
+
+					
+					<div class="form-btn ce"> 
+						<input type="submit" value="保存する" id="post1-submit" name="post1-submit" class="l-btn" />
+						<a soy:id="copy_link*" class="m-btn"><em>コピーを作成する</em></a> 
+					</div>
+					
+
+						</div><!--// .post1-section1 --> 
+					 
+					</div><!--  // .section --> 
+
+
+			</div><!-- //.content -->
+			
+			</li> 
+
+
+
+		
+			<li id="navi_template_contents">
+				
+				<div class="section">
+					
+					<ul class="crumbs">
+						<li><a soy:link="./" title="管理画面トップ" class="home_btn">管理画面トップ</a></li>
+						<li><a soy:link="page/template">テンプレートの管理</a></li>
+						<li><a soy:link="page/navigation">ナビゲーションの管理</a></li>
+						<li><a href="javascript:void(0);" onclick="$('.tab-index li:first').click();"><!-- soy:id="navigation_name_text*" /-->の設定</a></li>
+						<li>HTMLの編集</li>
+					</ul>
+					
+					<div class="title"> 
+						<h3>ナビゲーションのHTML</h3> 
+					</div>
+					
+					<div class="content"> 
+
+					<div class="item">
+						<textarea soy:id="navigation_content" name="tpml-name" cols="70" rows="20" class="m-area liq-area resizable html-editor" id="soycms_template_content">テンプレートhtmlが表示されます</textarea> 
+					</div> 
+						
+					</div> 
+					<!-- //.content --> 
+					
+					
+				</div> 
+				<!-- //.section -->
+				
+				<div class="form-btn ce"> 
+					<input type="submit" value="保存する" id="post1-submit" name="post1-submit" class="l-btn" />
+					<a soy:id="copy_link*" class="m-btn"><em>コピーを作成する</em></a>
+				</div> 
+			
+			</li>
+
+		</ul> 
+
+		
+		
+		</form>
+
+	</div> 
+	<!--  // .tab-menu --> 
+	
+
+</div> 
+<!--  // .window-content --> 
+</div> 
+<!--  // #main-window1 --> 
+
+<!-- soy:id="history_index" -->
+履歴の表示
+<!-- /soy:id="history_index" -->
+
+<script type="text/javascript" soy:src="../common/js/soycms_html_editor/editor.js"></script>
+<script type="text/javascript" soy:src="../common/js/soycms_html_editor/content-assist.js"></script>
+<script type="text/javascript">
+$(function(){
+	var options = { 
+		items: '.item_box'
+	 };
+	
+	var userAgent = navigator.userAgent.toLowerCase();
+	if(userAgent.match(/firefox/)) {
+		options["start"] = function (event, ui) { ui.item.css('margin-top', $(window).scrollTop() ); };
+		options["beforeStop"] = function (event, ui) { ui.item.css('margin-top', 0 ); };
+	}
+	
+	$("#item_manager_div .cell").sortable(options);
+	
+	SOYCMS_TemplateEditor.init({
+		textarea : $("#soycms_template_content"),
+		wrapper : $("#soycms_html_editor_wrap")
+	});
+});
+</script>
+
+
+						<!-- soy:quickhelp="navi_item_drug" /-->
+						<!-- ヘルプ：ナビゲーションの使い方 -->

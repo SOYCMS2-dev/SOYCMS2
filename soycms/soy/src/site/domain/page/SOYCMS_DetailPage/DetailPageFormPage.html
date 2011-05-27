@@ -1,0 +1,225 @@
+<div class="title"> 
+	<h3>ディレクトリの設定</h3> 
+</div>
+
+<div class="content">
+	
+<div class="form-section">
+	
+	<!--
+	<div class="label"> 
+		<h4>インデックスのURI</h4> 
+	</div>
+	<div class="item">
+		<input type="text" class="s-area" size="30" soy:id="index_uri" />
+	</div>
+	-->
+	
+	<div class="label"> 
+		<h4>記事タイトルのデフォルト名</h4> 
+	</div> 
+	<div class="item">
+		<input soy:id="default_title" class="m-area" style="width:400px;" value="" />
+		<a class="s" href="javascript:void(0);" onclick="$(this).next().show();$(this).hide();">example</a>
+		<ul class="s" style="display:none;">
+			<li>作成年 %YYYY%</li>
+			<li>作成月 %MM%</li>
+			<li>作成日 %DD%</li>
+			<li>記事数 %VOL%</li>
+		</ul>
+	</div>
+	
+	<div class="label"> 
+		<h4>記事のURL設定　※ディレクトリごとにルールの設定、記事ごとに編集可能</h4> 
+	</div> 
+	<div class="item"> 
+		<ul class="radio-list">
+			<li class="li0"><input soy:id="url_type_0" type="radio" value="0" name="dirurl-cfg" id="public-cfg0" checked="checked" /> 
+				<label for="public-cfg-0"><strong>固定(entry.html)</strong></label> 
+				<!-- soy:id="page_url" /--><strong>entry.html</strong>
+			</li> 
+			
+			
+			<li class="li1"><input soy:id="url_type_1" type="radio" value="1" name="dirurl-cfg" id="public-cfg1" checked="checked" /> 
+				<label for="public-cfg-1"><strong>記事名.html</strong></label> 
+				<!-- soy:id="page_url" /--><strong>記事名.html</strong>
+			</li> 
+
+			<li class="li2"><input soy:id="url_type_2" type="radio" value="2" name="dirurl-cfg" id="public-cfg2" /> 
+				<label for="public-cfg-2"><strong>記事名</strong></label> 
+				<!-- soy:id="page_url" /--><strong>記事名</strong>
+			</li> 
+			
+			<li class="li3"><input soy:id="url_type_3" type="radio" value="3" name="dirurl-cfg" id="public-cfg3" /> 
+				<strong><label for="public-cfg-3">年月日.html</label></strong>
+				<!-- soy:id="page_url" /--><strong>20100519.html</strong>
+			</li>	
+
+			<li class="li4"><input soy:id="url_type_4" type="radio" value="3" name="dirurl-cfg" id="public-cfg3" /> 
+				<label for="public-cfg-3"><strong>年月日_記事名.html</strong></label> 
+				<!-- soy:id="page_url" /--><strong>20100519_記事名.html</strong>
+			</li>	
+
+
+			<li class="li5"><input soy:id="url_type_5" type="radio" value="3" name="dirurl-cfg" id="public-cfg3" /> 
+				<label for="public-cfg-3"><strong>記事ID.html</strong></label> 
+				<!-- soy:id="page_url" /--><strong>123.html</strong>
+			</li> 
+
+			<li class="li6"><input soy:id="url_type_6" type="radio" value="3" name="dirurl-cfg" id="public-cfg3" /> 
+				<label for="public-cfg-3"><strong>カスタム設定</strong></label> 
+				<!-- soy:id="page_url" /-->
+				<input soy:id="url_type_option" name="post1-2" type="text" class="s-area" id="post1-2" value="" size="30" />
+				<a class="s" href="javascript:void(0);" onclick="$(this).next().show();$(this).hide();">example</a>
+				<ul class="s" style="display:none;">
+					<li>作成年 %YYYY%</li>
+					<li>作成月 %MM%</li>
+					<li>作成日 %DD%</li>
+					<li>記事名 %TITLE%</li>
+					<li>記事ID　%ID%</li>
+				</ul> 
+			</li> 
+
+
+		</ul> 
+	</div> 
+	
+	
+	
+	<div class="label"> 
+		<h4>ディレクトリのフィード出力の有無</h4> 
+	</div> 
+	<div class="item"> 
+		<input soy:id="is_output_feed" type="checkbox" value="1" name="feed-public-cfg" id="feed-public-cfg1" checked="checked" /><label for="public-cfg-1">フィードを出力する</label><br />
+		記事を<input soy:id="feed_entry_count" type="text" class="m-area" style="width:50px;" />件出力
+	</div> 
+
+
+	<div class="label"> 
+		<h4>ディレクトリのフィード設定</h4> 
+	</div> 
+	<p>※チェック有りで出力</p> 
+	<table class="form-table"> 
+		<tr> 
+			<th scope="row" rowspan="2">
+				<label for="post1-1">RSS1.0
+					<input soy:id="rdf_output" name="feed-output" type="checkbox" id="feed-select" value="rss1" checked> 
+				</label>				
+			</th> 
+			<td><!-- soy:id="page_url" /-->
+				<input soy:id="rdf_uri" type="text" class="s-area " style="width:70px;" /> 
+				<span class="li2"> 
+					<input soy:id="rdf_output_excerpt" name="feed-rss1-cfg" type="radio" id="feed-rss1-cfg1" value="1" checked /> 
+				</span>
+				要約を出力(先頭
+				<input  soy:id="rdf_excerpt_size" type="text" class="s-area" style="width:40px;" /> 
+				文字)　
+				<span class="li2"> 
+					<input soy:id="rdf_output_all" type="radio" value="2" name="feed-rss1-cfg" id="feed-rss1-cfg2" /> 
+				</span>全文を出力
+				<span class="li2">
+					<a soy:id="rdf_url" class="s-btn" target="_blank">確認</a>
+				</span>
+				<span class="li2">
+					<a soy:id="rdf_xml_link" class="s-btn" onclick="common_open_popup($(this).attr('href'));return false;">編集</a>
+				</span>
+		</tr> 
+		<tr>
+			<td>
+				フィードのタイトル名
+					<input soy:id="rdf_title" type="text" class="s-area" style="width:200px;" />
+			</td>
+		</tr>
+		
+		<tr> 
+			<th scope="row" rowspan="2">
+				<label for="post1-1">RSS2.0
+					<input soy:id="rss_output" name="feed-output" type="checkbox" id="feed-select" value="rss1" checked> 
+				</label>
+			</th> 
+			<td><!-- soy:id="page_url" /-->
+				<input soy:id="rss_uri" type="text" class="s-area " style="width:70px;" /> 
+				<span class="li2"> 
+					<input soy:id="rss_output_excerpt" type="radio" value="1" /> 
+				</span>
+				要約を出力(先頭
+				<input  soy:id="rss_excerpt_size" type="text" class="s-area" style="width:40px;" /> 
+				文字)　
+				<span class="li2"> 
+					<input soy:id="rss_output_all" type="radio" id="feed-rss2-cfg2" /> 
+				</span>全文を出力
+				<span class="li2">
+					<a soy:id="rss_url"class="s-btn" target="_blank">確認</a>
+				</span>
+				<span class="li2">
+					<a soy:id="rss_xml_link" class="s-btn" onclick="common_open_popup($(this).attr('href'));return false;">編集</a>
+				</span>
+			</td> 
+		</tr>
+		<tr>
+			<td>
+				フィードのタイトル名
+				<input soy:id="rss_title" type="text" class="s-area" style="width:200px;" />
+			</td>
+		</tr>
+		
+		<tr> 
+			<th scope="row" rowspan="2">
+				<label for="post1-1">Atom
+					<input soy:id="atom_output" name="feed-output" type="checkbox" id="feed-select" value="atom1" checked> 
+				</label>
+			</th> 
+			<td>
+				<!-- soy:id="page_url" /-->
+				<input soy:id="atom_uri" type="text" class="s-area " style="width:70px;" /> 
+				<span class="li2"> 
+					<input soy:id="atom_output_excerpt" type="radio" value="1" /> 
+				</span>
+				要約を出力(先頭
+				<input  soy:id="atom_excerpt_size" type="text" class="m-area" style="width:40px;" /> 
+				文字)　
+				<span class="li2"> 
+					<input soy:id="atom_output_all" type="radio" id="feed-atom2-cfg2" /> 
+				</span>全文を出力
+				<span class="li2">
+					<a soy:id="atom_url"class="s-btn" target="_blank">確認</a>
+				</span>
+				<span class="li2">
+					<a soy:id="atom_xml_link" class="s-btn" onclick="common_open_popup($(this).attr('href'));return false;">編集</a>
+				</span>
+			</td> 
+		</tr>
+		<tr>
+			<td>
+				フィードのタイトル名
+				<input soy:id="atom_title" type="text" class="s-area" style="width:200px;" />
+			</td>
+		</tr>
+	</table> 
+	
+	<div class="label"> 
+		<h3>記事の表示順</h3> 
+	</div> 
+	<div class="item"> 
+		<select soy:id="entry_position"></select>
+	</div> 
+
+<!-- soy:quickhelp="dir_list_cfg" /-->
+<!-- 記事の表示順のマニュアル -->
+
+	
+</div>
+</div>
+
+<div class="form-btn ce"> 
+	<input type="submit" value="設定する" id="post1-submit" name="save_basic" class="l-btn" /> 
+</div> 
+
+
+<script type="text/javascript">
+$(function(){
+});
+</script>
+<style type="text/css">
+
+</style>

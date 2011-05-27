@@ -1,0 +1,606 @@
+<div id="command-menu">
+
+<!-- soy:id="mode_edit" -->
+<div id="command-menu-section2" class="section">
+	<div class="title">
+		<h2>記事の状態</h2>
+	</div>
+	<div class="content">
+		<form soy:id="status_update_form">
+			
+		<div class="form-section">
+			<div class="label">
+				<h3>
+					<label for="post6-1">プレビュー</label>
+				</h3>
+			</div>
+			<div class="item">
+				<a class="s-btn" soy:id="preview_link" target="_blank" onclick="save_now();"><em>プレビュー</em></a>
+				<a class="s-btn" soy:id="check_link" target="_blank"><em>URLを確認</em></a>
+			</div>
+		</div>
+		
+		<div class="form-section">
+			<div class="label">
+				<h3>
+					<label for="post6-1">保存</label>
+				</h3>
+			</div>
+			
+			<!-- soy:id="is_not_public" -->
+			<p class="ce" style="background-color:#FAAFBE;padding:10px;margin:8px 0 10px;border:double 4px #ffffff;">
+				この記事は<b><!-- soy:id="status_text*" /--></b>です。<br />
+				
+				<input soy:id="public_btn" type="button" class="m-btn" value="公開する" onclick="aobata_editor.syncAll();$('#save_submit_btn').attr('name','do_open').click();" />
+			</p>
+			
+			<div class="ce break">
+				<input type="button" class="l-btn" value="保存(<!-- soy:id="status_text*" /-->)" onclick="aobata_editor.syncAll();$('#save_submit_btn').click();" />
+			</div>
+			<!-- /soy:id="is_not_public" -->
+			
+			<!-- soy:id="is_public" -->
+			<p class="ce" style="background-color:pink;padding:10px;margin:8px 0 10px;border:double 4px #ffffff;">
+				この記事は<b><!-- soy:id="status_text*" /--></b>です。<br />
+				<input soy:id="sync_btn" type="button" class="m-btn" value="更新する" onclick="aobata_editor.syncAll();$('#save_submit_btn').click();" />
+			</p>
+			<!-- /soy:id="is_public" -->
+		</div>
+		
+		<div class="form-section">
+			<div class="label">
+				<h3>
+					<label for="post6-1">最終保存時刻</label>
+					<input type="checkbox" soy:id="autosave" value="1" onclick="save_autosave_config(this);" checked />
+					<label for="autosave" class="s">自動保存</label>
+				</h3>
+			</div>
+			<div class="item">
+				<p class="intro">
+					<span id="last_update_date"><!-- soy:id="update_date" /--></span>
+					<input type="button" value="今すぐ保存" id="post5-btn1" name="post5-btn1" class="s-btn" onclick="save_now();" />
+				</p>
+			</div>
+		</div>
+		
+		<div id="post6-section1" class="form-section">
+			<div class="label">
+				<h3><label for="post6-1">作成日</label></h3>
+			</div>
+			<div class="item">
+				<p class="intro">
+					<span id="create_date_text"><!-- soy:id="create_date_text" /--></span>
+					&nbsp;<a href="javascript:void(0);" onclick="$(this).parent().hide();$('#create_date_form').show();" class="xsh-btn inline-btn"><em>編集</em></a>
+				</p>
+				<div id="create_date_form" style="display:none;">
+					<input type="text" soy:id="create_date" />
+					<a href="javascript:void(0);" onclick="save_create_date(this);" class="xsh-btn inline-btn"><em>保存</em></a>
+				</div>
+			</div>
+		</div>
+		
+		<div id="openperiod_info" class="form-section">
+			<div class="label">
+				<h3>公開期間</h3>
+			</div>
+			<div class="item">
+				<p class="intro">
+					<span id="openperiod_text"><!-- soy:id="openperiod_text" -->設定なし<!-- /soy:id="openperiod_text" --></span>
+					&nbsp;<a href="#openperiod_config" class="xsh-btn inline-btn popup-btn"><em>設定</em></a></p>
+			</div>
+		</div>
+				
+			<div id="openperiod_config" class="popup-content" style="display:none;">
+				<div class="title">
+					<h3>公開期間の設定</h3>
+				</div>
+				<div class="content">
+					<div class="item break ce">
+						
+						<input type="text" soy:id="openperiod_from" />
+						〜
+						<input type="text" soy:id="openperiod_until" />
+					</div>
+				</div>
+				
+				<div class="ce">
+					<input type="button" value="公開期間を設定する" class="m-btn" onclick="save_open_period(this);" />
+					<br />
+					<input type="button" value="公開期間をクリア" class="s-btn" onclick="$('#openperiod_config .content input').val('');save_open_period(this);" />
+				</div>
+			</div>
+			<!--  // .popup-content -->
+		
+		<div id="author_info" class="form-section">
+			<div class="label">
+				<h3>作成者</h3>
+			</div>
+			<div class="item">
+				<p class="intro">
+					<span id="author_text"><!-- soy:id="author_text" /--></span>
+					&nbsp;<a href="javascript:void(0);" onclick="$('#author_info').hide();$('#author_edit').show();" class="xsh-btn inline-btn"><em>編集</em></a>
+				</p>
+			</div>
+		</div>
+		<div id="author_edit" class="form-sections-block" style="display:none;">
+			<div class="form-section">
+				<div class="label">
+					<h3>作成者</h3>
+				</div>
+				<div class="item">
+					<p class="intro">
+						<input type="text" class="s-area liq-area" id="author_input" soy:id="author" />
+					</p>
+				</div>
+			</div>
+			<div class="form-section">
+				<div class="label">
+					<h3>リンク先</h3>
+				</div>
+				<div class="item">
+					<p class="intro">
+						<input type="text" class="s-area liq-area" id="author_link_text" soy:id="author_link_text" />
+					</p>
+				</div>
+			</div>
+			<div class="form-section">
+				<div class="label">
+					<h3>リンク先URL</h3>
+				</div>
+				<div class="item">
+					<p class="intro">
+						<input type="text" class="s-area liq-area" id="author_link_url" soy:id="author_link_url" />
+					</p>
+				</div>
+			</div>
+			<div class="form-btn ce">
+				<a href="javascript:void(0);" onclick="save_author(this);" class="xsh-btn inline-btn"><em>保存</em></a>
+				<br />
+				<input type="checkbox" soy:id="entry_author_check" id="entry_author_check" />
+				<label for="entry_author_check">現在の記事だけ保存</label>
+			</div>
+		</div>
+		
+		<div class="form-sections-block">
+			
+			<div id="post6-section2" class="form-section">
+				<div class="label">
+					<h3><label for="post6-2">公開状態</label></h3>
+				</div>
+				<div class="item">
+					<p class="intro ce">
+						<span class="xxl" soy:id="status_text"></span>
+						<a href="javascript:void(0);" onclick="$(this).hide();$('#entry_pubish_edit').show();" class="xsh-btn inline-btn"><em>編集</em></a></p>
+				</div>
+			</div>
+			
+			<div id="entry_pubish_edit" class="form-section" style="display:none;">
+				
+				<ul>
+					<!-- soy:id="action_list" -->
+					<li>
+						<input soy:id="action_check" type="radio" />
+					</li>
+					<!-- /soy:id="action_list" -->
+				</ul>
+			</div>
+			
+			<div id="message_edit" style="display:none;">
+				<div class="label">
+					<h4><label for="post6-2">メッセージ(メモ)</label></h4>
+				</div>
+				<p>
+					<textarea name="message" rows="4" class="m-area liq-area"></textarea>
+				</p>
+			</div>
+			
+			<div class="form-btn">
+				<p class="ce">
+					<input type="submit" onclick="save_now();" value="公開" id="change_status_btn" name="post6-btn1" class="l-btn" style="display:none;" />
+				</p>
+			</div>
+			
+		</div>
+	
+	</div>
+	
+	</form><!-- // status_update_form -->
+</div>
+<!--  // #command-menu-section2 -->
+
+<!-- /soy:id="mode_edit" -->
+
+<!-- soy:id="mode_comment" -->
+<div id="command-menu-comment" class="section">
+	<div class="title">
+		<h2>記事の状態</h2>
+	</div>
+	<div class="content">
+		<div class="form-section">
+			<div class="label">
+				<h3>
+					<label for="post6-1">プレビュー</label>
+				</h3>
+			</div>
+			<div class="item">
+				<a class="s-btn" soy:id="preview_link*" target="_blank" onclick="save_now();"><em>プレビュー</em></a>
+				<a class="s-btn" soy:id="check_link*" target="_blank"><em>URLを確認</em></a>
+			</div>
+		</div>
+		
+		
+		<div class="form-section">
+			<div class="label">
+				<h3>
+					<label for="post6-1">記事編集画面に戻る</label>
+				</h3>
+			</div>
+			<div class="item">
+				<a class="s-btn" soy:id="entry_detail_link"><em>記事編集画面に戻る</em></a>
+			</div>
+		</div>
+		
+		<div class="form-section">
+			<div class="label">
+				<h3><label for="post6-1">作成日</label></h3>
+			</div>
+			<div class="item">
+				<p class="intro">
+					<span id="create_date_text"><!-- soy:id="create_date_text*" /--></span>
+				</p>
+			</div>
+		</div>
+		
+		<div class="form-section">
+				<div class="label">
+					<h3><label for="post6-2">公開状態</label></h3>
+				</div>
+				<div class="item">
+					<p class="intro"><!-- soy:id="status_text*" /--></p>
+				</div>
+			</div>
+		</div>
+</div>
+<!-- /soy:id="mode_comment" -->
+
+<!-- soy:id="mode_edit*" -->
+
+<div id="command-menu-section3" class="section">
+	<div class="title">
+		<h2>メモ</h2>
+	</div>
+	<div class="content">
+		<div id="post6-section3" class="form-section">
+			
+			<div class="item">
+					<p>※メモの内容は公開されません。管理用のメモをご記入ください。</p>
+					<p>
+						<textarea soy:id="entry_memo" rows="4" id="post6-2" name="post6-2" class="m-area liq-area"></textarea>
+					</p>
+					
+					<p class="ce intro"><a href="javascript:void(0);" onclick="save_memo(this);" class="me-btn ce-b"><em>メモを保存</em></a></p>
+			</div>
+		
+		</div>
+	</div>
+</div>
+<!--  // #command-menu-section3 -->
+
+
+
+
+<div id="command-menu-section4" class="section">
+	<div class="title">
+		<h2>バックアップ</h2>
+	</div>
+	<div class="content">
+		<p>最新：<!-- soy:id="last_histroy_text" /--></p>
+		<ul>
+			<!-- soy:id="history_list" -->
+			<li><a soy:id="history_link">
+				<!-- soy:id="histroy_save_date" /-->
+			</a></li>
+			<!-- /soy:id="history_list" -->
+		</ul>
+		<p class="ri s"><a href="#history_popup" class="popup-btn-L" onclick="show_hisotry_list();"><strong>すべてのバックアップを表示(<!-- soy:id="history_count" /-->)</strong></a></p>
+	</div>
+</div>
+<!--  // #command-menu-section4 -->
+
+			<div id="history_popup" class="popup-content">
+			</div>
+			<!--  // .popup-content -->
+
+
+
+
+<div id="command-menu-section5" class="section">
+	<div class="title">
+		<h2>タグ</h2>
+	</div>
+	<div class="content">
+		<ul id="tag_list">
+			<!-- soy:id="tag_list" -->
+			<li><!-- soy:id="tag_text" /--></li>
+			<!-- /soy:id="tag_list" -->
+		</ul>
+		<p class="ri s"><a href="javascript:void(0);" onclick="$('#tag_edit').slideDown();">タグの追加・編集</a></p>
+		
+		<div id="tag_edit" style="display:none;">
+			<p>
+				<textarea id="entry_tags" soy:id="entry_tags" rows="4" id="post6-2" name="post6-2" class="m-area liq-area"></textarea>
+			</p>
+			
+			<p class="ce intro"><a href="javascript:void(0);" onclick="save_tags(this);" class="me-btn ce-b"><em>タグを保存</em></a></p>
+		</div>
+	</div>
+</div>
+<!--  // #command-menu-section5 -->
+
+
+<div id="command-menu-label" class="section">
+	<div class="title">
+		<h2>ラベル</h2>
+	</div>
+	<div class="content">
+		<div class="form-section">
+			<div class="item">
+			<ul class="radio-list">
+				<!-- soy:id="directory_label_list" -->
+				<li class="li1 label_wrap">
+					<p>
+						<input soy:id="label_check" type="checkbox" />
+						<label soy:id="label_name">ラベル名</label>
+					</p>
+				</li>
+				<!-- /soy:id="directory_label_list" -->
+			</ul>
+			</div>
+		</div>
+	
+		<div class="form-section">
+			<div class="label">
+				<h3>共通ラベル</h3>
+			</div>
+			
+			<div class="item">
+			
+				<ul class="radio-list">
+					<!-- soy:id="label_list" -->
+					<li class="li1 label_wrap">
+						<p>
+							<input soy:id="label_check" type="checkbox" />
+							<label soy:id="label_name">ラベル名</label>
+						</p>
+					</li>
+					<!-- /soy:id="label_list" -->
+				</ul>
+			
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript">
+	$(function(){
+		
+		$("#command-menu-label .radio-list").each(function(){
+			var labels = {};
+			
+			$(this).find("label").each(function(){
+				labels[$(this).html()] = {
+					ele : $(this).parents(".label_wrap"),
+					html : $(this).html(),
+					is_child : ($(this).html().indexOf("/") > 0),
+					label : $(this)
+				};
+			});
+			
+			
+			for (var html in labels) {
+				label = labels[html];
+				label_html = label.html;
+				
+				if (!label.is_child) continue;
+				
+				array = label_html.split("/");
+				last = array.pop();//まつび
+				parent_html = array.join("/");
+				
+				if (labels[parent_html]) {
+					
+					parent = labels[parent_html].ele;
+					if (parent.find("ul").size() < 1) parent.append($("<ul></ul>"));
+					parent.find("ul").append(label.ele);
+					label.label.html(last);
+					
+					label.ele.find("input").click(function(){
+						if ($(this).attr("checked")) {
+							ele = $(this);
+							while(ele.parents(".label_wrap:first").size() > 0){
+								wrap = ele.parents(".label_wrap:first");
+								wrap.find("input:first").attr("checked", true);
+								ele = wrap;
+							}
+						}
+					});
+					
+				}
+				
+				label.is_child = false;
+			}
+			
+		});
+		
+		//子ラベルは解除する
+		$("#command-menu-label .label_wrap").each(function(){
+			$(this).find(">p input").click(function(){
+				if (!$(this).attr("checked")) {
+					$(this).parents(".label_wrap:first").find("ul .label_wrap input").attr("checked", false);
+				}
+			});
+		});
+		
+		//ajax save event
+		$(".label_wrap input").click(function(){
+			save_label($(this));
+		});
+	});
+	</script>
+	<style type="text/css">
+	.label_wrap li{
+		margin-left:1em;
+	}
+	</style>
+</div>
+<!--  // #command-menu-label -->
+
+
+<div id="command-menu-section_meta" class="section">
+	<div class="title">
+		<h2>記事のメタ情報</h2>
+	</div>
+	<div class="content">
+		<div id="post6-section3" class="form-section">
+			
+			<div class="label">
+				<h3>Keyword</h3>
+			</div>
+			
+			<div class="item">
+				<p>
+					<input soy:id="entry_keyword" id="entry_keyword" class="s-area liq-area" />
+				</p>
+			</div>
+			
+			<div class="label">
+				<h3><label for="post6-1">Description</label></h3>
+			</div>
+			
+			<div class="item">
+				<p>
+					<textarea soy:id="entry_description" id="entry_description" rows="4" class="m-area liq-area"></textarea>
+				</p>
+			</div>
+			
+			<p class="ce intro"><a href="javascript:void(0);" onclick="save_meta(this);" class="me-btn ce-b"><em>保存</em></a></p>
+		
+		</div>
+	</div>
+</div>
+<!--  // #command-menu-section_meta -->
+
+
+
+
+<!-- soy:id="is_entry" -->
+<div id="command-menu-section8" class="section">
+	<div class="title">
+		<h2>コメント＆トラックバック</h2>
+	</div>
+	<div class="content">
+			<ul class="radio-list">
+				<li class="li1"><input soy:id="allow_comment" type="checkbox" id="allow_comment" /><label for="allow_comment">コメントを許可</label></li>
+				<li class="li1"><input soy:id="allow_trackback" type="checkbox" id="allow_comment" /><label for="allow_trackback">トラックバックを許可</label></li>
+				<li class="li1"><input soy:id="send_ping" type="checkbox" id="send_ping" /><label for="send_ping">更新Pingを送信</label></li>
+				<li class="li1"><input soy:id="feed_entry" type="checkbox" id="feed_entry" /><label for="feed_entry">フィードに表示</label></li>
+			</ul>
+			
+		<p class="ri s"><a soy:id="comment_link">コメントの管理(<!-- soy:id="comment_count" /-->)</a></p>
+		<p class="ri s"><a soy:id="trackback_link">トラックバックの管理(<!-- soy:id="trackback_count" /-->)</a></p>
+		<p class="ri s"><a href="#trakcbak-popup" class="popup-btn">トラックバックの送信</a></p>
+	</div>
+</div>
+<!-- /soy:id="is_entry" -->
+
+	<div id="trakcbak-popup" class="popup-content">
+		<div class="title">
+			<h2>トラックバックの送信</h2>
+		</div>
+		<div class="content">
+			<div class="item break">
+				<textarea class="s-area liq-area" rows="5" soy:id="trackback_destination"></textarea>
+			</div>
+		</div>
+		
+		<div class="ce">
+			<input type="button" value="トラックバックを送信する" class="m-btn" name="send_trackback" onclick="send_trackback(this);" />
+		</div>
+	</div>
+	<!--  // .popup-content -->
+
+
+
+<!-- soy:id="entry_template_wrap" -->
+<div id="command-menu-section9" class="section">
+	<div class="title">
+		<h2>記事テンプレート</h2>
+	</div>
+	<div class="content">
+		<div class="form-section">
+			<div class="label">
+				<h3>記事テンプレートの作成</h3>
+			</div>
+			<div class="item">
+				<p class="ce">
+					<a class="s-btn" soy:id="template_create_link"><em>記事テンプレートとして保存</em></a>
+				</p>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- /soy:id="entry_template_wrap" -->
+<!-- /soy:id="mode_edit*" -->
+
+
+<!-- soy:id="mode_edit*" -->
+<div id="command-menu-edit" class="section">
+	<div class="title">
+		<h2>記事の管理</h2>
+	</div>
+	<div class="content">
+		<p class="ce">
+			<a class="s-btn" soy:id="mode_sections_link">高度な編集</a>
+			<a class="s-btn" soy:id="entry_copy_link">記事のコピー</a>
+		</p>
+	</div>
+</div>
+<!-- /soy:id="mode_edit*" -->
+<!-- soy:id="mode_sections" -->
+<div id="command-menu-edit" class="section">
+	<div class="title">
+		<h2>編集モードの切り替え</h2>
+	</div>
+	<div class="content">
+		<p class="ce">
+			<a class="s-btn" soy:id="mode_detail_link">通常編集</a>
+		</p>
+	</div>
+</div>
+<!-- /soy:id="mode_sections" -->
+
+<div id="command-menu-trash" class="section">
+	<div class="title">
+		<h2>記事の削除</h2>
+	</div>
+	<div class="content">
+		<div class="form-section">
+			<div class="label">
+				<h3>記事の削除／復元</h3>
+			</div>
+			<div class="item">
+				<form soy:id="op_form">
+				<p class="ce">
+					<input class="s-btn" soy:id="op_trash" type="submit" name="op_trash" onclick="return confirm('ゴミ箱に移動します。よろしいですか？');" value="この記事をゴミ箱に移動する" />
+					<input class="s-btn break" soy:id="op_recover" type="submit" name="op_recover" value="この記事をゴミ箱から戻す" />
+					<input class="s-btn" soy:id="op_delete" type="submit" name="op_delete" onclick="return confirm('この記事を完全に削除します。\nこの操作は戻せません。\nよろしいですか？');" value="完全に削除する" />
+				</p>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+</div>
+<!--  // #command-menu -->
+
+	

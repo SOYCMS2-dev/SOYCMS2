@@ -1,0 +1,90 @@
+
+<!--  soy:display="errors" -->
+<div id="user-status"> 
+	<div class="inner"> 
+		<dl> 
+			<dt><span>ユーザーステータス</span></dt> 
+			<dd> 
+				ログインに失敗しました。<br />
+				ID,パスワードを確認してください。
+			</dd> 
+		</dl> 
+	</div> 
+</div> 
+<!--  // #user-status -->
+<!--  /soy:display="errors" -->		 
+
+	<div id="main-window1" class="main-window"> 
+	
+		<div class="window-title"> 
+			<h2>SOY CMS2 ログイン</h2> 
+		</div> 
+		
+		<div class="window-content"> 
+			
+			<div id="main-section1" class="section"> 
+			 <div class="ce site-id"><img soy:id="login_logo" alt="SOY CMS2" width="150" height="64" class="png" /></div> 
+
+				<div class="content"> 
+					<p class="intro">ID、パスワードを入力してログインしてください。</p> 
+					<form soy:id="login_form"> 
+						<div id="post1-section1" class="form-section"> 
+							<div class="label"> 
+								<h4>ID</h4> 
+							</div> 
+							<div class="item"> 
+								<p> 
+									<input soy:id="user_id" type="text" id="post1-2" name="post1-2" value="" class="xm-area liq-area" /> 
+								</p> 
+							</div> 
+						</div> 
+						<div id="post1-section2" class="form-section"> 
+							<div class="label"> 
+								<h4> 
+								<label for="post1-2">パスワード</label></h4> 
+							</div> 
+							<div class="item"> 
+								<p> 
+									<input soy:id="password" type="password" id="post1-2" name="post1-2" value="" class="xm-area liq-area" /> 
+								</p>
+							</div> 
+						</div> 
+						<div id="post1-section3" class="form-section">
+							<div class="item" soy:id="allow_cookie_login">
+								<p class="ce"> 
+										<input id="autologin" type="checkbox" name="autologin" id="checkbox"> 
+										<label for="autologin">ログイン情報を保存</label>
+								</p> 
+							</div>
+							<div class="item">  
+								<p class="ce"> 
+									<input type="submit" value="ログイン" id="post1-submit" name="post1-submit" class="l-btn" /> 
+								</p> 
+								<input type="hidden" soy:id="cp_theme" />
+							</div> 
+						</div> 
+						
+						<div id="post1-section4" class="form-section"> 
+							<div class="item">
+								<!-- soy:id="allow_password_reminder" --> 
+								<p class="ce sbreak"><a soy:link="remind_password">パスワードを忘れた場合</a></p>
+								<!-- /soy:id="allow_password_reminder" -->
+								 
+								<p class="ce">管理画面のテーマ
+										<select soy:id="theme_select"></select>
+									</select> 
+								</p> 
+							</div> 
+						</div> 
+						
+					</form> 
+				</div> 
+			</div> 
+			<!--  // #main-section1 --> 
+
+		</div> 
+		<!--  // .window-content --> 
+	</div> 
+	<!--  // #main-window1 --> 
+	
+	

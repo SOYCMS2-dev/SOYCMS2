@@ -1,0 +1,177 @@
+<div id="main-window1" class="main-window">
+		
+	<div class="window-title">
+		<h2 class="title-text">記事詳細</h2>
+		<p class="btn" style="display:none;">
+			<a id="show_attachment_btn" class="popup-btn-L" href="#attachments" title="添付ファイル"><span class="s-btn"><em>添付ファイル</em></span></a>
+		</p>
+	</div>
+	
+	<div class="window-content">
+		<!-- soy:id="has_child_entry" -->
+		<div class="tab-menu">
+			<ul class="tab-index"> 
+				<!-- soy:id="child_entry_list" -->
+				<li soy:id="entry_detail_link_wrap">
+					<a soy:id="entry_detail_link"><!-- soy:id="entry_title" /--></a>
+				</li>
+				<!-- /soy:id="child_entry_list" -->
+			</ul> 
+		</div>
+		<!-- /soy:id="has_child_entry" -->
+		<ul class="tab-contents">
+			<li>
+				<div class="section content">
+					
+					<!-- soy:id="overwrite_warning" -->
+					<div class="overwrite_warning" style="background-color:#FAAFBE;padding:5px 10px;margin:0px 0 12px;border:double 4px #ffffff;">
+						<p class="xl">この記事は公開後に編集されています。(<!-- soy:id="update_date_text" /-->)<br />公開側に反映するには「更新する」ボタンを押してください。</p>
+					</div>
+					<!-- /soy:id="overwrite_warning" -->
+					
+					<form soy:id="form" method="post" id="entry_form">
+						<div id="post1-section1" class="form-section">
+						
+							<div class="label">
+								<h4><label for="post1-1">タイトル</label></h4>
+							</div>
+							<div class="item">
+								<p class="article-title">
+									<input soy:id="entry_title" type="text" id="post1-1" name="post1-1" value="" class="xm-area" />
+								</p>
+							</div>
+							
+							<!-- soy:id="in_directory" -->
+							<div class="label">
+								<h4><label for="post1-1">記事のURL</label></h4>
+							</div>
+							<div class="item">
+								<p id="entry_url" class="intro">
+									<a id="entry_link" soy:id="entry_link" target="preview"><!-- soy:id="entry_url" /--></a>
+									<a href="javascript:void(0);" onclick="$('#entry_url').hide();$('#entry_url_edit').show();$('#entry_uri_input').focus();" class="sh-btn inline-btn"><em>編集</em></a>
+								</p>
+								<div id="entry_url_edit" style="display:none;">
+									<table class="form-table article-url-table"> 
+										<tr> 
+											<td class="fix-url"><!-- soy:id="directory_url" /--></td> 
+											<td class="article-url">
+												<input soy:id="entry_uri*" type="hidden" id="entry_uri_old" />
+												<input soy:id="entry_uri" type="text" id="entry_uri_input" name="post1-2" class="m-area liq-area" onfocus="focus_url(this);" />												
+											</td> 
+											<td>
+												<a class="s-btn" href="javascript:void(0);" onclick="save_entry_uri($(this));"><em>Save</em></a>
+												<a class="s-btn" href="javascript:void(0);" onclick="$('#entry_uri_input').val($('#entry_uri_old').val());$('#entry_url_edit').hide();$('#entry_url').show();"><em>Cancel</em></a>
+											</td>
+										</tr> 
+									</table>
+								</div>
+							</div>
+							<!-- /soy:id="in_directory" -->
+							
+							<!-- soy:id="is_page_entry" -->
+							<div class="label">
+								<h4><label for="post1-1">記事のURL</label></h4>
+							</div>
+							<div class="item">
+								<p id="entry_url" class="intro">
+									<a soy:id="page_link" target="preview"></a>
+								</p>
+							</div>
+							<!-- /soy:id="is_page_entry" -->
+							
+							<div id="content-container">
+								<div class="label">
+									<h4>内容</h4>
+								</div>
+								<div class="item">
+									<div id="sections_container" class="content">
+										
+										<!-- soy:id="section_list" -->
+										ここを要素毎に繰り返す
+										<!-- /soy:id="section_list" -->
+										
+										<div id="append_new_section" class="panel panel-line" style="display:none;">
+											<!-- soy:id="append_new_sections" -->
+											新しい要素
+											<!-- /soy:id="append_new_sections" -->
+											<div soy:id="add_child_entry_snippet" class="panel-parts"><a soy:id="add_child_entry_link" class="icon-sh-btn btn-nextpage" title="次のページ"><em>次のページ</em></a></div>
+										</div>
+										
+										<div id="insert_new_sections" class="panel-parts interval" style="display:none;">
+											<!-- soy:id="insert_new_sections" -->
+											新しい要素
+											<!-- /soy:id="insert_new_sections" -->
+										</div>
+										
+									</div>
+									<!--  // .content -->
+				
+									
+								</div>
+								<!--  // .item -->
+							</div>
+							
+							
+							<!-- soy:id="field_list" -->
+							<div soy:id="field_wrap" class="item field-item-wrap">
+								<h4><!-- soy:id="field_name" /--></h4>
+								<p class="intro"><!-- soy:id="field_description" /--></p>
+								<!-- soy:id="field_form" /-->
+							</div soy:id="field_wrap">
+							<!-- /soy:id="field_list" -->
+							
+							<!-- soy:id="soycms_entry_customfield" -->
+							カスタムフィールド拡張
+							<!-- /soy:id="soycms_entry_customfield" -->
+							
+			
+						</div>
+						<!--  // .post1-section1 -->
+			
+						<div class="form-btn ce" style="margin-bottom:50px;">
+							<input soy:id="save_btn" type="submit" value="更新する" id="save_submit_btn" class="l-btn" />
+							
+							<input soy:id="remove_page_btn" name="remove_page" type="submit" value="このページを削除" class="m-btn" onclick="return confirm('このページを削除します。\nよろしいですか？');" />
+						</div>
+				
+					</form><!-- // #entry_form -->
+				</div>
+				<!--  // .content -->
+				
+				
+			</li>
+		</ul><!-- // .tab-contents -->
+		
+		<div id="attachments" class="popup-contents" style="display:none;">
+			<!-- soy:id="attachments" -->
+			添付ファイル
+			<!-- /soy:id="attachments" -->	
+		</div><!-- // #attachments -->
+		
+		
+		<div class="section ce">
+		<a soy:id="prev_entry_link">&lt;&lt;<!-- soy:id="prev_entry_tite" /--></a> |
+		<a class="m-area" soy:id="list_link">[Directory]</a> |
+		<a soy:id="next_entry_link"><!-- soy:id="prev_entry_tite" /-->&gt;&gt;</a>
+		</div>
+	
+	
+	</div>
+	<!--  // .window-content -->
+</div>
+<!--  // #main-window1 -->
+
+
+<script type="text/javascript" soy:id="ajax_action"></script>
+<script type="text/javascript" soy:src="../common/wysiwyg/aobata.js"></script>
+<script type="text/javascript" soy:src="../common/js/soycms_entry/editor.js"></script>
+<script type="text/javascript">
+var content_position = '<!-- soy:id="content_position" /-->';
+$(function(){
+	if(content_position == -1){
+		$("#content-container").hide();
+	}else{
+		$("#field-" + content_position).after($("#content-container"));
+	}
+});
+</script>

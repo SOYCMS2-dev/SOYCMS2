@@ -1,0 +1,57 @@
+<div class="title"> 
+	<h3>ディレクトリのエイリアスの設定</h3> 
+</div>
+	
+<div class="content">
+<form soy:id="form">
+	<div class="form-section">
+		<div class="label"> 
+			<h4>ディレクトリ</h4> 
+		</div> 
+		<div class="item"> 
+			<p class="intro">どのディレクトリをエイリアスに設定するか選択してください。</p>
+			
+			<div class="pagelist-content">
+				<ul>
+					<!-- soy:id="directory_tree" -->
+					<li soy:id="page_list_wrap">
+						<dl> 
+							<dt class="image">
+								<img soy:id="page_icon" style="width:32px;height:32px;" />
+							</dt> 
+							<dt>
+								<input type="radio" soy:id="page_check" />
+							</dt>
+							<dd>
+								 ( <!-- soy:id="page_uri" /--> )
+							</dd> 
+						</dl>
+						<!-- soy:id="tree_child" -->
+						<ul>
+							<!-- soy:id="tree" -->ここが再帰的に実行<!-- /soy:id="tree" -->
+						</ul>
+						<!-- /soy:id="tree_child" --> 
+						
+					</li soy:id="page_list_wrap">
+					<!-- /directory_tree -->
+				</ul>
+			</div>
+		</div>
+		
+	</div><!-- // .form-section -->
+	
+	<div class="form-btn ce"> 
+		<input type="submit" value="設定する" id="post1-submit" name="save_basic" class="l-btn" /> 
+	</div> 
+
+</form>
+
+</div><!-- // .content -->
+
+<script type="text/javascript">
+$(function(){
+});
+</script>
+<style type="text/css">
+
+</style>

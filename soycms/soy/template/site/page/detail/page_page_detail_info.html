@@ -1,0 +1,156 @@
+<div class="section">
+
+
+	<ul class="crumbs">
+		<li><a soy:link="./" title="管理画面トップ" class="home_btn">管理画面トップ</a></li>
+		<li><a soy:link="page/list">ディレクトリの管理</a></li>
+		<li soy:id="type_error"><a soy:link="page/error">エラーページの管理</a></li>
+		<li><!-- soy:id="page_name*" /--></li>
+	</ul>
+
+	<div class="title"> 
+		<h3><!-- soy:id="page_name*" /--></h3> 
+	</div>	
+	
+	<div class="content">
+		
+		<table class="form-table">
+			<tr> 
+				<th scope="row"><label for="post1-1">記事</label></th>
+				<td>
+					<p>
+						<a soy:id="entry_link"><!-- soy:id="entry_link_text" /--></a>
+					</p>
+				</td> 
+			</tr> 
+		
+			<tr> 
+				<th scope="row"><label for="post1-1">URL</label></th> 
+				<td>
+					<p>
+					<a soy:id="page_link"><!-- soy:id="page_link_text" /--></a>
+					</p>
+				</td> 
+			</tr> 
+			
+			<tr> 
+				<th scope="row"><label for="post1-1">編集</label></th> 
+				<td>
+					<p>
+					<a soy:id="dynamic_link"><!-- soy:id="dynamic_link_text" /--></a>
+					</p>
+				</td> 
+			</tr> 
+			
+			<tr> 
+				<th scope="row"><label for="post1-1">種別</label></th> 
+				<td>
+					<p>
+						<!-- soy:id="page_type_text" /-->
+					</p>
+				</td> 
+			</tr> 
+			
+			<tr> 
+				<th scope="row"><label for="post1-1">作成日</label></th> 
+				<td>
+					<p>
+						<!-- soy:id="create_date" /-->
+						(<!-- soy:id="update_date" /--> 更新)
+					</p>
+				</td> 
+			</tr>
+			
+			<tr> 
+				<th scope="row"><label for="post1-1">作成者</label></th> 
+				<td>
+					<p>
+						<!-- soy:id="create_user_name" /-->
+					</p>
+				</td> 
+			</tr>
+			
+			<!-- soy:id="group_config_link_wrap" -->
+			<tr>
+				<th scope="row">グループ</th>
+				<td>
+					<a soy:id="group_config_link">グループの設定</a>
+				</td>
+			</tr>
+			<!-- /soy:id="group_config_link_wrap" -->
+			
+			<tr>
+				<th scope="row">使用中のテンプレート</th>
+				<td>
+					 <a soy:id="template_link"><!-- soy:id="template_name" /--></a>
+				</td>
+			</tr>
+			
+		</table>
+		
+	
+	</div><!-- /content -->
+
+</div><!-- /section -->
+
+<div soy:id="is_edit_page">
+<div class="section">	
+	<div class="title"> 
+		<h3>使用中のテンプレートを変更する</h3>
+		<p class="ri" style="margin:-35px 10px 20px 0;">
+			<a soy:link="page/template" class="s-btn">テンプレート一覧</a>
+		</p> 
+		
+	</div>
+	<div class="content">
+	<form soy:id="template_config_form">
+	<div class="item break">
+		
+		<table id="template_list" class="list-table">
+			<thead> 
+				<tr> 
+					<th width="18%" scope="col">テンプレート名</th> 
+					<th width="12%" class="col" scope="col">種類</th>
+					<th width="40%" scope="col">使用中のディレクトリ・ページ</th>
+					<th width="10%" class="s-cell" scope="col">プレビュー</th>  
+					<th width="10%" class="s-cell" scope="col">設定</th> 
+				</tr>
+			</thead> 
+			<tbody> 
+				<!-- soy:id="template_list" -->
+				<tr> 
+					<td>
+						<a soy:id="template_edit_link"><!-- soy:id="template_name" -->テンプレート名A<!-- /template_name --></a>
+						<p soy:id="template_description">◯◯◯◯◯◯◯◯◯◯◯◯◯◯◯◯◯◯◯◯◯◯◯◯◯◯◯◯◯◯◯◯</p>
+					</td> 
+					<td>
+						<span soy:id="template_color_box">■</span>
+						<!-- soy:id="template_type" -->テンプレート名A<!-- /template_type -->
+					</td> 
+					<td>
+						<!-- soy:id="page_list" -->
+							<a soy:id="page_link">ディレクトリへのリンク</a>
+							<a soy:id="page_public_link" class="external"><em>URL</em></a>
+							<!-- soy:id="not_last" -->|<!-- /soy:id="not_last" -->
+						<!-- /soy:id="page_list" -->
+					</td>
+					<td class="ce">
+						<a soy:id="preview_link">プレビュー</a>
+					</td> 
+					<td class="ce">
+						<input type="radio" soy:id="template_select_input" />
+					</td> 
+				</tr> 
+				<!-- /soy:id="template_list" -->
+			</tbody> 
+		</table> 
+	</div><!-- // .item -->
+	
+	<div class="form-btn ce"> 
+		<input type="submit" value="変更する" id="post1-submit" name="change_page_template" class="l-btn" /> 
+	</div>
+	</form>
+	</div>	
+</div>
+</div soy:id="is_edit_page">
+

@@ -1,0 +1,320 @@
+<!-- soy:id="item_list" -->
+<div soy:id="item_box" class="item_box">
+	
+	<div class="item_box_title">
+		<div class="item_box_title_inner"><h4><!-- soy:id="item_name" /--> - <!-- soy:id="item_type_text" /--></h4></div>
+	</div>
+	<div class="item_box_content"> 
+		<div class="item_box_content_inner"> 
+			<input type="hidden" class="item_position" soy:id="item_position" />
+			<input type="hidden" class="item_order" soy:id="item_order" />
+			<input type="hidden" class="item_delete" soy:id="item_delete" /> 
+			
+			<ul class="item_menu">
+				<li>
+					<!-- soy:id="item_preview" -->
+					<!-- /soy:id="item_preview" -->
+					<!-- soy:id="item_description" /-->
+				</li>
+				<li soy:id="detail_link_visible">
+					<a class="button" soy:id="detail_link">詳細</a>
+				</li>
+				<li soy:id="copy_link_visible">
+					<a class="button" soy:id="copy_link" target="_blank">コピー</a>
+				</li>
+				<li soy:id="recover_link">
+					<a class="button recover_link" href="javascript:void(0);" onclick="toggle_item_delete(this);">表示に設定</a>
+				</li>
+				<li soy:id="trash_link">
+					<a class="button trash_link" href="javascript:void(0);" onclick="toggle_item_delete(this);">非表示に設定</a>
+				</li>
+				<li soy:id="remove_link">
+					<a class="button" href="javascript:void(0);" onclick="toggle_item_delete(this);">削除</a>
+				</li>
+				
+				<li soy:id="whole_show_link_wrap">
+					<a class="button post_link" soy:id="whole_show_link" href="javascript:void(0);" onclick="return confirm('一括で”表示”に設定します。よろしいですか？\n\nこのテンプレートを利用している全てのページ・ディレクトリに影響があります。');">一括表示設定</a>
+				</li>
+				<li soy:id="whole_hide_link_wrap">
+					<a class="button post_link" soy:id="whole_hide_link" href="javascript:void(0);" onclick="return confirm('一括で”非表示”に設定します。よろしいですか？\n\nこのテンプレートを利用している全てのページ・ディレクトリに影響があります。');">一括非表示設定</a>
+				</li>
+				
+			</ul> 
+		</div> 
+	</div> 
+	
+	
+</div soy:id="item_box">
+<!-- /soy:id="item_list" -->
+
+<div class="widget_item_manager_wrap">
+	<div class="item_manager_main">
+		<div soy:id="item_layout"></div>
+	
+		<div class="ce cancel-btn" style="display:none;">
+			<input type="button" class="m-btn" value="Cancel" onclick="$('#item_manager_div .cell').sortable('cancel');$(this).parent().hide();" />
+		</div>
+	</div>
+	<div class="item_manager_sub">
+		<div id="item_manager_div2">
+			
+			<div class="item_manager break">
+				<div class="cell"> 
+					<div class="cell-title-wrap"> 
+						<h4 class="cell-title">要素を追加する</h4> 
+					</div>
+					<ul class="item_menu_sub"> 
+						<li class="library"><a class="button" href="javascript:void(0);" onclick="javascript:load_widget_list('library',this);"><strong>ライブラリ</strong></a></li> 
+						<li class="navigation"><a class="button" href="javascript:void(0);" onclick="javascript:load_widget_list('navigation',this);">ナビ</a></li> 
+						<li><a class="button" href="javascript:void(0);" onclick="javascript:load_widget_list('block',this);">ブロック</a></li> 
+					</ul> 
+				</div>
+				<div id="widget_list" class="cell">
+					<!-- ここが書き換わる -->
+				</div>
+			</div>
+			
+			<!-- soy:id="trash_box" -->
+			<div id="trash_box" class="item_manager">
+				<div class="cell"> 
+					<div class="cell-title-wrap"> 
+						<h4 class="cell-title">非表示中の要素</h4> 
+					</div>
+				</div>
+				<div class="cell">
+					<div class="inner">
+						
+					</div>
+				</div>
+			</div>
+			<!-- /soy:id="trash_box" -->
+			
+		</div>
+	</div>  
+</div>
+
+<script soy:src="../common/wysiwyg/default/colorpicker/js/colorpicker.js" type="text/javascript"></script>
+<script type="text/javascript">
+$(function(){
+	var mode = '<!-- soy:id="mode_text" /-->';
+	
+	if (mode == "navigation") {
+		$(".item_menu_sub .navigation").hide();
+	}
+	
+	$(".item_box").each(function(){
+		var pos = $(this).attr("pos");
+		var deleted = ($(this).attr("deleted") > 0);
+		
+		if(deleted){
+			$("#trash_box .inner").append($(this));
+			return;
+		}
+		
+		if ($("#cell_" + pos).size() < 1 ) {
+			if ($("#cell_blank").size() > 0) {
+				$("#cell_blank").append($(this));
+			}else{
+				$(this).hide();
+			}
+			
+			return;
+		}
+		
+		$("#cell_" + pos).append($(this));
+		
+	});
+	
+	$('.colorSelector').ColorPicker({
+		onBeforeShow : function(colpkr){
+			color = $(this).find("input").val();
+			$(this).ColorPickerSetColor(color.replace("#","").toLowerCase());
+		},
+		onShow: function (colpkr) {
+			$(colpkr).fadeIn(100);
+			return false;
+		},
+		onHide: function (colpkr) {
+			$(colpkr).fadeOut(100);
+			return false;
+		},
+		onChange: function (hsb, hex, rgb) {
+			ele = $(this).data('colorpicker').el;
+			
+			$(ele).parents(".cell").css("background","#" + hex);
+			$(ele).find("input").val('#' + hex).css("backgroundColor","#" + hex);
+			
+		}
+	});
+	
+	var url = SOYCMS_ROOT_URL + "common/wysiwyg/default/colorpicker/css/colorpicker.css";
+	var heads = document.getElementsByTagName("head");
+	
+	if(heads.length > 0){
+		link = document.createElement("link");
+		link.setAttribute("rel","stylesheet");
+		link.setAttribute("href",url); 
+		heads[0].appendChild(link);
+	}
+	
+});
+
+var toggle_item_delete = function(ele){
+	var box = $(ele).parents(".item_box");
+	
+	if (box.attr("deleted") > 0) {
+		if ($(box).hasClass("item_recovered")) {
+			$("#trash_box .inner").append($(box));
+			$(box).removeClass("item_recovered");
+		}else{
+			var pos = $(box).attr("pos");
+			$("#cell_" + pos).append($(box));
+			$(box).addClass("item_recovered");
+		}
+	} else {
+		box.toggleClass("item_delete");
+	}
+	
+	var input = box.find(".item_delete");
+	input.val(1 - input.val());
+
+};
+
+var load_widget_list = function(type,ele,page){
+	if (ele) {
+		$(".item_menu_sub li a").each(function(){
+			$(this).html($(this).text());
+		});
+		$(ele).wrapInner("<strong></strong>");
+	}
+	
+	var url = SOYCMS_ROOT_URL + "site/page/template/items?";
+	var templateId = '<!-- soy:id="template_id" /-->';
+	var navigationId = '<!-- soy:id="navigation_id" /-->';
+	
+	if(type)url += "&type=" + type;
+	if(templateId)url += "&template=" + templateId;
+	if(navigationId)url += "&navigation=" + navigationId;
+	if(page)url += "&page=" + page;
+	
+	$("#widget_list").load(url,function(){
+		append_draggable();
+	});
+	
+}
+
+var append_draggable = function(){
+	
+	var conf = {
+		helper : "clone",
+		start : function(){
+			$("#item_manager_div .cell").addClass("item_dragover");
+		},
+		stop : function(){
+			$("#item_manager_div .cell").removeClass("item_dragover");
+		}
+	};
+	
+	$("#widget_list").find(".item_box").draggable(conf);
+}
+
+$(function(){
+	load_widget_list();
+	
+	$("#item_manager_div .cell").droppable({
+		accept : ".item_box",
+		_over : function(event,ui){
+			$(this).find(".inner .item_box").hide();
+			$(this).addClass("item_dragover")
+		},
+		_out : function(event,ui){
+			$(this).removeClass("item_dragover");
+			$(this).find(".inner .item_box").show();
+		},
+		drop:function(event,ui){
+			
+			//新しい要素かどうか判定
+			
+			//既存の要素の場合
+			if (ui.draggable.parents("#item_manager_div").size() > 0) {
+				$(".cancel-btn").show();
+				return true;
+			
+			
+			//新しい要素を追加
+			} else {
+				ele = ui.draggable.clone();
+				ele.addClass("new_item");
+				ele.hide();
+				$(this).find(".inner").append(ele);
+				ele.fadeIn();
+				
+				pos = $(this).find(".inner").attr("cell:pos");
+				input = ele.find(".newitem_id");
+				input.attr("name","NewItem["+pos+"][]");
+				
+				input = ele.find(".item_order");
+				input.attr("name",input.attr("_name"));
+				
+				ele.find(".clear_btn").click(function(){
+					var _ele = $(this).parents(".item_box");
+					_ele.slideUp("fast", function(){
+						_ele.remove();
+					});
+				});
+			}
+			
+			return;
+		}
+	});
+});
+</script>
+<style type="text/css">
+.inner{
+	min-height:80px;
+}
+.cell-title-wrap{
+	width:100%;
+}
+
+.drop_box{
+	display:none;
+}
+
+.new_item{
+	border:solid 5px yellow !important;
+	position:relative;
+}
+
+.clear_btn{
+	display:none;
+	position:absolute;
+	right:-10px;
+	top:-10px;
+	
+}
+
+.new_item .clear_btn{
+	display:inline;
+}
+
+.item_dragover .drop_box{
+	display:block;
+	height:100px;
+	background-color:white;
+	border:dashed 5px #ccc;
+	font-size:x-large;
+	text-align:center;
+	line-height:100px;
+	margin-bottom:20px;
+}
+.recover_link{
+	display:none;
+}
+#trash_box .trash_link{
+	display:none;
+}
+#trash_box .recover_link{
+	display:inline;
+}
+</style>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rdf:RDF xmlns="http://purl.org/rss/1.0/"
+	xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xml:lang="<!-- cms:id="site_language*" /-->">
+
+	<channel rdf:about="<!-- cms:id="site_url" /-->">
+		<title><!-- cms:id="site_name*" /--></title>
+		<link><!-- cms:id="site_url*" /--></link>
+		<description>
+			<!-- cms:id="site_description" /-->
+			<!-- cms:id="directory_description" /-->
+		</description>
+		<dc:date>
+			<!-- cms:id="feed_last_update_date" cms:format="c" /-->
+		</dc:date>
+		<dc:language><!-- cms:id="site_language" /--></dc:language> 
+		<items>
+		<rdf:Seq>
+			<!-- block:id="entry_list*" -->
+			<rdf:li rdf:resource="<!-- cms:id="entry_url*" /-->" />
+			<!-- /block:id="entry_list*" -->
+		</rdf:Seq>
+		</items>
+	</channel>
+	
+	<!-- block:id="entry_list" -->
+	<item rdf:about="<!-- cms:id="entry_url*" /-->" >
+		<title><!-- cms:id="title" /--></title>
+		<link><!-- cms:id="entry_url*" /--></link>
+		<description><![CDATA[
+			<!-- cms:id="summary" --><!-- /cms:id="summary" -->
+		]]></description>
+		<dc:creator>
+			<!-- cms:id="author" /-->
+		</dc:creator>
+		<dc:date><!-- cms:id="create_date" cms:format="c" /--></dc:date>
+	</item>
+	<!-- /block:id="entry_list" -->
+	
+</rdf:RDF>

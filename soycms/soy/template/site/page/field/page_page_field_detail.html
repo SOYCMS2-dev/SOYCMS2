@@ -1,0 +1,270 @@
+<div id="main-window1" class="main-window">
+	
+<div class="window-title">
+	<h2 class="title-text"><!-- soy:id="field_name" /-->のフィールド設定</h2>
+</div>
+
+<div class="window-content">
+	
+<form soy:id="form">
+	
+<div class="section">
+	<div class="pagelist-menu"> 
+		<ul> 
+			<li class="back"><a soy:link="page/field">カスタムフィールド管理に戻る</a></li> 
+		</ul>
+	</div>
+	
+	
+	<div class="title">
+		<h3>フィールド設定</h3>
+	</div>
+	<div class="content">
+			
+		<table class="form-table"> 
+			<tr> 
+				<th scope="row">フィールドID</th> 
+				<td>
+					<span class="xxl" soy:id="field_id_text">*************</span>	
+				</td>
+			</tr>
+			<tr> 
+				<th scope="row">フィールド名</th> 
+				<td>
+					<input soy:id="field_name" type="text" class="m-area" size="40" value="サムネイル" />	
+				</td>
+			</tr>
+			<tr> 
+				<th scope="row">ラベル</th> 
+				<td>
+					<input soy:id="field_label" type="text" class="m-area" size="40" value="サムネイル" />	
+				</td>
+			</tr>
+			<tr> 
+				<th scope="row">項目の説明</th> 
+				<td>
+					<textarea soy:id="field_description" class="m-area" cols="40"></textarea>	
+				</td>
+			</tr>
+			<tr>	 
+				<th scope="row">複数設定</th> 
+				<td>
+					<p class="intro">
+						<input type="checkbox" soy:id="field_multi" id="field_multi" /> <label for="field_multi">この項目の複数追加を可能にする</label>
+					</p>
+					<p>
+						<input soy:id="field_multi_max" type="text" size="3" class="s-area" /> 個まで追加可能
+					</p>
+				</td>
+			</tr>
+			<tr>
+				<th scope="row">種別</th>
+				<td>
+					<select soy:id="field_type_select"></select>
+				</td>
+			</tr>
+			
+			<!-- soy:id="has_option" -->
+			<tr>
+				<th scope="row">オプション</th> 
+				<td>
+					<p class="intro">項目を改行して入力してください</p>
+					<textarea soy:id="field_option" type="text" value="" rows="5" class="s-area liq-area"></textarea>
+				</td> 
+			</tr>
+			<!-- /soy:id="has_option" -->
+			
+			<!-- soy:id="is_not_group" -->
+			<tr>
+				<th scope="row">初期値</th> 
+				<td>
+					<input soy:id="field_default_value" type="text" value="" class="s-area liq-area" />
+				</td> 
+			</tr>
+			<!-- /soy:id="is_not_group" -->
+		</table>
+		
+		<div class="form-btn ce">
+			<input type="submit" class="l-btn" name="save_config" value="保存" />
+			<!-- soy:id="is_detail" -->
+			<br />
+			<input type="submit" value="削除" id="post1-submit" name="remove" class="m-btn ri" onclick="return confirm('この項目を削除して良いですか？');" />
+			<!-- /soy:id="is_detail" -->
+		</div>
+		
+	</div>
+	
+	</form>
+
+</div>
+
+<!-- soy:id="is_group" -->
+<div class="section">
+	 
+	<div class="title">
+		<h3>フィールド一覧</h3>
+		
+		<p class="fr">
+			<a class="popup-btn s-btn" href="#field_order">表示順を変更する</a>
+		</p> 
+	</div>	
+	<div class="content"> 
+		<!-- soy:id="field_list" -->
+			<h4><!-- soy:id="list_field_name" -->hoge<!-- /soy:id="list_field_name" --> - (<!-- soy:id="list_field_id*" /-->)</h4>
+			
+			<div soy:id="column_config">
+			<form soy:id="config_form">
+				
+				<table class="form-table"> 
+					<tr> 
+						<th scope="row">種別</label></th> 
+						<td>
+							<select soy:id="child_field_type_select"></select>
+						</td>
+					</tr>
+					
+					<tr>
+						<th scope="row">項目ID</th> 
+						<td>
+							<input soy:id="field_id_old" type="hidden" />
+							<input soy:id="field_id" type="text" id="post1-1" name="post1-1" value="" class="s-area liq-area" />
+						</td>
+					</tr>
+					<tr>
+						<th scope="row">名前</th> 
+						<td>
+							<input soy:id="field_name" type="text" value="" class="s-area liq-area" />
+						</td> 
+					</tr>
+					<!-- soy:id="has_label" -->
+					<tr>
+						<th scope="row">ラベル</th> 
+						<td>
+							<input soy:id="field_label" type="text" value="" class="s-area liq-area" />
+						</td> 
+					</tr>
+					<!-- /soy:id="has_label" -->
+					<tr>	 
+						<th scope="row">説明</th> 
+						<td>
+							<textarea class="m-area liq-area" soy:id="field_description" rows="3"></textarea>
+						</td> 
+					</tr>
+					
+					<!-- soy:id="has_option" -->
+					<tr>
+						<th scope="row">オプション</th> 
+						<td>
+							<textarea soy:id="field_option" type="text" value="" class="s-area liq-area"></textarea>
+						</td> 
+					</tr>
+					<!-- /soy:id="has_option" -->
+					
+					<tr>
+						<th scope="row">初期値</th> 
+						<td>
+							<input soy:id="field_default_value" type="text" value="" class="s-area liq-area" />
+						</td> 
+					</tr>
+				</table>
+				
+				<div class="form-btn ce">
+					<input type="submit" class="m-btn" name="save_config" value="保存" />
+					<input type="submit" value="削除" id="post1-submit" name="remove" class="m-btn ri" onclick="return confirm('この項目を削除して良いですか？');" />
+				</div>
+				
+			</form soy:id="config_form">
+		</div>
+		<!-- /soy:id="field_list" -->
+		
+		<div id="field_order" class="popup-content" style="display:none;">
+			<h3>表示順の変更</h3>
+			<form soy:id="list_form">
+				<div class="form-btn ce">
+					<input type="submit" class="m-btn" name="save_orders" value="保存" />
+				</div>
+				
+				<table class="list-table">
+					<thead> 
+						<tr>
+							<th scope="col" width="13%">種別</th> 
+							<th scope="col">項目ID</th>
+							<th scope="col">ラベル</th>
+							<th width="13%;" scope="col">表示順</th>
+						</tr>
+					</thead>
+					<tbody>
+					<!-- soy:id="field_list*" -->
+					<tr>
+						<td>
+							<!-- soy:id="list_field_type" /-->
+						</td>
+						<td>
+							<!-- soy:id="list_field_id" /-->
+						</td>
+						<td>
+							<!-- soy:id="list_field_name" /-->
+						</td>
+						<td class="ce">
+							<input type="hidden" soy:id="order_input" />
+							<input type="button" value="▲" id="post1-btn3" name="post1-btn3" class="s-btn up_btn" /> 
+							<input type="button" value="▼" id="post1-btn3" name="post1-btn3" class="s-btn down_btn" />
+						</td>
+					</tr>
+					<!-- /soy:id="field_list*" -->
+					</tbody>
+				</table>
+				
+				<div class="under form-btn ce">
+					<input type="submit" class="m-btn" name="save_orders" value="保存" />
+				</div>
+			</form>
+		</div>
+		
+		
+	</div><!-- // .content -->
+	
+	<div class="title"> 
+		<h3>新しい項目の追加</h3> 
+	</div>	
+	<div class="content">
+		
+	
+	<form soy:id="add_form"> 
+				
+		<div class="form-section"> 
+			
+			<table class="form-table"> 
+				<tr> 
+					<th scope="row">種別</th> 
+					<td>
+						<select soy:id="new_field_type_select"></select>
+					</td>
+				</tr>
+				<tr>
+					<th scope="row">項目ID</th> 
+					<td><input name="NewField[fieldId]" class="s-area liq-area" /></td> 
+				</tr>
+				<tr>
+					<th scope="row">フィールド名</th> 
+					<td><input name="NewField[name]" value="" class="s-area liq-area" /></td> 
+				</tr> 
+			</table>
+			
+			<div class="form-btn ce"> 
+				<input type="submit" value="追加" id="post1-submit" name="add" class="m-btn" /> 
+			</div> 
+		</div>
+		
+	</form>
+	
+	</div>
+	
+</div><!-- // .section -->
+<!-- /soy:id="is_group" -->
+
+</form>
+
+</div><!-- // .window-content -->
+
+</div><!-- // .main-window -->

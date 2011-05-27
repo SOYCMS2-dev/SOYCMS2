@@ -1,0 +1,156 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ja" lang="ja" dir="ltr">
+<head>
+<meta cms:id="meta_content_type" http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta cms:id="meta_content_language" http-equiv="Content-Language" content="ja" />
+<meta cms:id="meta_keyword" content="" />
+<meta cms:id="meta_description" content="" />
+<meta http-equiv="Content-Style-Type" content="text/css" />
+<meta http-equiv="Content-Script-Type" content="text/javascript" />
+<title>サイトタイトル</title>
+<link rel="start" cms:id="link_start" />
+<link rel="stylesheet" href="@@SITE_PATH@@themes/default/css/styles.css" type="text/css" media="all" />
+<link rel="shortcut icon" cms:id="link_shortcut_icon" />
+<link rel="icon" cms:id="link_icon" />
+<script src="@@SITE_PATH@@themes/default/js/jquery.js" type="text/javascript"></script>
+<script src="@@SITE_PATH@@themes/default/js/design.js" type="text/javascript"></script>
+<!-- cms:id="site_feed" --><!-- サイト全体のフィード --><!-- /cms:id="site_feed" -->
+<!-- cms:id="directory_feed" --><!-- ディレクトリのフィード --><!-- /cms:id="directory_feed" -->
+</head>
+<body class="##BODY_CLASS##"> 
+	<p class="hidden-navi"><a href="#contents">本文へ</a></p>
+	
+	<div id="header">
+		<!-- layout:header -->
+		
+		<div id="dynamic-edit" cms:id="dynamic_edit_navi">
+			<p><a cms:id="dynamic_edit_link"><strong>ダイナミック編集</strong></a></p>
+		</div>
+		
+		<p id="site-id" class="text-site-id"><a href="@@SITE_PATH@@"><!-- cms:id="site_name" -->サイト名<!-- /cms:id="site_name" --></a></p>
+		
+		<!-- cms:include="search_box" -->
+		<dl id="search-box">
+			<dt><img src="@@SITE_PATH@@themes/default/img/search-title.gif" alt="サイト内検索" width="58" height="11" /></dt>
+			<dd>
+				<form action="/search" method="get" id="srch" name="srch">
+					<input type="text" name="q" value="" id="srchInput" tabindex="1" class="inputarea" />
+					<input type="image" src="@@SITE_PATH@@themes/default/img/search-btn.gif" alt="検索" id="srchBtn" tabindex="2" class="btn" value="submit" />				
+				</form>
+			</dd>
+		</dl>
+		<!-- // #search-box -->
+		<!-- /cms:include="search_box" -->
+	
+		<!-- cms:include="global_navi" -->
+		<ul id="global-navi" class="even5 text-center">
+			<li class="navi1"><a href="@@SITE_PATH@@"><em>HOME</em></a></li>
+			<li class="navi2"><a href="@@SITE_PATH@@contentsA/"><em>コンテンツA</em></a></li>
+			<li class="navi3"><a href="@@SITE_PATH@@contentsB/"><em>コンテンツB</em></a></li>
+			<li class="navi4"><a href="@@SITE_PATH@@news/"><em>お知らせ</em></a></li>
+			<li class="navi5"><a href="@@SITE_PATH@@contact"><em>お問い合わせ</em></a></li>
+		</ul>
+		<!-- /cms:include="global_navi" -->
+		<!-- /layout:header -->
+	</div>
+	<!--  // #header -->
+ 
+	<hr class="hidden-navi" title="ここから本文です" /> 
+	
+	<div id="contents"> 
+		
+		<div id="maincontent"> 
+			<!-- layout:main -->
+			
+			<h1 class="pagetitle">お問い合わせ</h1>
+			<p class="topicpath"><!-- cms:id="bread_crumbs" --><a cms:id="page_link"><!-- cms:id="page_name" /--></a><!-- cms:id="tree_child" --> &gt; <!-- cms:id="tree" -->[繰り返し]<!-- /cms:id="tree" --><!-- /cms:id="tree_child" --><!-- /cms:id="bread_crumbs" --></p>
+			
+			<div class="entry">
+				<div class="section">
+					<!-- block:id="app_main" -->
+					問い合わせフォームがここに表示されます。
+					<!-- /block:id="app_main" -->
+				</div>
+
+			</div>
+			<!-- //.entry -->
+			
+			<!-- /layout:main -->
+		</div>
+		<!--  // #maincontent -->
+		
+		<div id="subcontent" class="sub">
+			<!-- layout:sub -->
+			<!-- cms:navigation="submenu" -->
+
+			<!-- block:id="news" --> 
+			<div class="section"> 
+				<h2><!-- cms:id="block_name" -->お知らせ<!-- /cms:id="block_name" --></h2> 
+				<dl class="archive-list">
+					<!-- cms:id="entry_list" --> 
+					<dt>2010.04.20</dt> 
+					<dd><a cms:id="entry_link"><!-- cms:id="title" -->テキストが入ります。<!-- /cms:id="title" --></a></dd>
+					<!-- /cms:id="entry_list" --> 
+				</dl> 
+				<p class="link-r"><a href="@@SITE_PATH@@news/">お知らせ 一覧</a></p> 
+			</div> 
+			<!-- //.section --> 
+			<!-- /block:id="news" --> 
+
+			<!-- block:id="content_a" --> 
+			<div class="section"> 
+				<h2><!-- cms:id="block_name" -->コンテンツA<!-- /cms:id="block_name" --></h2> 
+				<ul class="img-list">
+					<!-- cms:id="entry_list" --> 
+					<li class="item"> 
+						<p class="image"><a cms:id="entry_link*"><img cms:id="thumbnail_image" alt="サンプル画像" width="50" height="50" /></a></p> 
+						<dl class="text"> 
+							<dt><a cms:id="entry_link"><!-- cms:id="title" -->タイトル<!-- /cms:id="title" --></a></dt> 
+							<dd cms:id="thumbnail_text">テキストが入ります。</dd> 
+						</dl> 
+					</li>
+					<!-- /cms:id="entry_list" --> 
+				</ul> 
+				<p class="link-r">一覧</a></p> 
+			</div> 
+			<!-- //.section --> 
+			<!-- /block:id="content_a" --> 
+
+			<!-- cms:include="banner-A" --> 
+			<ul class="banner"> 
+				<li><a href="/"><img src="@@SITE_PATH@@themes/default/img/banner.gif" alt="バナー" width="243" height="60" /></a></li> 
+				<li><a href="/"><img src="@@SITE_PATH@@themes/default/img/banner.gif" alt="バナー" width="243" height="60" /></a></li> 
+			</ul> 
+			<!--  // .banner --> 
+			<!-- /cms:include="banner-A" --> 
+
+			<!-- cms:include="banner-B" --> 
+			<ul class="banner"> 
+				<li><a href="/"><img src="@@SITE_PATH@@themes/default/img/banner-rss.gif" alt="RSS" width="47" height="15" /></a></li> 
+			</ul> 
+			<!--  // .banner --> 
+			<!-- /cms:include="banner-B" --> 
+
+			<!-- /cms:navigation="submenu" -->
+			<!-- /layout:sub -->
+		</div>
+		<!--  // #subcontent -->
+
+	</div>
+	<!-- // #contents -->
+	
+	<hr class="hidden-navi" title="ここまで本文です" />
+	
+	<!-- layout:footer -->
+	<!-- cms:include="footer" -->
+	<div id="footer">
+		<p class="pagetop"><a href="#header"><em>PageTop↑</em></a></p>
+		<ul class="navi"><li><a href="@@SITE_PATH@@themes/default/">リンク</a></li><li><a href="@@SITE_PATH@@themes/default/">リンク</a></li><li><a href="@@SITE_PATH@@themes/default/">リンク</a></li><li class="last"><a href="@@SITE_PATH@@themes/default/">リンク</a></li></ul>
+		<address class="copyright">copyright&copy; xxx all rights reserved.</address>
+	</div>
+	<!--  // #footer -->
+	<!-- /cms:include="footer" -->
+	<!-- /layout:footer -->
+	
+</body>
+</html>

@@ -1,0 +1,50 @@
+.field-operation-btn{
+	
+}
+.field-form:hover .field-operation-btn{
+	display:block;
+}
+
+.field-operation-append-btn{
+	float:right;
+	margin-top:0px;
+}
+
+
+.form-section .field-item-wrap{
+	
+}
+.field-form{
+	background-color:#F8F8F8;
+	padding:5px;
+	margin-bottom:13px;
+}
+table.form-table th.field-label-cell{
+	width:100px ;
+}
+.field-template{
+	display:none;
+}
+.field-form .field-cancel-btn{
+	display:none;
+}
+.field-form-deleted .field-cancel-btn{
+	display:inline;
+}
+.field-form-deleted .field-remove-btn{
+	display:none;
+}
+.field-form-deleted .field-child-list{
+	display:none;
+}
+.field-template{
+	display:none;
+}
+.field-form p.field-operation-btn{
+	text-align:right;
+	padding:5px 2px 0 0;
+}
+.field-child-list .field-form{
+	margin-bottom:0;
+	padding:0;
+}

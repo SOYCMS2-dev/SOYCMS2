@@ -1,0 +1,81 @@
+<div id="main-window1" class="main-window">
+	
+<div class="window-title">
+	<h2 class="title-text"><!-- soy:id="site_name_text" /--> - 詳細</h2>
+</div>
+
+<div class="window-content content">
+<div id="main-section1" class="section">
+	
+		<p class="fr ri">
+			<a soy:id="login_link" class="m-btn"><em>このサイトにログイン</em></a>
+		</p>
+	
+		<div class="pagelist-menu"> 
+			<ul> 
+				<li class="back"><a soy:link="site">サイト管理に戻る</a></li> 
+			</ul> 
+		</div>
+		
+		<form soy:id="form">
+		
+		<div class="form-section">
+			<div class="label">
+				<h4><label for="post1-1">サイトID</label></h4>
+			</div>
+			<div class="item">
+				<p class="xxl"><!-- soy:id="site_id_text" /--></p>
+			</div>
+		</div>
+		
+		<div class="form-section">
+			<div class="label">
+				<h4><label for="post1-4">サイト名称</label></h4>
+			</div>
+			<div class="item">
+				<p class="xxl"><!-- soy:id="site_name_text" /--></p>
+			</div>
+		</div>
+		
+		<div class="form-section">
+			<div class="label">
+				<h4><label for="post1-4">サイトURL</label></h4>
+			</div>
+			<div class="item">
+				<p class="intro">変更することで表示出来なくなる可能性があります</p>
+				<input class="m-area liq-area" soy:id="site_url" />
+			</div>
+		</div>
+		
+		<div class="form-section">
+			<div class="label">
+				<h4><label for="post1-4">サイトPath</label></h4>
+			</div>
+			<div class="item">
+				<p class="intro">変更することで表示出来なくなる可能性があります</p>
+				<input class="m-area liq-area" soy:id="site_path" />
+			</div>
+		</div>
+		
+		<div class="form-btn ce lbreak">
+			<input type="submit" class="l-btn" name="save" value="保存" />
+		</div>
+		
+		<!-- soy:quickhelp="domain_root" /-->
+		
+		<div class="form-btn ce lbreak">
+			<input type="submit" class="m-btn" soy:id="do_domain_root" value="ドメインルートに設定する" />
+			<input type="submit" class="m-btn" soy:id="undo_domain_root" value="ドメインルート設定を解除する" />
+		</div>
+		
+		
+		<div class="form-btn ce">
+			<a soy:id="remove_link" class="s-btn"><em>このサイトを削除する</em></a>
+		</div>
+		
+		
+		</form>
+</div>
+</div>
+
+</div>

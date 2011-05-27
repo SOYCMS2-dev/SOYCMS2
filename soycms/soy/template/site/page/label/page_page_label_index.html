@@ -1,0 +1,237 @@
+<div id="main-window1" class="main-window">
+	
+<div class="window-title">
+	<h2 class="title-text">ラベル一覧</h2>
+</div>
+
+<div class="window-content">
+	<div class="section">
+
+		<ul class="crumbs">
+			<li><a soy:link="./" title="管理画面トップ" class="home_btn">管理画面トップ</a></li>
+			<li>ラベル・タグの管理</li>
+		</ul>
+
+		<div class="pagelist-menu"> 
+			<ul> 
+				<li class="plus-btn"><a soy:link="page/label/create">ラベルの作成</a></li>
+				<li class="edit"><a soy:link="page/label/custom">ラベル用カスタムフィールドの設定</a></li>
+			</ul>
+		</div>
+	
+		<div class="title">
+			<h3>ディレクトリラベル</h3>
+			<p class="ri fr">
+				<a class="s-btn" href="javascript:void(0);" onclick="start_label_order();$(this).hide();"><em>表示順変更</em></a>
+			</p>
+		</div>
+		
+		<div class="content">
+			<form soy:id="form">
+			<div class="pagelist-content">
+				
+				<div class="save_order_wrap form-btn ce under" style="display:none;"> 
+					<input type="submit" value="表示順を保存する" id="post1-submit" name="post1-submit" class="m-btn-red" />
+					<p class="intro">
+						<a href="javascript:cancel_label_order();">キャンセル</a>
+					</p> 
+				</div> 
+				
+				<ul>
+					<!-- soy:id="label_tree" -->
+					<li soy:id="page_list_wrap">
+						<dl> 
+							<dt class="image">
+								<img soy:id="page_icon" style="width:32px;height:32px;" />
+							</dt> 
+							<dt>
+								<strong><!-- soy:id="page_name" /--></strong>
+							</dt>
+							<!-- soy:id="label_exists" -->
+							<dt>
+								<ol class="label_list">
+									<!-- soy:id="label_list" -->
+									<li class="label-item">
+										<div class="label_icon" soy:id="label_icon">■</div>
+										<a class="label-name" soy:id="detail_link"><!-- soy:id="label_name" /--></a>
+										<input type="hidden" soy:id="label_display_order" />
+									</li>
+									<!-- /soy:id="label_list" -->
+								</ol>
+							</dt>
+							<!-- /soy:id="label_exists" -->
+						</dl>
+						
+						
+						<!-- soy:id="tree_child" -->
+						<ul>
+							<!-- soy:id="tree" -->ここが再帰的に実行<!-- /soy:id="tree" -->
+						</ul>
+						<!-- /soy:id="tree_child" --> 
+						
+					</li soy:id="page_list_wrap">
+					<!-- /label_tree -->
+					
+				</ul>
+				
+				<div class="save_order_wrap form-btn ce under" style="display:none;"> 
+					<input type="submit" value="表示順を保存する" id="post1-submit" name="post1-submit" class="m-btn-red" />
+					<p class="intro">
+						<a href="javascript:cancel_label_order();">キャンセル</a>
+					</p> 
+				</div> 
+				
+			</div>
+			
+			</form>
+			
+
+		<p class="intro ce">
+			<a class="s-btn" onclick="return common_open_popup($(this).attr('href'));" soy:link="page/field/code?config=label"><em>テンプレート用HTML生成</em></a>
+		</p>
+			
+			
+		</div><!-- // .content -->
+	</div><!-- // .section -->
+	
+	<div class="section">
+		<div class="title">
+			<h3>共通ラベル</h3>
+		</div>
+		
+		<div class="content">
+			<!-- soy:id="label_exists" -->
+			
+			<ol>
+				<!-- soy:id="common_label_list" -->
+				<li>
+					<div class="label_icon" soy:id="label_icon">■</div>
+					<a style="margin-left:1.5em;" soy:id="detail_link"><!-- soy:id="label_name" /--></a>
+				</li>
+				<!-- /soy:id="common_label_list" -->
+			</ol>
+			
+			<!-- /soy:id="label_exists" -->
+			
+			<!-- soy:id="no_label" -->
+			<p class="lbreak">ラベルはありません</p>
+
+		<div class="pagelist-menu"> 
+			<ul> 
+				<li class="plus-btn"><a soy:link="page/label/create">ラベルの作成</a></li>
+			</ul>
+		</div>
+			<!-- /soy:id="no_label" -->
+			
+		</div><!-- //.content -->
+</div>
+</div>
+
+</div><!-- /windo1 -->
+
+<div id="main-window2" class="main-window">
+	
+<div class="window-title">
+	<h2 class="title-text">タグ一覧</h2>
+</div>
+
+<div class="window-content">
+<div id="main-section1" class="section">
+	
+	<!-- soy:id="tag_list" -->
+		<span><!-- soy:id="tag_text" /--></span>
+	<!-- /soy:id="tag_list" -->
+		
+</div>
+</div>
+
+</div><!-- /windo2 -->
+
+<script type="text/javascript">
+var cancel_label_order = function(){
+	location.reload();
+};
+var start_label_order = function(){
+	try {
+		$(".pagelist-content").addClass("mode-sort");
+		$(".save_order_wrap").fadeIn();
+		
+		$(".label_list li").each(function(){
+			$(this).find(">.label-name").before($('<div class="move_op"><a class="s-btn move-up" href="javascript:void(0);"><em>↑</em></a><a class="s-btn move-down" href="javascript:void(0);"><em>↓</em></a></div>'));
+		});
+		
+		
+		$(".move_op .move-up").click(function(){
+			var ele = $(this).parents(".label-item:first");
+			if (ele.prev().size()) {
+				ele.prev().before(ele);
+				ele.hide().fadeIn();
+			}
+		});
+		
+		$(".move_op .move-down").click(function(){
+			var ele = $(this).parents(".label-item:first");
+			if (ele.next().size()) {
+				ele.next().after(ele);
+				ele.hide().fadeIn();
+			}
+		});
+		
+	}catch(e){
+		
+	}
+};
+
+$(function(){
+	$(".label_list").each(function(){
+		var labels = {};
+		
+		$(this).find(".label-name").each(function(){
+			labels[$(this).html()] = {
+				ele : $(this).parents(".label-item"),
+				html : $(this).html(),
+				is_child : ($(this).html().indexOf("/") > 0),
+				label : $(this)
+			};
+		});
+		
+		for (var html in labels) {
+			label = labels[html];
+			label_html = label.html;
+			
+			if (!label.is_child) continue;
+			
+			array = label_html.split("/");
+			last = array.pop();//まつび
+			parent_html = array.join("/");
+			
+			if (labels[parent_html]) {
+				
+				parent = labels[parent_html].ele;
+				if (parent.find("ul").size() < 1) parent.append($("<ul></ul>"));
+				parent.find("ul").append(label.ele);
+				label.label.html(last);
+				
+			}
+			
+			label.is_child = false;
+		}
+		
+	});
+});
+</script>
+<style type="text/css">
+.move_op{
+	display:inline;
+	margin-left:20px;
+}
+.mode-sort .label-item{
+	padding-top:10px;
+}
+.label-name{
+	margin-left:1.5em;
+}
+.mode-sort .label-name{
+	margin-left:10px;
+}
+</style>

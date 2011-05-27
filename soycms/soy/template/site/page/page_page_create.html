@@ -1,0 +1,373 @@
+<!-- soy:id="type_dir" -->
+<div id="main-window1" class="main-window"> 
+					
+	<div class="window-title"> 
+		<h2>ディレクトリの作成</h2> 
+	</div> 
+	
+	<div class="window-content"> 
+		<form soy:id="dir_form">
+			
+		<div class="tab-menu"> 
+			<ul class="tab-index"> 
+				<li><a href="#tab1">基本設定</a></li>
+				<li><a href="#tab2">ディレクトリのテンプレート</a></li>
+				<li><a href="#tab3">index.htmlのテンプレート</a></li>
+			</ul> 
+			<ul class="tab-contents">
+				<li id="tab1_contents"> 
+					<div class="section"> 
+						
+						<div class="title"> 
+							<h3>ディレクトリの基本設定</h3> 
+						</div>	
+						<div class="content"> 
+				
+							<div id="post1-section1" class="form-section">
+								
+								<input type="hidden" soy:id="page_type_dir" /> 
+							
+								<div class="label"> 
+									<h4> 
+										<label for="post1-1">ディレクトリ名</label>
+									</h4> 
+								</div> 
+								<div class="item"> 
+									<p> 
+										<input soy:id="page_name" name="post1-2" type="text" class="xm-area" id="post1-2" value="ディレクトリ名A" size="50" /> 
+									</p> 
+								</div> 
+	
+								<div class="label"> 
+									<h4> 
+										<label for="post1-1">ディレクトリのURL</label> 
+										※英数字,_(アンダースコア),-(ハイフンのみ)</h4> 
+								</div> 
+								<div class="item"> 
+									<p> 
+										<span class="m-area liq-area">
+										<!-- soy:id="site_url" /-->
+										<!-- soy:id="page_uri_prefix_text" /-->
+										</span>
+										<input soy:id="page_uri_prefix" type="hidden" />
+										<input soy:id="page_uri" name="post1-2" type="text" class="m-area" id="post1-2" value="dirnameA/" size="40" /> 
+									</p> 
+								</div> 
+								
+								<div class="label"> 
+									<h4> 
+										<label>ディレクトリのエイリアス設定</label>
+									</h4> 
+								</div> 
+								<div class="item">
+									<input id="create_alias" type="checkbox" name="Page[type]" value="alias" onclick="$('#create_alias_option').slideDown();" />
+									<label  for="create_alias">ディレクトリのエイリアスを作成する</label>
+									
+									<div  id="create_alias_option" style="display:none;">
+										<p class="intro">特定のディレクトリの複製を作成することが出来ます。</p>
+										
+										<div class="pagelist-content">
+											<ul>
+												<!-- soy:id="directory_tree" -->
+												<li soy:id="page_list_wrap">
+													<dl> 
+														<dt class="image">
+															<img soy:id="page_icon" style="width:32px;height:32px;" />
+														</dt> 
+														<dt>
+															<input type="radio" soy:id="page_check" />
+														</dt>
+														<dd>
+															 ( <!-- soy:id="page_uri" /--> )
+														</dd> 
+													</dl>
+													<!-- soy:id="tree_child" -->
+													<ul>
+														<!-- soy:id="tree" -->ここが再帰的に実行<!-- /soy:id="tree" -->
+													</ul>
+													<!-- /soy:id="tree_child" --> 
+													
+												</li soy:id="page_list_wrap">
+												<!-- /directory_tree -->
+											</ul>
+										</div><!-- // .pagelist-content -->
+									</div>
+									
+								</div> 
+								
+							<div class="form-btn ce"> 
+								<input type="submit" value="作成する" class="l-btn" /> 
+							</div> 
+	
+							</div> 
+					
+	
+					</div><!-- // .content -->
+					 
+					</div>
+					<!-- // .section -->	
+				</li> 
+				
+				<li id="tab2_contents">
+					
+					<div class="section">
+						<div class="content">
+							<div class="form-section">
+								<div class="title">
+									<h3>ディレクトリのテンプレートを選択する</h3>
+								</div>
+								<div class="item">
+									<p>このディレクトリの記事表示に利用するテンプレートを選択してください。</p>
+								</div>
+								<div class="item">
+									<table class="list-table">
+										<thead>
+											<tr>
+												<th width="69" class="s-cell">選択</th>
+												<th width="115" class="w15p">テンプレート名</th>
+												<th width="115" class="w15p">メモ</th>
+												<th width="383">利用中のディレクトリ</th>
+												<th width="69" class="s-cell">プレビュー</th>
+											</tr>
+										</thead>
+										<tbody>
+											<!-- soy:id="directory_template_list" -->
+											<tr>
+												<td class="ce">
+													<input type="radio" soy:id="template_select_input" />
+												</td>
+												<td><!-- soy:id="template_name" /--></td>
+												<td><!-- soy:id="template_type" -->テンプレート名A<!-- /template_type --></td>
+												<td>
+													<!-- soy:id="page_list" -->
+														<a soy:id="page_link">ディレクトリへのリンク</a>
+														<!-- soy:id="not_last" -->|<!-- /soy:id="not_last" -->
+													<!-- /soy:id="page_list" -->
+												</td>
+												<td><a soy:id="preview_link">プレビュー</a></td>
+											</tr>
+											<!-- /soy:id="directory_template_list" -->
+										</tbody>
+									</table>
+								</div>
+								
+								<div class="label"> 
+									<h4>テンプレートをHTMLから指定する</h4> 
+								</div>
+								<div class="content">
+									<p>
+										<input type="radio" name="directory_template" id="directory_template_blank" value="" />
+										<label for="directory_template_blank">テンプレートをHTMLから指定</label>
+									</p>
+									<textarea soy:id="new_dir_template" class="m-area liq-area resizable html-editor break" rows="12" name="new_dir_template"></textarea>
+								</div>
+
+								<div class="form-btn ce">
+									<input type="submit" value="作成する" class="l-btn" />
+								</div>
+							</div>
+							<!--  // .form-section -->
+						</div>
+						<!--  // .content -->
+					</div><!--  // .section -->
+					
+				</li>
+				
+				<li id="tab3_contents">
+					<div class="section">
+						<div class="content">
+							<div class="form-section">
+								<div class="title">
+									<h3>index.htmlのテンプレートを選択する</h3>
+								</div>
+								<div class="item">
+									<p>このディレクトリのindex.htmlに利用するテンプレートを選択してください。</p>
+								</div>
+								<div class="item">
+									<table class="list-table">
+										<thead>
+											<tr>
+												<th width="69" class="s-cell">選択</th>
+												<th width="115" class="w15p">テンプレート名</th>
+												<th width="115" class="w15p">メモ</th>
+												<th width="383">利用中のディレクトリ</th>
+												<th width="69" class="s-cell">プレビュー</th>
+											</tr>
+										</thead>
+										<tbody>
+											<!-- soy:id="template_list" -->
+											<tr>
+												<td class="ce">
+													<input type="radio" soy:id="template_select_input" />
+												</td>
+												<td><!-- soy:id="template_name" /--></td>
+												<td><!-- soy:id="template_type" -->テンプレート名A<!-- /template_type --></td>
+												<td>
+													<!-- soy:id="page_list" -->
+														<a soy:id="page_link">ディレクトリへのリンク</a>
+														<!-- soy:id="not_last" -->|<!-- /soy:id="not_last" -->
+													<!-- /soy:id="page_list" -->
+												</td>
+												<td><a soy:id="preview_link">プレビュー</a></td>
+											</tr>
+											<!-- /soy:id="template_list" -->
+										</tbody>
+									</table>
+								</div>
+								
+								<div class="label"> 
+									<h4>テンプレートをHTMLから指定する</h4> 
+								</div>
+								<div class="content">
+									<p>
+										<input type="radio" name="page_template" id="template_blank" value="" />
+										<label for="template_blank">テンプレートをHTMLから指定</label>
+										<select soy:id="template_type_select"></select>
+									</p>
+									<textarea  soy:id="new_template*" class="m-area liq-area resizable html-editor break" rows="12" name="new_template"></textarea>
+								</div>
+
+								<div class="form-btn ce">
+									<input type="submit" value="作成する" class="l-btn" />
+								</div>
+							</div>
+							<!--  // .form-section -->
+						</div>
+						<!--  // .content -->
+					</div><!--  // .section -->
+				</li>
+			</ul> 
+	
+		</div> 
+		<!--  // .tab-menu --> 
+		
+		</form>
+	</div> 
+	<!--  // .window-content --> 
+</div> 
+<!--  // #main-window1 --> 
+<!-- /soy:id="type_dir" -->
+
+<!-- soy:id="type_page" -->
+<div id="main-window1" class="main-window"> 
+					
+	<div class="window-title"> 
+		<h2 soy:id="page_title">ページの作成</h2> 
+	</div> 
+	
+	<div class="window-content"> 
+	
+		<form soy:id="form" method="post" action="xxx" id="post1" name="post1">
+						
+			<div class="section"> 
+				
+				<div class="title"> 
+					<h3>ページの基本設定</h3> 
+				</div>	
+				<div class="content"> 
+				
+					<div id="post1-section1" class="form-section">
+						
+						<input type="hidden" soy:id="page_type_hidden" />	
+						<input soy:id="object_config" type="hidden" /> 
+					
+						<div class="label"> 
+							<h4> 
+								<label for="post1-1">ページ名</label></h4> 
+						</div> 
+						<div class="item"> 
+							<p> 
+								<span><!-- soy:id="parent_page_name" /--> ＞</span> 
+								<input soy:id="page_name" name="post1-2" type="text" class="xm-area" size="50" /> 
+							</p> 
+						</div> 
+
+						<div class="label"> 
+							<h4> 
+								<label for="post1-1">ページのURL</label> 
+								※英数字,_(アンダースコア),-(ハイフンのみ)</h4> 
+						</div> 
+						<div class="item"> 
+							<p> 
+								<!-- soy:id="site_url" /--><!-- soy:id="page_uri_prefix_text" /-->
+								<input soy:id="page_uri_prefix" type="hidden" />
+								<input soy:id="page_uri" name="post1-2" type="text" class="m-area" id="post1-2" value="dirnameA/" size="40" /> 
+							</p> 
+						</div>
+						
+						<!-- soy:id="tempplate_list_wrap" -->
+						<div class="label"> 
+							<h4>テンプレート</h4> 
+						</div> 
+						
+						<div class="item">
+							<p>このページのテンプレートを選択してください。</p>
+						</div>
+						
+						<div class="item">
+							<table class="list-table">
+								<thead>
+									<tr>
+										<th width="69" class="s-cell">選択</th>
+										<th width="115" class="w15p">テンプレート名</th>
+										<th width="115" class="w15p">メモ</th>
+										<th width="383">利用中のディレクトリ</th>
+										<th width="69" class="s-cell">プレビュー</th>
+									</tr>
+								</thead>
+								<tbody>
+									<!-- soy:id="template_list*" -->
+									<tr>
+										<td class="ce">
+											<input type="radio" soy:id="template_select_input" />
+										</td>
+										<td><!-- soy:id="template_name" /--></td>
+										<td><!-- soy:id="template_type" -->テンプレート名A<!-- /template_type --></td>
+										<td>
+											<!-- soy:id="page_list" -->
+												<a soy:id="page_link">ディレクトリへのリンク</a>
+												<!-- soy:id="not_last" -->|<!-- /soy:id="not_last" -->
+											<!-- /soy:id="page_list" -->
+										</td>
+										<td><a soy:id="preview_link">プレビュー</a></td>
+										
+									</tr>
+									<!-- /soy:id="template_list*" -->
+								</tbody>
+							</table>
+						</div>
+						<!-- /soy:id="tempplate_list_wrap" -->
+						
+						<!-- soy:id="template_creatable" -->
+						<div class="label"> 
+							<h4>テンプレートをHTMLから指定する</h4> 
+						</div>
+						<div class="content">
+							<p>
+								<input type="radio" name="page_template" id="template_blank" value="" />
+								<label for="template_blank">テンプレートをHTMLから指定</label>
+								<select soy:id="template_type_select"></select>
+							</p>
+							<textarea soy:id="new_template" class="m-area liq-area resizable html-editor break" rows="12" name="new_template"></textarea>
+						</div>
+						<!-- /soy:id="template_creatable" -->
+
+						<div class="form-btn ce"> 
+							<input type="submit" value="作成する" class="l-btn" /> 
+						</div>
+
+					</div> 
+			
+
+			</div><!-- // .content -->
+			 
+			</div>
+			<!-- // .section -->
+			
+		</form>		
+	
+	</div> 
+	<!--  // .window-content --> 
+</div> 
+<!--  // #main-window1 --> 
+<!-- /soy:id="type_page" -->

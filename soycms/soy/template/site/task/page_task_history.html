@@ -1,0 +1,45 @@
+<div id="task-window" class="main-window"> 
+					
+	<div class="window-title"> 
+		<h2>完了したタスク</h2> 
+	</div> 
+	
+	<div class="window-content"> 
+		<div class="section">
+			
+			<div class="pagelist-menu"> 
+				<ul> 
+					<li class="back"><a soy:link="task/">戻る</a></li> 
+				</ul> 
+			</div>
+			 
+			<div class="content"> 
+			
+			<dl>
+					<!-- soy:id="task_list" -->
+					<dt soy:id="close_date_wrap" style="margin-top:10px;">
+						<h4><!-- soy:id="close_date" -->Y年 n月 j日（曜日)<!-- /soy:id="close_date" --></h4>
+					</dt soy:id="close_date_wrap">
+					<dd>
+						・<!-- soy:id="task_title" /-->
+					</dd>
+					<!-- /soy:id="task_list" -->
+				</dl>
+				
+				<!-- soy:id="pager" -->
+				<div class="pager">
+					<p class="back" soy:id="prev_link_wrap"><a soy:id="prev_link">&lt;&nbsp;前へ</a></p>
+					<ol><!-- soy:id="pager_list" --><li><a soy:id="page_link"><!-- soy:id="page_text" /--></a></li><!-- /soy:id="pager_list" --></ol>
+					<p class="next" soy:id="next_link_wrap"><a soy:id="next_link">次へ&nbsp;&gt;</a></p>
+				</div> 
+				<!-- /pager -->
+				 
+			</div> 
+				
+		</div> 
+		<!--  // .section --> 
+	
+	</div> 
+	<!--  // .window-content --> 
+</div> 
+<!--  // #task-window1 --> 

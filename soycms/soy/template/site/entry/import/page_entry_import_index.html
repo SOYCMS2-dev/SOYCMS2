@@ -1,0 +1,128 @@
+<!-- soy:id="mode_result" -->
+<div class="main-window">
+	<div class="window-title"> 
+		<h2>インポートが完了しました</h2> 
+	</div> 
+<div class="window-content">
+	<div id="main-section1" class="section">
+		<div class="title">
+			<h3><!-- soy:id="page_name*" /-->への記事のインポートが完了しました</h3>
+		</div>
+		<div class="content">
+			<p>合計：<!-- soy:id="import_count" /-->件
+				（新規：<!-- soy:id="import_new" /-->,更新：<!-- soy:id="import_update" /-->)
+			の記事をインポートしました</p>
+			
+			<div class="ce">
+				<a soy:id="return_link" class="l-btn"><!-- soy:id="page_name*" /-->の記事一覧</a>
+			</div>
+		</div>
+	</div>
+
+</div>
+</div>
+<!-- /soy:id="mode_result" -->
+
+<div id="main-window1" class="main-window"> 
+				
+<div class="window-title"> 
+	<h2><!-- soy:id="page_name*" /-->に記事をインポート</h2> 
+</div> 
+
+<div class="window-content"> 
+
+	<div id="main-section1" class="section">
+		<div class="title">
+			<h3>インポートするファイルを選択し、種類を選択してください</h3>
+		</div>
+		<div class="content">
+			
+			<p class="back">
+				<a soy:id="return_link*"><!-- soy:id="page_name*" /-->の記事一覧に戻る</a>
+			</p>
+		
+			<iframe name="target_fr" id="target_fr" style="visibility:hidden;height:0px;width:0px;" href="_blank"></iframe>
+			
+			<form soy:id="form" _target="target_fr">
+				<input type="hidden" soy:id="directory_id" id="directory_id" value="" />
+				
+				<div class="form-section">
+					<div class="label">
+						<h4>インポートファイル</h4>
+					</div>
+					<div class="item">
+						<input type="file" name="import_file" />
+					</div>
+				</div>
+				
+				<div class="form-section">
+					<div class="label">
+						<h4>オプション</h4>
+					</div>
+					<div class="item">
+						<ul>
+							<li>
+								<input type="checkbox" soy:id="import_append" />
+								<label for="import_append">新規に追加する</label>
+							</li>
+							<li>
+								<input type="checkbox" soy:id="import_draft" />
+								<label for="import_draft">新規追加の場合は下書きに設定する</label>
+							</li>
+						</ul>						
+					</div>
+				</div>
+			
+				<div class="form-section">
+					<div class="label">
+						<h4>インポート形式</h4>
+					</div>
+					<div class="item">
+						
+						<ol>
+							<li>
+								<input type="radio" soy:id="import_type_soycms2">
+								<label for="import_type_soycms2"><strong>SOY CMS2形式</strong></label>
+							</li>
+							<!-- 
+							<li>
+								<input type="radio" soy:id="import_type_csv">
+								<label for="import_type_csv"><strong>CSV形式(タイトル、URL、カスタムフィールド)</strong></label>
+							</li>
+							<li>
+								<input type="radio" soy:id="import_type_mt">
+								<label for="import_type_mt"><strong>MovableType形式</strong></label>
+							</li>
+							<li>
+								<input type="radio" soy:id="import_type_epub">
+								<label for="import_type_epub"><strong>ePub形式</strong></label>
+							</li>
+							-->
+						</ol>
+						
+					</div>
+				</div>
+				
+				<div class="ce">
+					<input type="submit" class="l-btn" value="インポート" />
+				</div>
+			</form> 
+		</div>
+	</div> 
+	<!--  // #main-section1 -->
+
+</div> 
+<!--  // .window-content --> 
+</div> 
+<!--  // #main-window1 -->
+
+
+<!-- soy:id="page_entry_tree" -->
+ツリーの表示
+<!-- /soy:id="page_entry_tree" -->
+
+<script type="text/javascript">
+var SOYCMS_CURRENT_DIRECTORY = '<!-- soy:id="current_directory_id" /-->';
+</script>
+<script soy:src="../common/js/soycms_entry/list.js" type="text/javascript"></script>
+

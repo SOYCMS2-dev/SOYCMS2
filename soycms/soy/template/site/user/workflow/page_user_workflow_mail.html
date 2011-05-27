@@ -1,0 +1,60 @@
+<div id="main-window-mail" class="main-window"> 
+				
+<div class="window-title"> 
+	<h2>メール文面設定</h2> 
+</div> 
+
+<div class="window-content">
+	
+	<div class="section">
+		
+		<div class="content">
+			<div class="pagelist-menu"> 
+				<ul> 
+					<li class="back"><a soy:link="user/workflow">戻る</a></li>
+				</ul> 
+			</div>
+			
+			<div class="title">
+				<h3>承認メール文面設定</h3>
+			</div>
+			
+			<form soy:id="form">
+					
+				<div class="form-section">
+					
+					<div class="label">
+						<h4>メール件名</h4>
+					</div>
+					<div class="item">
+						<input type="text" class="m-area liq-area" soy:id="review_mail_title" />
+					</div>
+					
+					<div class="label">
+						<h4>メール文面（ヘッダー）</h4>
+					</div>
+					<div class="item">
+						<textarea class="liq-area " soy:id="review_mail_header" rows="5"></textarea>
+					</div>
+					
+					<div class="label">
+						<h4>メール文面（フッター）</h4>
+					</div>
+					<div class="item">
+						<textarea class="liq-area " soy:id="review_mail_footer" rows="5"></textarea>
+					</div>
+				
+				</div>
+				
+				<div class="ce">
+					<input type="submit" name="save" value="保存" class="l-btn" />
+				</div>
+			</form>
+		</div><!-- // .content -->
+	
+	</div><!-- // .section --> 
+	
+</div> 
+<!--  // .window-content --> 
+</div> 
+<!--  // #main-window-mail -->

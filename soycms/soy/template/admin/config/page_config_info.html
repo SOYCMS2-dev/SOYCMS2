@@ -1,0 +1,98 @@
+<div class="section">
+	<div class="title"> 
+		<h3>インストール情報</h3> 
+	</div>	
+	
+	<div class="content">
+		<table class="form-table"> 
+				<tr> 
+					<th scope="row"><label for="post1-1">インストールパス</label></th> 
+					<td><!-- soy:id="root_dir" /--></td> 
+				</tr>
+				
+				<tr> 
+					<th scope="row"><label for="post1-1">version</label></th> 
+					<td>
+						<!-- soy:id="soycms_version" /-->
+						<span id="check_version"></span>
+						<!-- soy:id="zip_enabled" -->
+						<a class="s-btn" soy:link="config.update" onclick="common_open_popup($(this).attr('href'));return false;">バージョンアップ</a>
+						<!-- /soy:id="zip_enabled" -->
+					</td> 
+				</tr>
+				
+				<tr> 
+					<th scope="row"><label for="post1-1">php version</label></th> 
+					<td><!-- soy:id="php_version" /--></td> 
+				</tr>
+				
+				<tr> 
+					<th scope="row"><label for="post1-1">plugins</label></th> 
+					<td><!-- soy:id="plugins" /--></td> 
+				</tr>
+				<tr>
+					<th scope="row">zip</th> 
+					<td>
+						<span id="check_zip"><!-- soy:id="zip" /--></span>
+						　<a class="s-btn" href="javascript:check_zip(this);">確認</a>
+					</td>
+				</tr>
+				<tr>
+					<th scope="row">exec</th> 
+					<td>
+						<span id="check_exec"><!-- soy:id="exec" /--></span>
+						　<a class="s-btn" href="javascript:check_exec(this);">確認</a>
+					</td>
+				</tr>
+		</table>
+	</div>
+</div>
+
+<div class="section">
+	
+	<div class="title"> 
+		<h3>サーバー情報</h3> 
+	</div>
+	
+	<div class="content"> 
+		
+		<textarea soy:id="phpinfo_text" readonly style="width:100%;height:150px;"></textarea>
+	
+	</div> 
+</div> 
+<!--  // .section --> 
+
+<script type="text/javascript">
+function check_exec(ele){
+	common_start_loading(ele);
+	url = SOYCMS_ROOT_URL + "admin/config/info";
+	$.post(url,{
+		"check_exec" : true
+	},function(res){
+		common_stop_loading();
+		$("#check_exec").html(res);
+	});
+	
+}
+function check_zip(ele){
+	common_start_loading(ele);
+	url = SOYCMS_ROOT_URL + "admin/config/info";
+	$.post(url,{
+		"check_zip" : true
+	},function(res){
+		common_stop_loading();
+		$("#check_zip").html(res);
+	});
+}
+
+function check_version(ele){
+	common_start_loading(ele);
+	url = SOYCMS_ROOT_URL + "admin/config/version";
+	$.post(url,{
+		"check_version" : true
+	},function(res){
+		common_stop_loading();
+		$("#check_version").html(res);
+	});
+}
+</script>

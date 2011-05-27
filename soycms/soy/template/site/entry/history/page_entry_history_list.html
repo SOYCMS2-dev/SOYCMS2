@@ -1,0 +1,43 @@
+	<h2><!-- soy:id="entry_title" /-->のバックアップ</h2>
+	<p class="intro">確認するバックアップデータを選択してください。</p>
+	
+	<table class="form-table">
+		<tr>
+			<th class="ce" width="10%" scope="row">日付</th>
+			<th class="ce" width="19%">操作</th>
+			<th class="ce" width="19%">状態</th>
+			<th class="ce" width="19%" scope="row">更新者</th>
+			<th class="ce w40">プレビュー</th>
+			<th class="ce w24">復元</th>
+		</tr>
+		<!-- soy:id="history_list" -->
+		<tr>
+			<td nowrap="nowrap" scope="row">
+				<!-- soy:id="history_date" -->2010-08-05 17:49:19<!-- /soy:id="history_date" -->
+			</td>
+			<td class="ce">
+				<!-- soy:id="history_type_text" /-->
+			</td>
+			<td class="ce">
+				<!-- soy:id="history_status_text" /-->
+			</td>
+			<td class="ce">
+				<!-- soy:id="history_username" /-->
+			</td>
+			<td><a soy:id="preview_link" target="_blank" class="xme-btn ce-b"><em>プレビュー</em></a></td>
+			<td><a soy:id="detail_link" class="sh-btn ce-b"><em>復元へ</em></a></td>
+		</tr>
+		<!-- /soy:id="history_list" -->
+		
+	</table>
+	
+	<!-- soy:id="pager" -->
+	<div class="pager">
+		<p class="back" soy:id="prev_link_wrap"><a soy:id="prev_link" onclick="show_hisotry_list($(this).attr('href'));return false;">&lt;&nbsp;前へ</a></p>
+		<ol><!-- soy:id="pager_list" --><li><a soy:id="page_link" onclick="show_hisotry_list($(this).attr('href'));return false;"><em><!-- soy:id="page_text" /--></em></a></li><!-- /soy:id="pager_list" --></ol>
+		<p class="next" soy:id="next_link_wrap"><a soy:id="next_link" onclick="show_hisotry_list($(this).attr('href'));return false;">次へ&nbsp;&gt;</a></p>
+	</div> 
+	<!-- /pager -->
+	
+	
+	

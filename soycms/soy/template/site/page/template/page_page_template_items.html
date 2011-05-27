@@ -1,0 +1,77 @@
+<div id="template_items_inner" class="inner">
+
+<!-- soy:id="item_list" -->
+<div soy:id="item_box" class="item_box">
+	
+	<div class="item_box_title">
+		<div class="item_box_title_inner">
+			<h4><!-- soy:id="item_name" /--> - <!-- soy:id="item_type_text" /--></h4>
+			<input type="button" class="clear_btn m-btn" value="cancel" />
+		</div>
+	</div>
+	<div class="item_box_content"> 
+		<div class="item_box_content_inner"> 
+			<input type="hidden" class="item_position" soy:id="item_position" />
+			<input type="hidden" class="item_order" soy:id="item_order" />
+			<input type="hidden" class="item_delete" soy:id="item_delete" /> 
+			
+			<ul class="item_menu">
+				<li>
+					<!-- soy:id="item_preview" -->
+					<!-- /soy:id="item_preview" -->
+					<span soy:id="item_description">aaaaaaaaaaaaaaaaaaaaaaaaaa</span>
+				</li>
+				<nobr>
+				<li>
+					<a class="button" soy:id="copy_link">コピー</a>
+				</li>
+				<li>
+					<a class="button" soy:id="detail_link">詳細</a>
+				</li>
+				</nobr>
+			</ul>
+			<input type="hidden" soy:id="newitem_id" class="newitem_id" />
+		</div> 
+	</div> 
+	
+	
+</div soy:id="item_box">
+<!-- /soy:id="item_list" -->
+
+<!-- soy:id="library_pager" -->
+<div class="pager">
+	<p class="back">
+		<a soy:id="library_pager_prev" onclick="load_widget_list('library',null,$(this).attr('href').replace('#','')); return false;">&lt;&nbsp;前へ</a>
+	</p>
+	<ol>
+		<li><select soy:id="library_pager_select" onchange="load_widget_list('library',null,$(this).val());"></select>/<!-- soy:id="library_pager_max" /--></li>
+	</ol>
+	<p class="next">
+		<a soy:id="library_pager_next" onclick="load_widget_list('library',null,$(this).attr('href').replace('#','')); return false;">次へ&nbsp;&gt;</a>
+	</p>
+</div>
+<!-- /soy:id="library_pager" -->
+
+
+<!-- soy:id="mode_block" -->
+<div>
+	<h4>新しいブロックの追加</h4>
+	<div class="item">
+		<p class="intro">
+			ブロックID:<input type="text" class="s-area liq-area" name="new_block_id" id="new_block_id" value="" />
+		</p>
+		<input type="radio" name="new_block_type" value="directory" id="new_block_type_directory" checked/>
+		<label for="new_block_type_directory">標準ブロック</label>
+		<input type="radio" name="new_block_type" value="script" id="new_block_type_script" />
+		<label for="new_block_type_script">拡張ブロック</label>
+	</div>
+	<div class="item ce">
+		<input type="submit" name="new_block" value="追加" class="m-btn" onclick="if($('#new_block_id').val().length<1){$('#new_block_id').focus();return false;}" />
+	</div>
+</div>
+
+<!-- /mode_block -->
+
+</div>
+
+

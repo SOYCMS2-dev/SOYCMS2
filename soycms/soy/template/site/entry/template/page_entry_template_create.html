@@ -1,0 +1,98 @@
+<div class="main-window"> 
+				
+<div id="window-title-layout" class="window-title"> 
+	<h2><span>記事テンプレートの作成</span></h2> 
+</div> 
+
+<div class="window-content"> 
+
+	<div class="section">
+		<div class="pagelist-menu"> 
+			<ul> 
+				<li class="back"><a soy:id="return_link">戻る</a></li> 
+			</ul> 
+		</div>
+		
+		<div class="title">
+			<h3>記事テンプレートを作成します</h3>
+		</div>
+
+		<div class="content">
+			<form soy:id="form">
+			
+			<div class="form-section">
+				<div class="label">
+					<h4>記事テンプレート名</h4>
+				</div>
+				<div class="item">
+					<p class="article-title">
+						<input soy:id="template_name" type="text" id="post1-1" name="post1-1" value="" class="xm-area" />
+					</p>
+				</div>
+			</div>
+			
+			<div class="form-section">
+				<div class="label">
+					<h4>記事テンプレートの説明</h4>
+				</div>
+				<div class="item">
+					<textarea soy:id="template_description" class="m-area liq-area" rows="3"></textarea>
+				</div>
+			</div>
+			
+			<div class="form-section">
+				<div class="label">
+					<h4>記事のタイトル</h4>
+				</div>
+				<div class="item">
+					<p class="intro">新規作成時の記事のタイトルを入力してください</p>
+					<p class="article-title">
+						<input soy:id="template_title" type="text" id="post1-1" name="post1-1" value="" class="xm-area" />
+					</p>
+					<p>
+						<a class="s" href="javascript:void(0);" onclick="$(this).parent().next().show();$(this).hide();">example</a>
+						<ul class="s" style="display:none;">
+							<li>作成年 %YYYY%</li>
+							<li>作成月 %MM%</li>
+							<li>作成日 %DD%</li>
+							<li>記事数 %VOL%</li>
+						</ul>
+					</p>
+				</div>
+			</div>
+			
+			<div class="form-section">
+				<div class="label">
+					<h4>プレビュー</h4>
+				</div>
+				<div class="item">
+					<div id="sections_container" class="content">
+						
+						<!-- soy:id="section_list" -->
+						ここを要素毎に繰り返す
+						<!-- /soy:id="section_list" -->
+						
+						
+					</div>
+					<!--  // .content -->
+				</div>
+			</div>
+			
+			<div class="form-btn ce" style="margin-bottom:50px;">
+				<input name="create" type="submit" value="作成する" class="l-btn" />
+			</div>
+		
+			</form>	
+		</div><!-- // .content -->
+				
+	</div><!-- //.section -->
+	
+</div> 
+<!--  // .window-content -->
+ 
+</div> 
+<!--  // #main-window -->
+
+<script type="text/javascript" soy:id="ajax_action"></script>
+<script type="text/javascript" soy:src="../common/wysiwyg/aobata.js"></script>
+<script type="text/javascript" soy:src="../common/js/soycms_entry/editor.js"></script>

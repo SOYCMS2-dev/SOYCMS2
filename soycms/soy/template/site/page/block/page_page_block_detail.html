@@ -1,0 +1,149 @@
+<div id="main-window1" class="main-window"> 
+				
+	<div class="window-title"> 
+		<h2><!-- soy:id="window_title" /-->の編集</h2> 
+	</div> 
+	
+	<div class="window-content"> 
+		
+		<div id="main-section1" class="section"> 
+
+			<div class="content"> 
+			
+				<form soy:id="form" method="post" action="xxx" id="post1" name="post1"> 
+				
+					<div id="post1-section1" class="form-section"> 
+					
+
+					<h3>ブロックを編集してください。</h3> 
+					
+						<!-- soy:id="mode_page" -->
+						<p class="intro xxl">
+							編集した場合テンプレートの設定を上書きします。<br />
+							テンプレートでのブロックの設定を変更する場合は<a soy:id="template_block_link">こちら</a>より行ってください。
+						</p>
+						<!-- /soy:id="mode_page" -->
+						
+						<!-- soy:id="is_admin_mode" -->
+						<div class="pagelist-menu"> 
+							<ul> 
+								<li class="back"><a soy:id="return_link"><!-- soy:id="return_text" /-->の設定画面に戻る</a></li>
+								<li class="back" soy:id="reset_link_wrap">
+									<a soy:id="reset_link">ブロックの設定をリセット(テンプレートの設定に戻します）</a>
+								</li  soy:id="reset_link_wrap">
+							</ul> 
+						</div>
+						<!-- /soy:id="is_admin_mode" -->
+							
+					
+						<div class="label"> 
+							<h4> 
+								<label for="post1-1">ブロックID</label> 
+							</h4> 
+						</div> 
+						<div class="item"> 
+							<p class="xxl"> 
+								ID名: <strong><!-- soy:id="block_id_text" /--></strong>
+							</p> 
+						</div> 
+						
+						<div class="label"> 
+							<h4> 
+								<label for="post1-1">編集</label> 
+							</h4> 
+						</div> 
+						<div class="item"> 
+							<p class="xl"> 
+								<a soy:id="template_edit_link">ブロックのhtmlを編集</a> 
+							</p> 
+						</div> 
+
+
+						<div class="label"> 
+							<h4> 
+								<label for="post1-1">ブロック名</label> 
+							</h4> 
+						</div> 
+						<div class="item"> 
+							<p> 
+								<input soy:id="block_name" name="tpml-name" type="text" class="xm-area" id="tpml-name" value="コンテンツ" size="40" />
+							</p>
+							<p class="s">
+								サイト名 #SiteName#  ディレクトリ名 #DirName#  ページ名 #PageName#
+							</p>
+						</div> 
+						
+						<div class="label"> 
+							<h4> 
+								<label for="post1-1">ブロックの説明</label> 
+							</h4> 
+						</div> 
+						<div class="item"> 
+							<textarea soy:id="block_description" class="m-area liq-area"></textarea> 
+							<p class="s">
+								サイト名 #SiteName#  ディレクトリ名 #DirName#  ページ名 #PageName#
+							</p>
+						</div> 
+						
+						<div class="label"> 
+							<h4> 
+								<label for="post1-1">一覧のリンク先</label> 
+							</h4> 
+						</div> 
+						<div class="item"> 
+							<p> 
+								<input soy:id="block_index_url" name="tpml-name" type="text" class="s-area liq-area" id="tpml-name" value="コンテンツ" size="40" /> 
+							</p>
+							<p class="s">
+								ページURL #PageUrl# ディレクトリURL #DirUrl#
+							</p>
+						</div>
+						
+						<div class="label"> 
+							<h4> 
+								<label for="post1-1">一覧のリンクタイトル</label> 
+							</h4> 
+						</div> 
+						<div class="item"> 
+							<p> 
+								<input soy:id="block_index_title" name="tpml-name" type="text" class="s-area liq-area" id="tpml-name" value="コンテンツ" size="40" /> 
+							</p>
+							<p class="s">
+								サイト名 #SiteName#  ディレクトリ名 #DirName#  ページ名 #PageName#
+							</p>
+						</div> 
+
+
+						<!-- soy:id="block_config" -->
+						個々にブロックの詳細
+						<!-- /soy:id="block_config" -->
+
+
+
+
+					<div class="form-btn ce"> 
+						<input type="submit" value="保存する" id="post1-submit" name="post1-submit" class="l-btn" /> 
+					</div> 
+
+					</div> 
+					
+
+				</form> 
+
+
+
+
+
+
+
+			</div> 
+		</div> 
+		<!--  // #main-section1 --> 
+
+		
+
+
+	</div> 
+	<!--  // .window-content --> 
+</div> 
+<!--  // #main-window1 --> 

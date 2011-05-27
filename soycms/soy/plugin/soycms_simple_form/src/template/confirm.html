@@ -1,0 +1,35 @@
+<form cms:id="contact_form">
+<p>入力内容をご確認下さい</p>
+<table class="fix" summary="お問い合わせフォーム">
+	<tbody>
+		<tr>
+			<th scope="row" class="right">件名</th>
+			<td>
+				<!-- cms:id="contact_title_text" -->件名<!-- /cms:id="contact_title_text" -->
+			</td>
+		</tr>
+		<tr>
+			<th scope="row" class="right"><strong class="important">*</strong>お名前</th>
+			<td>
+				<!-- cms:id="contact_name_text" -->お名前<!-- /cms:id="contact_name_text" -->
+			</td>
+		</tr>
+		<tr>
+			<th scope="row" class="right"><strong class="important">*</strong>メールアドレス</th>
+			<td>
+				<!-- cms:id="contact_mail_text" -->メールアドレス<!-- /cms:id="contact_mail_text" -->
+			</td>
+		</tr>
+		<tr>
+			<th scope="row" class="right"><strong class="important">*</strong>お問い合わせ内容</th>
+			<td>
+				<!-- cms:id="contact_body_text" -->お問い合わせ内容<!-- /cms:id="contact_body_text" -->
+			</td>
+		</tr>
+	</tbody>
+</table>
+<p class="center">
+	<input cms:id="back_button" type="submit" value="戻る" class="m-btn" />
+	<input type="submit" value="送信" id="sample-submit" name="sample-submit" class="l-btn" />
+</p>
+</form>

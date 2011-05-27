@@ -1,0 +1,170 @@
+<div id="main-window2" class="main-window"> 
+				
+<div class="window-title"> 
+	<h2>グループ管理</h2> 
+</div> 
+
+<div class="window-content"> 
+
+	<div class="form-section section">
+		<div class="content">
+			
+			<div class="pagelist-menu"> 
+				<ul> 
+					<li class="back"><a soy:link="user.group">グループ一覧</a></li>
+				</ul> 
+			</div>
+			
+			<!-- soy:id="group_exists" -->
+			<h3>読み／書き権限</h3>
+			
+			<form soy:id="form">
+			
+			<div class="form-section lbreak">
+				<table id="permission_table" class="list-table"> 
+					<thead> 
+						<tr>
+							<th>ディレクトリ一覧</th>
+							<!-- soy:id="group_list" -->
+							<th scope="col" colspan="2">
+								<a soy:id="detail_link">
+									<!-- soy:id="group_name" /-->
+								</a>
+							</th>
+							<!-- /soy:id="group_list" -->
+						</tr> 
+						<tr>
+							<th>
+								<input type="checkbox" style="visibility:hidden;" />
+							</th>
+							<!-- soy:id="group_list*" -->
+							<th scope="col">
+								<input type="checkbox" class="toggle_row" />
+								読み
+							</th>
+							<th scope="col">
+								<input type="checkbox" class="toggle_row" />
+								書き
+							</th>
+							<!-- /soy:id="group_list*" -->
+						</tr> 
+					</thead> 
+					<tbody> 
+						<!-- soy:id="page_list" -->
+						<tr> 
+							<th scope="row">
+								<nobr>
+								<a soy:id="page_detail_link">
+									<!-- soy:id="page_name" -->asdasd<!-- /page_name -->
+								</a>
+								<input type="checkbox" style="visibility:hidden;" />
+								</nobr>
+							</th>
+							<!-- soy:id="permission_list" -->
+							<td class="ce">
+								<input type="checkbox" soy:id="is_readable" />
+							</td>
+							<td class="ce">
+								<input type="checkbox" soy:id="is_writable" />
+							</td>
+							<!-- /soy:id="permission_list" -->
+							
+							
+						</tr> 
+						<!-- /soy:id="page_list" --> 
+					</tbody> 
+				</table>
+			</div>
+			<!-- /soy:id="group_exists" -->
+			
+			<div class="form-btn ce"> 
+				<p class="lbreak">
+					<input type="submit" value="保存" class="l-btn" />
+				</p>
+			</div>
+		
+			</form>
+			
+		</div><!-- // .content -->
+	</div><!-- //. section -->
+	
+	
+</div> 
+<!--  // .window-content --> 
+</div> 
+<!--  // #main-window2 -->
+
+<script type="text/javascript">
+$(function(){
+	
+	if($.browser.msie){
+		$("#permission_table").parent().css("overflow","auto");
+		return;
+	}
+	
+	//target tbl
+	table = $("#permission_table");
+	
+	//make scrollable
+	wrapper = $("<div></div>");
+	heading = $("<div></div>");
+	table_wrap = $("<div></div>");
+	
+	wrapper.append(heading);
+	wrapper.append(table_wrap);
+	table.parent().append(wrapper);
+	table_wrap.append(table);
+	
+	//build head
+	heading.append(table.clone());
+	heading.find("th[scope=col]").remove();
+	heading.find("tr").each(function(){
+		$(this).find("td").remove();
+	});
+	
+	
+	//configure
+	table_width = table.find("tr:first-child th:first-child").width();
+	
+	heading.css({
+		position : "absolute",
+		width : table_width
+	});
+	table_wrap.css({
+		/* position : "absolute", */
+		overflow : "auto",
+		marginLeft : "1px"
+	});
+	
+	table.find("tr").each(function(index,ele){
+		heading.find("tr:eq("+index+") th").height("0px");
+		
+		if(index == 0)return;
+		
+		$(this).find("th,td").each(function(index,ele){
+			
+			$(this).addClass("col-" + index);
+			$(this).bind("mouseover",function(){
+				$(".table-hover").removeClass("table-hover");
+				$(".col-" + index).addClass("table-hover");
+			});
+			$(this).find(".toggle_row").click(function(){
+				$(".col-" + index + " input[type=checkbox]").attr("checked",$(this).attr("checked"));		
+			});
+		});
+	});
+	
+});
+</script>
+<style type="text/css">
+.table-hover{
+	background-color:#ece7af !important;
+}
+#permission_table{
+	margin-bottom:15px;
+}
+#permission_table td,#permission_table th{
+	height:15px;
+	vertical-align:middle;
+}
+</style>

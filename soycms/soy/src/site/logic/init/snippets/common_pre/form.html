@@ -1,0 +1,22 @@
+<div class="snippet-line"> 
+	<div class="snippet-line">
+		<span class="label">コード</span>
+	</div>
+	<div class="snippet-line">
+		<textarea class="m-area liq-area" onchange="code_sync(this);"></textarea>
+	</div> 
+</div> 
+<script type="text/javascript">
+var code_area;
+var code_sync = function(ele){
+	
+	code_area = $(this).parents(".snippet-line").find("input[name=CODE]");
+	
+	if(code_area.size() < 1){
+		code_area = $("<input name='CODE' type='hidden' />");
+		$(ele).after(code_area);
+	}
+	
+	code_area.val($(ele).val().replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/\n/g,"\n<br />"));
+}
+</script>

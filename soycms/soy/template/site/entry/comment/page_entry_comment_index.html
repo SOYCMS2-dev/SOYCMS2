@@ -1,0 +1,103 @@
+<div id="main-window1" class="main-window"> 
+				
+<div class="window-title"> 
+	<h2>コメント一覧</h2> 
+</div> 
+
+<div class="window-content"> 
+	
+	<div id="main-section1" class="section"> 
+
+		<div class="content"> 
+
+			<form soy:id="form" method="post" action="xxx" id="post1" name="post1"> 
+			
+				<div id="post1-section1" class="form-section">
+					
+				<h3>
+					コメント一覧
+				</h3>
+				
+				<table class="list-table"> 
+					<thead> 
+						<tr> 
+							<th width="4%" class="s-cell" scope="col"><input type="checkbox" onclick="$('.comment_check').attr('checked',$(this).attr('checked'));" /></th>
+							<th width="18%" scope="col">記事</th> 
+							<th width="18%" scope="col">コメントタイトル</th> 
+							<th width="10%" scope="col">
+								状態
+								<select soy:id="status_select" onchange="location.href=location.pathname+'?status='+$(this).val();">
+									<option value="">全て</option>
+								</select>
+							</th> 
+							<th width="16%" scope="col">投稿者</th> 
+							<th width="9%" scope="col">投稿時刻</th> 
+						</tr> 
+					</thead> 
+					<tbody> 
+						<!-- soy:id="comment_list" -->
+						<tr soy:id="entry_list_row"> 
+							<td class="ce">
+								<input soy:id="comment_checkbox" type="checkbox" class="comment_check" />
+							</td>
+							<td>
+								<p>
+									<a class="entry_link" soy:id="list_link"><strong soy:id="entry_title">記事名A</strong></a>  
+								</p>
+							</td> 
+							<td>
+								<span soy:id="comment_title">記事名A</span>  
+							</td> 
+							<td class="ce"><!-- soy:id="comment_status" /--></td>
+							 
+							<td>
+								<!-- soy:id="comment_author" /-->
+							</td> 
+							<td>
+								<!-- soy:id="comment_submit_date" -->2010-06-10 14:25:43<!-- /comment_submit_date -->
+							</td> 
+						</tr> 
+						<!-- /comment_list -->
+					</tbody> 
+				</table> 
+				
+				<p class="ri intro"><!-- soy:id="count_max" /-->件中<!-- soy:id="count_start" /-->～<!-- soy:id="count_end" /-->件表示</p> 
+
+				
+				<div class="delete_btn_wrap form-btn ce break">
+					<div class="form-btn ce lbereak">
+						<input type="submit" value="公開に設定" class="m-btn" name="do_open" />
+						<input type="submit" value="非公開に設定" class="m-btn" name="do_close" />
+						<input type="submit" value="未読に設定" class="m-btn" name="do_unread" />
+						<input type="submit" value="完全に削除" class="m-btn" name="do_remove" onclick="return confirm('チェックしたコメントを削除します。この処理は戻せません。\nよろしいですか？');" />
+					</div>
+				</div> 
+				
+				
+				
+				<!-- soy:id="pager" -->
+				<div class="pager">
+					<p class="back" soy:id="prev_link_wrap"><a soy:id="prev_link">&lt;&nbsp;前へ</a></p>
+					<ol><!-- soy:id="pager_list" --><li><a soy:id="page_link"><!-- soy:id="page_text" /--></a></em></li><!-- /soy:id="pager_list" --></ol>
+					<p class="next" soy:id="next_link_wrap"><a soy:id="next_link">次へ&nbsp;&gt;</a></p>
+				</div> 
+				<!-- /pager -->
+
+				</div>
+				
+			
+			</form> 
+		</div> 
+	</div> 
+	<!--  // #main-section1 --> 
+
+	
+	
+
+
+</div> 
+<!--  // .window-content --> 
+</div> 
+<!--  // #main-window1 -->
+
+

@@ -1,0 +1,49 @@
+<div id="command-menu">
+
+<div id="command-menu-section1" class="site-status-section section">
+	<div class="title">
+		<h2>サイトの状態</h2>
+	</div>
+	<div class="content">
+		<dl> 
+			<dt>記事数：</dt><dd><a soy:link="entry"><!-- soy:id="entry_count" /--></a></dd> 
+			<dt>非公開：</dt><dd><a soy:link="entry/search?status=close"><!-- soy:id="close_entry_count" /--></a></dd> 
+			<!-- soy:id="review_entry" -->
+			<dt>承認待ち：</dt><dd><strong><a soy:link="entry/search?status=review"><!-- soy:id="review_entry_count" /--></a></strong></dd>
+			<!-- /soy:id="review_entry" --> 
+		</dl>
+	</div>
+</div>
+
+<div id="command-menu-section2" class="commenttrackback-section section">
+	<div class="title">
+		<h2>コメント／トラックバック</h2>
+	</div>
+	<div class="content">
+		<!-- soy:id="newitem_exists" -->
+		<dl> 
+			<dt>新着コメント：</dt><dd><strong><a soy:link="entry/comment"><!-- soy:id="comment_count" /--></a></strong></dd> 
+			<dt>新着トラックバック：</dt><dd><strong><a soy:link="entry/trackback"><!-- soy:id="trackback_count" /--></a></strong></dd> 
+		</dl>
+		<!-- /soy:id="newitem_exists" -->
+		<!-- soy:id="no_newitem" -->
+		新着コメント／トラックバックはありません。
+		<!-- /soy:id="no_newitem" -->
+	</div>
+</div>
+<!--  // #command-menu-section2 -->
+
+<div id="command-menu-section2" class="section">
+	<div class="title">
+		<h2>最近の活動</h2>
+	</div>
+	<div class="content">
+		<ul>
+		<!-- soy:id="activities" /-->
+		</ul>
+	</div>
+</div>
+<!--  // #command-menu-section2 -->
+
+</div>
+<!--  // #command-menu -->

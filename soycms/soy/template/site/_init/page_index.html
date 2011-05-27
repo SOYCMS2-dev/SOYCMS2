@@ -1,0 +1,203 @@
+<div id="main-window1" class="main-window"> 
+				
+<div class="window-title"> 
+	<h2>新しいサイトの作成</h2> 
+</div> 
+
+<div class="window-content"> 
+	
+	<div id="main-section1" class="section"> 
+
+		<div class="content"> 
+
+			<form soy:id="create_form"> 
+			
+				<div id="post1-section1" class="form-section"> 
+				
+					<p class="xxl" style="color:red;" soy:id="error_message">エラー</p>
+					
+					<h3>新しいサイトの作成 (1/4)</h3> 
+					<div class="label"> 
+						<h4> 
+							<label for="post1-1">サイトID (設定後変更出来ません) 利用できる文字：半角英数,ハイフン</label></h4> 
+					</div> 
+					<div class="item"> 
+						<p><input id="site_id_input" type="text" class="text" soy:id="site_id" size="40" class="xm-area" /></p>
+					</div> 
+
+
+					<div class="label"> 
+						<h4> 
+							<label for="post1-1">サイトの名前</label>
+						</h4> 
+					</div> 
+					<div class="item"> 
+						<p><input type="text" class="text" soy:id="site_name" class="xm-area" size="40" /></p> 
+					</div> 
+					
+
+					<div class="label"> 
+						<h4> 
+							<label for="post1-1">サイトディレクトリ</label></h4> 
+					</div> 
+					<div class="item">
+						<p class="xl">
+						<!-- soy:id="site_path_text_div" -->
+						<span id="site_path_text" soy:id="site_path_text"></span>
+						<a class="button change_btn" href="javascript:void(0);" onclick="show_site_path_input($(this));" style="display:none;">変更する</a>
+						<!-- /soy:id="site_path_text_div" -->
+						</p>
+						<input type="text" id="site_path_input" class="m-area liq-area" soy:id="site_path" size="40" />
+					</div> 
+
+
+
+					<div class="label"> 
+						<h4> 
+							<label for="post1-1">サイトのURL</label></h4> 
+					</div> 
+					<div class="item"> 
+						<p class="xl">
+						<!-- soy:id="site_url_text_div" -->
+						<span id="site_url_text" soy:id="site_url_text"></span>
+						<a class="button change_btn" href="javascript:void(0);" onclick="show_site_url_input($(this));" style="display:none;">変更する</a>
+						<!-- /soy:id="site_url_text_div" -->
+						</p>
+						<input type="text" id="site_url_input" class="text m-area liq-area" soy:id="site_url" />
+					</div> 
+	
+
+					<div class="label"> 
+						<h4> 
+							<label for="post1-1">データベース種別</label></h4> 
+					</div> 
+					<div class="item"> 
+						<p class="xl"> 
+							<input type="radio" id="db_type_sqlite" class="db_type_radio" soy:id="db_type_sqlite" name="dbtype"　checked="checked" />
+							<label for="db_type_sqlite">SQLite</label>
+							
+							<input type="radio" id="db_type_mysql" class="db_type_radio" soy:id="db_type_mysql" name="dbtype" />
+							<label for="db_type_mysql">MySQL</label>
+						</p> 
+						<p>※小規模サイト、一般的なWEBサイトであればSQLiteをお勧めいたします。</p>
+						
+						<script type="text/javascript">
+						$("input.db_type_radio").one("click",function(){
+							if($('#mysql_option').is(":visible"))return;
+							
+							//$("#mysql_dsn").val("localhost");
+							//$("#mysql_database").val("soycms2_" + $("#site_id_input").val());
+						});
+						
+						$("input.db_type_radio").bind("click",function(){
+							$('#mysql_option').toggle($('#db_type_mysql').attr("checked"));
+						});
+						</script>
+						
+						<div id="mysql_option" style="display:none;margin:10px 20px;border:solid 2px #ccc;padding:10px;width:65%;">
+							<h3>MySQLの接続情報を設定してください。</h3>
+							
+							<div class="label">
+								<h4><label for="post1-1">MySQLサーバ情報</label></h4>
+							</div>
+							<div class="item">
+								<p>
+									<input type="text" class="m-area" soy:id="mysql_dsn" name="post1-1" value="" size="40" />
+									(例, localhost, 127.0.0.1)
+								</p>
+							</div>
+							
+							<div class="label">
+								<h4><label for="post1-1">データベース</label></h4>
+							</div>
+							<div class="item">
+								<p>
+									<input type="radio" soy:id="mysql_specific_database">
+									<label for="mysql_specific_database">作成済みのデータベース名を指定する:</label>
+									<input type="text" class="m-area" soy:id="mysql_database" name="post1-1" value="" size="40" />
+								</p>
+								<p>
+									<input type="radio" soy:id="mysql_auto_create_database">
+									<label for="mysql_auto_create_database">データベースを自動的に作成する(作成権限が必要です)</label>
+								</p>
+							</div>
+							
+							<div class="label">
+								<h4><label for="post1-1">MySQLユーザ名</label></h4>
+							</div>
+							<div class="item">
+								<p><input type="text" class="m-area" soy:id="mysql_user" name="post1-1" value="" /></p>
+							</div>
+							
+							<div class="label">
+								<h4><label for="post1-1">MySQLパスワード</label></h4>
+							</div>
+							<div class="item">
+								<p><input type="text" class="m-area" soy:id="mysql_password" name="post1-1" value="" /></p>
+							</div>
+						</div>
+						
+						<script type="text/javascript">
+							if($('#db_type_mysql').attr("checked")){
+								$("#mysql_option").show();
+							}
+						</script> 
+					</div>
+
+
+				<div class="form-btn ce"> 
+					<input type="submit" value="次へ" id="post1-submit" name="post1-submit" class="l-btn" /> 
+				</div> 
+
+
+
+				</div> 
+				
+			</form> 
+
+
+
+
+
+
+
+		</div> 
+	</div> 
+	<!--  // #main-section1 --> 
+
+	
+
+
+</div> 
+<!--  // .window-content --> 
+</div> 
+<!--  // #main-window1 --> 
+
+<script type="text/javascript">
+$(function(){
+	$("#site_id_input").bind("keyup",function(){
+		if($("#site_path_text").size() > 0) {
+			$("#site_path_text").text($("#site_path_text")[0].getAttribute("prefix") + $("#site_id_input").val());
+		}
+		if ($("#site_url_text").size() > 0) {
+			$("#site_url_text").text($("#site_url_text")[0].getAttribute("prefix") + $("#site_id_input").val());
+		}
+		
+		if($("#site_id_input").val().length)$(".change_btn").show();
+	});
+	
+	if($("#site_id_input").val().length)$(".change_btn").show();
+});
+
+var show_site_path_input = function(obj){
+	$(obj).hide();
+	$("#site_path_text").hide();
+	$("#site_path_input").val($("#site_path_text").text()).show();
+}
+
+var show_site_url_input = function(obj){
+	$(obj).hide();
+	$("#site_url_text").hide();
+	$("#site_url_input").val($("#site_url_text").text()).show();
+}
+</script>

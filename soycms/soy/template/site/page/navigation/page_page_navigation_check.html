@@ -1,0 +1,129 @@
+<div id="main-window1" class="main-window"> 
+				
+<div id="window-title-layout" class="window-title">
+	<h2><span>ナビゲーションの編集</span></h2> 
+</div> 
+
+<div class="window-content"> 
+
+
+	<div id="main-section3" class="section"> 
+		<div class="content"> 
+			<div id="post1-section3" class="form-section"> 
+				<h3>下記のhtmlソースをテンプレートhtmlにペーストしてください。</h3> 
+			</div> 
+		</div> 
+	</div> 
+
+
+
+	<div class="section-block"> 
+		
+		<div id="main-section2" class="section"> 
+
+			
+			<div class="content"> 
+
+				<div id="post2-section2" class="form-section"> 
+					<div class="label"> 
+						<h4><label for="post3-3"><!-- soy:id="item_name" /--> 開始タグ</label></h4> 
+					</div> 
+
+						<p class="intro"><!-- soy:id="item_name" /-->となるhtmlソースの上部に追加してください。</p> 
+			
+					<div class="item"> 
+						<p> 
+							<textarea soy:id="start_tag" rows="3" cols="40" class="m-area liq-area html-editor">&lt;!-- Library id="header" --&gt;</textarea> 
+						</p> 
+					</div> 
+				</div> 
+
+			</div> 
+		</div> 
+		<!--  // #main-section2 --> 
+		
+		<div id="main-section3" class="section second-section"> 
+
+
+		
+			<div class="content"> 
+
+				
+
+				<div id="post3-section2" class="form-section"> 
+
+					<div class="label"> 
+						<h4><label for="post3-3"><!-- soy:id="item_name" /--> 終了タグ</label></h4> 
+					</div> 
+
+					<p class="intro"><!-- soy:id="item_name" /-->となるhtmlソースの下部に追加してください。</p> 
+									
+					<div class="item"> 
+						<p> 
+							<textarea soy:id="end_tag" rows="3" cols="40" class="m-area liq-area html-editor">&lt;!-- /Library id="header" --&gt;</textarea> 
+						</p> 
+					</div> 
+				</div> 
+					
+			</div> 
+		</div> 
+		<!--  // #main-section3 --> 
+		
+	</div> 
+	<!--  // .section-block --> 
+	
+	<!-- soy:id="is_item" -->
+	<div class="section"> 
+		<div class="content"> 
+			
+			<h3>もしくは下記の『<!-- soy:id="item_name*" /-->』 表示用タグ全体をテンプレートhtmlにペーストしてください。</h3>
+
+			<div id="post2-section2" class="form-section"> 
+				
+		
+				<div class="item"> 
+					<p> 
+						<textarea soy:id="whole_tag" class="m-area liq-area resizable html-editor" onclick="$(this).select();">&lt;!-- Library id="header" --&gt;</textarea> 
+					</p> 
+				</div> 
+			</div> 
+
+		</div> 
+	</div><!-- // .section -->
+	<!-- /soy:id="is_item" -->
+
+	<form soy:id="form">
+
+	<div id="main-section3" class="section"> 
+		<div class="content"> 
+			
+			<div class="title"> 
+				<h3>ナビゲーションhtml</h3> 
+			</div> 
+
+			<div class="item"> 
+				<p> 
+					<textarea soy:id="navigation_content" name="tpml-name" class="m-area liq-area resizable html-editor" id="soycms_template_content">テンプレートhtmlが表示されます</textarea> 
+				</p> 
+			</div> 
+		
+			<div id="post1-section3" class="form-section"> 
+				<div class="form-btn ce">
+					<input type="submit" value="次へ" class="l-btn" />
+					
+					<br /><br />
+					<input type="submit" value="この要素を取り除く" id="post1-submit" name="remove" class="s-btn" /> 
+				</div> 
+			</div> 
+		</div> 
+	</div> 
+
+	</form>
+	
+
+</div> 
+<!--  // .window-content -->
+ 
+</div> 
+<!--  // #main-window1 --> 
+ 

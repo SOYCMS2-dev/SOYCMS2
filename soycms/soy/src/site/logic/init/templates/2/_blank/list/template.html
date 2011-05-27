@@ -1,0 +1,117 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ja" lang="ja" dir="ltr">
+<head>
+<meta cms:id="meta_content_type" http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta cms:id="meta_content_language" http-equiv="Content-Language" content="ja" />
+<meta cms:id="meta_keyword" content="" />
+<meta cms:id="meta_description" content="" />
+<meta http-equiv="Content-Style-Type" content="text/css" />
+<meta http-equiv="Content-Script-Type" content="text/javascript" />
+<title>サイトタイトル</title>
+<link rel="start" href="@@SITE_PATH@@"  title="@@SITE_NAME@@"  />
+<link rel="stylesheet" href="@@SITE_PATH@@themes/default/css/site-dynamic-edit.css" type="text/css" media="all" />
+<link rel="shortcut icon" cms:id="link_shortcut_icon" />
+<link rel="icon" cms:id="link_icon" />
+</head>
+<body>
+	
+	<div id="header">
+		<!-- layout:header -->
+		
+		<div id="dynamic-edit" cms:id="dynamic_edit_navi">
+			<p><a cms:id="dynamic_edit_link"><strong>ダイナミック編集</strong></a></p>
+		</div>
+		
+		<p><a href="@@SITE_PATH@@"><!-- cms:id="site_name" -->サイト名<!-- /cms:id="site_name" --></a></p>
+		
+		<!-- /layout:header -->
+	</div>
+	<!--  // #header -->
+	
+	
+	<div id="contents">
+		
+		<div id="maincontent">
+			<!-- layout:main -->
+			
+			<h1><!-- cms:id="page_name" -->お知らせ<!-- /cms:id="page_name" --></h1>
+			
+			<!-- block:id="entry_list" -->
+			<div class="entry">
+				<h2><a cms:id="entry_link"><!-- cms:id="title*" -->記事タイトル<!-- /cms:id="title*" --></a></h2>
+
+				<div class="section">
+					<!-- cms:id="introduction" -->
+					<p>お知らせの記事本文が入ります。続きを読むタグ挿入までコンテンツを表示します。</p>
+					<!-- /cms:id="introduction" -->
+					<p><a cms:id="entry_more_link">続きを読む</a></p>
+					<p><!-- cms:id="create_date" -->2010.09.22<!-- /cms:id="create_date" --></p>
+					<p>ラベル: 
+						<!-- cms:id="label_list" -->
+						<a cms:id="label_link"><!-- cms:id="label_name" -->ラベル名C<!-- /cms:id="label_name" --></a> 
+						<!-- /cms:id="label_list" -->
+					</p>
+				</div>
+
+			</div>
+			<!-- //.entry -->
+			<!-- /block:id="entry_list" -->
+
+			<!-- block:id="pager" -->
+			<div class="pager">
+				<p class="back" cms:id="prev_link_wrap"><a cms:id="prev_link">&lt;&nbsp;前へ</a></p>
+					<ol><!-- cms:id="pager_list" --><li><a cms:id="page_link"><!-- cms:id="page_text" /--></a></li><!-- /cms:id="pager_list" --></ol>
+				<p class="next" cms:id="next_link_wrap"><a cms:id="next_link">次へ&nbsp;&gt;</a></p>
+
+			</div> 
+			<!-- /block:id="pager" -->
+
+			<!-- /layout:main -->
+		</div>
+		<!--  // #maincontent -->
+		
+		<div id="subcontent">
+			<!-- layout:sub -->
+			<!-- cms:navigation="submenu" -->
+
+			<!-- block:id="news" -->
+			<div class="section"> 
+				<h2><!-- cms:id="block_name" -->タイトル<!-- /cms:id="block_name" --></h2> 
+				<dl>
+					<!-- cms:id="entry_list" -->
+					<dt>2010.04.20</dt>
+					<dd><a cms:id="entry_link"><!-- cms:id="title" -->テキストが入ります。<!-- /cms:id="title" --></a></dd>
+					<!-- /cms:id="entry_list" -->
+				</dl>
+				<p><a href="@@SITE_PATH@@news/"><!-- cms:id="block_name" -->お知らせ<!-- /cms:id="block_name" --> 一覧</a></p>
+			</div> 
+			<!-- //.section --> 
+			<!-- /block:id="news" --> 
+
+
+			<!-- /cms:navigation="submenu" -->
+			<!-- /layout:sub -->
+		</div>
+		<!--  // #subcontent -->
+
+	</div>
+	<!-- // #contents -->
+
+
+
+	<!-- layout:footer -->
+	<!-- cms:include="footer" -->
+	<div id="footer">
+		<p><a href="#header"><em>PageTop↑</em></a></p>
+			<ul class="navi">
+				<li><a href="@@SITE_PATH@@">Link</a></li>
+				<li><a href="@@SITE_PATH@@">Link</a></li>
+				<li><a href="@@SITE_PATH@@">Link</a></li>
+			</ul>
+		<address class="copyright">copyright&copy; xxx all rights reserved.</address>
+	</div>
+<!--  // #footer -->
+	<!-- /cms:include="footer" -->
+	<!-- /layout:footer -->
+</body>
+</html>

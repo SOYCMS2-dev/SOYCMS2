@@ -1,0 +1,234 @@
+<div id="main-window1" class="main-window"> 
+					
+	<div class="window-title"> 
+		<h2>WEBデザインのエクスポート</h2>
+	</div> 
+	
+	<div class="window-content">
+		<iframe id="target_fr" name="target_fr" src="about:blank;" frameborder="0" style="margin:0;padding:0;width:0px;position:absolute;height:0px;visibility:hidden;"></iframe>
+		
+		<form soy:id="form" target="target_fr"> 
+		
+		<div class="section">
+			<div class="title">
+				<h3>WEBデザインのエクスポート</h3>
+			</div>
+			<div class="content">
+				<p soy:id="zip_error_message" class="error xxl">
+					この環境ではWEBデザインのエクスポートを使用出来ません。Zip拡張を有効にして下さい。
+				</p>
+				
+				<p class="intro">エクスポートする内容を設定して下さい</p>
+				
+				<div class="form-section">
+					<div class="form-section">
+						<div class="label">
+							<h4>ファイル名</h4>
+						</div>
+						<div class="item">
+							<input type="text" class="m-area" soy:id="filename" size="30" />
+							.zip
+						</div>
+					</div>
+				
+					<div class="label">
+						<h4>テンプレート</h4>
+					</div>
+					<div class="item">
+						<ul class="check_list_wrap">
+							<li>
+								<input type="checkbox" id="toggle_template_check" class="toggle_check"  checked="checked" onclick="$('.template_check').attr('checked',$(this).attr('checked'));" />
+								<label for="toggle_template_check">全て</label>
+							</li>
+							<!-- soy:id="template_list" -->
+							<li class="check_list checked_list">
+								<input type="checkbox" soy:id="checkbox" class="template_check" />
+							</li>
+							<!-- /soy:id="template_list" -->
+						</ul>
+					</div>
+				</div>
+				
+				<div class="form-section">
+					<div class="label">
+						<h4>ライブラリ</h4>
+					</div>
+					<div class="item">
+						<ul class="check_list_wrap">
+							<li>
+								<input type="checkbox" id="toggle_library_check" class="toggle_check"  checked="checked" onclick="$('.library_check').attr('checked',$(this).attr('checked'));" />
+								<label for="toggle_library_check">全て</label>
+							</li>
+							<!-- soy:id="library_list" -->
+							<li class="check_list checked_list">
+								<input type="checkbox" soy:id="checkbox" class="library_check" />
+								(<!-- soy:id="id_text" /-->)
+							</li>
+							<!-- /soy:id="library_list" -->
+						</ul>
+					</div>
+				</div>
+				
+				<div class="form-section">
+					<div class="label">
+						<h4>スニペット</h4>
+					</div>
+					<div class="item">
+						<ul class="check_list_wrap">
+							<li>
+								<input type="checkbox" id="toggle_snippet_check" class="toggle_check" onclick="$('.snippet_check').attr('checked',$(this).attr('checked'));" checked />
+								<label for="toggle_snippet_check">全て</label>
+							</li>
+						</ul>
+						<p>
+							<input type="button" class="s-btn" onclick="$('#snippet_list_wrap').toggle();" value="投稿ボタンを表示する" />
+						</p>
+						
+						<ul id="snippet_list_wrap" class="check_list_wrap" style="display:none;">
+							<!-- soy:id="snippet_list" -->
+							<li class="check_list checked_list">
+								<input type="checkbox" soy:id="checkbox" class="snippet_check" />
+								(<!-- soy:id="id_text" /-->)
+							</li>
+							<!-- /soy:id="snippet_list" -->
+						</ul>
+					</div>
+				</div>
+				
+				<div class="form-section">
+					<div class="label">
+						<h4>ナビゲーション</h4>
+					</div>
+					<div class="item">
+						<ul class="check_list_wrap">
+							<li>
+								<input type="checkbox" id="toggle_navigation_check" class="toggle_check" checked="checked" onclick="$('.navigation_check').attr('checked',$(this).attr('checked'));" />
+								<label for="toggle_navigation_check">全て</label>
+							</li>
+							<!-- soy:id="navigation_list" -->
+							<li class="check_list checked_list">
+								<input type="checkbox" soy:id="checkbox" class="navigation_check" />
+								(<!-- soy:id="id_text" /-->)
+							</li>
+							<!-- /soy:id="navigation_list" -->
+						</ul>
+					</div>
+				</div>
+				
+				<div class="form-section">
+					<div class="label">
+						<h4>テーマ</h4>
+					</div>
+					<div class="item">
+						<p>"サイトディレクトリ/themes" 以下のディレクトリをエクスポート</p>
+						<ul class="check_list_wrap">
+							<li>
+								<input type="checkbox" id="toggle_theme_check" class="toggle_check" checked="checked" onclick="$('.theme_check').attr('checked',$(this).attr('checked'));" />
+								<label for="toggle_theme_check">全て</label>
+							</li>
+							<!-- soy:id="theme_list" -->
+							<li class="check_list checked_list">
+								<input type="checkbox" soy:id="checkbox" class="theme_check" />
+							</li>
+							<!-- /soy:id="theme_list" -->
+							
+						</ul>
+					</div>
+				</div>
+				
+				<div class="form-section">
+					<div class="label">
+						<h4>カスタムフィールド</h4>
+					</div>
+					<div class="item">
+						<ul class="check_list_wrap">
+							<li>
+								<input type="checkbox" id="toggle_field_check" class="toggle_check" checked="checked" onclick="$('.field_check').attr('checked',$(this).attr('checked'));" />
+								<label for="toggle_field_check">全て</label>
+							</li>
+							<li class="check_list checked_list">
+								<input type="checkbox" id="fields_common" name="fields[]" value="common.ini" class="field_check" checked />
+								<label for="fields_common">共通のカスタムフィールド</label>
+							</li>
+							<li class="check_list checked_list">
+								<input type="checkbox" id="fields_label" name="fields[]" value="label.ini" class="field_check" checked />
+								<label for="fields_label">ラベルのカスタムフィールド</label>
+							</li>
+						</ul>
+					</div>
+				</div>
+				
+				
+				
+				<div class="form-btn ce">
+					<input id="start_download_btn" type="submit" name="build" class="l-btn" value="エクスポートをダウンロード" onclick="start_download(this);" />
+				</div>
+		
+				
+			</div> 
+		</div> 
+		<!--  // .section -->
+		
+		</form>
+		
+		<div id="download_message_wrap" class="section" style="display:none;">
+			<p id="download_message"></p>
+		</div><!-- // .section -->
+
+	</div> 
+	<!--  // .window-content --> 
+</div> 
+<!--  // #main-window1 -->
+
+<style type="text/css">
+.check_list_wrap li{
+	padding:8px;
+	margin:2px;
+	background-color:#eee;
+}
+.check_list_wrap li label{
+	padding-left:5px;
+	font-weight:bold;
+}
+li.checked_list{
+	background-color:#ffdf85;
+}
+#download_message{
+	border:solid 3px #8f8f90;
+	padding:5px;
+}
+</style> 
+<script type="text/javascript">
+$(function(){
+	$(".check_list").each(function(){
+		if($(this).find("input[type=checkbox]").attr("checked")){
+			$(this).addClass("checked_list");
+		}else{
+			$(this).removeClass("checked_list");
+		}
+	});
+	$(".check_list_wrap .check_list input[type=checkbox]").bind("change",function(){
+		$(this).parents("li").toggleClass("checked_list");
+	});
+	$(".toggle_check").bind("change",function(){
+		$(this).parents(".check_list_wrap").find(".check_list input[type=checkbox]").trigger("change");
+	});
+});
+
+function start_download(ele){
+	$("#start_download_btn").hide();
+	$("#download_message_wrap").fadeIn();
+	$("#download_message").html('<span class="loading"></span>現在エクスポートファイルを作成しています。しばらくお待ち下さい。');
+}
+
+function notify_message(message){
+	$("#start_download_btn").show();
+	$("#download_message").html(message);
+}
+
+function notifySuccess(url){
+	$("#target_fr").attr("src",url);
+	
+}
+</script>
+

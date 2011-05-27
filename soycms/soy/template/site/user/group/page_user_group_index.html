@@ -1,0 +1,64 @@
+<div id="main-window2" class="main-window"> 
+				
+<div class="window-title"> 
+	<h2>グループ管理</h2> 
+</div> 
+
+<div class="window-content"> 
+
+	<div class="form-section section">
+		<div class="content">
+			
+			<div class="pagelist-menu"> 
+				<ul> 
+					<li class="plus-btn"><a soy:link="user.group.create">グループの追加</a></li>
+					<li class="directory-set"><a soy:link="user.group.directories">ディレクトリ設定</a></li>
+				</ul> 
+			</div>
+			
+			<!-- soy:id="group_exists" -->
+			<h3>グループ一覧</h3>
+			
+			<div class="form-section lbreak">
+				<table class="list-table"> 
+					<thead> 
+						<tr>
+							<th width="17%" scope="col">グループID</th> 
+							<th width="17%" scope="col">グループ名称</th>
+							<th width="16%" scope="col">説明</th>  
+							<th width="20%" class="s-cell" scope="col">設定</th> 
+						</tr> 
+					</thead> 
+					<tbody> 
+						<!-- soy:id="group_list" -->
+						<tr> 
+							<td>
+								<!-- soy:id="group_id" /-->
+							</td>
+							<td>
+								<!-- soy:id="group_name" /-->
+							</td>
+							<td>
+								<!-- soy:id="group_description" /-->
+							</td> 
+							<td>
+								<a soy:id="detail_link" class="sh-btn"><em>編集</em></a>
+							</td> 
+						</tr> 
+						<!-- /soy:id="group_list" --> 
+					</tbody> 
+				</table>
+			</div>
+			<!-- /soy:id="group_exists" -->
+			
+			<!-- soy:quickhelp="group_usage" /-->
+			
+		</div><!-- // .content -->
+	</div><!-- //. section -->
+	
+	
+</div> 
+<!--  // .window-content --> 
+</div> 
+<!--  // #main-window2 -->
+

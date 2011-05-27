@@ -1,0 +1,64 @@
+<div id="main-window1" class="main-window">
+	
+<div class="window-title">
+	<h2 class="title-text">カスタムフィールド管理</h2>
+</div>
+
+<div class="window-content">
+		
+	<div class="section">
+		
+		<div class="title">
+			<h3>登録するカスタムフィールドを選択してください</h3>
+		</div>
+		
+		<div class="content">
+			
+			<!-- soy:id="field_empty" -->
+			<p class="xl">登録出来るカスタムフィールドがありません。</p>
+			<!-- /soy:id="field_empty" -->
+			
+			<form soy:id="form">
+				
+			<table class="list-table">
+				<thead>
+				<tr>
+					<th width="30"></th>
+					<th>フィールドID</th>
+					<th>フィールド名</th>
+					<th>使用中のディレクトリ</th>
+					<th>説明</th>
+				</tr>
+				</thead>
+				<tbody>
+					<!-- soy:id="field_list" -->
+					<tr>
+						<td class="ce">
+							<input type="checkbox" soy:id="field_check" />
+						</td>
+						<td><!-- soy:id="list_field_id" /--></td>
+						<td><!-- soy:id="list_field_name" /--></td>
+						<td>
+							<!-- soy:id="list_field_directories" /-->
+						</td>
+						<td>
+							<!-- soy:id="list_field_description_text" /-->
+						</td>
+					</tr>
+					<!-- /soy:id="field_list" -->
+				</tbody>
+			</table>
+			
+			<div class="under form-btn ce">
+				<input type="submit" class="l-btn" value="追加" />
+			</div>
+			
+			</form>
+			
+			
+		</div>
+	</div><!-- // .section -->
+
+</div><!-- // .window-content -->
+
+</div><!-- // .main-window -->

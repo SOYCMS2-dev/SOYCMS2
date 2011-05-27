@@ -1,0 +1,72 @@
+<div id="main-window-page-tree" class="main-window"> 
+				
+<div class="window-title"> 
+	<h2>記事のコピー（ディレクトリの選択）</h2> 
+</div> 
+
+<div class="window-content"> 
+
+	<div class="section">
+		<div class="title">
+			<h3>記事のコピー</h3>
+		</div>
+		
+		<div class="pagelist-content content">
+			<p class="intro">
+				記事の保存先ディレクトリを選択してください。
+			</p>
+			
+			<form soy:id="form" id="copyform">
+				<input type="hidden" id="page_id" name="directory" />
+			</form>
+		<ul>
+			<!-- soy:id="directory_tree" -->
+			<li soy:id="page_list_wrap"> 
+				<dl> 
+					<dt class="image">
+						<a soy:id="create_entry_link*" class="create_entry_link">
+							<img soy:id="page_icon" style="width:32px;height:32px;" />
+							<span class="page_id" soy:id="page_id*" style="display:none;"></span>
+						</a>
+					</dt>
+					<dt class="name">
+						<a class="create_entry_link noicon" soy:id="create_entry_link*">
+							<!-- soy:id="page_name" /--><span class="page_id" soy:id="page_id*" style="display:none;"></span>
+						</a> (<!-- soy:id="entry_count" --><!-- /soy:id="entry_count" -->)
+						
+					</dt>
+				</dl>
+				
+				<!-- soy:id="tree_child" -->
+				<ul>
+					<!-- soy:id="tree" -->ここが再帰的に実行<!-- /soy:id="tree" -->
+				</ul>
+				<!-- /soy:id="tree_child" --> 
+				
+			</li soy:id="page_list_wrap">
+			<!-- /directory_tree -->
+			
+		</ul> 
+		</div>
+		
+	</div>
+</div> 
+<!--  // .window-content --> 
+</div> 
+<!--  // #main-window-page-tree -->
+
+<style type="text/css">
+.template_list_more{
+	display:none;
+}
+</style>
+
+<script type="text/javascript">
+$(function(){
+	$(".create_entry_link").click(function(){
+		$("#page_id").val($(this).find(".page_id").html());
+		$("#copyform").submit();
+		return false;
+	});
+});
+</script>

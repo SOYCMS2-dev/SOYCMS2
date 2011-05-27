@@ -1,0 +1,10 @@
+RewriteEngine on
+
+#if you use multiple domain environment (using VirtualDocumentRoot ),
+#comment out the next line and fix for your control panel request URI.
+#RewriteBase /soycms/admin
+
+RewriteCond %{REQUEST_FILENAME}/index.php !-f
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_URI} !/index.php/
+RewriteRule ^(.*)$ index.php?soycms_pathinfo=$1 [QSA,L]

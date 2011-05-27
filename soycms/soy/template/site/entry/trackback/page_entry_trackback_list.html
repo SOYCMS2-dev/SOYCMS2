@@ -1,0 +1,97 @@
+<div id="main-window1" class="main-window"> 
+				
+<div class="window-title"> 
+	<h2><!-- soy:id="entry_title" /-->のトラックバック一覧</h2> 
+</div> 
+
+<div class="window-content"> 
+	
+	<div id="main-section1" class="section">
+		
+		<div class="pagelist-menu"> 
+			<ul> 
+				<li class="back"><a soy:link="entry/trackback">トラックバック一覧</a></li> 
+			</ul> 
+		</div>  
+
+		<div class="content"> 
+
+			<form soy:id="form" method="post" action="xxx" id="post1" name="post1"> 
+			
+				<div id="post1-section1" class="form-section">
+					
+				<h3>
+					<!-- soy:id="entry_title" /-->のトラックバック一覧
+				</h3>
+				
+				<div class="delete_btn_wrap form-btn ce break">
+					<div class="form-btn ce lbereak">
+						<input type="submit" value="公開に設定" class="m-btn" name="do_open" />
+						<input type="submit" value="非公開に設定" class="m-btn" name="do_close" />
+						<input type="submit" value="未読に設定" class="m-btn" name="do_unread" />
+						<input type="submit" value="完全に削除" class="m-btn" name="do_remove" onclick="return confirm('チェックしたコメントを削除します。この処理は戻せません。\nよろしいですか？');" />
+					</div>
+				</div>
+				
+				<div class="item">
+					<table class="list-table"> 
+						<thead> 
+							<tr> 
+								<th width="4%" class="s-cell" scope="col"><input type="checkbox" onclick="$('.trackback_check').attr('checked',$(this).attr('checked'));" /></th> 
+								<th width="39%" scope="col">送信元</th> 
+								<th width="10%" scope="col">
+									状態
+								</th> 
+								<th width="9%" scope="col">更新時刻</th> 
+							</tr> 
+						</thead> 
+						<tbody> 
+							<!-- soy:id="trackback_list" -->
+							<tr soy:id="entry_list_row"> 
+								<td class="ce">
+									<input soy:id="trackback_checkbox" type="checkbox" class="trackback_check" />
+								</td> 
+								<td>
+									<span soy:id="blog_name">記事名A</span><br />
+									<a soy:id="blog_link"><!-- soy:id="blog_url" /--></a>
+									<p soy:id="excerpt"></p>
+								</td> 
+								<td class="ce"><!-- soy:id="trackback_status" /--></td> 
+								<td>
+									<!-- soy:id="trackback_submit_date" -->2010-06-10 14:25:43<!-- /trackback_submit_date -->
+								</td> 
+							</tr> 
+							<!-- /trackback_list -->
+						</tbody> 
+					</table> 
+				</div>
+				
+			
+				<div class="delete_btn_wrap form-btn ce break">
+					<div class="form-btn ce lbereak">
+						<input type="submit" value="公開に設定" class="m-btn" name="do_open" />
+						<input type="submit" value="非公開に設定" class="m-btn" name="do_close" />
+						<input type="submit" value="未読に設定" class="m-btn" name="do_unread" />
+						<input type="submit" value="完全に削除" class="m-btn" name="do_remove" onclick="return confirm('チェックしたコメントを削除します。この処理は戻せません。\nよろしいですか？');" />
+					</div>
+				</div>
+				
+				
+				</div>
+				
+
+			</form> 
+		</div> 
+	</div> 
+	<!--  // #main-section1 --> 
+
+	
+	
+
+
+</div> 
+<!--  // .window-content --> 
+</div> 
+<!--  // #main-window1 -->
+
+

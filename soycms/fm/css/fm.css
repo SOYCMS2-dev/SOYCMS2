@@ -1,0 +1,162 @@
+html{
+	padding:0;
+	margin:0;
+	overflow:hidden;
+}
+
+body{
+	padding:0;
+	margin:0;
+	min-height:300px;
+}
+
+/* classes */
+
+.loading{
+	width:15px;
+	height:15px;
+	margin:10px;
+	background-image:url("img/ajax-loader.gif");
+}
+
+/* #toolbar */
+
+#toolbar{
+	height:34px;
+	background-color:red;
+	font-size:12px !important;
+	background-color:#696969;
+	color:white;
+	
+	border-radius:5px 5px 0 0;
+}
+#toolbar .item{
+	float:left;
+}
+
+#toolbar a.item{
+	margin:7px 8px 5px 8px;
+	text-decoration:none;
+	padding:0 5px;
+	border:solid 1px #a9a9a9;
+	border-radius: 5px;
+	height:17px;
+	background-color:white;
+}
+
+#upload_popup{
+	height:150px;
+}
+
+/* #root_path */
+
+#root_path{
+	margin:0;
+	padding:0;
+	line-height:34px;
+}
+
+#root_path li{
+	margin:0;
+	padding:0;	
+	margin-right:5px;
+
+	float:left;
+	list-style:none;
+}
+#root_path li:after{
+	content:" > "
+}
+
+/* #file */
+#files table{
+	width:100%;
+	line-height:1.4;
+}
+#files .row_name{
+	text-align:left;
+	width:70%;
+}
+#files .row_type{
+	width:100px;
+}
+#files .row_size{
+	width:100px;
+}
+
+#files thead tr th{
+	padding:10px 7px 3px;
+	font-size:11px;
+	color:#666;
+	background-color:white;
+	font-weight:bold;
+	border-bottom:solid 3px #ababab;
+}
+
+#files tr td{
+	padding:4px;
+	border-right:solid 1px #f0f0f0;
+}
+#files .odd td{
+	background-color:#f0f0f0;
+	border-right:solid 1px #ffffff;
+}
+#files tr td.row_name{
+	padding-left:8px;
+}
+#files tr td.row_name a{
+	padding-left:18px;
+	
+	background-position:0 -802px;
+	background-image:url("./img/pagelist-toolicon.gif");
+	background-repeat:no-repeat;
+}
+#files .folder td.row_name{
+	padding-left:8px;
+}
+#files .folder td.row_name a{
+	padding:2px;
+	text-decoration:none;
+	
+	padding-left:18px;
+	background-position:0 -1200px;
+	background-image:url("./img/pagelist-toolicon.gif");
+	background-repeat:no-repeat;
+}
+
+/* popup */
+.popup-inner iframe{
+	width:100%;
+	height:100%;
+	border-style:none;
+}
+
+/* contextmenu */
+#fm_contextmenu{
+	width:200px;
+	display:none;
+	position:absolute;
+	text-align:left;
+	border:solid 1px;
+	background-color:white;
+	border-color:#cacaca #767676 #767676 #cacaca;
+}
+
+#fm_contextmenu h2{
+	background-color:#3e3e3e;
+	color:white;
+	padding:2px;
+}
+
+#fm_contextmenu li a{
+	text-decoration:none;
+}
+
+#fm_contextmenu li{
+	padding:2px;
+}
+
+#fm_contextmenu li:hover{
+	background-color:#acaa6b;
+	font-weight:bold;
+}

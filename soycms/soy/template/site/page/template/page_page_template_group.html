@@ -1,0 +1,118 @@
+<div id="main-window1" class="main-window">
+
+<div id="window-title-layout" class="window-title">
+	<h2><span>テンプレートの管理</span></h2>
+</div>
+
+<div class="window-content">
+
+	<div class="tab-menu">
+
+		<ul class="tab-index">
+			<li class="on"><a soy:link="./page/template">テンプレートの管理</a></li>
+			<li><a soy:link="./page/library">ライブラリの管理</a></li>
+			<li><a soy:link="./page/navigation">ナビゲーションの管理</a></li>
+		</ul>
+
+		<ul class="tab-contents">
+			<li>
+
+			<form soy:id="form" method="post" action="xxx" id="post1" name="post1">
+
+				<div id="main-section1" class="section">
+
+
+					<ul class="crumbs">
+						<li><a soy:link="./" title="管理画面トップ" class="home_btn">管理画面トップ</a></li>
+						<li><a soy:link="page/template">テンプレートの管理</a></li>
+						<li><!-- soy:id="group_name" /--></li>
+					</ul>
+
+					<div class="content">
+
+						<div class="pagelist-menu">
+							<ul>
+								<li class="template-set"><a soy:link="page/template/create">テンプレートを作成</a></li>
+							</ul>
+						</div>
+
+						<h3>テンプレート一覧</h3>
+
+						<div class="save_order_wrap form-btn ce break" style="display:none;">
+							<input type="submit" value="表示順を保存する" id="post1-submit" name="post1-submit" class="l-btn-red" />
+						</div>
+
+						<div id="post1-section1" class="form-section">
+
+							<!-- soy:id="template_exists" -->
+							<table id="template_list" class="list-table">
+								<thead>
+									<tr>
+										<th width="18%" scope="col">テンプレート名</th>
+										<th width="12%" class="col" scope="col">種類</th>
+										<th width="30%" scope="col">使用中のディレクトリ・ページ</th>
+										<th width="10%" class="s-cell" scope="col">プレビュー</th>
+										<th width="10%" class="s-cell" scope="col">表示順</th>
+										<th width="10%" class="s-cell" scope="col">設定</th>
+									</tr>
+								</thead>
+								<tbody>
+									<!-- soy:id="template_list" -->
+									<tr>
+										<td>
+											<span soy:id="template_color_box">■</span>
+											<!-- soy:id="template_name" -->テンプレート名A<!-- /template_name --></td>
+										<td>
+											<!-- soy:id="template_type" -->テンプレート名A<!-- /template_type -->
+										</td>
+										<td>
+											<!-- soy:id="page_list" -->
+												<a soy:id="page_link">ディレクトリへのリンク</a>
+												<!-- soy:id="not_last" -->|<!-- /soy:id="not_last" -->
+											<!-- /soy:id="page_list" -->
+										</td>
+										<td>
+											<a soy:id="preview_link">プレビュー</a>
+										</td>
+										<td>
+											<a href="javascript:void(0);" class="sh-btn up_btn"><em>↑</em></a>
+											<a href="javascript:void(0);" class="sh-btn down_btn"><em>↓</em></a>
+										</td>
+										<td>
+											<input type="hidden" soy:id="template_order" />
+											<a soy:id="template_edit_link" class="sh-btn"><em>編集</em></a>
+											<a soy:id="template_copy_link" class="sh-btn"><em>コピー</em></a>
+											<a soy:id="template_remove_link" class="sh-btn"><em>削除</em></a>
+										</td>
+									</tr>
+									<!-- /soy:id="template_list" -->
+								</tbody>
+							</table>
+							<!-- /template_exists" -->
+
+							<!-- soy:id="template_not_exists" -->
+							<p>テンプレートはありません</p>
+							<!-- /soy:id="template_not_exists" -->
+
+							</div>
+					</div>
+
+					<div class="save_order_wrap form-btn ce under" style="display:none;">
+						<input type="submit" value="表示順を保存する" id="post1-submit" name="post1-submit" class="l-btn-red" />
+					</div>
+
+
+				</div>
+				<!--  // #main-section1 -->
+
+			</form>
+
+	</li>
+	</div><!-- // .tab-menu -->
+
+</div>
+<!--  // .window-content -->
+</div>
+<!--  // #main-window1 -->
+
+<!-- soy:quickhelp="dir_cfg" /-->

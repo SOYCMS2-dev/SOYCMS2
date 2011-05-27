@@ -1,0 +1,179 @@
+<!DOCTYPE html> 
+<html lang="ja" dir="ltr" > 
+<head> 
+<meta charset="utf-8" /> 
+<title>SOYCMS2 File Manager</title>
+</head>  
+<body>
+	<div id="toolbar">
+		<a href="#upload_popup" class="popup-btn item">アップロード</a>
+		<a class="item" href="javascript:location.reload();">リロード</a>
+		<a href="#mkdir_popup" class="popup-btn item">フォルダの作成</a>
+		<ul class="item" id="root_path">
+			
+		</ul>	
+		
+		<br style="clear:both;" />
+	</div>
+	<div id="files" style="margin-bottom:30px;">
+		<table>
+			<thead>
+				<tr>
+					<th scope="row" colspan="5">
+						<!-- soy:id="path_text" /-->
+					</th>
+				</tr>
+				<tr>
+					<th class="row_name" scope="row">Name</th>
+					<th class="row_type le" scope="row">URL</th>
+					<th class="row_type le" scope="row">Date</th>
+					<th class="row_type le" scope="row">Type</th>
+					<th class="row_size le" scope="row">Size</th>
+				</tr>
+			</thead>
+			<tbody>
+				<!-- soy:id="file_list" -->
+				<tr soy:id="file_list_row">
+					<td class="row_name">
+						<a class="url_link" soy:id="file_link">
+							<!-- soy:id="file_name" /-->
+						</a>
+					</td>
+					<td>
+						<a soy:id="url_link">URL</a>
+						<input class="file_link_input s-area liq-area" soy:id="file_link_input"  style="display:none;" />
+					</td>
+					<td class="row_date">
+						<!-- soy:id="file_date" /-->
+					</td>
+					
+					<td class="row_type">
+						<!-- soy:id="file_type" /-->
+					</td>
+					<td class="row_size">
+						<!-- soy:id="file_size" /-->
+					</td>
+				</tr>
+				<!-- /soy:id="file_list" -->
+				<!-- soy:id="more_link_wrap" -->
+				<tr id="more_link_row">
+					<td colspan="3">
+						 全<!-- soy:id="file_total_count" /-->件中
+						 <!-- soy:id="file_current_count" /-->
+						 
+						 <a soy:id="more_link" onclick="read_more_files(this);return false">Read More...</a>
+					</td>
+				</tr>
+				<!-- /soy:id="more_link_wrap" -->
+			</tbody>
+		</table>
+	</div>
+	
+	<div id="upload_popup" class="popup-content"> 
+		<h3 class="h2">アップロード</h3> 
+		<form soy:id="form">
+			<div class="form-section"> 
+				<div class="label">
+					<h4>アップロード先</h4>
+				</div>
+				<div class="item">
+					<p><!-- soy:id="upload_path_text" /--></p>
+					<input type="hidden" soy:id="upload_path" />
+				</div>
+			</div>
+			
+			<div class="form-section"> 
+				<div class="label">
+					<h4>ファイルを選択してください</h4>
+				</div>
+				<div class="item">
+					<input type="file" name="files[]" multiple />
+					<span>最大<!-- soy:id="max_upload_size" /-->までアップロード可能</span>
+					<br />
+				</div>
+				<div class="item">
+					<input type="checkbox" id="is_overwrite" name="is_overwrite" value="1" checked />
+					<label for="is_overwrite">同名のファイルは上書きする</label>
+				</div>
+			</div>
+			
+			<div class="ce">
+				<p class="break">
+					<input class="m-btn" type="submit" name="upload" value="upload" />
+				</p>
+			</div>
+		</form> 
+	</div>
+	
+	<div id="mkdir_popup" class="popup-content"> 
+		<h3 class="h2">ディレクトリの作成</h3> 
+		<form soy:id="mkdir_form">
+			<div class="form-section"> 
+				<div class="label">
+					<h4>ディレクトリ名称</h4>
+				</div>
+				<div class="item">
+					<input id="new_directory_input" type="text" class="liq-area m-area" name="new_directory_name" />
+				</div>
+			</div>
+			
+			<div class="ce">
+				<input class="m-btn" type="submit" name="mkdir" value="create" onclick="return ($('#new_directory_input').val().length > 0);" />
+			</div>
+		</form> 
+	</div>
+	
+	<div id="rename_popup" class="popup-content"> 
+		<h3 class="h2">名前の変更</h3> 
+		<form soy:id="rename_form">
+			<div class="form-section"> 
+				<div class="label">
+					<h4>ファイル名称</h4>
+				</div>
+				<div class="item">
+					<input type="hidden" name="old_name" id="old_name" />
+					<input type="text" name="new_name" id="new_name" class="m-area liq-area" />
+				</div>
+			</div>
+			
+			<div class="ce">
+				<input type="submit" name="rename" value="変更" class="m-btn" />
+			</div>
+		</form> 
+	</div>
+	
+	<div id="remove_popup" class="popup-content"> 
+		<h3 class="h2">ファイルの削除</h3> 
+		<form soy:id="remove_form">
+			<div class="form-section"> 
+				<div class="item">
+					<p><span class="select_file_name"></span>を削除しますか？</p>
+					<input type="hidden" name="remove_file" id="remove_file" />
+				</div>
+			</div>
+			
+			<div class="ce">
+				<input type="submit" name="remove" value="削除" class="m-btn" />
+			</div>
+		</form> 
+	</div>
+
+<script type="text/javascript">
+$(function(){
+	$(window.parent).scrollTop(0);
+	$(window.document).click(function(){
+		adjust_height();
+	});
+});
+</script>
+
+<div id="fm_contextmenu" style="display:none;">
+	<h2 class="select_file_name">選択</h2>
+	<ul>
+		<li onclick="$(this).find('a').click();"><a href="#rename_popup" class="popup-btn" style="width:100%;">名前の変更</a></li>
+		<li onclick="$(this).find('a').click();"><a href="#remove_popup" class="popup-btn" style="width:100%;">削除</a></li>
+	</ul>
+</div>
+
+</body> 
+</html> 

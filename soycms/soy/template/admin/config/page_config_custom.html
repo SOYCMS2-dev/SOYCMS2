@@ -1,0 +1,108 @@
+<div class="section">
+	<div class="title"> 
+		<h3>ログイン画面のテーマ変更</h3> 
+	</div>	
+	
+	<div class="content">
+		
+		<form soy:id="config_form"> 
+			
+				<div id="post1-section1" class="form-section"> 
+					
+					<div class="label"> 
+						<h4> 
+							<label for="post1-1">ログインアイコンの変更</label>
+						</h4> 
+					</div> 
+					<div class="item"> 
+						<ul class="radio-list"> 
+							<li class="li1"><input soy:id="login_icon_default" type="radio" value="1" name="icon1-cfg" id="login_icon_default" checked="checked" /><label for="login_icon_default">デフォルト</label> 
+								<img soy:src="../common/cp_theme/gray/img/logo_login.png" alt="SOY CMS2" width="150" height="64" class="png" /></li>
+							<li class="li2"><input soy:id="login_icon_custom" type="radio" value="3" name="icon1-cfg" id="login_icon_custom" /><label for="login_icon_custom">変更する</label> 
+								<img soy:id="login_icon_custom_img" width="150" height="64" />
+								<br>
+								(150ピクセル×64ピクセルの画像ファイル)<br> 
+								<input type="file" name="login_icon_custom" /> 
+							</li>	
+						</ul> 
+					</div>
+					
+					<div class="label"> 
+						<h4> 
+							<label for="post1-1">ログイン画面のインターフェイスデザイン変更</label></h4> 
+					</div> 
+					<div class="item"> 
+						<ul class="radio-list"> 
+							<li class="li1"> 
+								<table class="form-table"> 
+									<tr> 
+										<td width="33%" class="ce"><img soy:src="../common/cp_theme/gray/thumbnail.jpg" width="160" height="100" alt="デフォルトカラー">
+											<strong class="xl"><br /> 
+												<input type="radio" soy:id="color_select_gray" checked="checked" /> 
+											</strong>
+										</td> 
+										<td width="34%" class="ce"><img soy:src="../common/cp_theme/olive/thumbnail.jpg" alt="右サイドタイプ" width="160" height="100">
+											<strong class="xl"><br /> 
+												<input type="radio" soy:id="color_select_olive" checked="checked" /> 
+											</strong>
+										</td>
+										<td width="34%" class="ce"><img soy:src="../common/cp_theme/white/thumbnail.jpg" alt="左サイドタイプ" width="160" height="100">
+											<strong class="xl"><br /> 
+												<input type="radio" soy:id="color_select_white" checked="checked" /> 
+											</strong>
+										</td> 
+										<td width="34%" class="ce"><img soy:src="../common/cp_theme/black/thumbnail.jpg" alt="サイド無しタイプ" width="160" height="100">
+											<strong class="xl"><br /> 
+												<input type="radio" soy:id="color_select_black" checked="checked" /> 
+											</strong>
+										</td> 
+									</tr> 
+									<tr> 
+										<td class="ce"><img soy:src="../common/cp_theme/blue/thumbnail.jpg" width="160" height="100" alt="デフォルトカラー"><strong class="xl"><br /> 
+												<input type="radio" soy:id="color_select_blue" checked="checked" /> 
+											</strong>
+										</td> 
+										<td class="ce"><img soy:src="../common/cp_theme/aqua/thumbnail.jpg" width="160" height="100" alt="デフォルトカラー"><strong class="xl"><br /> 
+												<input type="radio" soy:id="color_select_aqua" checked="checked" /> 
+											</strong>
+										</td> 
+										<td class="ce"><img soy:src="../common/cp_theme/green/thumbnail.jpg" width="160" height="100" alt="デフォルトカラー"><strong class="xl"><br /> 
+												<input type="radio" soy:id="color_select_green" checked="checked" /> 
+											</strong>
+										</td> 
+										<td class="ce">&nbsp;</td> 
+									</tr> 
+								</table> 
+							</li> 
+						</ul>
+					</div>
+					
+					<div class="label"> 
+						<h3> 
+							<label for="post1-1">Cookieログインの設定</label>
+						</h3> 
+					</div> 
+					<div class="item"> 
+						<input type="checkbox" soy:id="allow_keep_login" />
+						<label for="allow_keep_login">Cookieログインを許可する</label>
+					</div>
+					
+					<div class="label"> 
+						<h3> 
+							<label for="post1-1">パスワードリマインダーの設定</label>
+						</h3> 
+					</div> 
+					<div class="item"> 
+						<input type="checkbox" soy:id="allow_password_reminder" />
+						<label for="allow_password_reminder">パスワードリマインダーを許可する</label>
+					</div>
+					
+					<div class="form-btn ce"> 
+								<input type="submit" value="設定する" id="post1-submit" name="post1-submit" class="l-btn" /> 
+					</div> 
+				
+				</div> 
+		</form>
+	
+	</div>
+</div>

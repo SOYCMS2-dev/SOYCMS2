@@ -1,0 +1,108 @@
+<div id="main-window1" class="main-window"> 
+				
+	<div class="window-title"> 
+		<h2>新しいサイトの作成</h2> 
+	</div> 
+	
+	<div class="window-content"> 
+		
+		<div id="main-section1" class="section"> 
+
+			<div class="content"> 
+
+				<form soy:id="form"> 
+				
+					<div id="post1-section1" class="form-section"> 
+						
+						<h3>新しいサイトの作成 (2/4)</h3> 
+						<div class="label"> 
+							<h4> 
+								<label for="post1-3">文字コード</label> (設定後変更可能)</h4> 
+						</div> 
+						<div class="item"> 
+							<p> 
+								<select soy:id="config_encoding"></select>
+							</p> 
+						</div> 
+
+
+						<div class="label"> 
+							<h4> 
+								<label for="post1-3">タイムゾーン</label> (設定後変更可能)</h4> 
+						</div> 
+						<div class="item"> 
+							<p> 
+								<select soy:id="config_timezone_select"></select> 
+							</p> 
+						</div> 
+						
+						<!--
+
+						<div class="label"> 
+							<h4>WEBサイト全体のフィード[RSS,atom]出力 (設定後変更可能)  </h4> 
+						</div> 
+						<div class="item"> 
+							<input type="radio" value="1" name="feed-public-cfg" id="feed-public-cfg1" checked="checked" /> 
+							<label for="public-cfg-1">フィードを出力する　<a href="#popup4" class="popup-btn-L">詳細設定</a>　</label> 
+								<input type="radio" value="2" name="feed-public-cfg" id="feed-public-cfg2" /><label for="public-cfg-2">フィードを出力しない</label> 
+						</div> 
+						
+						-->
+		
+						<!--
+						<div class="label"> 
+							<h4>記事の承認公開の可否 ※設定後に変更可能</h4> 
+						</div> 
+						<p>記事作成者が複数存在し、承認フローが必要な場合は、承認公開機能を利用してください。</p> 
+						<div class="item"> 
+							<p>
+								
+								<span class="li2"> 
+									<input soy:id="config_not_use_workflow" type="radio" value="1" checked /> 
+								</span> 
+								承認公開を利用しない
+								
+								<span class="li2"> 
+									<input name="workflow" type="radio" id="public-cfg8" value="1" checked/> 
+								</span> 承認公開を利用する
+							
+								<span c
+								<span class="li2"> 
+									<input type="radio" name="workflow" value="2" onclick="alert('この機能はベータ版につき使用出来ません。');return false;" /> 
+								</span> 多段承認フローを利用する（※ベータ版につき現在使用出来ません）
+							</p> 
+						</div> 
+						-->
+
+
+
+
+						<div class="label"> 
+							<h4>画像/ファイルのアップロード先　<strong>※設定後は変更できません。ご注意ください。</strong></h4> 
+						</div> 
+						<div class="item"> 
+							<p> 
+								<!-- soy:id="site_url" /-->
+								<input soy:id="config_upload" type="text" class="m-area" id="post1-2" value="files/" size="30" /> 
+							</p> 
+						</div> 
+
+
+
+
+					<div class="form-btn ce"> 
+						<input type="submit" value="戻る" name="go_back" class="l-btn" /> 
+						　
+						<input type="submit" value="次へ" id="next" name="post1-submit" class="l-btn" /> 
+					</div> 
+
+
+
+					</div> 
+					
+				</form> 
+
+
+			</div> 
+		</div> 
+		<!--  // #main-section1 -->

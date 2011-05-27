@@ -1,0 +1,73 @@
+<div id="main-window1" class="main-window"> 
+				
+	<div class="window-title"> 
+		<h2>グループの追加</h2> 
+	</div> 
+	
+	<div class="window-content"> 
+		
+		<div id="main-section1" class="section"> 
+
+			<div class="content">
+				
+				<div class="pagelist-menu"> 
+					<ul> 
+						<li class="back"><a soy:link="user.group">グループ一覧</a></li>
+					</ul> 
+				</div>
+				
+				<form soy:id="form"> 
+				
+					<div class="form-section">
+						
+						<p soy:id="is_error" class="error intro l">
+							作成に失敗しました。入力内容を確認してください。
+						</p>
+					
+						<div class="label"> 
+							<h4>グループID</h4> 
+						</div> 
+						<div class="item"> 
+							<p class="intro">半角英数字14文字以内 ※後から変更出来ません</p>
+							<p> 
+								<input soy:id="group_id" class="m-area" style="width:400px;" placeholder="GroupName" /> 
+							</p> 
+						</div> 
+						
+						<div class="label"> 
+							<h4>グループ名</h4> 
+						</div> 
+						<div class="item"> 
+							<p> 
+								<input soy:id="group_name" class="m-area" style="width:400px;" placeholder="グループ名" /> 
+							</p> 
+						</div>
+						
+						<div class="label"> 
+							<h4>説明</h4> 
+						</div> 
+						<div class="item"> 
+							<textarea soy:id="group_description" class="m-area" rows="4" style="width:400px;"></textarea> 
+						</div> 
+						
+						
+						<div class="form-btn ce"> 
+							<p class="lbreak">
+								<input type="submit" value="追加" class="l-btn" />
+							</p>
+						</div>
+					</div> 
+					
+
+				</form> 
+			</div> 
+		</div> 
+		<!--  // #main-section1 --> 
+
+		
+
+
+	</div> 
+	<!--  // .window-content --> 
+</div> 
+<!--  // #main-window1 --> 

@@ -1,0 +1,166 @@
+<div id="main-window1" class="main-window">
+	
+<div class="window-title">
+	<h2 class="title-text">カスタムフィールド管理</h2>
+</div>
+
+<div class="window-content">
+		
+	<div class="section">
+
+		<ul class="crumbs">
+			<li><a soy:link="./" title="管理画面トップ" class="home_btn">管理画面トップ</a></li>
+			<li>カスタムフィールド管理</li>
+		</ul>
+
+		
+		<div class="pagelist-menu"> 
+			<ul> 
+				<li class="plus-btn"><a soy:link="page/field/create">カスタムフィールド項目の追加</a></li> 
+			</ul>
+		</div>
+		
+		<div class="title">
+			<h3>ディレクトリ用カスタムフィールド</h3>
+		</div>
+		
+		<div class="content">
+			<div class="pagelist-content">
+				<ul>
+					<!-- soy:id="field_tree" -->
+					<li soy:id="page_list_wrap">
+						<dl> 
+							<dt class="image">
+								<a soy:id="field_config_link">
+									<img soy:id="page_icon" style="width:32px;height:32px;" />
+								</a>
+							</dt>
+							<dt>
+								<a soy:id="field_config_link*">
+								<strong><!-- soy:id="page_name" /--></strong>
+								</a>
+							</dt>
+							<!-- soy:id="field_exixts" -->
+							<dt>
+								<!-- soy:id="field_config" /-->
+							</dt>
+							<!-- /soy:id="field_exixts" -->
+						</dl>
+						
+						<!-- soy:id="tree_child" -->
+						<ul><!-- soy:id="tree" -->ここが再帰的に実行<!-- /soy:id="tree" --></ul>
+						<!-- /soy:id="tree_child" -->
+						 
+					</li soy:id="page_list_wrap">
+					<!-- /soy:id="field_tree" -->
+				</ul>
+			</div><!-- // .pagelist-content -->
+		</div>
+	</div><!-- // .section -->
+	
+	
+	<div class="section">
+		<div class="title">
+			<h3>共通カスタムフィールド</h3>
+		</div>
+
+
+		<div class="pagelist-menu"> 
+			<ul> 
+				<li class="plus-btn"><a soy:link="page/field/create?type=entry">カスタムフィールド項目の追加</a></li>
+				<li class="plus-btn"><a onclick="common_open_popup($(this).attr('href'),{onclose:function(){location.reload();}});return false;" soy:link="page/field/select">すべてのカスタムフィールド項目から追加</a></li>
+			</ul>
+		</div>
+		
+		<div class="content">
+			<form soy:id="entry_field_form">
+				
+			<div class="under form-btn ce save_order_wrap" style="display:none;">
+				<input type="submit" class="m-btn-red" name="save_order" value="表示順を保存" />
+			</div>
+			
+			<table class="list-table break">
+				<thead>
+				<tr>
+					<th>項目名</th>
+					<th>項目ID</th>
+					<th>タイプ</th>
+					<th>表示順</th>
+					<th>操作</th>
+				</tr>
+				</thead>
+				<tbody>
+					<!-- soy:id="entry_field_list" -->
+					<tr>
+						<td><!-- soy:id="list_field_name" /--></td>
+						<td><!-- soy:id="list_field_id" /--></td>
+						<td><!-- soy:id="list_field_type" /--></td>
+						<td>
+							<input type="hidden" soy:id="order_input" />
+							<input type="button" value="▲" class="s-btn up_btn" /> 
+							<input type="button" value="▼" class="s-btn down_btn" />
+						</td>
+						<td>
+							<a soy:id="field_detail_link">詳細</a>
+							<a class="s-btn fr" soy:id="field_clear_link">非表示</a>
+						</td>
+					</tr>
+					<!-- /soy:id="entry_field_list" -->
+				</tbody>
+			</table>
+			<p class="under ce">
+				<a class="s-btn" onclick="return common_open_popup($(this).attr('href'));" soy:link="page/field/code?type=entry"><em>テンプレート用HTML生成</em></a>
+			</p>
+			
+			<div class="under form-btn ce save_order_wrap" style="display:none;">
+				<input type="submit" class="m-btn-red" name="save_order" value="表示順を保存" />
+			</div>
+			</form>
+			
+			
+		</div>
+	</div><!-- // .section -->
+	
+	<div class="section">
+		<div class="title">
+			<h3>すべてのカスタムフィールド (非表示含む)</h3>
+		</div>
+		<div class="content">
+			<table class="list-table break">
+				<thead>
+				<tr>
+					<th>項目名</th>
+					<th>項目ID</th>
+					<th>タイプ</th>
+					<th>使用中のディレクトリ</th>
+					<th>操作</th>
+				</tr>
+				</thead>
+				<tbody>
+					<!-- soy:id="field_list" -->
+					<tr>
+						<td><!-- soy:id="list_field_name" /--></td>
+						<td><!-- soy:id="list_field_id" /--></td>
+						<td><!-- soy:id="list_field_type" /--></td>
+						<td>
+							<!-- soy:id="list_field_directories" /-->
+						</td>
+						<td>
+							<a soy:id="field_detail_link">詳細</a>
+							<a class="s-btn fr" soy:id="field_remove_link">削除</a>
+						</td>
+					</tr>
+					<!-- /soy:id="field_list" -->
+				</tbody>
+			</table>
+			<p class="under ce">
+				<a class="s-btn" onclick="return common_open_popup($(this).attr('href'));" soy:link="page/field/code"><em>テンプレート用HTML生成</em></a>
+			</p>
+				
+		</div><!-- // .content -->
+	</div><!-- // .section -->
+	
+
+</div><!-- // .window-content -->
+
+</div><!-- // .main-window -->

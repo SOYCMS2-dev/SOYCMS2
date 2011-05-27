@@ -1,0 +1,32 @@
+<div class="form-section">
+	<div class="label">
+		<h4><label for="post1-1">スクリプトの設定</label></h4>
+	</div>
+	<div class="item">
+		<select soy:id="script_select">
+			<option value="">----------</option>
+		</select>
+		
+		<input type="submit" class="s-btn" name="change-script" value="変更"/>	
+	</div>
+	
+	<!-- soy:id="script_config" --><!-- /soy:id="script_config" -->
+	
+	
+	<div class="label">
+		<h4><label for="post1-1">記事の表示件数</label></h4>
+	</div>
+	<div class="item">
+		<p class="intro">
+			片方だけを指定することが出来ます。指定しない場合は全てが表示されます。
+		</p>
+		<p>
+			<input type="text" class="s-area" soy:id="countFrom" name="post1-1" value="" />
+			件目
+			〜
+			<input type="text" class="s-area" soy:id="countTo" name="post1-1" value="" />
+			件目を表示する
+		</p>
+	</div>
+	
+</div>

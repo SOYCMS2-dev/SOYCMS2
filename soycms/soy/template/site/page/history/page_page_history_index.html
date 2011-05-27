@@ -1,0 +1,59 @@
+<!-- soy:id="history_exists" -->
+<div id="main-window2" class="main-window" style="clear:both;"> 
+
+	<div class="window-title">
+		<h2><!-- soy:id="name" /-->のバックアップ</h2> 
+	</div>
+	
+	<div class="window-content">
+		<div class="section">
+			
+			<!-- soy:id="mode_page" -->
+			<div class="pagelist-menu"> 
+				<ul> 
+					<li class="back"><a soy:id="back_link">戻る</a></li> 
+				</ul> 
+			</div> 
+			<!-- /soy:id="mode_page" -->
+			
+			
+			<div class="title">
+				<h3>バックアップ一覧</h3>
+			</div>
+			<div class="content">
+				<table class="form-table">
+					<tr>
+						<th class="ce" width="10%" scope="row">日付</th>
+						<th class="ce" width="19%">操作</th>
+						<th class="ce" width="19%" scope="row">更新者</th>
+						<th class="ce w24">復元</th>
+					</tr>
+					<!-- soy:id="history_list" -->
+					<tr>
+						<td nowrap="nowrap" scope="row">
+							<!-- soy:id="history_date" -->2010-08-05 17:49:19<!-- /soy:id="history_date" -->
+						</td>
+						<td class="ce">
+							<!-- soy:id="history_type_text" /-->
+						</td>
+						<td class="ce">
+							<!-- soy:id="history_username" /-->
+						</td>
+						<td><a soy:id="detail_link" class="sh-btn ce-b"><em>復元へ</em></a></td>
+					</tr>
+					<!-- /soy:id="history_list" -->
+					
+				</table>
+				
+				<!-- soy:id="pager" -->
+				<div class="pager">
+					<p class="back" soy:id="prev_link_wrap"><a soy:id="prev_link" onclick="show_hisotry_list($(this).attr('href'));return false;">&lt;&nbsp;前へ</a></p>
+					<ol><!-- soy:id="pager_list" --><li><a soy:id="page_link" onclick="show_hisotry_list($(this).attr('href'));return false;"><em><!-- soy:id="page_text" /--></em></a></li><!-- /soy:id="pager_list" --></ol>
+					<p class="next" soy:id="next_link_wrap"><a soy:id="next_link" onclick="show_hisotry_list($(this).attr('href'));return false;">次へ&nbsp;&gt;</a></p>
+				</div> 
+				<!-- /pager -->
+			</div>
+		</div>
+	</div>
+</div>
+<!-- /soy:id="history_exists" -->

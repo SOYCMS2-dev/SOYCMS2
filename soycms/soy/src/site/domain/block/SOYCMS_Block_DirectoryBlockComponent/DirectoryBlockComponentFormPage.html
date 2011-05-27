@@ -1,0 +1,360 @@
+<div class="form-section">
+	
+	<div class="label">
+		<h4><label for="post1-1">記事ディレクトリ</label></h4>
+	</div>
+	<div class="item">
+		<table class="form-table">
+			<tr>
+				<th>
+					ディレクトリ
+				</th>
+				<td>
+					<input soy:id="current_directory" id="current_directory" type="radio">
+					<label for="current_directory">現在のディレクトリの記事を表示する</label>
+					
+					<input soy:id="select_directory" id="select_directory" type="radio">
+					<label for="select_directory">記事ディレクトリを指定する</label>		
+				</td>
+			</tr>
+			<tr class="options select_directory">
+				<th>
+					ディレクトリの指定
+				</th>
+				<td>
+					記事ディレクトリを選択してください（複数可）。<br />
+					<select soy:id="directories" size="5" multiple="1"></select>
+				</td>
+			</tr>
+			<tr>
+				<th>オプション</th>
+				<td>
+					<p class="options current_directory">
+						<input id="includeChild" type="checkbox" soy:id="include_child_dir" />
+						<label for="includeChild">子ディレクトリの記事も表示する</label>
+					</p>
+					<p class="options select_directory">
+						下記設定はディレクトリを一つだけ選択した場合のみ有効となります。
+					</p>
+					<p>
+						<input id="includeIndex" type="checkbox" soy:id="include_index" />
+						<label for="includeIndex">index.htmlも表示する</label>
+					</p>
+					<p>
+						<input id="includeChildIndex" type="checkbox" soy:id="include_child_index" />
+						<label for="includeChildIndex">子ディレクトリのindex.htmlも表示する</label>
+					</p>
+					<p>
+						<input id="is_group_by_label" type="checkbox" soy:id="is_group_by_label" />
+						<label for="is_group_by_label">ラベルでグループ化を行う</label>
+					</p>
+					<p>ラベルを最大 <input type="text" class="s-area" soy:id="label_count" size="4" /> 件表示(空の場合は全て)</p>
+				</td>
+			</tr>
+			<tr  class="is_group_by_label_option">
+				<th>ラベルのグループ化の<br />オプション</th>
+				<td>
+					<p>
+						<input id="is_group_only_current_label" type="checkbox" soy:id="is_group_only_current_label" />
+						<label for="is_group_only_current_label">現在のラベルのみ表示</label>
+					</p>
+					<table class="label_conditions_table">
+						<tbody>
+							<!-- soy:id="label_option_list" -->
+							<tr class="label_condition">
+								<td>
+									<select soy:id="option_field_id" name="[labelConditions][#NUM#][fieldId]"></select>
+									の値が
+									
+									<input type="hidden" class="label_condition_remove" soy:id="label_condition_remove" value="0" />
+								</td>
+								<td>
+									<input soy:id="option_value" name="[labelConditions][#NUM#][value]" type="text" class="s-area" />
+									<select soy:id="option_condition" name="[labelConditions][#NUM#][condition]">
+										<option value="equal">と等しい</option>
+										<option value="not_equal">と等しく無い</option>
+										<option value="large">より大きい</option>
+										<option value="small">より小さい</option>
+										<option value="equal_large">以上</option>
+										<option value="equal_small">以下</option>
+										<option value="equal_text">に完全一に致する</option>
+										<option value="like_text">に部分一致する</option>
+									</select>
+								</td>
+								<td>
+									時
+									<select soy:id="option_operation" name="[labelConditions][#NUM#][operation]">
+										<option value="visible">表示する</option>
+										<option value="hide">表示しない</option>
+									</select>
+								</td>
+								<td class="operation">
+									<input class="s-btn" type="button" onclick="return common_sort_table($(this).parents('.label_condition'),true);" value="▲" />
+									<input class="s-btn" type="button" onclick="return common_sort_table($(this).parents('.label_condition'),false);" value="▼" /> 
+									 <input class="s-btn" type="button" onclick="if(confirm('この条件を削除して良いですか？')){$(this).parents('.label_condition').hide().find('.label_condition_remove').val(1);}" value="削除" />
+								</td>
+							</tr>
+							<!-- /soy:id="label_option_list" -->
+						</tbody>
+						<tfoot>
+							<tr>
+								<td colspan="4">
+									<p class="intro">表示するラベルを条件を付けて絞り込むことが出来ます。<br />
+									条件を設定して条件を追加ボタンを押して下さい。</p>
+								</td>
+							<tr class="add_label_options">
+								<td>
+									<select name="[labelConditions][#NUM#][fieldId]" soy:id="label_customfield_select"></select>
+									の値が
+								</td>
+								<td>
+									<input name="[labelConditions][#NUM#][value]" type="text" class="s-area" />
+									<select name="[labelConditions][#NUM#][condition]">
+										<option value="equal">と等しい</option>
+										<option value="not_equal">と等しく無い</option>
+										<option value="large">より大きい</option>
+										<option value="small">より小さい</option>
+										<option value="equal_large">以上</option>
+										<option value="equal_small">以下</option>
+										<option value="equal_text">に完全一に致する</option>
+										<option value="like_text">に部分一致する</option>
+									</select>
+								</td>
+								<td>
+									時
+									<select name="[labelConditions][#NUM#][operation]">
+										<option value="visible">表示する</option>
+										<option value="hide">表示しない</option>
+									</select>
+								</td>
+								<td class="operation">
+									<input class="s-btn" type="button" onclick="return add_label_otption();" value="条件の追加" />
+								</td>
+							</tr>
+						</tfoot>
+					</table>
+				</td>
+			</tr>
+		</table>
+		
+		
+	</div>
+	
+	
+	<!-- soy:id="label_exists" -->
+	<div class="label">
+		<h4><label for="post1-1">ラベル</label></h4>
+	</div>
+	<div class="item">
+		<p class="intro">
+			ラベルで絞り込みを行います。選択しない場合は全てのラベルが対象になります。
+			
+			<input name="label_option" type="radio" soy:id="label_option_and" id="label_option_and" />
+			<label for="label_option_and">全てのラベル(AND)</label>
+			
+			<input name="label_option" type="radio" soy:id="label_option_or" id="label_option_or" />
+			<label for="label_option_or">いずれかのラベル(OR)</label>
+		</p>
+		<div>
+			<input type="hidden" name="object[labels]" value="" />
+			<select soy:id="labels" size="5" multiple="1" class="linq"></select>
+		</div>
+		
+	</div>
+	<!-- /soy:id="label_exists" -->
+	
+	<!-- soy:id="tag_exists" -->
+	<div class="label">
+		<h4><label for="post1-1">タグ</label></h4>
+	</div>
+	<div class="item">
+		<p class="intro">
+			タグで絞り込みを行います。
+			
+			<input name="tag_option" type="radio" soy:id="tag_option_and" id="tag_option_and" />
+			<tag for="tag_option_and">全てのタグ</tag>
+			
+			<input name="tag_option" type="radio" soy:id="tag_option_or" id="tag_option_or" />
+			<tag for="tag_option_or">いずれかのタグ</tag>
+		</p>
+		
+		<textarea soy:id="tags" id="tag_textarea" class="s-area liq-area"></textarea>
+		
+		<div>
+			<!-- soy:id="tag_list" -->
+			<span class="tag_list" soy:id="tag_name">タグ名</span>
+			<!-- /soy:id="tag_list" --> 
+			｜<span class="tag_list noinput" onclick="$('#tag_textarea').val('');">クリア</span>
+		</div>
+	</div>
+	<!-- /soy:id="tag_exists" -->
+	
+	<div class="label">
+		<h4><label for="post1-1">記事の表示順</label></h4>
+	</div>
+	<div class="item">
+		<ul>
+			<li>
+				<input name="sort_type_1" type="radio" soy:id="sort_type_1" id="sort_type_1" />
+				<label for="sort_type_1">更新順（新しい物が前）</label>
+			</li>
+			<li>
+				<input name="sort_type_2" type="radio" soy:id="sort_type_2" id="sort_type_2" />
+				<label for="sort_type_2">更新順（新しい物が後）</label>
+			</li>
+			<li>
+				<input name="sort_type_3" type="radio" soy:id="sort_type_3" id="sort_type_3" />
+				<label for="sort_type_3">作成日順（新しい物が前)</label>
+			</li>
+			<li>
+				<input name="sort_type_4" type="radio" soy:id="sort_type_4" id="sort_type_4" />
+				<label for="sort_type_4">作成日順（新しい物が後)</label>
+			</li>
+			<li id="sort_type_directory">
+				<input name="sort_type_5" type="radio" soy:id="sort_type_5" id="sort_type_5" />
+				<label for="sort_type_5">ディレクトリでの並び順</label>
+			</li>
+			<li id="sort_type_label">
+				<input name="sort_type_6" type="radio" soy:id="sort_type_6" id="sort_type_6" />
+				<label for="sort_type_6">ラベルでの並び順</label>
+			</li>
+		</ul>
+	</div>
+	
+	<div class="label">
+		<h4><label for="post1-1">index.htmlと記事の並び順</label></h4>
+	</div>
+	<div class="item">
+		<ul>
+			<li>
+				<input name="index_sort_type_1" type="radio" soy:id="index_sort_type_1" id="index_sort_type_1" />
+				<label for="index_sort_type_1">index.html,記事...,index.html...</label>
+			</li>
+			<li>
+				<input name="index_sort_type_2" type="radio" soy:id="index_sort_type_2" id="index_sort_type_2" />
+				<label for="index_sort_type_2">index.html,index.html...,記事...</label>
+			</li>
+			<li>
+				<input name="index_sort_type_3" type="radio" soy:id="index_sort_type_3" id="index_sort_type_3" />
+				<label for="index_sort_type_3">記事...,index.html,index.html...</label>
+			</li>
+
+		</ul>
+	</div>
+	
+	
+	<div class="label">
+		<h4><label for="post1-1">記事の表示件数</label></h4>
+	</div>
+	<div class="item">
+		<p class="intro">
+			片方だけを指定することが出来ます。指定しない場合は全てが表示されます。
+		</p>
+		<p>
+			<input type="text" class="s-area" soy:id="countFrom" name="post1-1" value="" />
+			件目
+			〜
+			<input type="text" class="s-area" soy:id="countTo" name="post1-1" value="" />
+			件目を表示する
+		</p>
+	</div>
+</div>
+
+<script type="text/javascript">
+function change_tag_value(value){
+	var textarea = $("#tag_textarea");
+	
+	try {
+		values = textarea.val().split(" ");
+		
+		//空要素は削除する
+		values = jQuery.grep(values,function(n){
+			return (n.length > 0);
+		});
+		
+		if ($.inArray(value,values) >= 0) {
+			
+			values = jQuery.grep(values,function(n){
+				return (n != value);
+			});
+			
+		} else {
+			values.push(value);	
+		}
+		
+		textarea.val(values.join(" "));
+	}catch(e){
+		alert(e);
+	}
+}
+$(function(){
+	$("#tag_textarea").attr("readonly",true);
+	
+	$(".tag_list").click(function(){
+		if($(this).hasClass("noinput"))return;
+		
+		var tag_value = $(this).html();
+		change_tag_value(tag_value);
+		return false;
+	});
+	
+	$("#current_directory").click(function(){
+		$(".options").hide();
+		$(".current_directory").show();
+	});
+	$("#select_directory").click(function(){
+		$(".options").hide();
+		$(".select_directory").show();
+	});
+	
+	$(".options").hide();
+	
+	if($("#select_directory").attr("checked")){
+		$(".select_directory").show();
+	}else{
+		$(".current_directory").show();
+	}
+	
+	//ラベルでグループ
+	$(".is_group_by_label_option").toggle($("#is_group_by_label").attr("checked"));
+	$("#is_group_by_label").click(function(){
+		$(".is_group_by_label_option").toggle($("#is_group_by_label").attr("checked"));
+	});
+	
+	$(".label_condition select").each(function(){
+		$(this).val($(this).attr("_value"));
+	});
+});
+
+function add_label_otption(){
+	tr = $(".add_label_options").clone(true);
+	tr.removeClass("add_label_options").addClass("label_option");
+	
+	tr.find(".operation").html(
+		'<input class="s-btn up_btn" type="button" onclick="return common_sort_table($(this).parents(\'.label_condition\'),true);" value="▲" />' +
+		'<input class="s-btn down_btn" type="button" onclick="return common_sort_table($(this).parents(\'.label_condition\'),false);" value="▼" />' + 
+		' <input class="s-btn" type="button" onclick="if(confirm(\'この条件を削除して良いですか？\')){$(this).parents(\'.label_condition\').remove();}" value="削除" />'
+	);
+	
+	var num = $(".label_condition").size();
+	
+	tr.find("select,input,textarea").each(function(){
+		_name = $(this).attr("name");
+		_name = _name.replace("#NUM#",num);
+		_name = "object" + _name;
+		$(this).attr("name",_name);
+	});
+	
+	$(".label_conditions_table tbody").append(tr);
+}
+</script>
+<style type="text/css">
+.tag_list{
+	cursor:pointer;
+	padding:2px;
+	border:solid 1px black;
+}
+.tag_list:hover{
+	background-color:yellow;
+}
+</style>

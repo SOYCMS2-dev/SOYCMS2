@@ -1,0 +1,122 @@
+<div id="main-window1" class="main-window"> 
+
+<div id="window-title-layout" class="window-title">
+	<h2><span>ナビゲーションを作成</span></h2> 
+</div> 
+
+<div class="window-content"> 
+
+
+	<div class="tab-menu">
+	
+		<ul class="tab-index"> 
+			<li><a soy:link="./page/template">テンプレートの管理</a></li>
+			<li><a soy:link="./page/library">ライブラリの管理</a></li>
+			<li class="on"><a soy:link="./page/navigation">ナビゲーションの管理</a></li>
+		</ul> 
+
+		<ul class="tab-contents">
+			<li>
+
+
+
+	
+	<div id="main-section1" class="section"> 
+
+
+						<ul class="crumbs">
+							<li><a soy:link="./" title="管理画面トップ" class="home_btn">管理画面トップ</a></li>
+							<li><a soy:link="page/template">テンプレートの管理</a></li>
+							<li><a soy:link="page/navigation">ナビゲーションの管理</a></li>
+							<li>ナビゲーションの作成</li>
+						</ul>
+
+
+		<div class="content"> 
+		
+
+			<form soy:id="form" method="post" action="xxx" id="post1" name="post1"> 
+			
+				<div id="post1-section1" class="form-section"> 
+				
+
+				<h3>ナビゲーションの作成設定</h3> 
+
+					<div class="label"> 
+						<h4>ナビゲーション名</h4> 
+					</div>
+					<p>「サイドバー」など、用途にあった名前をつけてください。</p>
+					<div class="item"> 
+						<p>
+							<input soy:id="navigation_name" name="tpml-name" type="text" class="m-area" id="tpml-name" value="サイドバー" size="50" />
+						</p> 
+					</div> 
+
+					<div class="label"> 
+						<h4>ナビゲーションID</h4> 
+					</div>
+					<p>英数字のみ入力可能です。</p>
+					<div class="item">
+						<p soy:id="create_error" class="intro xl" style="color:red;">このIDは使用出来ません。</p>
+						<p> 
+							<input soy:id="navigation_id" name="tpml-name" type="text" class="m-area" id="tpml-name" value="sidebar" size="50" /> 
+						</p> 
+					</div> 
+					
+					<div class="label"> 
+						<h4> 
+							<label for="post1-1">説明</label>
+						</h4> 
+					</div> 
+					<div class="item"> 
+						<p class="intro">わかりやすい説明を入れてください。</p>
+						<p>
+							<textarea soy:id="navigation_description" rows="2" cols="70" class="liq-area" style="font-size:13px;"></textarea>
+						</p> 
+					</div> 
+					
+					<div class="label"> 
+						<h4>html</h4> 
+					</div> 
+					<div class="item"> 
+						<p>ナビゲーションで使うHTMLを貼り付けてください</p>
+						<p> 
+							<textarea soy:id="navigation_content" rows="10" name="post1-2" class="m-area liq-area">htmlソースが表示されます</textarea>
+						</p> 
+					</div> 
+
+
+
+					<div class="form-btn ce"> 
+						<p> 
+							<input type="submit" value="次へ" id="post1-submit" name="next" class="l-btn" /> 
+						</p> 
+					</div> 
+
+				</div><!-- //.form-section --> 
+				
+
+			</form> 
+
+
+
+
+
+			</li>
+		</ul>
+	</div><!-- //.tab-menu -->
+
+
+
+
+		</div> 
+	</div> 
+	<!--  // #main-section1 --> 
+
+	
+
+
+</div> 
+<!--  // .window-content --> 
+</div> 
+<!--  // #main-window1 --> 

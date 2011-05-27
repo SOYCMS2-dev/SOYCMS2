@@ -1,0 +1,52 @@
+<form cms:id="contact_form">
+<table class="fix" summary="お問い合わせフォーム">
+<caption>
+<strong class="important">*入力必須</strong>
+</caption>
+	<tbody>
+		<tr>
+			<th scope="row" class="right">件名</th>
+			<td>
+				<input cms:id="contact_title" type="text" class="l-area" />
+			</td>
+		</tr>
+		<tr>
+			<th scope="row" class="right"><strong class="important">*</strong>お名前</th>
+			<td>
+				<p class="important" cms:id="name_require_error">お名前は必須項目です。</p>
+				<p class="important" cms:id="name_format_error">お名前の書式が正しくありません。</p>
+				<input cms:id="contact_name" type="text" class="l-area" />
+			</td>
+		</tr>
+		<tr>
+			<th scope="row" class="right"><strong class="important">*</strong>メールアドレス</th>
+			<td>
+				<p class="important" cms:id="mail_require_error">メールアドレスは必須項目です。</p>
+				<p class="important" cms:id="mail_format_error">メールアドレスの書式が正しくありません。</p>
+				<input cms:id="contact_mail" type="text" class="l-area" />
+			</td>
+		</tr>
+		<tr>
+			<th scope="row" class="right"><strong class="important">*</strong>メールアドレス(確認)</th>
+			<td>
+				<p class="important" cms:id="mail_confirm_require_error">メールアドレス(確認)は必須項目です。</p>
+				<p class="important" cms:id="mail_confirm_format_error">メールアドレス(確認)の書式が正しくありません。</p>
+				<p class="important" cms:id="mail_confirm_error">メールアドレスが一致しません。</p>
+				<input cms:id="contact_mail_confirm" type="text" class="l-area" />
+			</td>
+		</tr>
+		<tr>
+			<th scope="row" class="right"><strong class="important">*</strong>お問い合わせ内容</th>
+			<td>
+				<p class="important" cms:id="body_require_error">お問い合わせ内容を入力してください</p>
+				<textarea cms:id="contact_body" rows="6" cols="50" class="l-area"></textarea>
+			</td>
+		</tr>
+	</tbody>
+</table>
+<p class="center">
+	<input type="submit" value="送信" class="l-btn" />
+</p>
+</form>
+
+

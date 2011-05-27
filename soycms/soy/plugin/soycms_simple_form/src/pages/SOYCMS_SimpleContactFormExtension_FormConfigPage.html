@@ -1,0 +1,207 @@
+<form soy:id="form">
+	
+<!-- soy:id="on_detail" -->
+<div class="section">
+	
+	<ul class="crumbs">
+		<li><a soy:link="./" title="管理画面トップ" class="home_btn">管理画面トップ</a></li>
+		<li><a soy:link="page.list" title="ディレクトリの管理">ディレクトリの管理</a></li>
+		<li><a soy:id="page_link"><!-- soy:id="page_name*" /--></a></li>
+		<li><a soy:id="page_config_link">基本設定</a></li>
+		<li><!-- soy:id="field_name" /-->の設定</li>
+	</ul>
+	
+	<div class="title">
+		<h3><!-- soy:id="field_name*" /-->の設定</h3>
+	</div>
+	<div class="content">
+		
+		<table class="form-table"> 
+			<tbody><tr> 
+				<th scope="row">項目ID</th> 
+				<td>
+					<span class="xxl"><!-- soy:id="field_id_text" /--></span>	
+				</td>
+			</tr>
+			<tr> 
+				<th scope="row">項目名</th> 
+				<td>
+					<input soy:id="field_name_input" name="config[name]" class="m-area" type="text" style="width:430px;" placeholder="項目名">	
+				</td>
+			</tr>
+			<tr>
+				<th scope="row">項目タイプ</th>
+				<td>
+					<p>
+						<select soy:id="field_type"></select>
+					</p>
+					<!-- soy:id="require_option" -->
+					<p>フィールドタイプ別オプション</p>
+					<table class="form-table">
+						<tbody>
+							<!-- soy:id="type_input" -->
+							<tr>
+								<th scope="row">入力チェック</th>
+								<td>
+									<select id="field_validation_select" soy:id="field_validation_select">
+										<option value="">チェック無し</option>
+									</select>
+									<p class="validation-regex" style="margin-top:10px;">
+										<span>正規表現</span>
+										<input type="text" soy:id="field_validation_regex" class="s-area" size="30" />
+									</p>
+									<script type="text/javascript">
+									$("#field_validation_select").change(function(){
+										$(".validation-regex").toggle($(this).val() == "regex");
+									}).trigger("change");
+									</script>
+								</td>
+							</tr>
+							<!-- /soy:id="type_input" -->
+							<!-- soy:id="type_mailaddress" -->
+							<tr>
+								<th scope="row">メールアドレス照合<br />(メールアドレスを二回入力)</th>
+								<td>
+									<input soy:id="field_mailaddress_confirm" type="checkbox" />
+								</td>
+							</tr>
+							<!-- /soy:id="type_mailaddress" -->
+							<!-- soy:id="type_subitem" -->
+							<tr>
+								<th scope="row">選択項目</th>
+								<td>
+									<p>項目を一行ずつ入力してください</p>
+									<textarea class="m-area" soy:id="field_subitem" rows="5" style="width:350px;"></textarea>
+								</td>
+							</tr>
+							<!-- /soy:id="type_subitem" -->
+							<!-- soy:id="type_checkbox" -->
+							<tr>
+								<th scope="row">区切り文字</th>
+								<td>
+									<input class="s-area" soy:id="field_checkbox_separate" style="width:350px;" />
+								</td>
+							</tr>
+							<!-- /soy:id="type_checkbox" -->
+							
+							<!-- soy:id="require_default" -->
+							<tr>
+								<th scope="row">初期値</th>
+								<td><input soy:id="field_default_value" class="s-area" type="text" style="width:350px;"></td>
+							</tr>
+							<!-- /soy:id="require_default" -->
+							
+						</tbody>
+					</table>
+					<!-- /soy:id="require_option" -->
+				</td>
+			</tr>
+			<tr>
+				<th scope="row">必須チェック</th>
+				<td>
+					<span class="intro">
+					<input soy:id="field_require" id="field_require" value="1" type="checkbox">
+					</span><label for="field_require">必須項目</label>
+				</td>
+			</tr>
+		</tbody>
+		</table>
+		
+		
+		<div class="form-btn ce">
+			<input type="submit" name="update" value="保存" class="l-btn" />
+		</div>
+	
+	
+	</div><!-- // .content -->
+</div>
+<!-- /soy:id="on_detail" -->
+
+
+<!-- soy:id="on_create" -->
+<div class="section">
+	
+	<ul class="crumbs">
+		<li><a soy:link="./" title="管理画面トップ" class="home_btn">管理画面トップ</a></li>
+		<li><a soy:link="page.list" title="ディレクトリの管理">ディレクトリの管理</a></li>
+		<li><a soy:id="page_link"><!-- soy:id="page_name*" /--></a></li>
+		<li><a soy:id="page_config_link">基本設定</a></li>
+		<li>フィールドの追加</li>
+	</ul>
+	
+	<div class="title">
+		<h3>コンタクトフォームにフィールドの追加</h3>
+	</div>
+	<div class="content">
+		
+		<div class="form-section">
+			<div class="label">
+				<h4>
+					<label for="post1-1">項目名</label>
+				</h4>
+			</div>
+			<div class="item">
+				<p>
+					<input name="NewField[name]" type="text" value="" class="xm-area" style="width:400px;" placeholder="項目名" />
+				</p>
+			</div>
+		</div>
+		
+		<div class="form-section">
+				
+			<div class="item">		
+				<table class="form-table">
+					<tbody>	
+						<tr>
+							<th scope="row">項目ID</th>
+							<td>
+								<input name="NewField[id]" class="m-area" style="width:320px;" placeholder="name" />
+							</td>
+						</tr>
+						
+						<tr>
+							<th scope="row">項目タイプ</th>
+							<td>
+								<select soy:id="field_type_select"></select>
+							</td>
+						</tr>
+					<tbody>
+				</table>
+			</div>
+		</div>
+		
+		<div class="form-btn ce">
+			<input type="submit" name="create" value="追加" class="l-btn" />
+		</div>
+	
+	
+	</div><!-- // .content -->
+</div>
+<!-- /soy:id="on_create" -->
+
+<!-- soy:id="on_sample" -->
+<div class="section">
+	<div class="content">
+	<p>出力されたHTMLを「テンプレートの設定」に反映してください。</p>
+		<h4>送信画面</h4>
+		<textarea soy:id="code_area" class="liq-area html-editor" rows="19"></textarea>
+		
+		<h4>確認画面</h4>
+		<textarea soy:id="confirm_code_area" class="liq-area html-editor" rows="19"></textarea>
+		
+		<h4>その他メールで使用可能な表記</h4>
+		<textarea soy:id="mail_code_area" class="liq-area html-editor" rows="19"></textarea>
+		
+		<div id="popout_btn_wrap" class="form-section ce">
+			<input type="button" onclick="window.open(location.href,'','width=800, height=600, menubar=no, toolbar=no, scrollbars=yes');return common_close_popup();" value="ポップアウト (外部ウィンドウで開く)" />
+		</div>
+		<script type="text/javascript">
+			if(window.opener){
+				$("#popout_btn_wrap").hide();
+			}
+		</script>
+	</div>
+</div>
+<!-- /soy:id="on_sample" -->
+
+</form>

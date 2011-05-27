@@ -1,0 +1,33 @@
+<!-- soy:id="file_list" -->
+<tr soy:id="file_list_row">
+	<td class="row_name">
+		<a class="url_link" soy:id="file_link">
+			<!-- soy:id="file_name" /-->
+		</a>
+	</td>
+	<td>
+		<a soy:id="url_link">URL</a>
+		<input class="file_link_input s-area liq-area" soy:id="file_link_input"  style="display:none;" />
+	</td>
+	<td class="row_date">
+		<!-- soy:id="file_date" /-->
+	</td>
+	
+	<td class="row_type">
+		<!-- soy:id="file_type" /-->
+	</td>
+	<td class="row_size">
+		<!-- soy:id="file_size" /-->
+	</td>
+</tr>
+<!-- /soy:id="file_list" -->
+<!-- soy:id="more_link_wrap" -->
+<tr id="more_link_row">
+	<td colspan="3">
+		 全<!-- soy:id="file_total_count" /-->件中
+		 <!-- soy:id="file_current_count" /-->
+		 
+		 <a soy:id="more_link" onclick="read_more_files(this);return false">Read More...</a>
+	</td>
+</tr>
+<!-- /soy:id="more_link_wrap" -->

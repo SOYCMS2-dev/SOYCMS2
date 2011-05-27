@@ -1,0 +1,105 @@
+<div id="main-window1" class="main-window"> 
+				
+		<div class="window-title"> 
+			<h2>投稿ボタン詳細</h2> 
+		</div> 
+		
+		<div class="window-content"> 
+			
+			<div id="main-section1" class="section"> 
+
+				<div class="content"> 
+				
+					<div class="pagelist-menu"> 
+						<ul> 
+							<li class="back"><a soy:link="page/snippet/">戻る</a></li> 
+						</ul> 
+					</div>
+
+					<form soy:id="form" method="post" action="xxx" id="post1" name="post1"> 
+					
+						<div id="post1-section1" class="form-section"> 
+							<h3><!-- soy:id="snippet_name_text*" /-->の編集</h3>
+							
+							<!-- soy:id="is_child_snippet" -->
+							<div class="label"> 
+								<h4>親ボタン</h4> 
+							</div> 
+							<div class="item">
+								<a id="snippet_class_preview" class="icon-btn <!-- soy:id="snippet_class" /-->" href="javascript:void(0);"><em></em></a>
+								<span class="xl">
+								<!-- soy:id="parent_snippet_name_text" /-->
+								</span>
+							</div> 
+							<!-- /soy:id="is_child_snippet" --> 
+
+							<div class="label"> 
+								<h4> 
+									<label for="post1-1">名前</label> 
+								</h4> 
+							</div> 
+							<div class="item"> 
+								<p>
+									<input soy:id="snippet_name" type="text" class="m-area" size="40" />
+								</p> 
+							</div> 
+							
+							<div class="label"> 
+								<h4> 
+									<label for="post1-1">説明</label>
+								</h4> 
+							</div> 
+							<div class="item"> 
+								<p class="intro">わかりやすい説明を入れてください。</p>
+								<p>
+									<textarea soy:id="snippet_description" rows="6" class="m-area liq-area resizable html-editor"></textarea>
+								</p> 
+							</div> 
+
+							<div class="label"> 
+								<h4>html</h4> 
+							</div> 
+							<div class="item"> 
+								<p> 
+									<textarea soy:id="snippet_content" class="m-area liq-area resizable html-editor">htmlソースが表示されます</textarea>
+								</p> 
+							</div> 
+							
+							<!-- soy:id="is_not_child_snippet" -->
+							<div class="label"> 
+								<h4>クラス</h4> 
+							</div> 
+							<div class="item">
+								<p class="intro">表示側のアイコンを設定します。</p>
+								<select soy:id="snippet_class_select" onchange="$('#snippet_class_preview').attr('class','icon-btn ' + $(this).val());"></select>
+								<a id="snippet_class_preview" class="icon-btn <!-- soy:id="snippet_class_select_text" /-->" href="javascript:void(0);"><em></em></a>
+							</div> 
+							<!-- /soy:id="is_not_child_snippet" -->
+
+
+						<div class="form-btn ce"> 
+							<input type="submit" value="保存する" id="post1-submit" name="post1-submit" class="l-btn" /> 
+						</div> 
+
+						</div> 
+						
+
+					</form> 
+
+
+
+
+
+
+
+				</div> 
+			</div> 
+			<!--  // #main-section1 --> 
+	
+			
+
+
+		</div> 
+		<!--  // .window-content --> 
+	</div> 
+	<!--  // #main-window1 --> 

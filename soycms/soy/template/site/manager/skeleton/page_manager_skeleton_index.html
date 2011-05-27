@@ -1,0 +1,328 @@
+<div id="main-window1" class="main-window"> 
+					
+	<div class="window-title"> 
+		<h2>サイトテンプレートファイルの作成</h2>
+	</div> 
+	
+	<div class="window-content">
+		<iframe id="target_fr" name="target_fr" src="about:blank;" frameborder="0" style="margin:0;padding:0;width:0px;position:absolute;height:0px;visibility:hidden;"></iframe>
+		
+		<form soy:id="form" target="target_fr"> 
+		
+		<div class="section">
+			<div class="title">
+				<h3>サイトテンプレートファイルの作成</h3>
+			</div>
+			<div class="content">
+				<p soy:id="zip_error_message" class="error xxl">
+					この環境ではサイトテンプレートファイルの作成を使用出来ません。Zip拡張を有効にして下さい。
+				</p>
+				
+				<p class="intro">サイトテンプレートファイルの内容を設定して下さい</p>
+				
+				<div class="form-section">
+					<div class="label">
+						<h4>サイトテンプレートの名前</h4>
+					</div>
+					<div class="item">
+						<input type="text" class="m-area" soy:id="skeleton_name" size="30" />
+					</div>
+					
+					<div class="label">
+						<h4>サイトテンプレートの説明</h4>
+					</div>
+					<div class="item">
+						<textarea class="m-area liq-area" soy:id="skeleton_description" rows="3"></textarea>
+					</div>
+					
+					<div class="label">
+						<h4>作成者名</h4>
+					</div>
+					<div class="item">
+						<input type="text" class="m-area" soy:id="skeleton_author" size="30" />
+					</div>
+					
+					<div class="label">
+						<h4>作成者URL</h4>
+					</div>
+					<div class="item">
+						<input type="text" class="m-area" soy:id="skeleton_author_url" size="30" />
+					</div>
+					
+					<div class="label">
+						<h4>サムネイル画像</h4>
+					</div>
+					<div class="item">
+						<p class="intro">140x105pxのjpgにリサイズされます。</p>
+						<input type="file" name="thumbnail" />
+					</div>
+				</div>
+				
+				<div class="form-section">
+					<div class="label">
+						<h4>コンテンツの設定</h4>
+					</div>
+					<div class="item">
+						<a href="javascript:void(0);" onclick="$(this).parents('.form-section').hide();$('.skeleton_contents').show();">
+							コンテンツを個別に設定する
+						</a>
+					</div>
+				</div>
+				
+				<div class="skeleton_contents" style="display:none;">
+					
+					<div class="form-section">
+						<div class="label">
+							<h4>サイトマップ</h4>
+						</div>
+						<div class="item">
+							
+							<div class="break" style="background-color:#dedede;padding:10px;">
+								<strong>一括</strong>: 
+								<input type="checkbox" id="export_attachments_toggle" class="s-btn" onclick="$('.export_attachments').attr('checked',$(this).attr('checked'));" checked />
+								<label for="export_attachments_toggle">添付ファイル・画像</label>
+							</div>
+							
+							<div class="pagelist-content">
+								<ul>
+								<!-- soy:id="page_list" -->
+								<li soy:id="page_list_wrap">
+									<div class="page_list_wrap"> 
+										<dl class="page-item">
+											<dt class="image">
+												<a soy:id="detail_link*">
+													<img soy:id="page_icon" style="width:32px;height:32px;" />
+												</a>
+											</dt>
+											<dt class="name">
+												<a soy:id="public_link*" class="noicon"><!-- soy:id="page_name" /--></a> (<!-- soy:id="page_uri" /-->)
+												<input soy:id="page_order" type="hidden" />
+											</dt> 
+											<dd>
+												<input type="checkbox" class="export_config" soy:id="export_config" onchange="on_change_tree(this);" />
+												<label soy:id="export_config_label">エクスポートする</label>
+												
+												<!-- soy:id="is_directory" -->
+												<input type="checkbox" soy:id="export_entry" />
+												<label soy:id="export_entry_label">記事をエクスポートする</label>(<!-- soy:id="entry_count" /-->)
+												<!-- /soy:id="is_directory" -->
+												
+												<!-- soy:id="is_not_directory" -->
+												<input type="hidden" soy:id="export_entry_hidden" />
+												<!-- /soy:id="is_not_directory" -->
+												
+												<input type="checkbox" class="export_attachments" soy:id="export_attachments" />
+												<label soy:id="export_attachments_label">添付ファイル・画像もエクスポートする</label>
+											</dd> 
+										</dl>
+										<!-- soy:id="tree_child" -->
+										<ul class="page-child">
+											<!-- soy:id="tree" -->ここが再帰的に実行<!-- /soy:id="tree" -->
+										</ul>
+										<!-- /soy:id="tree_child" --> 
+									</div>
+									
+								</li soy:id="page_list_wrap">
+								<!-- /page_list -->
+								</ul>
+								
+							</div>
+						</div><!-- //.item -->
+					</div><!-- //.form-section -->
+				</div><!-- // .skeleton_contents -->
+				
+				
+				<div class="form-section">
+					<div class="label">
+						<h4>デザインの設定</h4>
+					</div>
+					<div class="item">
+						<a href="javascript:void(0);" onclick="$(this).parents('.form-section').hide();$('.skeleton_design').show();">
+							デザインを個別に設定する
+						</a>
+					</div>
+				</div>
+				
+				<div class="skeleton_design" style="display:none;">
+				
+					<div class="form-section">
+						<div class="label">
+							<h4>テンプレート</h4>
+						</div>
+						<div class="item">
+							<ul class="check_list_wrap">
+								<li>
+									<input type="checkbox" id="toggle_template_check" class="toggle_check"  checked="checked" onclick="$('.template_check').attr('checked',$(this).attr('checked'));" />
+									<label for="toggle_template_check">全て</label>
+								</li>
+								<!-- soy:id="template_list" -->
+								<li class="check_list checked_list">
+									<input type="checkbox" soy:id="checkbox" class="template_check" />
+								</li>
+								<!-- /soy:id="template_list" -->
+							</ul>
+						</div>
+					</div>
+					
+					<div class="form-section">
+						<div class="label">
+							<h4>ライブラリ</h4>
+						</div>
+						<div class="item">
+							<ul class="check_list_wrap">
+								<li>
+									<input type="checkbox" id="toggle_library_check" class="toggle_check"  checked="checked" onclick="$('.library_check').attr('checked',$(this).attr('checked'));" />
+									<label for="toggle_library_check">全て</label>
+								</li>
+								<!-- soy:id="library_list" -->
+								<li class="check_list checked_list">
+									<input type="checkbox" soy:id="checkbox" class="library_check" />
+									(<!-- soy:id="id_text" /-->)
+								</li>
+								<!-- /soy:id="library_list" -->
+							</ul>
+						</div>
+					</div>
+					
+					<div class="form-section">
+						<div class="label">
+							<h4>スニペット</h4>
+						</div>
+						<div class="item">
+							<ul class="check_list_wrap">
+								<li>
+									<input type="checkbox" id="toggle_snippet_check" class="toggle_check" onclick="$('.snippet_check').attr('checked',$(this).attr('checked'));" checked />
+									<label for="toggle_snippet_check">全て</label>
+								</li>
+							</ul>
+							<p>
+								<input type="button" class="s-btn" onclick="$('#snippet_list_wrap').toggle();" value="投稿ボタンを表示する" />
+							</p>
+							
+							<ul id="snippet_list_wrap" class="check_list_wrap" style="display:none;">
+								<!-- soy:id="snippet_list" -->
+								<li class="check_list checked_list">
+									<input type="checkbox" soy:id="checkbox" class="snippet_check" />
+									(<!-- soy:id="id_text" /-->)
+								</li>
+								<!-- /soy:id="snippet_list" -->
+							</ul>
+						</div>
+					</div>
+					
+					<div class="form-section">
+						<div class="label">
+							<h4>ナビゲーション</h4>
+						</div>
+						<div class="item">
+							<ul class="check_list_wrap">
+								<li>
+									<input type="checkbox" id="toggle_navigation_check" class="toggle_check" checked="checked" onclick="$('.navigation_check').attr('checked',$(this).attr('checked'));" />
+									<label for="toggle_navigation_check">全て</label>
+								</li>
+								<!-- soy:id="navigation_list" -->
+								<li class="check_list checked_list">
+									<input type="checkbox" soy:id="checkbox" class="navigation_check" />
+									(<!-- soy:id="id_text" /-->)
+								</li>
+								<!-- /soy:id="navigation_list" -->
+							</ul>
+						</div>
+					</div>
+					
+					<div class="form-section">
+						<div class="label">
+							<h4>テーマ</h4>
+						</div>
+						<div class="item">
+							<p>"サイトディレクトリ/themes" 以下のディレクトリをエクスポート</p>
+							<ul class="check_list_wrap">
+								<li>
+									<input type="checkbox" id="toggle_theme_check" class="toggle_check" checked="checked" onclick="$('.theme_check').attr('checked',$(this).attr('checked'));" />
+									<label for="toggle_theme_check">全て</label>
+								</li>
+								<!-- soy:id="theme_list" -->
+								<li class="check_list checked_list">
+									<input type="checkbox" soy:id="checkbox" class="theme_check" />
+								</li>
+								<!-- /soy:id="theme_list" -->
+								
+							</ul>
+						</div>
+					</div>
+				</div><!-- // .skeleton_design -->
+				
+				
+				
+				<div class="form-btn ce">
+					<input id="start_download_btn" type="submit" name="build" class="l-btn" value="サイトテンプレートファイルをダウンロード" onclick="start_download(this);" />
+				</div>
+		
+				
+			</div> 
+		</div> 
+		<!--  // .section -->
+		
+		</form>
+		
+		<div id="download_message_wrap" class="section" style="display:none;">
+			<p id="download_message"></p>
+		</div><!-- // .section -->
+
+	</div> 
+	<!--  // .window-content --> 
+</div> 
+<!--  // #main-window1 -->
+
+<style type="text/css">
+.check_list_wrap li{
+	padding:8px;
+	margin:2px;
+	background-color:#eee;
+}
+.check_list_wrap li label{
+	padding-left:5px;
+	font-weight:bold;
+}
+li.checked_list{
+	background-color:#ffdf85;
+}
+#download_message{
+	border:solid 3px #8f8f90;
+	padding:5px;
+}
+</style> 
+<script type="text/javascript">
+$(function(){
+	$(".check_list").each(function(){
+		if($(this).find("input[type=checkbox]").attr("checked")){
+			$(this).addClass("checked_list");
+		}else{
+			$(this).removeClass("checked_list");
+		}
+	});
+	$(".check_list_wrap .check_list input[type=checkbox]").bind("change",function(){
+		$(this).parents("li").toggleClass("checked_list");
+	});
+	$(".toggle_check").bind("change",function(){
+		$(this).parents(".check_list_wrap").find(".check_list input[type=checkbox]").trigger("change");
+	});
+});
+
+function start_download(ele){
+	//$("#start_download_btn").hide();
+	$("#download_message_wrap").fadeIn();
+	$("#download_message").html('<span class="loading"></span>現在アーカイブを作成しています。しばらくお待ち下さい。');
+}
+
+function notify_message(message){
+	$("#start_download_btn").show();
+	$("#download_message").html(message);
+}
+
+function notifySuccess(url){
+	$("#target_fr").attr("src",url);
+	
+}
+</script>
+

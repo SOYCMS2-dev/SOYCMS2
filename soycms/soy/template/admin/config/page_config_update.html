@@ -1,0 +1,93 @@
+<div class="section">
+	<div class="title"> 
+		<h3>SOY CMS2のアップデート</h3> 
+	</div>	
+	
+	<div class="content">
+		<form soy:id="form">
+			<p class="intro">SOY CMSのアーカイブファイルをアップロードしてください</p>
+			<input type="file" name="soycms_archive" />
+			
+			<div class="ce">
+				<input type="submit" class="m-btn" value="アップロード" />
+			</p>
+		</form>
+		
+		<iframe id="target_fr" style="visibility:hidden;width:0;height:0;" frameborder="0"></iframe>
+		<form id="update_form" soy:id="update_form" target="target_fr">
+			
+			<input type="hidden" soy:id="update_target" id="update_target" />
+			
+			<div class="form-section">
+			<table class="form-table break">
+				<tr>
+					<th class="xl">
+						バージョン
+					</th>
+					<td class="xl">
+						<!-- soy:id="version" /-->
+						 -&gt; 
+						<!-- soy:id="new_version" /-->
+					</td>
+				</tr>
+				<tr id="log_row">
+					<td colspan="2">
+						<textarea style="display:none;" id="log_textarea"></textarea>
+					</td>
+				</tr>
+			</table>
+			
+			<div class="btn_row ce lbreak">
+				<input type="button" class="l-btn" name="execute" value="アップデートの実行" onclick="return show_update_confirm_message();" />
+			</div>
+			
+			</div>
+		</form>
+		
+		
+		<div class="ce">
+			<input type="button" class="m-btn" value="閉じる" onclick="window.parent.location.reload();" />
+		</p>
+	</div>
+</div>
+
+<script type="text/javascript">
+var show_update_confirm_message = function(){
+	if(!confirm(
+		"アップデートを実行します。よろしいですか？"
+	)){
+		return false;
+	}
+	
+	$(".btn_row").hide(300);
+	
+	//submit
+	form = $("#update_form");
+	target = $("#update_target").val();
+	
+	$("#log_row").show();
+	common_start_loading($("#log_textarea"));
+	
+	$.ajaxSetup({async:true});
+	$.post(form.attr("action"),form.serialize());
+	
+	setTimeout(function(){
+		_update = function(){
+			$.get(SOYCMS_ROOT_URL + "admin/config/update?log=" + target,function(res){
+				common_stop_loading();
+				$("#log_textarea").show().val(res);
+				setTimeout(_update,500);
+			});
+		};
+		_update();
+	},500);
+	
+}
+</script>
+<style type="text/css">
+#log_textarea{
+	width:100%;
+	height:200px;
+}
+
+</style>

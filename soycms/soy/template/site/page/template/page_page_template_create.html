@@ -1,0 +1,158 @@
+<div id="main-window1" class="main-window"> 
+				
+<div id="window-title-layout" class="window-title">
+	<h2><span>テンプレートを作成</span></h2> 
+</div> 
+
+<div class="window-content">
+
+<div class="tab-menu">
+
+	<ul class="tab-index">
+		<li class="on"><a soy:link="./page/template">テンプレートの管理</a></li>
+		<li><a soy:link="./page/library">ライブラリの管理</a></li>
+		<li><a soy:link="./page/navigation">ナビゲーションの管理</a></li>
+	</ul>
+
+	<ul class="tab-contents">
+	<li>
+
+	<div id="main-section1" class="section"> 
+
+		<ul class="crumbs">
+			<li><a soy:link="./" title="管理画面トップ" class="home_btn">管理画面トップ</a></li>
+			<li><a soy:link="page/template">テンプレートの管理</a></li>
+			<li>テンプレートを作成</li>
+		</ul>
+
+
+		<div class="content">
+		 
+		<form soy:id="form" method="post" action="xxx" id="post1" name="post1"> 
+		
+			<div id="post1-section1" class="form-section"> 
+			
+
+			<h3>テンプレートの作成設定</h3>
+			
+				<div class="label"> 
+					<h4> 
+						<label for="post1-1">次のテンプレートのレイアウト情報を引き継ぐ</label> 
+					</h4> 
+				</div> 
+				<div class="item"> 
+					<p> 
+						<select soy:id="parent_template_select">
+							<option value="">---------------</option>
+						</select> 
+					</p> 
+				</div>
+			
+				<div class="label"> 
+					<h4> 
+						<label for="post1-1">テンプレートID　※半角英数字のみ ファイル名に使用されます</label> 
+					</h4> 
+				</div> 
+				<div class="item">
+					<p class="xl" style="color:red" soy:id="create_error">
+						 このテンプレートIDは使われているため使用出来ません。
+					</p>
+					<p> 
+						<input soy:id="template_id" name="tpml-name" type="text" class="m-area" size="50" /> 
+					</p> 
+				</div> 
+			
+				<div class="label"> 
+					<h4> 
+						<label for="post1-1">テンプレート名</label> 
+						※トップページ用など、用途にあった名前をつけてください。
+					</h4> 
+				</div> 
+				<div class="item"> 
+					<p> 
+						<input soy:id="template_name" name="tpml-name" type="text" class="m-area" id="tpml-name" value="" size="50" /> 
+					</p> 
+				</div> 
+				
+				<div class="label"> 
+					<h4> 
+						<label for="post1-1">テンプレートの種類</label> 
+						※作成後変更出来ません
+					</h4> 
+				</div> 
+				<div class="item"> 
+					<ul class="clearfix" style="margin:10px;">
+						<!-- soy:id="template_type_list" -->
+						<li class="fl ce">
+							<dl style="width:113px;">
+								<dt>
+									<p style="margin-bottom:5px;">
+										<img class="template-preview-image" soy:id="template_type_image" width="60" height="60" style="border:solid 5px #cfcfcf;" />
+									</p>
+								</dt>
+								<dd>
+									<input type="radio" soy:id="template_type_radio" />
+								</dd>
+							</dl>
+						</li>
+						<!-- /soy:id="template_type_list" -->
+					</ul>
+				</div> 
+				
+				<div class="label"> 
+					<h4>html</h4> 
+				</div> 
+				<div class="item"> 
+					<textarea soy:id="template_content_area" rows="8" class="m-area liq-area resizable html-editor">テンプレートで使うHTMLを貼り付けてください</textarea>
+					<p>
+						<input type="checkbox" id="is_overwrite" name="is_overwrite" value="1" />
+						<label for="is_overwrite">既存のライブラリ・ナビゲーションを上書きする</label>
+					</p>
+		
+				</div> 
+		
+				<div class="form-btn ce"> 
+					<input type="submit" value="次へ" id="post1-submit" name="next" class="l-btn" /> 
+				</div> 
+
+			</div><!-- // .form-section -->
+			
+		</form>
+		
+		</div><!-- // .content --> 
+ 
+	</div>
+	<!--  // #main-section1 --> 
+
+	</li>
+</div><!-- // .tab-menu -->
+
+</div> 
+<!--  // .window-content --> 
+</div> 
+<!--  // #main-window1 -->
+
+<style type="text/css">
+
+</style>
+
+<script type="text/javascript">
+$(function(){
+	$(".item_up_btn").click(function(){
+		var parent = $(this).parents("tr");
+		parent.insertBefore(parent.prev("tr"));
+	});
+	$(".item_down_btn").click(function(){
+		var parent = $(this).parents("tr");
+		parent.insertAfter(parent.next("tr"));
+	});
+	$(".item_delete_btn").click(function(){
+		var parent = $(this).parents("tr");
+		if (confirm("delete ok?")) {
+			parent.fadeOut("normal",function(){
+				parent.remove();
+			});
+		}
+	});
+});
+</script> 

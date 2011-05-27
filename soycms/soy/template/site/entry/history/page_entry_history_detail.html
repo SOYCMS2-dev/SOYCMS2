@@ -1,0 +1,116 @@
+<div id="main-window1" class="main-window">
+		
+	<div class="window-title">
+		<h2 class="title-text">記事のバックアップ</h2>
+	</div>
+	
+	<div class="window-content">
+		<div class="section content">
+			
+			<div class="pagelist-menu"> 
+				<ul> 
+					<li class="back"><a soy:id="detail_link">戻る</a></li> 
+					
+				</ul> 
+			</div> 
+			
+			<!-- soy:id="not_recent_history" -->
+			<div class="overwrite_warning" style="background-color:pink;padding:5px;margin:0px 0 12px;border:double 4px #ffffff;">
+				<p>これより新しい履歴があります。</p>
+			</div>
+			<!-- /soy:id="not_recent_history" -->
+			
+			
+				<div id="post1-section1" class="form-section">
+				
+					<div class="label">
+						<h4><label for="post1-1">タイトル</label></h4>
+					</div>
+					<div class="item">
+						<p class="xxxl">
+							<!-- soy:id="history_title_text" /-->
+						</p>
+						<!-- soy:id="title_changed" -->
+						<p>
+							<span>現在のタイトル：</span>
+							<!-- soy:id="title_text" /-->
+						</p>
+						<!-- /soy:id="title_changed" -->
+					</div>
+					
+					<div class="label">
+						<h4>更新者</h4>
+					</div>
+					<div class="item">
+						<p class="l">
+							<!-- soy:id="history_username" /-->
+						</p>
+					</div>
+					
+					<div class="label">
+						<h4><label for="post1-1">保存時刻</label></h4>
+					</div>
+					<div class="item">
+						<p>
+							<!-- soy:id="history_date" /-->
+						</p>
+					</div>
+					
+					<div class="label">
+						<h4><label for="post1-1">記事のURL(このバックアップのプレビュー)</label></h4>
+					</div>
+					<div class="item">
+						<p id="entry_url" class="intro">
+							<a id="entry_link" soy:id="preview_link" target="preview"><!-- soy:id="entry_url" /--></a>
+						</p>
+					</div>
+					
+					<form soy:id="form" method="post" id="entry_form">
+			
+						<div id="rollback_alert" class="form-btn ce" style="margin:15px 0;">
+							<input soy:id="save_btn" type="submit" value="このバックアップに復元する" id="save_submit_btn" class="l-btn" />
+							<!-- soy:id="is_public_entry" -->
+							<p class="xl" style="color:red;">
+								公開側記事はすぐに反映されません。<br />
+							公開側記事を反映するには、復元後「更新する」ボタンを押してください。 </p>
+							<!-- /soy:id="is_public_entry" -->
+						</div>
+					
+					<div class="label">
+						<h4>内容</h4>
+					</div>
+					<div class="item">
+						<div id="sections_container" class="content">
+							
+							<!-- soy:id="section_list" -->
+							ここを要素毎に繰り返す
+							<!-- /soy:id="section_list" -->
+							
+							
+						</div>
+						<!--  // .content -->
+						
+					</div>
+					<!--  // .item -->
+					
+					<div class="form-btn ce" style="margin:15px 0;">
+						<input name="remove" type="submit" value="このバックアップを削除する" id="remove_submit_btn" class="m-btn" onclick="return confirm('削除してもよろしいですか？この処理は戻せません。');" />
+					</div>
+					
+					
+					</form><!-- // #entry_form -->
+	
+				</div>
+				<!--  // .post1-section1 -->
+		</div>
+		<!--  // .content -->
+		
+	</div>
+	<!--  // .window-content -->
+</div>
+<!--  // #main-window1 -->
+
+
+<script type="text/javascript" soy:id="ajax_action"></script>
+<script type="text/javascript" soy:src="../common/wysiwyg/aobata.js"></script>
+<script type="text/javascript" soy:src="../common/js/soycms_entry/editor.js"></script>

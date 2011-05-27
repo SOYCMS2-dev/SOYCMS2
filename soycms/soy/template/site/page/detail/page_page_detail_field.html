@@ -1,0 +1,170 @@
+<div id="main-window1" class="main-window"> 
+
+
+<div soy:id="window_title_wrap" id="window-title-directory" class="window-title"> 
+	<h2><span><!-- soy:id="page_name*" /-->の設定 ( <a soy:id="page_uri_link"><em><!-- soy:id="page_uri_text*" /--></em></a> )</span></h2> 
+</div soy:id="window_title_wrap"> 
+
+<div class="window-content"> 
+
+	<div class="tab-menu">
+		
+		<ul class="tab-index"> 
+			<li><a soy:id="tab_info_link">情報</a></li>
+			<li><a soy:id="tab_basic_link">基本設定</a></li>
+			<li><a soy:id="tab_item_link">要素設定</a></li>
+			<li><a soy:id="tab_editor_link">エディタ設定</a></li>
+			<li class="on"><a soy:id="tab_customfield_link">カスタムフィールド設定</a></li>
+			
+			<!-- soy:id="ext_menu_list" -->
+			<li><a soy:id="ext_menu_link">#######</a></li>
+			<!-- /soy:id="ext_menu_list" -->
+		</ul>
+		
+	</div>
+	
+	<div class="section">
+
+		<ul class="crumbs">
+			<li><a soy:link="./" title="管理画面トップ" class="home_btn">管理画面トップ</a></li>
+			<li><a soy:link="page/field">カスタムフィールドの管理 (全体)</a></li>
+			<li><a soy:id="tab_info_link*"><!-- soy:id="page_name" /--></a></li>
+			<li><!-- soy:id="page_name*" /--> 記事のカスタムフィールド</li>
+		</ul>
+
+
+
+			<div class="title">
+				<h3>「<!-- soy:id="page_name*" /-->」 記事のカスタムフィールド</h3>
+			</div>
+
+
+
+
+			<div class="content">
+
+
+		<div class="pagelist-menu"> 
+			<ul> 
+				<li class="plus-btn"><a onclick="common_open_popup($(this).attr('href'),{onclose:function(){location.reload();}});return false;" soy:id="create_field_link">"<!-- soy:id="page_name*" /-->"にカスタムフィールド項目を追加</a></li>
+				<li class="plus-btn"><a onclick="common_open_popup($(this).attr('href'),{onclose:function(){location.reload();}});return false;" soy:id="append_field_link">すべてのカスタムフィールド項目から追加</a></li>
+			</ul>
+		</div>
+
+				<form soy:id="list_form">
+					<div class="under form-btn ce save_order_wrap" style="display:none;">
+						<input type="submit" class="m-btn-red" name="save_order" value="表示順を保存" />
+					</div>
+					
+					<table class="list-table break">
+						<thead>
+						<tr>
+							<th width="120">項目名</th>
+							<th width="120">項目ID</th>
+							<th width="120">表示順</th>
+							<th width="120">操作</th>
+						</tr>
+						</thead>
+						<tbody>
+							<!-- soy:id="field_list" -->
+							<tr>
+								<td><!-- soy:id="list_field_name" /--></td>
+								<td><!-- soy:id="list_field_id" /--></td>
+								<td>
+									<input type="hidden" soy:id="order_input" />
+									<input type="button" value="▲" class="s-btn up_btn" /> 
+									<input type="button" value="▼" class="s-btn down_btn" />
+								</td>
+								<td>
+									<a onclick="common_open_popup($(this).attr('href'),{onclose:function(){location.reload();}});return false;" soy:id="field_detail_popup_link"><em>詳細</em></a>
+									<a class="s-btn fr" onclick="if(confirm('この項目を設定から取り除きます。'))$(this).next().click();return false;">非表示</a>
+									<input type="submit" soy:id="delete_button" style="display:none;" />
+								</td>
+								
+							</tr>
+							<!-- /soy:id="field_list" -->
+						</tbody>
+					</table>
+					<p class="under ce">
+						<a class="s-btn" onclick="return common_open_popup($(this).attr('href'));" soy:id="field_code_link"><em>テンプレート用HTML生成</em></a>
+						<a class="s-btn" soy:id="page_entry_edit_link"><em>"<!-- soy:id="page_name*" /-->"の記事を編集する</em></a>
+					</p>
+
+					
+					<div class="under form-btn ce save_order_wrap" style="display:none;">
+						<input type="submit" class="m-btn-red" name="save_order" value="表示順を保存" />
+					</div>
+			</form>
+		</div><!-- // .content -->
+	</div><!-- // .section -->
+		
+	<div class="section">
+		
+		<div class="title">
+			<h3>共通 カスタムフィールド</h3>
+		</div>
+		<div class="content">
+
+
+		<div class="pagelist-menu"> 
+			<ul> 
+				<li class="plus-btn"><a onclick="return common_open_popup($(this).attr('href'));" soy:link="page/field/create?page=entry&layer">カスタムフィールド項目を追加</a></li>
+				<li class="plus-btn"><a onclick="common_open_popup($(this).attr('href'),{onclose:function(){location.reload();}});return false;" soy:link="page/field/select">すべてのカスタムフィールド項目から追加</a></li>
+			</ul>
+		</div>
+
+			
+			<table class="list-table break">
+				<thead>
+					<tr>
+						<th width="120">項目名</th>
+						<th width="120">項目ID</th>
+						<th width="120">表示順</th>
+						<th width="120">操作</th>
+					</tr>
+				</thead>
+				<tbody>
+				<!-- soy:id="common_field_list" -->
+				<tr>
+					<td><!-- soy:id="list_field_name" /--></td>
+					<td><!-- soy:id="list_field_id" /--></td>
+					<td>
+						<input type="hidden" soy:id="order_input" />
+						<input type="button" value="▲" class="s-btn up_btn" /> 
+						<input type="button" value="▼" class="s-btn down_btn" />
+					</td>
+					<td>
+						<a soy:id="field_detail_link"><em>詳細</em></a>
+					</td>
+				</tr>
+				<!-- /soy:id="common_field_list" -->
+				</tbody>
+			</table>
+			<p class="under ce">
+				<a class="s-btn" onclick="return common_open_popup($(this).attr('href'));" soy:link="page/field/code?type=entry"><em>テンプレート用HTML生成</em></a>
+			</p>
+			
+		</div><!-- // .content -->
+	</div><!-- // .section -->
+
+		<div class="section">
+			<div class="title">
+				<h3>内容(記事本文) の表示位置</h3>
+			</div>
+			<div class="content">
+				<form soy:id="form">
+				
+				<select soy:id="position"></select>
+				
+				<div class="form-btn ce">
+					<input type="submit" name="create" value="保存" class="l-btn" />
+				</div>
+				
+				</form>
+				
+				
+			</div><!-- // .content -->
+		</div><!-- // .section -->
+
+</div><!-- //.window-content -->
+</div><!-- //.main-widnow -->

@@ -1,0 +1,44 @@
+<div id="main-window1" class="main-window">
+	
+<div class="window-title">
+	<h2 class="title-text"><!-- soy:id="site_name_text" /--> - ルート設定</h2>
+</div>
+
+<div class="window-content content">
+<div id="main-section1" class="section">
+		
+		<form soy:id="form">
+			
+		<p class="intro">index.php,.htaccessを編集してください</p>
+		<p soy:id="error_message" class="error">書き込み権限がありません</p>
+		
+		<div class="form-section">
+			<div class="label">
+				<h4><label for="post1-1">index.php</label></h4>
+			</div>
+			<div class="item">
+				<textarea soy:id="index_php" class="m-area liq-area" rows="8"></textarea>
+			</div>
+		</div>
+		
+		<div class="form-section">
+			<div class="label">
+				<h4>.htaccess</h4>
+			</div>
+			<div class="item">
+				<textarea soy:id="htaccess" class="m-area liq-area" rows="8"></textarea>
+			</div>
+		</div>
+		
+		<div class="form-btn ce">
+			<input type="submit" class="m-btn" name="back" value="戻る" />
+			<input type="submit" class="m-btn" name="save" value="保存" />
+		</div>
+		
+		
+		
+		</form>
+</div>
+</div>
+
+</div>

@@ -1,0 +1,10 @@
+<dl id="search-box">
+	<dt><img src="@@SITE_PATH@@themes/default/img/search-title.gif" alt="サイト内検索" width="58" height="11" /></dt>
+	<dd>
+		<form action="@@SITE_PATH@@search" method="get" id="srch" name="srch">
+			<input type="text" name="q" value="<?php echo htmlspecialchars(@$_GET["q"],ENT_QUOTES); ?>" id="srchInput" tabindex="1" class="inputarea" />
+			<input type="image" src="@@SITE_PATH@@themes/default/img/search-btn.gif" alt="検索" id="srchBtn" tabindex="2" class="btn" value="submit" />
+		</form>
+	</dd>
+</dl>
+<!-- // #search-box -->

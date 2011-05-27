@@ -1,0 +1,49 @@
+<div class="title"> 
+	<h3>検索ページの設定</h3> 
+</div>
+
+<div class="content">
+
+	<div class="form-section">
+		<div class="label"> 
+			<h4>検索モジュール</h4> 
+		</div> 
+		<div class="item"> 
+			<p class="intro">検索モジュールを選択してください</p>
+			
+			<select soy:id="module_list">
+				<option value="">選択してください</option>
+			</select>
+		</div>
+		
+		<div class="label"> 
+			<h4>検索モジュール詳細設定</h4> 
+		</div> 
+		<div class="item"> 
+			<!-- soy:id="module_config" -->
+			詳細設定
+			<!-- /soy:id="module_config" -->
+		</div>
+		
+		<div class="label"> 
+			<h4>検索件数</h4> 
+		</div> 
+		<div class="item">
+			<input class="m-area" type="text" size="4" soy:id="limit" />件
+		</div>
+		
+	</div><!-- // .form-section -->
+	
+	<div class="form-btn ce"> 
+		<input type="submit" value="設定する" id="post1-submit" name="save_basic" class="l-btn" /> 
+	</div> 
+
+</div><!-- // .content -->
+
+<script type="text/javascript">
+$(function(){
+});
+</script>
+<style type="text/css">
+
+</style>

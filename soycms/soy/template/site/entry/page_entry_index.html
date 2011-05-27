@@ -1,0 +1,110 @@
+<div id="main-window1" class="main-window"> 
+				
+<div class="window-title"> 
+	<h2>最近更新した記事一覧</h2> 
+</div> 
+
+<div class="window-content"> 
+	
+	<div class="section">
+		<a soy:link="entry/search">記事の検索</a> ｜ 
+		<a soy:link="entry/search?status=review">未承認の記事(<!-- soy:id="count_review" -->100<!-- /soy:id="count_review" -->)</a> ｜
+		<a soy:link="entry/search?status=draft">下書きの記事(<!-- soy:id="count_draft" -->100<!-- /soy:id="count_draft" -->)</a> ｜
+		<a soy:link="entry/list/trash">ゴミ箱(<span class="trash_count" soy:id="count_trash">100</span>)</a> ｜
+		<a soy:link="entry/template/list">記事テンプレートの管理</a>
+	</div>
+
+	
+	<div id="main-section1" class="section"> 
+
+		<div class="content"> 
+
+			<form soy:id="form" method="post" action="xxx" id="post1" name="post1"> 
+			
+				<div class="form-section">
+					
+				<h3>最近更新した記事</h3>
+				
+				<table class="list-table"> 
+					<thead> 
+						<tr> 
+							<th width="4%" class="s-cell" scope="col"><input type="checkbox" onclick="$('.entry_check').attr('checked',$(this).attr('checked'));" /></th> 
+							<th width="39%" scope="col">記事名</th> 
+							<th width="10%" scope="col">公開状態</th> 
+							<th width="16%" scope="col">作成/編集者<span></span></th> 
+							<th width="13%" scope="col">種類</th> 
+							<th width="9%" scope="col">更新時刻</th> 
+							<th width="9%" class="s-cell" scope="col">設定</th> 
+						</tr> 
+					</thead> 
+					<tbody> 
+						<!-- soy:id="entry_list" -->
+						<tr soy:id="entry_list_row"> 
+							<td class="ce">
+								<input soy:id="entry_checkbox" type="checkbox" class="entry_check" />
+							</td> 
+							<td><p>
+									<a class="entry_link" soy:id="entry_detail_link"><strong soy:id="entry_title">記事名A</strong></a><br> 
+									<a soy:id="entry_preview_link"><!-- soy:id="entry_url" /--></a><br> 
+								</p>
+							</td> 
+							<td class="ce"><!-- soy:id="entry_status" /--></td> 
+							<td><!-- soy:id="entry_author" /-->
+								<!-- soy:id="entry_editor" /-->
+							</td> 
+							<td>
+								<a soy:id="directory_link">ディレクトリへのリンク</a>
+								<br /><!-- soy:id="label_link_list" /-->
+							</td> 
+							<td>
+								<!-- soy:id="entry_update_date" -->2010-06-10 14:25:43<!-- /entry_update_date -->
+							</td> 
+							<td><a soy:id="entry_detail_link*" class="sh-btn"><em>編集</em></a></td> 
+						</tr> 
+						<!-- /entry_list -->
+					</tbody> 
+				</table> 
+				
+				<p class="ri intro"><!-- soy:id="count_max" /-->件中<!-- soy:id="count_start" /-->～<!-- soy:id="count_end" /-->件の記事を表示</p>
+				
+				<p>
+					<input type="button" value="ごみ箱" class="m-btn set_trash" />
+					<input type="button" value="公開" class="m-btn set_open" />
+					<input type="button" value="非公開" class="m-btn set_close" /> 
+				</p> 
+				
+				<!-- soy:id="pager" -->
+				<div class="pager">
+					<p class="back" soy:id="prev_link_wrap"><a soy:id="prev_link">&lt;&nbsp;前へ</a></p>
+					<ol><!-- soy:id="pager_list" --><li><a soy:id="page_link"><em><!-- soy:id="page_text" /--></em></a></li><!-- /soy:id="pager_list" --></ol>
+					<p class="next" soy:id="next_link_wrap"><a soy:id="next_link">次へ&nbsp;&gt;</a></p>
+				</div> 
+				<!-- /pager -->
+
+
+
+				</div>
+				
+				
+
+			</form> 
+		</div> 
+	</div> 
+	<!--  // #main-section1 --> 
+
+<script type="text/javascript">
+var SOYCMS_CURRENT_DIRECTORY = '<!-- soy:id="current_directory_id" /-->';
+</script>
+<script soy:src="../common/js/soycms_entry/list.js" type="text/javascript"></script>
+	
+
+
+</div> 
+<!--  // .window-content --> 
+</div> 
+<!--  // #main-window1 -->
+
+<!-- soy:id="page_entry_tree" -->
+ツリーの表示
+<!-- /soy:id="page_entry_tree" -->
+

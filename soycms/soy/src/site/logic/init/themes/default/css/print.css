@@ -1,0 +1,157 @@
+@charset "utf-8";
+/* Title：Le Theme [default] */
+/* Author：Lebe Inc. */
+/* Licence: MIT Licence */
+
+@media print {
+html {
+	background:#FFF;
+}
+
+body {
+	position: relative;
+	border: none;
+ background: none;
+	color:#000;
+	font-size: 12pt;
+	text-align: left;
+}
+
+h1, h2, h3, h4, h5, h6, dt, caption {
+	page-break-after:avoid;
+}
+
+.hidden-navi {
+	display: none;
+}
+
+/*** Not print ***/
+#search-box,
+#global-navi, #global-navi-img, #global-navi-ir,
+#footer p.pagetop, #footer ul.navi {
+	display: none;
+}
+
+
+/*** base layout&design ***/
+#header {
+	background: none;
+}
+
+#contents {
+	background: none;
+}
+
+#maincontent, #subcontent, #subcontent2 {
+	display: block;
+	float: none !important;
+	width: 100% !important;
+	overflow: visible;
+	margin: 0 !important;
+}
+													
+#subcontent, #subcontent2 {
+	page-break-before: always;	                                  
+}
+
+#footer {
+	margin: 10px 0 0 0;
+	border-top: 2px solid #888;
+	background: none;
+}
+
+#footer address.copyright {
+	width: 100%;
+	text-align: left;
+}
+
+
+/***  #contents parts ***/
+#contents .sub .section {
+	border: none;
+}
+
+
+
+#maincontent ul.layout-list2col,
+#maincontent ul.layout-list3col,
+#maincontent ul.layout-list4col {
+	margin: 0 0 1.5em 0;
+}
+
+#contents .section ul.layout-list2col,
+#contents .section ul.layout-list3col,
+#contents .section ul.layout-list4col {
+	margin: 0;
+}
+
+#maincontent ul.layout-list2col li.item,
+#maincontent ul.layout-list3col li.item,
+#maincontent ul.layout-list4col li.item {
+	display: block;
+	float: none;
+	width: 100% !important;
+	margin: 0 0 5px 0!important;
+	padding: 0;
+	border-bottom: 1px dotted #999;
+}
+
+#maincontent ul.layout-list2col li.last,
+#maincontent ul.layout-list3col li.last,
+#maincontent ul.layout-list4col li.last,
+.layout-1c #maincontent ul.layout-list3col li.last,
+.layout-3c #maincontent ul.layout-list3col li.last,
+.layout-3c #maincontent ul.layout-list4col li.last {
+	margin: 0;
+	border: none;
+}
+
+#maincontent ul.layout-list2col li.item .image,
+#maincontent ul.layout-list3col li.item .image,
+#maincontent ul.layout-list4col li.item .image {
+	display: inline;
+	float:left;
+	margin: 0 15px 0 0 !important;
+	padding: 0 0 5px 0;
+}
+
+#maincontent ul.layout-list2col li.item .image {	width: 324px;}
+#maincontent ul.layout-list3col li.item .image {	width: 212px;}
+#maincontent ul.layout-list4col li.item .image {	width: 156px;}
+
+.layout-1c #maincontent ul.layout-list2col li.item .image {	width: 454px;}
+.layout-1c #maincontent ul.layout-list3col li.item .image {	width: 298px;}
+.layout-1c #maincontent ul.layout-list4col li.item .image {	width: 221px;}
+
+.layout-3c #maincontent ul.layout-list2col li.item .image {	width: 259px;}
+.layout-3c #maincontent ul.layout-list3col li.item .image {	width: 170px;}
+.layout-3c #maincontent ul.layout-list4col li.item .image {	width: 125px;}
+
+#maincontent ul.layout-list2col li.item .text,
+#maincontent ul.layout-list3col li.item .text,
+#maincontent ul.layout-list4col li.item .text,
+#maincontent ul.layout-list2col li.item dl.text dd,
+#maincontent ul.layout-list3col li.item dl.text dd,
+#maincontent ul.layout-list4col li.item dl.text dd {
+	margin: 0;
+	padding: 0 0 5px 0;
+}
+
+	
+
+/***  other browser ***/
+/* flaot clear */
+html>body .clearfix,
+html>body .section,
+html>body ul.img-list li.item, html>body ul.layout-list2col li.item, ul.layout-list3col li.item, html>body ul.layout-list4col li.item {
+	overflow: hidden;
+}
+
+
+
+
+
+
+
+}
+

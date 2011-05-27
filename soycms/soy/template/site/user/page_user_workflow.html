@@ -1,0 +1,195 @@
+<div id="main-window1" class="main-window"> 
+				
+<div class="window-title"> 
+	<h2>公開権限管理</h2> 
+</div> 
+
+<div class="window-content">
+	
+	<div class="section">
+		
+		<div class="content">
+			
+			<div class="pagelist-menu"> 
+				<ul> 
+					<li class="edit"><a soy:link="user/workflow/mail">承認メール文面設定</a></li>
+				</ul> 
+			</div>
+			
+			
+			<!-- soy:id="permission_list_exists" -->
+			<h3>公開権限一覧</h3>
+			
+			<form soy:id="form">
+				<table class="list-table"> 
+					<thead> 
+						<tr> 
+							<th width="10%" class="s-cell" scope="col"></th>
+							<th width="17%" scope="col">ID</th>
+							<th width="17%" scope="col">名前</th>
+							<th width="63%" scope="col">説明</th>
+						</tr> 
+					</thead> 
+					<tbody> 
+						<!-- soy:id="permission_list" -->
+						<tr> 
+							<td>
+								<input type="checkbox" soy:id="permission_check" />
+							</td>
+							<td>
+								<!-- soy:id="permission_key" /-->
+							</td>
+							<td>
+								<input soy:id="permission_name" class="s-area liq-area" type="text" />
+							</td> 
+							<td>
+								<input soy:id="permission_description" class="s-area liq-area" type="text" />
+							</td> 
+						</tr> 
+						<!-- /soy:id="permission_list" --> 
+					</tbody> 
+				</table>
+			
+			<div class="form-btn ce">
+				<input type="submit" name="remove" value="チェックを削除" class="m-btn" />
+				<input type="submit" name="save" value="保存" class="l-btn" />
+			</div> 
+			
+			</form>
+			<!-- /soy:id="permission_list_exists" -->
+			
+		</div><!-- // .content -->
+	
+		<a name="new_user"></a>
+		<div class="content">
+			
+			<h3>新しい権限を追加</h3> 
+			
+			<form soy:id="add_form">
+			
+			<table class="list-table break"> 
+					<thead> 
+						<tr> 
+							<th width="17%" scope="col">ID</th>
+							<th width="17%" scope="col">名前</th>
+							<th width="63%" scope="col">説明</th>
+						</tr> 
+					</thead> 
+					<tbody> 
+						<!-- soy:id="permission_list" -->
+						<tr> 
+							<td>
+								<input type="text" class="s-area liq-area" soy:id="permission_id" />
+							</td>
+							<td>
+								<input soy:id="permission_name" class="s-area liq-area" type="text" />
+							</td> 
+							<td>
+								<input soy:id="permission_description" class="s-area liq-area" type="text" />
+							</td> 
+						</tr> 
+						<!-- /soy:id="permission_list" --> 
+					</tbody> 
+				</table>
+				
+				<div class="form-btn ce">
+					<input type="submit" name="add" value="追加" class="l-btn" />
+				</div> 
+			
+			</form>
+			
+		</div>
+	</div>
+	
+	
+</div> 
+<!--  // .window-content --> 
+</div> 
+<!--  // #main-window2 -->
+
+<a name="workflow"></a>
+<div id="main-window2" class="main-window"> 
+				
+<div class="window-title"> 
+	<h2>公開ワークフロー管理</h2> 
+</div> 
+
+<div class="window-content">
+	
+	<div class="section">
+		<div class="title">
+			<h3>ワークフロー管理</h3>
+		</div> 
+
+		<div class="content">
+			<form soy:id="workflow_form">
+				
+			<div class="form-section">
+				<div class="label">
+					<h4>ワークフロー例</h4>
+				</div>
+				<div class="item">
+					<a href="#example1" class="popup-btn-L s-btn"><em>公開権限不要</em></a>
+					<a href="#example2" class="popup-btn-L s-btn"><em>公開権限必要</em></a>
+					<a href="#example3" class="popup-btn-L s-btn"><em>シンプル(公開、非公開のみ)</em></a>
+				</div>
+			</div>
+			
+			<div class="form-section">
+				<div class="label">
+					<h4>ワークフロー設定</h4>
+				</div>
+				<div class="item">
+					<textarea class="liq-area " soy:id="workflow_textarea" style="height:400px;"></textarea>
+				</div>
+			</div>
+			
+			<div id="example1" class="popup-content form-section">
+				<div class="label">
+					<h4>ワークフロー設定 公開権限不要</h4>
+				</div>
+				<div class="item">
+					<textarea class="liq-area" id="workflow_example1" soy:id="workflow_example1" style="height:400px;"></textarea>
+				</div>
+				<div class="ce">
+					<input type="button" onclick="$('#workflow_textarea').val($('#workflow_example1').val()).select();$('#popupLayer').click();" value="この設定を使う" class="l-btn" />
+				</div>
+			</div>
+			
+			<div id="example2" class="popup-content form-section">
+				<div class="label">
+					<h4>ワークフロー設定 公開権限必要</h4>
+				</div>
+				<div class="item">
+					<textarea class="liq-area" id="workflow_example2" soy:id="workflow_example2" style="height:400px;"></textarea>
+				</div>
+				<div class="ce">
+					<input type="button" onclick="$('#workflow_textarea').val($('#workflow_example2').val()).select();$('#popupLayer').click();" value="この設定を使う" class="l-btn" />
+				</div>
+			</div>
+			
+			<div id="example3" class="popup-content form-section">
+				<div class="label">
+					<h4>ワークフロー設定 シンプル</h4>
+				</div>
+				<div class="item">
+					<textarea class="liq-area" id="workflow_example3" soy:id="workflow_example3" style="height:400px;"></textarea>
+				</div>
+				<div class="ce">
+					<input type="button" onclick="$('#workflow_textarea').val($('#workflow_example3').val()).select();$('#popupLayer').click();" value="この設定を使う" class="l-btn" />
+				</div>
+			</div>
+				
+			<div class="ce">
+				<input type="submit" name="save_workflow" value="保存" class="l-btn" />
+			</div>
+			</form>
+		</div><!-- // .content -->
+	
+	</div><!-- // .section --> 
+	
+</div> 
+<!--  // .window-content --> 
+</div> 
+<!--  // #main-window2 -->
+

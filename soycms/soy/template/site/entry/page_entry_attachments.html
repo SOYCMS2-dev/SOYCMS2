@@ -1,0 +1,198 @@
+<div class="content">
+	<div class="label">
+		<h3>画像またはファイルをアップロードしてください</h3>
+	</div>
+	
+	<div class="item">
+		
+		<div id="upload_popup"> 
+			
+			<form soy:id="form" target="target_fr">
+				<div class="form-section"> 
+					<div class="label">
+						<h4>ファイルを選択してください</h4>
+					</div>
+					<div class="item">
+						<input id="upload_file" type="file" name="files[]" multiple /><br />
+						<span>最大<!-- soy:id="max_upload_size" /-->までアップロード可能</span>
+					</div>
+					<div class="item">
+						<input type="checkbox" id="is_overwrite" name="is_overwrite" value="1" checked />
+						<label for="is_overwrite">同名のファイルは上書きする</label>
+						
+						<br />
+						<input type="checkbox" id="create_thumbnail" soy:id="create_thumbnail" name="create_thumbnail" value="1" checked onclick="$('#thumbnail_option').toggle($(this).attr('checked'));save_make_thumbnail_config(this);" />
+						<label for="create_thumbnail">サムネイルを作成する（画像のみ）</label>
+						
+						<div id="thumbnail_option">
+							<h4>サムネイル</h4>
+							<p class="intro">※縦長の画像は縦長に、横長の画像は横長に下記サイズでサムネイルを作成します。</p>
+							
+							<p>大：<input soy:id="thumbnail_size_l" name="thumbnail_size[]" type="text" class="s-area" value="300" size="5" />
+							ピクセル　中：
+							<input soy:id="thumbnail_size_m" name="thumbnail_size[]" type="text" class="s-area" value="140" size="5" />
+							ピクセル　小：
+							<input soy:id="thumbnail_size_s" name="thumbnail_size[]" type="text" class="s-area" value="60" size="5" />ピクセル</p>
+								
+						</div>
+						<br />
+						<input type="checkbox" id="resize_auto" soy:id="resize_auto" name="resize_auto" value="1" checked onclick="$('#resize_auto_option').toggle($(this).attr('checked'));save_auto_resize_config(this);" />
+						<label for="resize_auto">大きすぎる画像は自動的に縮小する(画像のみ)</label>
+						
+						<div id="resize_auto_option">
+							<p class="intro">※幅と高さ両方を指定した場合縦横比に関わらず固定サイズになります</p>
+							<p>
+							幅：<input id="resize_auto_width" soy:id="resize_auto_width" type="text" class="s-area" value="1024" size="5" />
+							高さ：<input id="resize_auto_height" soy:id="resize_auto_height" type="text" class="s-area" value="768" size="5" />ピクセル
+							</p>
+						</div>
+						
+					</div>
+				</div>
+				
+				
+				<div class="ce lbreak">
+					<input type="submit" name="upload" value="アップロード" class="l-btn" onclick="save_auto_resize_config(this);save_make_thumbnail_config(this);" />
+				</div>
+			</form> 
+
+
+		<p>画像下のサムネイルのリンク(例:300x200)をクリックすることで画像の挿入・選択が出来ます。</p>
+		
+		<div id="attachment_list">
+		<!-- soy:id="attachment_list" -->
+		<div class="file_box ce">
+			<p><a class="attachment_link" soy:id="filename"></a></p>
+			<div class="fileimage" soy:id="extension"></div>
+			<img soy:id="image" />
+			
+			<ul soy:id="thumbnail_list">
+				<li>
+					<a class="thumbnail_link" soy:id="thumbnail_link">XXX</a>
+				</li>
+			</ul>
+			
+			<p class="ri" style="float:right;">
+				<a class="s-btn" href="javascript:void(0);" onclick="$(this).next().show();"><em>削除</em></a>
+				<a soy:id="file_remove_link" style="display:none;"><strong>削除しますか?</strong></a>
+			</p>
+			
+		</div>
+		<!-- /soy:id="attachment_list" -->
+		</div>
+		
+		<br style="clear:both;" />
+		
+		
+			<iframe id="target_fr" name="target_fr" src="about:blank;" style="visibility:hidden;width:0;height:0;"></iframe>
+			
+			<!-- soy:quickhelp="entry_attachment" /-->
+			
+		</div><!-- // #upload_popup -->
+		
+	</div>
+	<!-- // .item -->
+
+	
+	
+</div>
+
+<!-- soy:id="is_action" -->
+<script type="text/javascript">
+if(window.parent){
+	window.parent.notify(document);
+}
+</script>
+<!-- /soy:id="is_action" -->
+<script type="text/javascript">
+var notify = function(d){
+	
+	$("#attachment_list").html($($(d).find("#attachment_list").html()));
+	$("#upload_file").val("");
+	
+	var func = window.attachment_func;
+	
+	if (func) {
+
+		$(".thumbnail_link").click(function(){
+			try {
+				$("#overLayer-L p.close,#overLayer p.close").click();
+				var img = $(this).attr("href");
+				var link = $(this).attr("img");
+				if (func) {
+					func(img, link);
+				}
+			} catch (e) {
+			
+			}
+			return false;
+		});
+		
+		$(".attachment_link").unbind("click").click(function(){
+			try {
+				$("#overLayer-L p.close,#overLayer p.close").click();
+				var img = $(this).attr("href");
+				var title = $(this).attr("title");
+				if (func) {
+					if(title == "image")title = img;
+					func(title, img);
+				}
+			} catch (e) {
+			
+			}
+			return false;
+		});
+	}
+	
+};
+var reload_list = function(){
+	var reload_url = '<!-- soy:id="reload_url" /-->';
+	$("#target_fr").attr("src",reload_url + "&t=" + (new Date()));
+}
+var prepare_attachment = function(func){
+	window.attachment_func = func;
+	
+	$(".attachment_link").unbind("click");
+	$(".thumbnail_link").unbind("click");
+	
+	$(".thumbnail_link").one("click",function(){
+		try {
+			$("#popupLayer").click();
+			var img = $(this).attr("href");
+			var link = $(this).attr("img");
+			if (func) {
+				func(img,link);
+			}
+		}catch(e){
+			
+		}
+		return false;
+	});
+	$(".attachment_link").one("click",function(){
+		try {
+			$("#popupLayer").click();
+			var img = $(this).attr("href");
+			var title = $(this).attr("title");
+			if (func) {
+				if (title == "image") {
+					title = img;
+					img = null;
+				}
+				if(title == img){
+					img = null;
+				}
+				func(title, img);
+			}
+		}catch(e){
+			
+		}
+		
+		return false;
+	});
+};
+
+$(function(){
+	$("#thumbnail_option").toggle($("#create_thumbnail").attr('checked'));
+	$("#resize_auto_option").toggle($("#resize_auto").attr('checked'));
+});
+</script>

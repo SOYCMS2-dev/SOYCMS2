@@ -1,0 +1,164 @@
+<div id="main-window1" class="main-window"> 
+					
+	<div class="window-title"> 
+		<h2>サイトのデータ管理</h2>
+	</div> 
+	
+	<div class="window-content"> 
+		<div class="section-block">
+
+			<div class="section">
+				<div class="title">
+					<h3>コンテンツの管理</h3>
+				</div> 
+				<div class="content">
+					<div class="form-section">
+						<div class="label">
+							<h4>現在のコンテンツ数</h4>
+						</div>
+						<div class="item">
+							<p><a soy:link="entry"><!-- soy:id="contents_count" /-->件</a></p>
+						</div>
+					</div>
+					
+					<div class="form-section">
+						<div class="label">
+							<h4>現在のディレクトリ数</h4>
+						</div>
+						<div class="item">
+							<p><a soy:link="page"><!-- soy:id="directory_count" /-->個</a></p>
+						</div>
+					</div>
+					
+					
+					
+					
+				</div> 
+			</div> 
+			<!--  // .section -->
+			
+			
+			<div class="section second-section">
+				<div class="title">
+					<h3>コンテンツをインポートする</h3>
+				</div>
+				<div class="content"> 
+					<form soy:id="contents_form">
+						<div class="form-section">
+							<div class="label">
+								<h4>インポートする</h4>
+							</div>
+							<div class="item">
+								<input type="file" name="contents_file" />
+							</div>
+						</div>
+					
+						<div class="form-btn ce">
+							<input type="submit" value="インポート内容の確認" class="m-btn" />
+						</div>
+					</form>
+				</div> 
+			</div> 
+			<!--  // .section -->
+		
+		</div><!-- // .section-block -->
+		
+		
+		<div class="section-block">
+
+			<div class="section">
+				<div class="title">
+					<h3>デザインの管理</h3>
+				</div> 
+				<div class="content">
+					<div class="form-section">
+						<div class="label">
+							<h4>テンプレート数</h4>
+						</div>
+						<div class="item">
+							<p><a soy:link="page/templates/"><!-- soy:id="template_count" /-->個</a></p>
+						</div>
+					</div>
+					<div class="form-section">
+						<div class="label">
+							<h4>ライブラリ数</h4>
+						</div>
+						<div class="item">
+							<p><a soy:link="page/library/"><!-- soy:id="library_count" /-->個</a></p>
+						</div>
+					</div>
+					<div class="form-section">
+						<div class="label">
+							<h4>記事ボタン数</h4>
+						</div>
+						<div class="item">
+							<p><a soy:link="page/snippet/"><!-- soy:id="snippet_count" /-->個</a></p>
+						</div>
+					</div>
+					<div class="form-section">
+						<div class="label">
+							<h4>ナビゲーション数</h4>
+						</div>
+						<div class="item">
+							<p><a soy:link="page/navigation/"><!-- soy:id="navigation_count" /-->個</a></p>
+						</div>
+					</div>
+					
+					
+					
+					
+				</div> 
+			</div> 
+			<!--  // .section -->
+			
+			
+			<div class="section second-section">
+				<div class="title">
+					<h3>WEBデザインをインポートする</h3>
+				</div>
+				<div class="content"> 
+					<form soy:id="design_form">
+						<div class="form-section">
+							<div class="label">
+								<h4>インポートする</h4>
+							</div>
+							<div class="item">
+								<input type="file" name="design_file" />
+							</div>
+						</div>
+						
+						<div class="form-btn ce">
+							<input type="submit" value="インポート内容の確認" class="m-btn" />
+						</div>
+					</form>
+				</div> 
+			</div> 
+			<!--  // .section -->
+		
+		</div><!-- // .section-block -->
+		
+		<div class="section">
+			<div class="title">
+				<h3>サイトテンプレートファイルの作成</h3>
+			</div> 
+			<div class="content">
+				<p class="lbreak">サイトテンプレートファイル作成機能を使えば、作成済みサイトを1つのzipファイルにまとめることが出来ます。<br />
+				生成されたサイトテンプレートファイルを利用して、新しいサイトを簡単に作成する事が出来ます。</p>
+				
+				<div class="ce">
+					<a soy:link="manager/skeleton" class="m-btn">サイトテンプレートファイルの作成</a>
+				</div>
+			</div>
+		</div>
+		 	
+	</div> 
+	<!--  // .window-content --> 
+</div> 
+<!--  // #main-window1 -->
+	
+
+<style type="text/css">
+</style> 
+<script type="text/javascript">
+</script>
+

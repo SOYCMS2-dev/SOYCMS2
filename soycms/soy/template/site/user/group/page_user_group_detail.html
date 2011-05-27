@@ -1,0 +1,113 @@
+<div id="main-window1" class="main-window"> 
+				
+	<div class="window-title"> 
+		<h2>グループの詳細</h2> 
+	</div> 
+	
+	<div class="window-content"> 
+		
+		<form soy:id="form"> 
+		
+		<div id="main-section1" class="section"> 
+
+			<div class="content">
+				
+				<div class="pagelist-menu"> 
+					<ul> 
+						<li class="back"><a soy:link="user.group">グループ一覧</a></li>
+					</ul> 
+				</div>
+				
+					<div class="form-section">
+						
+						<div class="label"> 
+							<h4>グループID</h4> 
+						</div> 
+						<div class="item"> 
+							<p class="l"> 
+								<!-- soy:id="group_id_text" /-->
+							</p>
+						</div> 
+						
+						<div class="label"> 
+							<h4>グループ名</h4> 
+						</div> 
+						<div class="item"> 
+							<p>
+								<input soy:id="group_name" class="m-area" size="60" /> 
+							</p> 
+						</div>
+						
+						<div class="label"> 
+							<h4>説明</h4> 
+						</div> 
+						<div class="item">
+							<p class="intro">このグループについて説明を入力して下さい。</p>
+							<textarea soy:id="group_description" class="m-area" rows="4" cols="60"></textarea> 
+						</div> 
+					</div> 
+			</div> 
+		</div> 
+		<!--  // #main-section1 --> 
+
+		<!-- soy:id="user_exists" -->
+		<div id="main-section2" class="section"> 
+			<div class="title">
+				<h3>ユーザー毎</h3>
+			</div>
+			<div class="content">
+				
+				<p class="intro">ユーザをグループに追加する場合は操作をオン、オフに設定してください。</p>
+				
+				<table class="list-table"> 
+					<thead> 
+						<tr> 
+							<th width="20%" class="s-cell" scope="col">
+								<input type="checkbox" onclick="$('.admin_check').attr('checked',$(this).attr('checked'));" />
+							</th>
+							<th width="17%" scope="col">ユーザー名</th>
+							<th width="63%" scope="col">ロール</th>
+						</tr> 
+					</thead> 
+					<tbody> 
+						<!-- soy:id="user_list" -->
+						<tr> 
+							<td class="ce">
+								<input type="checkbox" soy:id="user_check" class="admin_check" />
+							</td>
+							<td>
+								<a soy:id="detail_link">
+								<!-- soy:id="user_name" /-->
+								</a>
+							</td>
+							<td>
+								<!-- soy:id="role_list_text" /-->
+							</td> 
+						</tr> 
+						<!-- /soy:id="user_list" --> 
+					</tbody> 
+				</table> 
+				
+			</div>
+		</div><!-- // #main-section2 -->
+		<!-- /soy:id="user_exists" -->
+		
+		<div id="main-section3" class="section"> 
+			<div class="content">
+				<div class="form-btn ce"> 
+					<p class="lbreak">
+						<input type="submit" value="保存" class="l-btn" />
+					</p>
+					<p>
+						<a soy:id="delete_link" class="s-btn">このグループを削除する</a>
+					</p>
+				</div>
+			</div>
+		</div><!-- // #main-section3 -->
+		
+		</form>
+		
+	</div> 
+	<!--  // .window-content --> 
+</div> 
+<!--  // #main-window1 --> 

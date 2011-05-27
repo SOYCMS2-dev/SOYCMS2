@@ -1,0 +1,34 @@
+<div class="snippet-line"> 
+	<div class="snippet-line">
+		<span class="label">引用</span>
+	</div>
+	<div class="snippet-line">
+		<textarea class="m-area liq-area" onchange="quote_sync(this);"></textarea>
+	</div>
+	<div class="snippet-line">
+		<span class="label">引用元タイトル</span>
+	</div>
+	<div class="snippet-line">
+		<input type="text" class="s-area liq-area" name="QUOTE_TITLE" />
+ 	</div>
+ 	<div class="snippet-line">
+		<span class="label">引用元URL</span>
+	</div>
+	<div class="snippet-line">
+		<input type="text" class="s-area liq-area input-link" name="QUOTE_URL" value="" />
+ 	</div>
+</div>
+<script type="text/javascript">
+var quote_area;
+var quote_sync = function(ele){
+	
+	quote_area = $(this).parents(".snippet-line").find("input[name=QUOTE]");
+	
+	if(quote_area.size() < 1){
+		quote_area = $("<input name='QUOTE' />");
+		$(ele).after(quote_area);
+	}
+	
+	quote_area.val($(ele).val().replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/\n/g,"\n<br />"));
+}
+</script>

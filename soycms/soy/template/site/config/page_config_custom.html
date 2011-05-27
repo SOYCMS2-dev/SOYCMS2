@@ -1,0 +1,225 @@
+<div id="main-window1" class="main-window"> 
+				
+<div class="window-title"> 
+	<h2>管理画面のテーマ変更</h2> 
+</div> 
+
+<div class="window-content"> 
+	
+	<div id="main-section1" class="section"> 
+
+		<div class="content"> 
+
+			<form soy:id="config_form"> 
+			
+				<div id="post1-section1" class="form-section"> 
+					
+					<h3>管理画面のテーマを変更する</h3> 
+					<div class="label"> 
+						<h4> 
+							<label for="post1-1">ヘッダーアイコンの変更</label></h4> 
+					</div> 
+					<div class="item"> 
+						<ul class="radio-list"> 
+							<li class="li1"><input soy:id="header_icon_default" type="radio" value="1" name="icon1-cfg" id="header_icon_default" checked="checked" /><label for="header_icon_default">デフォルト</label> 
+								<img soy:src="../common/cp_theme/gray/img/logo.png" alt="SOY CMS2" width="150" height="64" class="png" /></li> 
+							<li class="li2"><input soy:id="header_icon_custom" type="radio" value="3" name="icon1-cfg" id="header_icon_custom" /><label for="header_icon_custom">変更する</label> 
+								<img soy:id="header_icon_custom_img" width="150" height="64" />
+								<br />
+								(150ピクセル×64ピクセルの画像を設定してください)<br />
+								<input type="file" name="header_icon_custom" /> 
+							</li>	
+						</ul> 
+					</div> 
+
+
+
+					
+
+					<div class="label"> 
+						<h4>吹き出しアイコンの変更</h4> 
+					</div> 
+					<div class="item"> 
+						<ul class="radio-list"> 
+							<li class="li1"><input soy:id="popup_icon_default" type="radio" value="1" name="icon2-cfg" id="popup_icon_default" checked="checked" /><label for="popup_icon_default">デフォルト</label> 
+							<img soy:src="../common/cp_theme/gray/img/user-status-bg.png" width="50" height="50" alt="吹き出しアイコン"></li> 
+							<li class="li2"><input type="radio" value="3" soy:id="popup_icon_custom" id="public-cfg3" /><label for="popup_icon_custom">変更する</label> 
+								<img soy:id="popup_icon_custom_img" width="50" height="50" />
+								<br> 
+								(50ピクセル×50ピクセルの画像を設定してください)<br> 
+								<input type="file" name="popup_icon_custom" /> 
+							</li>	
+						</ul> 
+					</div> 
+					
+					<div class="label"> 
+						<h4> 
+							<label for="post1-1">管理画面のインターフェイスデザイン変更</label></h4> 
+					</div> 
+					<div class="item"> 
+						<ul class="radio-list"> 
+							<li class="li1"> 
+								<table class="form-table"> 
+									<tr> 
+										<td class="ce"><img soy:src="../common/cp_theme/gray/thumbnail.jpg" width="160" height="100" alt="グレイ">
+											<strong class="xl"><br /> 
+												<input type="radio" soy:id="color_select_gray" checked="checked" /> 
+											</strong>
+										</td> 
+										<td class="ce"><img soy:src="../common/cp_theme/olive/thumbnail.jpg" alt="オリーブ" width="160" height="100">
+											<strong class="xl"><br /> 
+												<input type="radio" soy:id="color_select_olive" checked="checked" /> 
+											</strong>
+										</td>
+										<td class="ce"><img soy:src="../common/cp_theme/white/thumbnail.jpg" alt="ホワイト" width="160" height="100">
+											<strong class="xl"><br /> 
+												<input type="radio" soy:id="color_select_white" checked="checked" /> 
+											</strong>
+										</td> 
+										<td class="ce"><img soy:src="../common/cp_theme/black/thumbnail.jpg" alt="ブラック" width="160" height="100">
+											<strong class="xl"><br /> 
+												<input type="radio" soy:id="color_select_black" checked="checked" /> 
+											</strong>
+										</td> 
+									</tr> 
+									<tr> 
+										<td class="ce"><img soy:src="../common/cp_theme/blue/thumbnail.jpg" width="160" height="100" alt="ブルー"><strong class="xl"><br /> 
+												<input type="radio" soy:id="color_select_blue" checked="checked" /> 
+											</strong>
+										</td> 
+										<td class="ce"><img soy:src="../common/cp_theme/aqua/thumbnail.jpg" width="160" height="100" alt="アクア"><strong class="xl"><br /> 
+												<input type="radio" soy:id="color_select_aqua" checked="checked" /> 
+											</strong>
+										</td> 
+										<td class="ce"><img soy:src="../common/cp_theme/green/thumbnail.jpg" width="160" height="100" alt="グリーン"><strong class="xl"><br /> 
+												<input type="radio" soy:id="color_select_green" checked="checked" /> 
+											</strong>
+										</td> 
+										<td class="ce">&nbsp;</td> 
+									</tr> 
+								</table> 
+							</li> 
+						</ul>
+					</div>
+					
+					
+					<div class="label"> 
+						<h4> 
+							<label for="post1-1">カスタマイズする (CSSを上書きする)</label>
+						</h4> 
+					</div> 
+					<div class="item">
+						<textarea soy:id="custom_css" rows="9" cols="100%" id="post1-2" name="post1-2" class="m-area liq-area"></textarea> 
+					</div> 
+	
+
+					<div class="label"> 
+						<h4> 
+							<label for="post1-1">faviconの設定 (16×16ピクセルの.icoファイル)</label></h4> 
+					</div> 
+					<div class="item"> 
+						<p> 
+							<img soy:id="favicon" width="16" height="16" style="display:block;" />
+							<input type="file" name="favicon" />
+						</p> 
+					</div> 
+
+
+					<div class="label"> 
+						<h4> 
+							<label for="post1-1">管理画面テーマのサムネイル画像</label></h4> 
+					</div> 
+					<div class="item"> 
+						<p> 
+							<img soy:id="thumbnail_img" width="160" height="100" style="display:block;" />
+							(160ピクセル×100ピクセルの.jpgファイル)<br> 
+							<input type="file" name="thumbnail_img" /> 
+						</p> 
+					</div> 
+					
+					<div class="label"> 
+						<h4>フッターのHTML</h4> 
+					</div> 
+					<div class="item"> 
+						<textarea soy:id="parts_footer" class="m-area liq-area" rows="10"></textarea>
+					</div> 
+
+
+				<div class="form-btn ce"> 
+					<input type="submit" value="設定する" id="post1-submit" name="post1-submit" class="l-btn" /> 
+				</div> 
+
+
+
+				</div> 
+				
+			</form> 
+			
+			
+			
+			<?php /*
+
+
+			<h3>管理画面カスタマイズデザインデータのエクスポートとインポート</h3> 
+			<form method="post" action="xxx" id="post1" name="post1"> 
+			
+				<div id="post1-section2" class="form-section"> 
+
+					<div class="label"> 
+						<h4> 
+							<label for="post1-1">カスタマイズデザインファイルのエクスポート(出力)</label></h4> 
+					</div> 
+					<div class="form-btn ce"> 
+						<p> 
+							<input type="submit" value="エクスポートする" id="post1-submit" name="post1-submit" class="l-btn" /> 
+						</p> 
+					</div>									
+				
+				
+				</div> 
+				
+			</form> 
+
+
+
+
+			<form method="post" action="xxx" id="post1" name="post1"> 
+			
+				<div id="post1-section3" class="form-section"> 
+
+					<div class="label"> 
+						<h4> 
+							<label for="post1-1">カスタマイズデザインファイルのインポート</label> 
+							(入力)</h4> 
+					</div> 
+					<div class="item"> 
+
+								<input name="post1-2" type="text" class="s-area" id="post1-2" value="" size="30" /> 
+								<input type="button" value="参照" id="post1-btn3" name="post1-btn3" class="s-btn" /> 
+					<div class="form-btn ce"> 
+						<p> 
+							<input type="submit" value="インポートする" id="post1-submit" name="post1-submit" class="l-btn" /> 
+						</p> 
+					</div>	
+					
+					</div>									
+				
+				
+				</div> 
+				
+			</form> 
+
+			*/ ?>
+
+
+		</div> 
+	</div> 
+	<!--  // #main-section1 --> 
+
+	
+
+
+</div> 
+<!--  // .window-content --> 
+</div> 
+<!--  // #main-window1 --> 

@@ -1,0 +1,87 @@
+@charset "utf-8";
+/* author：Lebe Inc. */
+
+/* reset */
+html,body,div,
+ul,ol,li,dl,dt,dd,
+form,fieldset,input,button,textarea,
+h1,h2,h3,h4,h5,h6,pre,code,p,blockquote,address,hr,
+table,th,td {
+ margin: 0;
+ padding: 0;
+}
+
+h1,h2,h3,h4,h5,h6,table,pre{
+ font-size: 100%;
+}
+
+ol, ul {
+	list-style: none;
+}
+
+table {
+	border: none;
+	border-collapse:collapse;
+ border-spacing: 0;
+}
+
+caption,th,td {
+ text-align: left;
+	vertical-align: top;
+}
+
+q:before,q:after {
+	content: '"';
+}
+
+a { 
+	vertical-align: baseline;
+}
+
+a:link, a:visited, a:hover, a:active {
+ text-decoration: underline;
+}
+
+fieldset,abbr,acronym {
+ border: 0;
+}
+
+img {
+	border: 0;
+	vertical-align: bottom;
+}
+
+h1,h2,h3,h4,h5,h6, strong {
+	font-weight: bold;
+}
+
+address,em,cite,dfn,var {
+	font-style:normal;
+}
+
+pre,code,kbd,samp,var {
+	font-family : monospace ;
+}
+
+ins {
+		text-decoration: underline;
+}
+
+del { 
+	text-decoration: line-through;
+} 
+
+big {
+	font-size: 115%;
+}
+
+small {
+	font-size: 86%;
+}
+
+hr {
+ border: 0;
+ height: 1px;
+ background-color: #000;
+ color: #000;
+}

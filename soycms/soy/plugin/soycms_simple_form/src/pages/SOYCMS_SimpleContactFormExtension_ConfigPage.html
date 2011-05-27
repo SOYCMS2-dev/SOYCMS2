@@ -1,0 +1,156 @@
+<div class="title">
+	<h3>コンタクトフォームの設定</h3>
+</div>
+<div class="content">
+<div class="form-section">
+	
+	<ul class="tab_index">
+		<li><a href="javascript:void(0);">要素の設定</a></li>
+		<li><a href="javascript:void(0);">テンプレートの設定</a></li>
+		<li><a href="javascript:void(0);">メールの設定</a></li>
+	</ul>
+	<ul class="tab_container">
+		
+		<li id="tab0_container">
+			
+			<div class="pagelist-menu"> 
+				<ul> 
+					<li class="plus-btn"><a soy:id="create_link">コンタクトフォーム項目の追加</a></li>
+				</ul>
+			</div>
+			
+			<div class="label">
+				<h4>コンタクトフォーム項目</h4>
+			</div>
+			
+			<div class="item">
+				<table class="list-table break">
+					<thead>
+					<tr>
+						<th>項目名</th>
+						<th>項目ID</th>
+						<th>タイプ</th>
+						<th>操作</th>
+					</tr>
+					</thead>
+					<tbody>
+						<!-- soy:id="field_list" -->
+						<tr>
+							<td><!-- soy:id="list_field_name" /--></td>
+							<td><!-- soy:id="list_field_id" /--></td>
+							<td><!-- soy:id="list_field_type" /--></td>
+							<td>
+								<a soy:id="list_field_detail_link">詳細</a>
+								<a class="s-btn fr" soy:id="field_remove_link" onclick="return confirm('削除します。よろしいですか？');">削除</a>
+							</td>
+						</tr>
+						<!-- /soy:id="field_list" -->
+					</tbody>
+				</table>
+				<p class="under ce">
+					<a class="s-btn" onclick="return common_open_popup($(this).attr('href'));" soy:id="sample_code_link"><em>テンプレート用HTML生成</em></a>
+				</p>
+				
+				<input type="hidden" soy:id="field_items" />
+			</div>
+
+			
+			
+		</li><!-- // #tab1_container -->
+		
+		<li id="tab1_container">
+	
+			<div class="label">
+				<h4>送信画面(HTML)</h4>
+			</div>
+			<div class="item">
+				<textarea soy:id="form_html" class="m-area liq-area resizable html-editor" rows="8"></textarea>
+			</div>
+			
+			<div class="label">
+				<h4>確認画面(HTML)</h4>
+			</div>
+			<div class="item">
+				<input type="checkbox" soy:id="is_show_confirm" />
+				<label for="is_show_confirm">確認画面を表示する</label>
+				<textarea soy:id="confirm_html" class="m-area liq-area resizable html-editor" rows="8"></textarea>
+			</div>
+			
+			<div class="label">
+				<h4>完了画面(HTML)</h4>
+			</div>
+			<div class="item">
+				<textarea soy:id="complete_html" class="m-area liq-area resizable html-editor" rows="8"></textarea>
+			</div>
+			
+			<div class="form-btn ce"> 
+				<input type="submit" name="save_basic" class="l-btn" value="保存" />
+			</div> 
+		</li><!-- // #tab2_container -->
+		
+		<li id="tab2_container">
+
+			<div class="title">
+				<h3>通知メールの設定</h3>
+			</div>
+			<div class="content">
+			<div class="form-section">
+				
+				<div class="label">
+					<h4>問い合わせ通知先メールアドレス (カンマ区切りで複数指定可能）</h4>
+				</div>
+				<div class="item">
+					<p>
+						<input soy:id="admin_addr" type="text" class="m-area" style="width:550px" placeholder="aaa@domain.com,bbb@domain.com" />
+					</p>
+				</div> 
+				
+				<div class="label">
+					<h4>通知メール</h4>
+				</div>
+				<div class="item">
+					<div>
+						<p class="break">件名：<input soy:id="admin_mail_title" type="text" class="m-area" style="width:510px" /></p>
+						<textarea soy:id="admin_mail_body" class="m-area liq-area" rows="8"></textarea><br />
+					</div>
+				</div>
+			
+				<div class="label">
+					<h4>ユーザーへの確認メール</h4>
+				</div>
+				<div class="item">
+					<p class="break">
+						<input id="is_send_confirm_mail" type="checkbox" soy:id="is_send_confirm_mail" />
+						<label for="is_send_confirm_mail">ユーザーへの確認メールを送信する</label>
+					</p>
+					<div>
+						<p class="break">件名：<input soy:id="mail_title" type="text" class="m-area" style="width:510px" /></p>
+						<textarea soy:id="mail_body" class="m-area liq-area" rows="8"></textarea><br />
+					</div>
+				</div>
+				
+				<div class="form-btn ce"> 
+					<input type="submit" name="save_basic" class="l-btn" value="保存" />
+					
+					<p class="ri">
+						初期設定に戻す場合はチェックを入れて<br />初期設定に戻すボタンを押して下さい。<br />
+						<input id="reset_object_config" type="checkbox" value="0" _name="object[config]"/>
+						初期設定に戻す
+						<input type="submit" name="save_basic" class="s-btn" value="初期設定に戻す" onclick="$('#reset_object_config').attr('name','object[config]')" />
+					</p> 
+				</div> 
+			</li>
+		</ul>
+</div><!-- // .form-section -->
+</div><!-- // .section -->
+
+<style type="text/css">
+.mail_body_info dt{
+	list-style:armenian;
+	margin-left:8px;
+}
+.mail_body_info dd{
+	padding-left:16px;
+}
+
+</style>

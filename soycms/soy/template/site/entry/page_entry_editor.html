@@ -1,0 +1,69 @@
+<!-- soy:id="section_list" -->
+<div class="section_list">
+	
+	<div class="article-header">
+		
+		<div class="text-mode-panel">
+			<div class="panel">
+				<div class="panel-line">
+					<div class="panel-parts"><a href="javascript:void(0);" onclick="aobata_editor.find(this).swapMode();" class="icon-btn btn-html toggle-btn" title="HTML"><em>HTML</em></a></div>
+					<div class="panel-parts has_form">
+						<div id="downpanel_delformat" class="downpanel">
+							<a href="javascript:void(0);" onclick="return _showoption(this);" class="icon-btn btn-delformat interval" title="ソースフォーマット"><em>ソースフォーマット</em></a>
+						</div>
+						<div id="downpanel_delformat_option" class="downpanel-fix" style="display:none;width:550px;">
+							<div class="downpanel-fix-inner">
+								<div class="mbreak">
+									<ul>
+										<!--
+										<li class="fl" style="width:50%;"><input type="checkbox" id="format_indent" checked /><label style="line-height:1;" for="format_indent">インデント</label></li>
+										-->
+										<li class="fl" style="width:50%;"><input type="checkbox" id="format_span" checked /><label style="line-height:1;" for="format_span">無駄なspanの除去</label></li>
+									</ul>
+								</div>
+								<p class="ri" style="clear:both;">
+									<input class="s-btn" type="button" onclick="aobata_editor.find(this).format($('#downpanel_delformat_option input:checked').map(function(){ return $(this).attr('id'); }).get());_hideallpopup();" value="OK" />
+									<input class="s-btn" type="button" onclick="_hideallpopup();" value="Cancel" />
+								</p>
+							</div>
+						</div> 
+					</div>
+					<div class="panel-parts">
+						<a class="icon-xme-btn btn-addelement" href="javascript:void(0);" title="セクションを追加" onclick="show_insert_lines(this);"><em><strong>セクションを追加</strong></em></a>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<div class="wysiwyg-mode-panel">
+
+		</div>
+		
+	</div>
+	
+	<div class="article-body">
+		<input type="hidden" soy:id="section_type" />
+		<input type="hidden" soy:id="section_snippet" />
+		<input type="hidden" soy:id="section_value" />
+		<input type="hidden" class="section_remove" soy:id="section_remove" value="0" />
+		<textarea soy:id="section_area" class="m-area liq-area html-editor"></textarea>
+	</div>
+	
+	
+	<div class="article-footer">
+		<div class="panel">	
+			<div class="panel-line">
+				<div class="panel-parts"><a class="icon-btn btn-orderup" href="javascript:void(0);" title="上と入れ換え"><em><strong>上と入れ換え</strong></em></a></div>
+				<div class="panel-parts"><a class="icon-btn btn-orderdown" href="javascript:void(0);" title="下と入れ換え"><em><strong>下と入れ換え</strong></em></a></div>
+				<div class="panel-parts do-remove"><a class="icon-xme-btn btn-delelement" href="javascript:void(0);" title="セクションを削除"><em><strong>セクションを削除</strong></em></a></div>
+				<div class="panel-parts undo-remove"><a class="icon-sh-btn btn-undo" href="javascript:void(0);" title="キャンセル"><em><strong>キャンセル</strong></em></a></div>
+				
+				<div class="panel-parts close-editor" style="float:right;"><a class="icon-btn btn-close" href="javascript:void(0);" title="閉じる"><em>閉じる</em></a></div>
+				
+			</div>
+		</div>
+	</div>
+	
+	<!--  // .panel -->
+</div><!-- // .section_list -->
+<!-- /soy:id="section_list" -->

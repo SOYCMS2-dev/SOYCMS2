@@ -1,0 +1,35 @@
+<div id="main-window1" class="main-window">
+	
+<div class="window-title">
+	<h2 class="title-text">ユーザー一覧</h2>
+</div>
+
+<div class="window-content">
+<div id="main-section1" class="section">
+	
+		<div soy:id="main_table">
+			<table class="list-table">
+				<thead>
+					<tr>
+						<th width="50">ユーザーID</th>
+						<th>名称</th>
+						<th>操作</th>
+					</tr>
+				</thead>
+				
+				<tbody>
+					<tr soy:id="user_list">
+						<td><span soy:id="user_id"></span></td>
+						<td><strong><span soy:id="name"></span></strong></td>
+						<td>
+							<a soy:id="detail_link" class="s-btn"><em>詳細</em></a>
+							<a soy:id="remove_link" class="button">削除</a>
+						</td>
+					</tr soy:id="user_list">
+				</tbody>
+			</table>
+			</div>
+</div>
+</div>
+
+</div>

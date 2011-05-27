@@ -1,0 +1,62 @@
+<div id="main-window-page-tree" class="main-window"> 
+				
+<div class="window-title"> 
+	<h2>ディレクトリ</h2> 
+</div> 
+
+<div class="window-content"> 
+
+	<div class="section">
+		<a soy:link="entry/search">記事の検索</a> ｜ 
+		<a soy:link="entry/search?status=review">未承認の記事(<!-- soy:id="count_review" -->100<!-- /soy:id="count_review" -->)</a> ｜
+		<a soy:link="entry/search?status=draft">下書きの記事(<!-- soy:id="count_draft" -->100<!-- /soy:id="count_draft" -->)</a> ｜
+		<a soy:link="entry/list/trash">ゴミ箱(<span class="trash_count" soy:id="count_trash">100</span>)</a>
+	</div>
+
+	<div class="section">
+		
+		<div class="pagelist-content">
+		<ul>
+			<!-- soy:id="directory_tree" -->
+			<li soy:id="page_list_wrap"> 
+				<dl> 
+					<dt class="image">
+						<a soy:id="list_link*">
+							<img soy:id="page_icon" style="width:32px;height:32px;" />
+						</a>
+					</dt>
+					<dt class="name">
+						<a soy:id="list_link*" class="noicon"><!-- soy:id="page_name" /--></a> (<!-- soy:id="entry_count" /-->)</dt>
+					<dd>
+						<!-- soy:id="page_uri" /-->
+					</dd> 
+				</dl>
+				<!-- soy:id="tree_child" -->
+				<ul>
+					<!-- soy:id="tree" -->ここが再帰的に実行<!-- /soy:id="tree" -->
+				</ul>
+				<!-- /soy:id="tree_child" --> 
+				
+			</li soy:id="page_list_wrap">
+			<!-- /directory_tree -->
+			
+			<!-- soy:id="label_list" -->
+			<li>
+				<dl>
+					<dt class="image">
+						<a soy:id="list_link*">
+							<img soy:id="label_icon" style="width:32px;height:32px;" />
+						</a>
+					</dt> 
+					<dt><a soy:id="list_link*"><!-- soy:id="label_name" /--></a> (<!-- soy:id="entry_count" /-->)</dt>
+				</dl> 
+			</li> 
+			<!-- /soy:id="label_list" -->
+			
+		</ul> 
+		</div>
+	</div>
+</div> 
+<!--  // .window-content --> 
+</div> 
+<!--  // #main-window-page-tree -->

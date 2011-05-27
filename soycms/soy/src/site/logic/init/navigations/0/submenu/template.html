@@ -1,0 +1,47 @@
+<!-- block:id="news" --> 
+<div class="section"> 
+	<h2><!-- cms:id="block_name" -->お知らせ<!-- /cms:id="block_name" --></h2> 
+	<dl class="archive-list">
+		<!-- cms:id="entry_list" --> 
+		<dt cms:id="create_date" cms:format="Y.m.d">2010.04.20</dt> 
+		<dd><a cms:id="entry_link"><!-- cms:id="title" -->テキストが入ります。<!-- /cms:id="title" --></a></dd>
+		<!-- /cms:id="entry_list" --> 
+	</dl> 
+	<p class="link-r"><a href="@@SITE_PATH@@news/">一覧</a></p> 
+</div> 
+<!-- //.section --> 
+<!-- /block:id="news" --> 
+
+<!-- block:id="catalog" --> 
+<div class="section"> 
+	<h2><!-- cms:id="block_name" -->カタログ<!-- /cms:id="block_name" --></h2> 
+	<ul class="img-list">
+		<!-- cms:id="entry_list" --> 
+		<li class="item"> 
+			<p class="image"><a cms:id="entry_link*"><img cms:id="thumbnail_image" alt="サンプル画像" width="50" height="50" /></a></p> 
+			<dl class="text"> 
+				<dt><a cms:id="entry_link"><!-- cms:id="title" -->タイトル<!-- /cms:id="title" --></a></dt> 
+				<dd cms:id="thumbnail_text">テキストが入ります。</dd> 
+			</dl> 
+		</li>
+		<!-- /cms:id="entry_list" --> 
+	</ul> 
+	<p class="link-r"><a href="@@SITE_PATH@@catalog/">一覧</a></p> 
+</div> 
+<!-- //.section --> 
+<!-- /block:id="catalog" --> 
+
+<!-- cms:include="banner-A" --> 
+<ul class="banner"> 
+	<li><a href="/"><img src="@@SITE_PATH@@themes/default/img/banner.gif" alt="バナー" width="243" height="60" /></a></li> 
+	<li><a href="/"><img src="@@SITE_PATH@@themes/default/img/banner.gif" alt="バナー" width="243" height="60" /></a></li> 
+</ul> 
+<!--  // .banner --> 
+<!-- /cms:include="banner-A" --> 
+
+<!-- cms:include="banner-B" --> 
+<ul class="banner"> 
+	<li><a href="/"><img src="@@SITE_PATH@@themes/default/img/banner-rss.gif" alt="RSS" width="47" height="15" /></a></li> 
+</ul> 
+<!--  // .banner --> 
+<!-- /cms:include="banner-B" --> 

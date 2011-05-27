@@ -1,0 +1,144 @@
+<div id="main-window1" class="main-window"> 
+					
+	<div class="window-title"> 
+		<h2>コンテンツのエクスポート</h2>
+	</div> 
+	
+	<div class="window-content">
+		<iframe id="target_fr" name="target_fr" src="about:blank;" frameborder="0" style="margin:0;padding:0;width:0px;position:absolute;height:0px;visibility:hidden;"></iframe>
+		
+		<form soy:id="form" target="target_fr"> 
+		
+		<div class="section">
+			<div class="title">
+				<h3>コンテンツのエクスポート</h3>
+			</div>
+			<div class="content">
+				<p soy:id="zip_error_message" class="error xxl">
+					この環境ではコンテンツのエクスポートを使用出来ません。Zip拡張を有効にして下さい。
+				</p>
+				
+				<p class="intro">エクスポートする内容を設定して下さい</p>
+				
+				<div class="form-section">
+					<div class="label">
+						<h4>エクスポートファイルの名前</h4>
+					</div>
+					<div class="item">
+						<input type="text" class="m-area" soy:id="filename" size="30" />
+						.zip
+					</div>
+				</div>
+				
+				<div class="form-section">
+					<div class="label">
+						<h4>サイトマップ</h4>
+					</div>
+					<div class="item">
+						
+						<div class="break" style="background-color:#dedede;padding:10px;">
+							<strong>一括</strong>: 
+							<input type="checkbox" id="export_attachments_toggle" class="s-btn" onclick="$('.export_attachments').attr('checked',$(this).attr('checked'));" checked />
+							<label for="export_attachments_toggle">添付ファイル・画像</label>
+						</div>
+						
+						<div class="pagelist-content">
+							<ul>
+							<!-- soy:id="page_list" -->
+							<li soy:id="page_list_wrap">
+								<div class="page_list_wrap"> 
+									<dl class="page-item">
+										<dt class="image">
+											<a soy:id="detail_link*">
+												<img soy:id="page_icon" style="width:32px;height:32px;" />
+											</a>
+										</dt>
+										<dt class="name">
+											<a soy:id="public_link*" class="noicon"><!-- soy:id="page_name" /--></a> (<!-- soy:id="page_uri" /-->)
+											<input soy:id="page_order" type="hidden" />
+										</dt> 
+										<dd>
+											<input type="checkbox" class="export_config" soy:id="export_config" onchange="on_change_tree(this);" />
+											<label soy:id="export_config_label">エクスポートする</label>
+											
+											<!-- soy:id="is_directory" -->
+											<input type="checkbox" soy:id="export_entry" />
+											<label soy:id="export_entry_label">記事をエクスポートする</label>(<!-- soy:id="entry_count" /-->)
+											<!-- /soy:id="is_directory" -->
+											
+											<!-- soy:id="is_not_directory" -->
+											<input type="hidden" soy:id="export_entry_hidden" />
+											<!-- /soy:id="is_not_directory" -->
+											
+											<input type="checkbox" class="export_attachments" soy:id="export_attachments" />
+											<label soy:id="export_attachments_label">添付ファイル・画像もエクスポートする</label>
+										</dd> 
+									</dl>
+									<!-- soy:id="tree_child" -->
+									<ul class="page-child">
+										<!-- soy:id="tree" -->ここが再帰的に実行<!-- /soy:id="tree" -->
+									</ul>
+									<!-- /soy:id="tree_child" --> 
+								</div>
+								
+							</li soy:id="page_list_wrap">
+							<!-- /page_list -->
+							</ul>
+							
+						</div>
+					</div><!-- //.item -->
+				</div><!-- //.form-section -->
+				
+				
+				<div class="form-btn ce">
+					<input id="start_download_btn" type="submit" name="build" class="l-btn" value="エクスポートをダウンロード" onclick="start_download(this);" />
+				</div>
+		
+				
+			</div> 
+		</div> 
+		<!--  // .section -->
+		
+		</form>
+		
+		<div id="download_message_wrap" class="section" style="display:none;">
+			<p id="download_message"></p>
+		</div><!-- // .section -->
+
+	</div> 
+	<!--  // .window-content --> 
+</div> 
+<!--  // #main-window1 -->
+
+<style type="text/css">
+.hidden-page{
+	display:none;
+}
+</style> 
+<script type="text/javascript">
+$(function(){
+	
+});
+
+function on_change_tree(ele){
+	flag = $(ele).attr("checked");
+	$(ele).closest(".page_list_wrap").find("input[type=checkbox]").attr("checked",flag);
+}
+
+function start_download(ele){
+	//$("#start_download_btn").hide();
+	$("#download_message_wrap").fadeIn();
+	$("#download_message").html('<span class="loading"></span>現在エクスポートファイルを作成しています。しばらくお待ち下さい。');
+}
+
+function notify_message(message){
+	$("#start_download_btn").show();
+	$("#download_message").html(message);
+}
+
+function notifySuccess(url){
+	$("#target_fr").attr("src",url);
+	
+}
+</script>
+

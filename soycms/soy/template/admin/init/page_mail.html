@@ -1,0 +1,209 @@
+<div class="main-window"> 
+<div class="window-title"> 
+	<h2>メールサーバーの設定</h2>
+</div>
+
+<div class="window-content content">
+	
+<div class="section">
+	<div class="title"> 
+		<h3>メールサーバー設定</h3> 
+	</div>	
+	<div class="content"> 
+		<form soy:id="form" method="post" action="xxx" id="post1" name="post1">
+			<input type="hidden" soy:id="is_ssl_enabled" id="is_ssl_enabled" value="0" />
+			<input type="hidden" soy:id="is_imap_enabled" id="is_imap_enabled" value="0" />
+			
+			<table class="form-table">
+				<tr>
+					<th>送信方法</th>
+					<td>
+						<input soy:id="send_server_type_sendmail" type="radio" name="server_type" />
+						<label for="send_server_type_sendmail">sendmail</label>
+						<input soy:id="send_server_type_smtp" type="radio" name="server_type" />
+						<label for="send_server_type_smtp">SMTP</label>
+					</td>
+				</tr>
+			
+				<tr>
+					<th>サーバー</th>
+					<td><input soy:id="send_server_address" type="text" name="" class="s-area" value="" /></td>
+				</tr>
+				<tr>
+					<th>ポート</th>
+					<td><input soy:id="send_server_port" type="text" name="" class="s-area" value="" /></td>
+				</tr>
+				<tr>
+					<th>SSL設定</th>
+					<td>
+					<input type="hidden" name="isUseSSLSendServer" value="0" />
+					<input soy:id="is_use_ssl_send_server" type="checkbox" name="" />
+					<label for="is_use_ssl_send_server">SSL(暗号化)を使用する</label>
+					
+					<p class="error" soy:id="ssl_disabled">SSLが使えないサーバーです。</p>
+					</td>
+				</tr>
+				
+				<tr>
+				<th rowspan="2">認証</th>
+				<td>
+					<input name="isUseSMTPAuth" type="hidden" value="0" />
+					<input soy:id="is_use_smtp_auth" type="checkbox" id="is_use_smtp_auth" />
+					<label for="is_use_smtp_auth">SMTP認証(SMTP-AUTH)を使用する</label>
+					<table class="inner_table">
+						<col style="width:100px;text-align:left;" />
+						<tr>
+							<th>ユーザー名</th>
+							<td><input soy:id="send_server_user" type="text" class="s-area" /></td>
+						</tr>
+						<tr>
+							<th>パスワード</th>
+							<td><input soy:id="send_server_password" type="password" name="" class="s-area" /></td>
+						</tr>
+
+					</table>
+				</td>
+			</tr>
+			
+			<tr>
+				<td>
+					<input name="isUsePopBeforeSMTP" type="hidden" value="0" />	
+					<input soy:id="is_use_pop_before_smtp" type="checkbox" name="" />
+					<label for="is_use_pop_before_smtp">「POP/IMAP before SMTP」を使用する</label>
+				</td>
+			</tr>
+		</table> 
+		
+	</div>
+		
+	<div class="section" id="pop_imap_config">
+		<div class="title"> 
+			<h3>POP/IMAP設定</h3> 
+		</div>	
+		
+		<table class="form-table">
+			<tr>
+				<th>受信方法</th>
+				<td>
+					<input soy:id="receive_server_type_pop" type="radio" name="server_type" />
+					<label for="receive_server_type_pop">POP3</label>
+					
+					<input soy:id="receive_server_type_imap" type="radio" name="server_type" />
+					<label for="receive_server_type_imap">IMAP</label>
+					
+					<p class="error" soy:id="imap_disabled">IMAPが使えないサーバーです。</p>
+				</td>
+			</tr>
+			<tr>
+				<th rowspan="2">サーバー設定</th>
+				<td style="background-color:white;">
+					<table class="inner_table">
+						<col style="width:100px;text-align:left;" />
+						<tr>
+							<th>サーバー</th>
+							<td><input class="s-area" soy:id="receive_server_address" type="text" name="" val()="" /></td>
+						</tr>
+						<tr>
+							<th>ポート</th>
+							<td><input class="s-area" soy:id="receive_server_port" type="text" name="" val()="" /></td>
+						</tr>
+						<tr>
+							<th>ユーザー名</th>
+							<td><input class="s-area" soy:id="receive_server_user" type="text" val()=""></td>
+						</tr>
+						<tr>
+							<th>パスワード</th>
+							<td><input class="s-area" soy:id="receive_server_password" type="password" name="" val()="" /></td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			
+			<tr>
+				<td>
+					<input name="isUseSSLReceiveServer" type="hidden" value="0" />
+					<input soy:id="is_use_ssl_receive_server" type="checkbox" name="" />
+					<label for="is_use_ssl_receive_server">SSL(暗号化)を使用する</label>
+
+					<p class="error" soy:id="ssl_disabled">SSLが使えないサーバーです。</p>
+				</td>
+			</tr>
+		</table>
+	</div>
+	
+	<div class="section">
+		<div class="title"> 
+			<h3>管理者のメールアドレス設定</h3>
+			<p class="intro">パスワードリマインダなど、SOY CMS2からメールを送信する場合には必ず設定してください。</p>
+		</div>	
+		
+		<table class="form-table">
+			<tr>
+				<th>管理者メールアドレス</th>
+				<td>
+					<input id="administrator_address" soy:id="administrator_address" type="text" class="m-area" size="50" value="" />
+				</td>
+			</tr>
+			<tr>
+				<th>管理者名称</th>
+				<td>
+					<input id="administrator_name" soy:id="administrator_name" type="text" class="m-area" size="50" value="" />
+				</td>
+			</tr>
+			
+			
+			<tr>
+				<th>返信先メールアドレス※</th>
+				<td>
+					<input soy:id="return_address" type="text" class="m-area" size="50" value="" />
+					<br />※返信先を別のメールアドレスに設定する場合
+				</td>
+			</tr>
+			<tr>
+				<th>返信先名称※</th>
+				<td>
+					<input soy:id="return_name" type="text" class="m-area" size="50" value="" />
+					<br />※返信先を別のメールアドレスに設定する場合
+				</td>
+			</tr>
+
+			<tr>
+				<th>文字コード</th>
+				<td>
+					<select soy:id="mail_encoding"></select>
+				</td>
+			</tr>
+			
+			<tr>
+				<th>テストメールを送信する<br />メールアドレス</th>
+				<td>
+					<input id="test_mailaddress" name="test_mailaddress" type="text" class="m-area" size="50" value="" />
+				</td>
+			</tr>
+		</table>
+		
+		<div class="form-btn ce">
+			<input class="l-btn" type="submit" name="test_mail" value="テストメールの送信" onclick="return confirm_test_send();" />
+			<input class="l-btn" type="submit" name="save_mail" value="保存" id="post1-btn1" name="post1-btn1" />
+		</div>
+		 
+	</form> 
+	
+	</div> 
+</div> 
+
+</div>
+
+<script type="text/javascript" soy:src="../common/js/soycms_config/mail.js"></script> 
+
+<script type="text/javascript">
+$(function(){
+	if($("#administrator_address").val().length < 1){
+		$("#administrator_address").val($("#mail_address_input",window.parent.document).val());
+	}
+	if($("#administrator_name").val().length < 1){
+		$("#administrator_name").val($("#user_id_input",window.parent.document).val());
+	}
+});
+
+</script>

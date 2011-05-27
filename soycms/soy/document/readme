@@ -1,0 +1,13 @@
+-conf
+	configure directory
+	(if you make some program plesase include common.inc.php)
+-lib
+	library directory
+-pages
+	view classes
+-sql
+-src
+	all files in base directory are included automatic.
+-template
+	template directory
+test

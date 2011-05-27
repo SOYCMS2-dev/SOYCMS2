@@ -1,0 +1,61 @@
+<div id="main-window-sitemap" class="main-window">
+				
+	<div id="window-title-directory" class="window-title"> 
+		<h2><span soy:id="menu_title">サイトマップ</span></h2> 
+	</div> 
+	
+	<div class="window-content"> 
+		
+		<div id="main-section1" class="section"> 
+		
+			<p class="ri sitemap-mode-navi">
+				<a href="javascript:void(0);" class="mode-all" onclick="common_sitemap_mode('all');">全て</a> | <a class="mode-dir" href="javascript:void(0);" onclick="common_sitemap_mode('dir');">ディレクトリのみ</a>
+			</p>
+			<div class="pagelist-content">
+				<ul>
+					<!-- soy:id="sitemap" -->
+					<li soy:id="page_list_wrap"> 
+						<dl class="page-item">
+							<dt class="image">
+								<a href="javascript:void(0);" onclick="$($(this).parents('.type-dir')[0]).find('.type-page').show();">
+									<img soy:id="page_icon" style="width:32px;height:32px;" />
+								</a>
+							</dt>
+							<dt class="name">
+								<a class="noicon" soy:id="detail_link"><!-- soy:id="sitemap_page_name" /--></a>
+								(<!-- soy:id="page_uri" /-->)
+							</dt> 
+						</dl>
+						<!-- soy:id="tree_child" -->
+						<ul class="page-child">
+							<!-- soy:id="tree" -->ここが再帰的に実行<!-- /soy:id="tree" -->
+						</ul>
+						<!-- /soy:id="tree_child" --> 
+						
+					</li soy:id="page_list_wrap">
+					<!-- /sitemap -->
+					
+				</ul>
+			</div>
+			
+			
+		</div> 
+		<!--  // #main-section1 --> 
+
+		
+	</div> 
+	<!--  // .window-content --> 
+</div> 
+<!--  // #main-window-sitemap -->
+
+<script type="text/javascript">
+//<?php $mode = SOYCMS_UserData::get("sitemap_mode","all"); ?>
+//<?php if($mode == "dir"){ ?>
+
+$(function(){
+	$(".pagelist-content .type-page").hide();
+	$(".sitemap-mode-navi").addClass("mode-dir");
+});
+
+//<?php } ?>
+</script>

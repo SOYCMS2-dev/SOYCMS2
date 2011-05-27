@@ -1,0 +1,432 @@
+<div id="main-window1" class="main-window"> 
+				
+<div class="window-title"> 
+	<h2>投稿ボタンの管理</h2> 
+</div> 
+
+<div class="window-content"> 
+
+<form soy:id="form" method="post" action="xxx" id="post1" name="post1">
+	
+	<div id="main-section1" class="section"> 
+
+		<div class="content"> 
+
+			<div id="post1-section1" class="form-section"> 
+				
+				<h3>投稿ボタン一覧</h3>
+				
+				<div class="pagelist-menu"> 
+					<ul> 
+						<li class="plus-btn"><a soy:link="page/snippet/create">投稿ボタンの追加</a></li> 
+					</ul> 
+				</div>
+				
+				<div class="save_order_wrap form-btn ce break" style="display:none;"> 
+					<input type="submit" value="表示順を保存する" id="post1-submit" name="post1-submit" class="l-btn" /> 
+				</div>  
+
+				<!-- soy:id="snippet_exists" -->
+				<table class="list-table"> 
+					<thead> 
+						<tr>
+							<th width="26%" scope="col">投稿ボタン名</th>
+							<th width="66%" scope="col">説明</th> 
+							<th width="9%" class="s-cell" scope="col">表示順</th> 
+							<th width="9%" class="s-cell" scope="col">設定</th> 
+						</tr> 
+					</thead> 
+					<tbody> 
+						<!-- soy:id="snippet_list" -->
+						<tr> 
+							<td>
+								<div class="panel-line">
+									<a class="icon-btn <!-- soy:id="snippet_class" /-->" href="javascript:void(0);"><em></em></a>
+									<!-- soy:id="snippet_name" -->ライブラリ名A<!-- /snippet_name -->
+								</div>
+							</td> 
+							<td>
+								<!-- soy:id="snippet_comment" /-->
+								
+								<!-- soy:id="has_child_snippet" -->
+									<table class="list-table">
+									<tr>
+										<th width="26%" scope="col">投稿ボタン名</th>
+										<th width="66%" scope="col">説明</th> 
+										<th width="9%" class="s-cell" scope="col">設定</th> 
+									</tr>
+									<!-- soy:id="child_snippet" -->
+									<tr>
+										<td><!-- soy:id="snippet_name" -->ライブラリ名A<!-- /snippet_name --></td>
+										<td><!-- soy:id="snippet_comment" /--></td>
+										<td>
+											<a soy:id="snippet_edit_link" class="sh-btn"><em>編集</em></a>
+											<a soy:id="snippet_remove_link" class="sh-btn"><em>削除</em></a>
+										</td>
+									</tr>
+									<!-- /soy:id="child_snippet" -->
+									</table>
+								<!-- /soy:id="has_child_snippet" -->
+							</td> 
+							<td>
+								<a href="javascript:void(0);" class="sh-btn up_btn"><em>↑</em></a>
+								<a href="javascript:void(0);" class="sh-btn down_btn"><em>↓</em></a>
+							</td>
+							<td>
+								<input type="hidden" soy:id="snippet_order" />
+								<a soy:id="snippet_edit_link" class="sh-btn"><em>編集</em></a>
+								<a soy:id="snippet_apppend_link" class="sh-btn"><em>追加</em></a>
+								<a soy:id="snippet_remove_link" class="sh-btn"><em>削除</em></a>
+							</td> 
+						</tr> 
+						<!-- /soy:id="snippet_list" -->
+					</tbody> 
+				</table> 
+					<!-- /soy:id="snippet_exists" --> 
+					
+				<!-- soy:id="snippet_not_exists" -->
+				<p>ライブラリはありません</p>
+				<!-- /soy:id="snippet_not_exists" -->
+
+
+				</div> 
+				
+
+			</form> 
+		</div> 
+	</div> 
+	<!--  // #main-section1 -->
+	
+	<div class="save_order_wrap form-btn ce break" style="display:none;"> 
+		<input type="submit" value="表示順を保存する" id="post1-submit" name="post1-submit" class="l-btn" /> 
+	</div>  
+	
+</form>
+
+
+</div> 
+<!--  // .window-content --> 
+</div> 
+<!--  // #main-window1 --> 
+
+
+
+<a name="wysiwyg_config"></a>
+
+<div id="main-window2" class="main-window"> 
+				
+<div class="window-title"> 
+	<h2>WYSIWYGエディタの管理</h2> 
+</div> 
+
+<div class="window-content">
+	
+	<div class="section"> 
+
+		<div class="content">  
+
+			<form soy:id="config_form">
+				
+				<div class="label"> 
+					<h4>記事編集時に読み込むCSS</h4> 
+				</div>
+				<div class="item">
+					<!-- soy:quickhelp="custom_css" /-->
+					
+					<p>1件毎に改行してください</p>
+					 
+					<p>
+						<textarea class="m-area liq-area" soy:id="editor_custom_css" rows="4"></textarea> 
+					</p> 
+				</div>
+				
+				<div class="form-btn ce break"> 
+					<input type="submit" value="設定" name="save_wysiwyg_config" class="l-btn" /> 
+				</div> 
+			
+			</form>
+		</div><!-- //.content -->
+	</div><!-- //.section -->
+	
+	<div class="section" style="display:none;">  
+		<div class="title">
+			<h3>テキストのプロパティウィンドウ</h3>
+		</div>
+		<div class="content">
+			<table class="list-table wysiwyg-btn">
+				<thead>
+					<tr>
+						<th width="57" scope="col">ボタン名</th>
+						<th width="459" scope="col">操作</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td class="ce"><div class="panel-parts"><a href="javascript:void(0);" class="icon-btn btn-bold" title="太字"><em>太字</em></a></div></td>
+						<td>
+							<dl>
+								<dt>タグで囲む</dt>
+								<dd><input type="text" class="s-area" soy:id="bold_tag" size="4" /></dd>
+								<dt>クラスを指定</dt>
+								<dd><input type="text" class="s-area" soy:id="bold_class" size="10" /></dd>
+								<dt>style属性を指定</dt>
+								<dd><input type="text" class="s-area" soy:id="bold_style" /></dd>
+							</dl>
+						</td>
+					</tr>
+					<tr>
+						<td class="ce"><div class="panel-parts"><a href="javascript:void(0);" class="icon-btn btn-italic" title="斜体"><em>斜体</em></a></div></td>
+						<td>
+							<dl>
+								<dt>タグで囲む</dt>
+								<dd><input type="text" class="s-area" soy:id="bold_tag" size="4" /></dd>
+								<dt>クラスを指定</dt>
+								<dd><input type="text" class="s-area" soy:id="bold_class" size="10" /></dd>
+								<dt>style属性を指定</dt>
+								<dd><input type="text" class="s-area" soy:id="bold_style" /></dd>
+							</dl>
+						</td>
+					</tr>
+					<tr>
+						<td class="ce"><div class="panel-parts"><a href="javascript:void(0);" class="icon-btn btn-underline" title="アンダーライン"><em>アンダーライン</em></a></div></td>
+						<td>
+							<dl>
+								<dt>タグで囲む</dt>
+								<dd><input type="text" class="s-area" soy:id="bold_tag" size="4" /></dd>
+								<dt>クラスを指定</dt>
+								<dd><input type="text" class="s-area" soy:id="bold_class" size="10" /></dd>
+								<dt>style属性を指定</dt>
+								<dd><input type="text" class="s-area" soy:id="bold_style" /></dd>
+							</dl>
+						</td>
+					</tr>
+					<tr>
+						<td class="ce"><div class="panel-parts"><a href="javascript:void(0);" class="icon-btn btn-del" title="打ち消し線"><em>打ち消し線</em></a></div></td>
+						<td>
+							<dl>
+								<dt>タグで囲む</dt>
+								<dd><input type="text" class="s-area" soy:id="bold_tag" size="4" /></dd>
+								<dt>クラスを指定</dt>
+								<dd><input type="text" class="s-area" soy:id="bold_class" size="10" /></dd>
+								<dt>style属性を指定</dt>
+								<dd><input type="text" class="s-area" soy:id="bold_style" /></dd>
+							</dl>
+						</td>
+					</tr>
+					<tr>
+						<td class="ce"><div class="panel-parts"><div id="downpanel19" class="downpanel"><a href="javascript:void(0);" class="icon-btn btn-fontsize" title="文字サイズ"><em>文字サイズ</em></a><a href="javascript:void(0);" class="downarrow-s-btn interval" title="文字サイズ・プルダウンメニュー"><em>文字サイズ・プルダウンメニュー</em></a></div></div></td>
+						<td>
+							<table class="form-table">
+								<tr>
+									<th>極小</th>
+									<td>
+										<dt>タグで囲む</dt>
+										<dd><input type="text" class="s-area" soy:id="bold_tag" size="4" /></dd>
+										<dt>クラスを指定</dt>
+										<dd><input type="text" class="s-area" soy:id="bold_class" size="10" /></dd>
+										<dt>style属性を指定</dt>
+										<dd><input type="text" class="s-area" soy:id="bold_style" /></dd>
+									</td>
+								</tr>
+								<tr>
+									<th>小</th>
+									<td>
+										<dt>タグで囲む</dt>
+										<dd><input type="text" class="s-area" soy:id="bold_tag" size="4" /></dd>
+										<dt>クラスを指定</dt>
+										<dd><input type="text" class="s-area" soy:id="bold_class" size="10" /></dd>
+										<dt>style属性を指定</dt>
+										<dd><input type="text" class="s-area" soy:id="bold_style" /></dd>
+									</td>
+								</tr>
+								<tr>
+									<th>中</th>
+									<td>
+										<dt>タグで囲む</dt>
+										<dd><input type="text" class="s-area" soy:id="bold_tag" size="4" /></dd>
+										<dt>クラスを指定</dt>
+										<dd><input type="text" class="s-area" soy:id="bold_class" size="10" /></dd>
+										<dt>style属性を指定</dt>
+										<dd><input type="text" class="s-area" soy:id="bold_style" /></dd>
+									</td>
+								</tr>
+								<tr>
+									<th>大</th>
+									<td>
+										<dt>タグで囲む</dt>
+										<dd><input type="text" class="s-area" soy:id="bold_tag" size="4" /></dd>
+										<dt>クラスを指定</dt>
+										<dd><input type="text" class="s-area" soy:id="bold_class" size="10" /></dd>
+										<dt>style属性を指定</dt>
+										<dd><input type="text" class="s-area" soy:id="bold_style" /></dd>
+									</td>
+								<tr>
+									<th>特大</th>
+									<td>
+										<dt>タグで囲む</dt>
+										<dd><input type="text" class="s-area" soy:id="bold_tag" size="4" /></dd>
+										<dt>クラスを指定</dt>
+										<dd><input type="text" class="s-area" soy:id="bold_class" size="10" /></dd>
+										<dt>style属性を指定</dt>
+										<dd><input type="text" class="s-area" soy:id="bold_style" /></dd>
+									</td>
+								</tr>
+								<tr>
+									<th>超特大</th>
+									<td>
+										<dt>タグで囲む</dt>
+										<dd><input type="text" class="s-area" soy:id="bold_tag" size="4" /></dd>
+										<dt>クラスを指定</dt>
+										<dd><input type="text" class="s-area" soy:id="bold_class" size="10" /></dd>
+										<dt>style属性を指定</dt>
+										<dd><input type="text" class="s-area" soy:id="bold_style" /></dd>
+									</td>
+								</tr>
+								<tr>
+									<th>極大</th>
+									<td>
+										<dt>タグで囲む</dt>
+										<dd><input type="text" class="s-area" soy:id="bold_tag" size="4" /></dd>
+										<dt>クラスを指定</dt>
+										<dd><input type="text" class="s-area" soy:id="bold_class" size="10" /></dd>
+										<dt>style属性を指定</dt>
+										<dd><input type="text" class="s-area" soy:id="bold_style" /></dd>
+									</td>
+								</tr>
+							</table>
+					</tr>
+					<tr>
+						<td class="ce"><div class="panel-parts"><a href="javascript:void(0);" class="icon-btn btn-left" title="左揃え"><em>左揃え</em></a></div></td>
+						<td>
+							<dl>
+								<dt>タグで囲む</dt>
+								<dd><input type="text" class="s-area" soy:id="bold_tag" size="4" /></dd>
+								<dt>クラスを指定</dt>
+								<dd><input type="text" class="s-area" soy:id="bold_class" size="10" /></dd>
+								<dt>style属性を指定</dt>
+								<dd><input type="text" class="s-area" soy:id="bold_style" /></dd>
+							</dl>
+						</td>
+					</tr>
+					<tr>
+						<td class="ce"><div class="panel-parts"><a href="javascript:void(0);" class="icon-btn btn-center" title="中央揃え"><em>中央揃え</em></a></div></td>
+						<td>
+							<dl>
+								<dt>タグで囲む</dt>
+								<dd><input type="text" class="s-area" soy:id="bold_tag" size="4" /></dd>
+								<dt>クラスを指定</dt>
+								<dd><input type="text" class="s-area" soy:id="bold_class" size="10" /></dd>
+								<dt>style属性を指定</dt>
+								<dd><input type="text" class="s-area" soy:id="bold_style" /></dd>
+							</dl>
+						</td>
+					</tr>
+					<tr>
+						<td class="ce"><div class="panel-parts"><a href="javascript:void(0);" class="icon-btn btn-right interval" title="右揃え"><em>右揃え</em></a></div></td>
+						<td>
+							<dl>
+								<dt>タグで囲む</dt>
+								<dd><input type="text" class="s-area" soy:id="bold_tag" size="4" /></dd>
+								<dt>クラスを指定</dt>
+								<dd><input type="text" class="s-area" soy:id="bold_class" size="10" /></dd>
+								<dt>style属性を指定</dt>
+								<dd><input type="text" class="s-area" soy:id="bold_style" /></dd>
+							</dl>
+						</td>
+					</tr>
+					<tr>
+						<td class="ce"><div class="panel-parts"><a href="javascript:void(0);" class="icon-btn btn-indent" title="インデント"><em>インデント</em></a></div></td>
+						<td>
+							<dl>
+								<dt>タグで囲む</dt>
+								<dd><input type="text" class="s-area" soy:id="bold_tag" size="4" /></dd>
+								<dt>クラスを指定</dt>
+								<dd><input type="text" class="s-area" soy:id="bold_class" size="10" /></dd>
+								<dt>style属性を指定</dt>
+								<dd><input type="text" class="s-area" soy:id="bold_style" /></dd>
+							</dl>
+						</td>
+					</tr>
+					<tr>
+						<td class="ce"><div class="panel-parts"><div id="downpanel23" class="downpanel"><a href="javascript:void(0);" class="icon-btn btn-margin" title="マージン"><em>マージン</em></a><a href="javascript:void(0);" class="downarrow-s-btn interval" title="マージン・プルダウンメニュー"><em>マージン・プルダウンメニュー</em></a></div></div></td>
+						<td>
+							<table class="form-table">
+								<tr>
+									<th>下マージン小</th>
+									<td>
+										<dl>
+											<dt>タグで囲む</dt>
+											<dd><input type="text" class="s-area" soy:id="bold_tag" size="4" /></dd>
+											<dt>クラスを指定</dt>
+											<dd><input type="text" class="s-area" soy:id="bold_class" size="10" /></dd>
+											<dt>style属性を指定</dt>
+											<dd><input type="text" class="s-area" soy:id="bold_style" /></dd>
+										</dl>
+									</td>
+								</tr>
+								<tr>
+									<th>マージン(１行）</th>
+									<td>
+										<dl>
+											<dt>タグで囲む</dt>
+											<dd><input type="text" class="s-area" soy:id="bold_tag" size="4" /></dd>
+											<dt>クラスを指定</dt>
+											<dd><input type="text" class="s-area" soy:id="bold_class" size="10" /></dd>
+											<dt>style属性を指定</dt>
+											<dd><input type="text" class="s-area" soy:id="bold_style" /></dd>
+										</dl>
+									</td>
+								</tr>
+								<tr>
+									<th>マージン(２行）</th>
+									<td>
+										<dl>
+											<dt>タグで囲む</dt>
+											<dd><input type="text" class="s-area" soy:id="bold_tag" size="4" /></dd>
+											<dt>クラスを指定</dt>
+											<dd><input type="text" class="s-area" soy:id="bold_class" size="10" /></dd>
+											<dt>style属性を指定</dt>
+											<dd><input type="text" class="s-area" soy:id="bold_style" /></dd>
+										</dl>
+									</td>
+								</tr>
+								<tr>
+									<th>マージン(３行）</th>
+									<td>
+										<dl>
+											<dt>タグで囲む</dt>
+											<dd><input type="text" class="s-area" soy:id="bold_tag" size="4" /></dd>
+											<dt>クラスを指定</dt>
+											<dd><input type="text" class="s-area" soy:id="bold_class" size="10" /></dd>
+											<dt>style属性を指定</dt>
+											<dd><input type="text" class="s-area" soy:id="bold_style" /></dd>
+										</dl>
+									</td>
+								</tr>
+							</table>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			
+			<div class="form-btn ce break"> 
+				<input type="submit" value="設定" name="save_wysiwyg_config" class="l-btn" /> 
+			</div>
+			
+		</div><!-- // .content -->
+	</div><!-- // .section -->
+</div><!-- // .window-content -->
+</div><!-- // #main-window2 -->
+<style type="text/css">
+.wysiwyg-btn dt{
+	float:left;
+	font-weight:bold;
+	vertical-align:middle;
+	margin:2px 5px;
+}
+.wysiwyg-btn dd{
+	float:left;
+}
+
+</style>
+

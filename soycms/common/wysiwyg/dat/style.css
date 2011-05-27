@@ -1,0 +1,166 @@
+.aobata_editor_wrap{
+	position:relative;
+	height:100%;
+	width:100%;
+}
+.aobata_editor_wrap iframe{
+	height:100%;
+	width:100%;
+	overflow:auto;
+}
+.aoboata_editor_textarea{
+	position:absolute;
+}
+.aobata_editor_param_view{
+	display:none;
+	z-index:1000000;
+	position:fixed;
+	width:100%;
+	height:190px;
+	
+	left:0;
+	bottom:0px;
+}
+
+.aobata_editor_param_view  .property-panel{
+	width:100%;
+}
+
+.aobata_editor_param_view .btn-close{
+	background:url("./img/close-btn.png") no-repeat;
+	position: absolute;
+	width: 24px;
+	height: 24px;
+	top: -10px;
+	right: -10px;
+	cursor:pointer;
+}
+
+.tag-img .type_text{
+	display:none;
+}
+.tag-other .type_img{
+	display:none;
+}
+
+/* table context menu */
+#aobata_editor_table_menu{
+	position:absolute;
+	border:solid 1px black;
+	background-color:#cdcdcd;
+	text-align:left;
+}
+
+#aobata_editor_table_menu li{
+	padding:5px;
+}
+#aobata_editor_table_menu li.table-context-menu:hover{
+	background-color:#545959;
+	color:white !important;
+	font-weight:bold;
+}
+#aobata_editor_table_menu a{
+	text-decoration:none;
+}
+#aobata_editor_table_menu li:hover a{
+	color:white;
+}
+
+/* header footer menu */
+
+.article-header{
+	display:none;
+	
+	width:100%;
+	position:fixed;
+	top:0;
+	left:0;
+	z-index:2000000;
+}
+
+.article-footer{
+	display:none;
+	
+	width:100%;
+	position:fixed;
+	bottom:0;
+	left:0;
+	z-index:2000000;
+}
+
+.aobata_editor_actived .article-header,
+.aobata_editor_actived .article-footer,
+.aobata_editor_actived #insert_new_sections,
+.aobata_editor_actived #append_new_sections{
+	display:block;
+}
+
+
+.aobata_editor_actived .article-body{
+	border:2px solid #999;
+}
+
+.aobata_editor_actived .undo-remove{
+	display:none;
+}
+
+.aobata_editor_appended .article-body{
+	box-shadow: 0px 0 1px 3px #66cccc;
+	-webkit-box-shadow: 0px 0 1px 3px #66cccc;
+	-moz-box-shadow: 0px 0 1px 3px #66cccc;
+}
+
+.section_removed .undo-remove{
+	display:block;
+}
+.section_removed .btn-delelement{
+	display:none;
+}
+
+.text-mode-panel{
+	display:none;
+}
+
+.text-mode .text-mode-panel{
+	display:block;
+}
+
+.text-mode .aobata_editor_param_tool{
+	display:none;
+}
+
+/* preview */
+.aobata_preview_overlay{
+	background-color:transparent;
+	height:100%;
+	position:absolute;
+	width:100%;
+	z-index:10;
+}
+
+
+.panel-header .panel-title{
+	cursor:move;
+}
+
+.downpanel-fix{
+	z-index:20000000;
+}
+
+.downmenu-layer-right{
+	margin-left:46px;
+	margin-top:-31px;
+}
+
+/* image */
+.panel-image-preview{
+	right:15px;
+	position:absolute;
+	padding:5px;
+	border:solid 1px #666;
+}
+.panel-image-preview img{
+	border:solid 1px #666;
+	width:70px;
+	height:70px;
+}

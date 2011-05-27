@@ -1,0 +1,57 @@
+<!DOCTYPE html> 
+<html lang="ja" dir="ltr" > 
+<head> 
+<meta charset="utf-8" /> 
+<title>SOYCMS2 File Manager</title>
+</head>  
+<body>
+	
+	<div id="main" class="section">
+		<div class="content" style="width:90%;height:90%;overflow:auto;text-align:left;">
+		
+			<!-- soy:id="file_not_exists" -->
+			<div class="ce">
+				<p class="xl">指定のファイルが見つかりません</p>
+				<button onclick="common_close_editor();" class="m-btn">閉じる</button>
+			</div>
+			<!-- /soy:id="file_not_exists" -->
+			
+			<form soy:id="form">
+				
+				<!-- soy:id="file_exists" -->
+				<div class="form-section">
+					<div class="label">
+						<h2><!-- soy:id="file_path" /--></h2>
+					</div>
+					
+					<p class="notice xl" style="color:#666;" soy:id="updated">更新しました</p>
+					
+					<div class="item">
+						<textarea soy:id="file_content" class="liq-area m-area" rows="18"></textarea>
+						<img soy:id="image_preview" />
+					</div>
+				</div>
+				
+				
+				<!-- soy:id="is_not_image" -->
+				<div class="form-btn ce">
+					<input type="submit" name="save" value="保存" class="l-btn" />
+				</div>
+				<!-- /soy:id="is_not_image" -->
+				
+				<!-- soy:id="is_image" -->
+				<div class="form-btn ce">
+					<input type="button" name="save" value="閉じる" class="l-btn" onclick="common_close_editor();" />
+				</div>
+				<!-- /soy:id="is_image" -->
+				
+				<!-- /soy:id="file_exists" -->
+			
+			</form>
+			
+		</div>
+	</div>
+	
+	
+</body> 
+</html> 

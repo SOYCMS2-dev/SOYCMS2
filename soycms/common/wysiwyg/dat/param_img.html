@@ -1,0 +1,115 @@
+<div id="img-property-panel" class="property-panel"> 
+	<div class="panel-header"> 
+		<div class="panel-title"><strong>プロパティ</strong></div> 
+		<div class="panel-close" title="閉じる" onclick="aobata_editor.get().closeParam();"><span></span></div> 
+	</div>
+	<div class="panel icon-btn-panel">
+		
+		<div class="panel-line panel-image-preview"></div>
+		
+		<div class="panel-line"> 
+			<div class="panel-parts"><label>ファイルパス</label>
+			<input id="img_attr_src" name="post1-2" type="text" class="s-area input-link" size="42" value="http://" onchange="var val=$(this).val();aobata_editor.get().execNode(function(node){$(node).attr('src',val)});" /></div> 
+			<div class="panel-parts"><input type="button" value="参照" id="post5-btn1" name="post5-btn1" class="s-btn" onclick="entry_editor_show_attachments(function(img,link){
+							$('#img_attr_width').val('');
+							$('#img_attr_height').val('');
+							if(!link)link='';
+							$('#img_attr_href').val(link).trigger('change');
+							$('#img_attr_src').val(img).trigger('change');
+							
+						});" /></div> 
+			<div class="panel-parts"><label>代替テキスト</label>
+			<input name="post1-2" type="text" class="s-area" id="img_attr_alt" value="" size="16" onchange="var val=$(this).val();aobata_editor.get().execNode(function(node){$(node).attr('alt',val)});" /></div> 
+		</div> 
+		
+		<div class="panel-line">
+			<script type="text/javascript">
+			function aobata_change_image_size(width,height){
+				
+				if((width != null && width.length < 1) || (height != null && height.length <1)){
+					$("#img_attr_width").val("");
+					$("#img_attr_height").val("");
+					
+					aobata_editor.get().execNode(function(node){
+						$(node).removeAttr('width');
+						$(node).removeAttr('height');
+					});
+					return;
+				}
+				
+				
+				
+				var keep_ratio = $("#img_attr_aspect").attr("checked");
+				var img = new Image;
+				img.src = $("#img_attr_src").val();
+				var img_width = img.width,img_height = img.height;
+				
+				if(keep_ratio){
+					if(width){
+						height = Math.floor(img_height * width / img_width);
+						$("#img_attr_height").val(height);
+					}
+					
+					else if(height){
+						width = Math.floor(img_width * height / img_height);
+						$("#img_attr_width").val(width);
+					}
+				}
+				
+				aobata_editor.get().execNode(function(node){
+					if(width > 10)$(node).attr('width',width);
+					if(height > 10)$(node).attr('height',height);
+				});
+			}
+			</script>
+			<div class="panel-parts"><label>幅</label><input type="text" class="s-area" id="img_attr_width" size="3" onchange="var val=$(this).val();aobata_change_image_size(val,null);" /></div> 
+			<div class="panel-parts"><label>高さ</label><input type="text" class="s-area" id="img_attr_height" size="3" onchange="var val=$(this).val();aobata_change_image_size(null,val);" /></div> 
+			<div class="panel-parts"><label>縦横比を維持</label><input type="checkbox" id="img_attr_aspect" checked /></div>
+			<div class="panel-parts"><label>テキストの位置</label>
+				<select id="img_align" onchange="aobata_editor.get().execNode(function(node){$(node).css('verticalAlign',$('#img_align').val());});">
+					<option value="baseline">ベースライン</option>
+					<option value="top">上端揃え</option>
+					<option value="middle">上下中央揃え</option>
+					<option value="bottom">下端揃え</option>
+					<option value="text-top">テキスト上端揃え</option>
+					<option value="text-bottom">テキスト下端揃え</option>
+				</select>
+			</div>
+			<div class="panel-parts"><label>回りこみ</label>
+				<select id="img_float" onchange="aobata_editor.get().execNode(function(node){val=$('#img_float').val();$(node).css({'float':val,cssFloat:val,styleFloat:val});});">
+					<option value="none">回りこみ解除</option>
+					<option value="left">右に回り込み</option>
+					<option value="right">左に回りこみ</option>
+				</select>
+			</div>
+		</div> 
+		
+		<div class="panel-line"> 
+			<div class="panel-parts"><label>リンク先URL</label>
+			<input name="post1-2" type="text" class="s-area input-link" id="img_attr_href" size="42" value="http://" onchange="aobata_editor.get().execCommand('imageLink',$(this).val());" /></div> 
+			<div class="panel-parts"> 
+				<label>ターゲット</label><select id="img_attr_target" name="post1-5"> 
+					<option value="" selected="selected">指定なし</option> 
+					<option value="_blank" >_blank</option> 
+					<option value="_parent" >_parent</option> 
+					<option value="_self" >_self</option> 
+					<option value="_top" >_top</option> 
+				</select> 
+			</div> 
+		</div> 
+		
+		<div class="panel-line">
+			<div class="panel-parts"> 
+				<label>id</label>
+				<input class="s-area" type="text" id="attr_id" value="" onkeyup="var val=$(this).val();aobata_editor.get().execNode(function(node){$(node).attr('id',val);});" /> 
+			</div> 
+			<div class="panel-parts"> 
+				<label>class</label> 
+				<input class="s-area" type="text" id="attr_class" value="" onkeyup="var val=$(this).val();aobata_editor.get().execNode(function(node){$(node).attr('class',val);});" /> 
+			</div> 
+		</div> 
+		
+	</div> 
+	<!--  // .panel --> 
+</div> 
+<!--  / #img-property-panel --> 

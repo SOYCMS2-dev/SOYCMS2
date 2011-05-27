@@ -1,0 +1,79 @@
+<div id="main-window1" class="main-window">
+	
+<div class="window-title">
+	<h2 class="title-text">サイト一覧</h2>
+</div>
+
+<div class="window-content">
+<div id="main-section1" class="section">
+	
+		<div soy:id="main_table">
+			<table class="list-table">
+				<thead>
+					<tr>
+						<th>サイトID</th>
+						<th>サイト名称</th>
+						<th>リンク</th>
+						<th>操作</th>
+					</tr>
+				</thead>
+				
+				<tbody>
+					<!-- soy:id="site_list" -->
+					<tr soy:id="site_row" class="site-list">
+						<td>
+							<img soy:id="site_favicon_img" width="16" height="16" />
+							<span soy:id="site_id"></span>
+						</td>
+						<td><span soy:id="site_name"></span></td>
+						<td><a soy:id="site_url"></a></td>
+						<td>
+							<a soy:id="detail_link" class="button">詳細</a>
+							<a soy:id="login_link" class="button">ログイン</a>
+						</td>
+					</tr>
+					<!-- /soy:id="site_list" -->
+				</tbody>
+			</table>
+		</div>
+</div>
+	
+	<!-- soy:id="is_super_user" -->
+	<div class="section">
+		<div class="lbreak ce">
+			<p class="intro">
+				<a class="m-btn" soy:link="site/create"><em>サイトを作成</em></a>
+			</p>
+			<p>
+				<a soy:link="site/skeleton"><em>サイトテンプレートの管理</em></a>
+			</p>
+		</div>
+	</div>
+	<!-- /soy:id="is_super_user" -->
+
+</div>
+
+</div>
+
+<script type="text/javascript">
+$(function(){
+	var url = SOYCMS_ROOT_URL + "admin/ajax/check_site_login";
+	
+	$(".site-list").each(function(){
+		id = $(this).attr("id");
+		site_id = id.replace(/site-/,"");
+		
+		$.post(url,{ id : site_id }, (function(_id){
+			
+			return function(res){
+				if (res == 0) {
+					$("#" + _id).hide();
+				}else{
+					$("#" + _id).show();
+				}
+			}
+		})(id));	
+	});
+	
+});
+</script>

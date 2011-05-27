@@ -1,0 +1,202 @@
+<div class="section"> 
+
+	<ul class="crumbs">
+		<li><a soy:link="./" title="管理画面トップ" class="home_btn">管理画面トップ</a></li>
+		<li><a soy:link="page/list">ディレクトリの管理</a></li>
+		<li soy:id="type_error"><a soy:link="page/error">エラーページの管理</a></li>
+		<li><a href="#tab0" onclick="$('.tab-index li:first').click();"><!-- soy:id="page_name_text*" /--></a></li>
+		<li>基本設定</li>
+	</ul>
+
+	<div class="title">
+		<h3>タイプ</h3> 
+	</div>
+		
+	<div class="content">
+	<span class="li1"><!-- soy:id="page_type_text" /--></span> 
+	<p><strong>※タイプは作成後に変更できません。変更する場合は、作成しなおしてください。</strong></p> 
+	</div>
+</div>
+
+
+<div class="section">
+
+	<div class="title">
+		<h3>基本設定</h3>
+	</div>
+	<div class="content">
+
+	<div id="post1-section1" class="form-section">
+
+	<div class="label"> 
+		<h4> 
+			<label for="post1-1">名前</label></h4> 
+	</div> 
+	<div class="item"> 
+		<p> 
+			<input soy:id="page_name" name="post1-2" type="text" class="xm-area" id="post1-2" value="ディレクトリ名A" size="40" style="width:400px" /> 
+		</p> 
+	</div> 
+
+	<!-- soy:id="uri_editable" -->
+	<div class="label"> 
+		<h4> 
+			<label for="post1-1">URL</label> 
+			※英数字＋_(アンダースコア),-(ハイフン)、/(スラッシュ)</h4> 
+	</div> 
+	<div class="item"> 
+		<p>
+			<!-- soy:id="site_url" /-->
+			<input soy:id="page_uri" name="post1-2" type="text" class="m-area" id="post1-2" value="dirnameA/" size="30" />
+			<p class="s">末尾の「/」は不要ですが、「/」をつけてもアクセス出来ます。</p> 
+		</p> 
+	</div>
+	<!-- /soy:id="uri_editable" -->
+
+	<div class="label"> 
+		<h4> 
+		<label for="post1-2">説明(descriptionタグの内容) </label></h4> 
+	</div> 
+	<div class="item"> 
+		<p><textarea soy:id="page_config_description" rows="2" cols="70" id="post1-2" name="post1-2" class="m-area liq-area" size="60" /></textarea></p> 
+	</div> 
+	
+	<!-- soy:id="is_not_directory*" -->
+	<div class="label"> 
+		<h4> 
+		<label for="post1-2">キーワードタグの設定(keywordタグの内容) </label></h4> 
+	</div> 
+	<div class="item"> 
+		<p>,(カンマ)でキーワードを区切って入力してください。<br> 
+			<input soy:id="page_config_keyword" type="text" id="post1-2" name="post1-2" class="s-area liq-area" />
+		</p>
+	</div>
+	<!-- /soy:id="is_not_directory*" -->
+
+	<div class="label"> 
+		<h4> 
+			<label for="post1-1">タイトルタグの設定</label>
+		</h4> 
+	</div> 
+	<div class="item"> 
+		<p> 
+			<input soy:id="page_config_title" name="post1-2" type="text" class="m-area" id="post1-2" value="[記事名,ディレクトリ名] | [SiteNAME]" size="70" style="width:400px" /> 
+		</p>
+		<p class="s">サイト名 #SiteName#  ディレクトリ名 #DirName#  ページ名 #PageName#  記事名 #EntryTitle#</p>
+	</div> 
+
+	<div class="label"> 
+		<h4>アイコン設定 (管理画面側)</h4> 
+	</div> 
+	<div class="item"> 
+		<ul class="radio-list"> 
+			<li class="li1">
+				<img soy:id="page_icon" width="32" height="32" alt="ディレクトリアイコン">
+			</li> 
+			<li class="li2">
+				変更する 
+				(32ピクセル×32ピクセルの画像ファイル[png,jpg,gif])
+				<br> 
+				<input type="file" name="icon_upload" />
+				<input type="submit" name="clear_icon" class="s-btn" value="アイコンをリセット" /> 
+			</li>	
+		</ul> 
+	</div> 
+
+	<div class="label"> 
+		<h4><label for="post1-3">文字コード(種別)</label></h4> 
+	</div> 
+	<div class="item"> 
+		<p> 
+			<input id="page_config_encoding" soy:id="page_config_encoding" class="m-area" onclick="$('#page_config_encoding_select').show();" />
+			(<input soy:id="page_config_type" type="text" class="m-area" value="" />)
+		</p>
+		<select id="page_config_encoding_select" soy:id="page_config_encoding_select" onchange="$('#page_config_encoding').val($(this).val());$(this).hide();" style="display:none;position:absolute;"></select>
+	</div> 
+	
+	<div class="label"> 
+		<h4 id="pu">公開設定</h4> 
+	</div> 
+	<div class="item"> 
+		<ul class="radio-list"> 
+			<li class="li1"><input soy:id="page_config_public_1" class="public_config_radio" type="radio" value="1" name="public-cfg" id="public-cfg-1" /><label for="public-cfg-1">公開</label></li> 
+			<li class="li2"><input soy:id="page_config_public_0" class="public_config_radio" type="radio" value="2" name="public-cfg" id="public-cfg-2" /><label for="public-cfg-2">非公開</label></li> 
+			<li class="li3"><input soy:id="page_config_public_2" class="public_config_radio" type="radio" value="3" name="public-cfg" id="public-cfg-3" /><label for="public-cfg-3">ベーシック認証付き公開</label> 
+				<table id="public-cfg3_option" soy:id="page_config_public_2_option_wrap" class="form-table">
+					<tr>
+						<th>ユーザID</th>
+						<td>
+							<input soy:id="page_config_public_2_option_id" name="post1-2" type="text" class="m-area" id="post1-2" value="" size="40" />
+						</td>
+					</tr>
+					<tr>
+						<th>パスワード</th>
+						<td>
+							<input soy:id="page_config_public_2_option_pass" name="post1-2" type="text" class="m-area" id="post1-2" value="" size="40" />
+						</td>
+					</tr>
+				</table>
+			</li>
+			<!-- 
+			<li class="li4"><input soy:id="page_config_public_3" class="public_config_radio" type="radio" value="4" name="public-cfg" id="public-cfg-4" /><label for="public-cfg-4">要ログイン</label></li>
+			-->	
+		</ul> 
+		<script type="text/javascript">
+		$(function(){
+			$(".public_config_radio").click(function(){
+				$("#public-cfg3_option").toggle($("#public-cfg-3").attr("checked"));
+			});
+		});
+		</script>
+	</div>
+
+	<div class="label"> 
+		<h4> 
+			<label for="post1-1">ディレクトリのfaviconの設定</label> 
+			※設定しなければサイト全体の設定が有効となります。
+		</h4> 
+	</div> 
+	<div class="item"> 
+		<p style="margin-bottom:5px;">	
+			<img soy:id="page_favicon" width="16" height="16" />
+			<input type="file" name="favicon_upload" />
+		</p>
+		<p>
+			<input soy:id="favicon_url" type="text" class="s-area liq-area" readonly />
+		</p>
+ 
+	</div> 
+	
+	<!-- 
+	<div class="label"> 
+		<h4>公開期間の設定</h4> 
+	</div> 
+	<div class="item"> 
+		<p>※既存の、ボタンを押した後の状態を表示</p> 
+	</div> 
+	-->
+
+	<div class="form-btn ce"> 
+		<input type="submit" value="設定する" id="post1-submit" name="save_basic" class="l-btn" /> 
+	</div> 
+	
+	</div><!-- /form-section -->
+	</div><!-- /content -->
+
+</div><!-- /section --> 
+
+<a name="config_advance"></a>
+<div class="section">
+	
+	<!-- soy:id="page_advanced_config" /-->
+
+</div>
+
+<script type="text/javascript">
+$(function(){
+	if(location.hash.match(/#tab1\/advance/)){
+		location.hash = "config_advance";
+		location.hash = "tab1";
+	}
+});
+</script>

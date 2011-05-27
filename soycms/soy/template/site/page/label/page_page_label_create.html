@@ -1,0 +1,125 @@
+<div id="main-window1" class="main-window">
+	
+<div class="window-title">
+	<h2 class="title-text">ラベルの作成</h2>
+</div>
+
+<div class="window-content">
+<div id="main-section1" class="section">
+	
+	<ul class="crumbs">
+		<li><a soy:link="./" title="管理画面トップ" class="home_btn">管理画面トップ</a></li>
+		<li><a soy:link="page/label">ラベル・タグの管理</a></li>
+		<li>ラベルの作成</li>
+	</ul>
+	
+	<div class="content">
+		
+		<form soy:id="create_form">
+			
+			<div class="form-section">
+				<div class="label">
+					<h4><label for="post1-1">ラベル名</label></h4>
+				</div>
+				<div class="item">
+					<p>
+						<input name="post1-1" type="text" class="xm-area" value="" style="width:400px;" soy:id="label_name" placeholder="ラベル名" />
+					</p>
+				</div>
+			</div>
+			
+			<div class="form-section">
+				<div class="label">
+					<h4><label for="post1-1">ディレクトリとURL</label></h4>
+				</div>
+				<div class="item">
+					<p class="intro">
+						共通ラベルを作成する場合は、「<label for="directory_select_blank">ディレクトリを設定しない</label>」を選択してください。
+						<br />
+						ラベルはディレクトリ毎に指定することで、カテゴリのように使用することが可能です。
+					</p>
+					<div class="label_directory_option">
+						<table class="form-table"> 
+							<tr> 
+								<th scope="row">ディレクトリ</th>
+								<td>
+									<p class="break">
+										<input type="radio" id="directory_select_blank" name="Label[directory]" class="directory_select" value="" checked>
+										<label for="directory_select_blank">ディレクトリを設定しない</label>
+									</p>
+									
+									<div class="pagelist-content">
+										<ul>
+											<!-- soy:id="label_tree" -->
+											<li soy:id="page_list_wrap">
+												<dl> 
+													<dt class="image">
+														<a soy:id="create_entry_link*">
+															<img soy:id="page_icon" style="width:32px;height:32px;" />
+														</a>
+													</dt> 
+													<dt class="name">
+														<a soy:id="public_link" class="directory_public_link" style="display:none;"> </a>
+														<input type="radio" soy:id="page_check" class="directory_select">
+														<p><!-- soy:id="page_uri" /--></p>
+													</dt>
+												</dl>
+												
+												<!-- soy:id="tree_child" -->
+												<ul>
+													<!-- soy:id="tree" -->ここが再帰的に実行<!-- /soy:id="tree" -->
+												</ul>
+												<!-- /soy:id="tree_child" --> 
+												
+											</li soy:id="page_list_wrap">
+											<!-- /soy:id="label_tree" -->
+											
+										</ul>
+									</div>
+								</td>
+							</tr>
+							<tr>
+								<th>URL</th>
+								<td>
+									<span id="url_prefix"></span>
+									<input name="post1-1" type="text" class="m-area" value="" style="width:200px;" soy:id="label_alias" placeholder="label_name" />
+								</td>
+							</tr>
+							<tr>
+								<th>表示順</th>
+								<td>
+									<input type="checkbox" id="insert_last" name="insert_last" value="1" />
+									<label for="insert_last">末尾に追加</label>
+								</td>
+							</tr>
+						</table>
+					</div>
+				</div>
+			</div>
+			
+			<div class="form-btn ce">
+				<input class="l-btn" type="submit" value="作成" id="post1-btn1" name="post1-btn1" />
+			</div>
+		
+		</form>
+	
+	</div><!-- // .content -->
+</div>
+</div>
+
+</div>
+<script type="text/javascript">
+$(function(){
+	$(".directory_select").click(function(){
+		$("#url_prefix").html($(this).prev("a.directory_public_link").attr("href"));
+	});
+});
+</script>
+<style type="text/css">
+.pagelist-content dt.name label{
+	margin-left:5px;
+	font-weight:bold;
+	font-size:134%;
+}
+
+</style>

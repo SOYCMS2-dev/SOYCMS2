@@ -1,0 +1,63 @@
+<div id="main-window1" class="main-window">
+	
+<div class="window-title">
+	<h2 class="title-text">サイトテンプレートの管理</h2>
+</div>
+
+<div class="window-content">
+	<div id="main-section1" class="section">
+		
+		<p class="fr ri">
+			<a href="#skeleton_upload_form" class="popup-btn">サイトテンプレートファイルの選択<br />(ファイルアップロード)</a>
+		</p>
+		
+		<div class="pagelist-menu"> 
+			<ul> 
+				<li class="back"><a soy:link="site">サイト管理に戻る</a></li> 
+			</ul> 
+		</div>
+		
+		
+		
+		<!-- soy:id="no_skeleton" -->
+		<p class="intro">現在利用可能なサイトテンプレートはありません</p>
+		<!-- /soy:id="no_skeleton" -->
+		
+		<div>
+			<!-- soy:id="skeleton_list" -->
+			<div class="ce" style="width:28%;border:solid 1px #e4e3e0;padding-top:10px;margin:1%;float:left;">
+				<p>
+					<a soy:id="skeleton_detail_link*">
+						<img soy:id="skeleton_thumbnail" width="140" height="105">
+					</a>
+				</p>
+				<p class="intro">
+					<a soy:id="skeleton_detail_link*">
+						<strong class="xl"><label soy:id="skeleton_selected_label"><!-- soy:id="skeleton_name" /--></label></strong>
+					</a>
+				</p> 
+			</div>
+			<!-- /soy:id="skeleton_list" -->
+		
+			<br style="clear:both;" />
+		</div>
+			
+	</div>
+
+</div>
+
+</div>
+
+
+<div id="skeleton_upload_form" class="popup-content">
+	<h4>サイトテンプレートファイルのアップロード</h4>
+	<form soy:id="skeleton_upload_form">
+		
+		<input type="file" name="skeleton" value="" />
+		
+		<div class="form-btn ce">
+			<input type="submit" name="skeleton_upload" value="アップロード" />
+		</div>
+	</form>
+</div>
+

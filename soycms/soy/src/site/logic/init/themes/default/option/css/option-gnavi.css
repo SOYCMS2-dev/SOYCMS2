@@ -1,0 +1,116 @@
+@charset "UTF-8";
+/* Title：Le Theme [default] */
+/* Author：Lebe Inc. */
+/* Licence: MIT Licence */
+/* global-navi option  ------- 
+.even3,.even7,.even8
+------------------- */
+
+
+/* #global-navi */
+
+.navi7 #global-navi li.navi7 a,
+.navi8 #global-navi li.navi8 a {
+	background-position: right bottom;
+	color: #333;
+}
+
+#global-navi.even3 li a em { width: 273px;}
+
+#global-navi.even7 li a em { width: 94px;}
+#global-navi.even7 li.navi1 a em { width: 95px;}
+
+#global-navi.even8 li a em { width: 77px;}
+#global-navi.even8 li.navi1 a em, #global-navi.even8 li.navi2 a em, #global-navi.even8 li.navi3 a em { width: 78px;}
+
+
+/* #global-navi-ir */
+
+#global-navi-ir.even3 li { width:313px;}
+#global-navi-ir.even3 li.navi1 { width:314px;}
+
+#global-navi-ir.even7 li { width:134px;}
+#global-navi-ir.even7 li.navi1, #global-navi-ir.even7 li.navi2 { width:135px;}
+
+#global-navi-ir.even8 li { width:117px;}
+#global-navi-ir.even8 li.navi1, #global-navi-ir.even8 li.navi2, #global-navi-ir.even8 li.navi3, #global-navi-ir.even8 li.navi4 { width:118px;}
+
+
+#global-navi-ir.even3 li a { background-image: url(../img/global-navi-ir-even3-bg.gif);}
+#global-navi-ir.even7 li a { background-image: url(../img/global-navi-ir-even7-bg.gif);}
+#global-navi-ir.even8 li a { background-image: url(../img/global-navi-ir-even8-bg.gif);}
+
+
+#global-navi-ir.even3 li.navi1 a { background-position: 0 0; }
+#global-navi-ir.even3 li.navi1 a:hover, #global-navi-ir.even3 li.navi1 a:focus,#global-navi-ir.even3 li.navi1 a:active {	background-position: 0 -50px; }
+#global-navi-ir.even3 li.navi1 a.on, .navi1 #global-navi-ir.even3 li.navi1 a {	background-position: 0 -100px; }
+
+#global-navi-ir.even3 li.navi2 a { background-position: -314px 0; }
+#global-navi-ir.even3 li.navi2 a:hover, #global-navi-ir.even3 li.navi2 a:focus,#global-navi-ir.even3 li.navi2 a:active {	background-position: -314px -50px; }
+#global-navi-ir.even3 li.navi2 a.on, .navi2 #global-navi-ir.even3 li.navi2 a {	background-position: -314px -100px; }
+
+#global-navi-ir.even3 li.navi3 a { background-position: -627px 0; }
+#global-navi-ir.even3 li.navi3 a:hover, #global-navi-ir.even3 li.navi3 a:focus,#global-navi-ir.even3 li.navi3 a:active {	background-position: -627px -50px; }
+#global-navi-ir.even3 li.navi3 a.on, .navi3 #global-navi-ir.even3 li.navi3 a {	background-position: -627px -100px; }
+
+
+#global-navi-ir.even7 li.navi1 a { background-position: 0 0; }
+#global-navi-ir.even7 li.navi1 a:hover, #global-navi-ir.even7 li.navi1 a:focus,#global-navi-ir.even7 li.navi1 a:active {	background-position: 0 -50px; }
+#global-navi-ir.even7 li.navi1 a.on, .navi1 #global-navi-ir.even7 li.navi1 a {	background-position: 0 -100px; }
+
+#global-navi-ir.even7 li.navi2 a { background-position: -135px 0; }
+#global-navi-ir.even7 li.navi2 a:hover, #global-navi-ir.even7 li.navi2 a:focus,#global-navi-ir.even7 li.navi2 a:active {	background-position: -135px -50px; }
+#global-navi-ir.even7 li.navi2 a.on, .navi2 #global-navi-ir.even7 li.navi2 a {	background-position: -135px -100px; }
+
+#global-navi-ir.even7 li.navi3 a { background-position: -270px 0; }
+#global-navi-ir.even7 li.navi3 a:hover, #global-navi-ir.even7 li.navi3 a:focus,#global-navi-ir.even7 li.navi3 a:active {	background-position: -270px -50px; }
+#global-navi-ir.even7 li.navi3 a.on, .navi3 #global-navi-ir.even7 li.navi3 a {	background-position: -270px -100px; }
+
+#global-navi-ir.even7 li.navi4 a { background-position: -404px 0; }
+#global-navi-ir.even7 li.navi4 a:hover, #global-navi-ir.even7 li.navi4 a:focus,#global-navi-ir.even7 li.navi4 a:active {	background-position: -404px -50px; }
+#global-navi-ir.even7 li.navi4 a.on, .navi4 #global-navi-ir.even7 li.navi4 a {	background-position: -404px -100px; }
+
+#global-navi-ir.even7 li.navi5 a { background-position: -538px 0; }
+#global-navi-ir.even7 li.navi5 a:hover, #global-navi-ir.even7 li.navi5 a:focus,#global-navi-ir.even7 li.navi5 a:active {	background-position: -538px -50px; }
+#global-navi-ir.even7 li.navi5 a.on, .navi5 #global-navi-ir.even7 li.navi5 a {	background-position: -538px -100px; }
+
+#global-navi-ir.even7 li.navi6 a { background-position: -672px 0; }
+#global-navi-ir.even7 li.navi6 a:hover, #global-navi-ir.even7 li.navi6 a:focus,#global-navi-ir.even7 li.navi6 a:active {	background-position: -672px -50px; }
+#global-navi-ir.even7 li.navi6 a.on, .navi6 #global-navi-ir.even7 li.navi6 a {	background-position: -672px -100px; }
+
+#global-navi-ir.even7 li.navi7 a { background-position: -806px 0; }
+#global-navi-ir.even7 li.navi7 a:hover, #global-navi-ir.even7 li.navi7 a:focus,#global-navi-ir.even7 li.navi7 a:active {	background-position: -806px -50px; }
+#global-navi-ir.even7 li.navi7 a.on, .navi7 #global-navi-ir.even7 li.navi7 a {	background-position: -806px -100px; }
+
+
+#global-navi-ir.even8 li.navi1 a { background-position: 0 0; }
+#global-navi-ir.even8 li.navi1 a:hover, #global-navi-ir.even8 li.navi1 a:focus,#global-navi-ir.even8 li.navi1 a:active {	background-position: 0 -50px; }
+#global-navi-ir.even8 li.navi1 a.on, .navi1 #global-navi-ir.even8 li.navi1 a {	background-position: 0 -100px; }
+
+#global-navi-ir.even8 li.navi2 a { background-position: -118px 0; }
+#global-navi-ir.even8 li.navi2 a:hover, #global-navi-ir.even8 li.navi2 a:focus,#global-navi-ir.even8 li.navi2 a:active {	background-position: -118px -50px; }
+#global-navi-ir.even8 li.navi2 a.on, .navi2 #global-navi-ir.even8 li.navi2 a {	background-position: -118px -100px; }
+
+#global-navi-ir.even8 li.navi3 a { background-position: -236px 0; }
+#global-navi-ir.even8 li.navi3 a:hover, #global-navi-ir.even8 li.navi3 a:focus,#global-navi-ir.even8 li.navi3 a:active {	background-position: -236px -50px; }
+#global-navi-ir.even8 li.navi3 a.on, .navi3 #global-navi-ir.even8 li.navi3 a {	background-position: -236px -100px; }
+
+#global-navi-ir.even8 li.navi4 a { background-position: -354px 0; }
+#global-navi-ir.even8 li.navi4 a:hover, #global-navi-ir.even8 li.navi4 a:focus,#global-navi-ir.even8 li.navi4 a:active {	background-position: -354px -50px; }
+#global-navi-ir.even8 li.navi4 a.on, .navi4 #global-navi-ir.even8 li.navi4 a {	background-position: -354px -100px; }
+
+#global-navi-ir.even8 li.navi5 a { background-position: -472px 0; }
+#global-navi-ir.even8 li.navi5 a:hover, #global-navi-ir.even8 li.navi5 a:focus,#global-navi-ir.even8 li.navi5 a:active {	background-position: -472px -50px; }
+#global-navi-ir.even8 li.navi5 a.on, .navi5 #global-navi-ir.even8 li.navi5 a {	background-position: -472px -100px; }
+
+#global-navi-ir.even8 li.navi6 a { background-position: -589px 0; }
+#global-navi-ir.even8 li.navi6 a:hover, #global-navi-ir.even8 li.navi6 a:focus,#global-navi-ir.even8 li.navi6 a:active {	background-position: -589px -50px; }
+#global-navi-ir.even8 li.navi6 a.on, .navi6 #global-navi-ir.even8 li.navi6 a {	background-position: -589px -100px; }
+
+#global-navi-ir.even8 li.navi7 a { background-position: -706px 0; }
+#global-navi-ir.even8 li.navi7 a:hover, #global-navi-ir.even8 li.navi7 a:focus,#global-navi-ir.even8 li.navi7 a:active {	background-position: -706px -50px; }
+#global-navi-ir.even8 li.navi7 a.on, .navi7 #global-navi-ir.even8 li.navi7 a {	background-position: -706px -100px; }
+
+#global-navi-ir.even8 li.navi8 a { background-position: -823px 0; }
+#global-navi-ir.even8 li.navi8 a:hover, #global-navi-ir.even8 li.navi8 a:focus,#global-navi-ir.even8 li.navi8 a:active {	background-position: -823px -50px; }
+#global-navi-ir.even8 li.navi8 a.on, .navi8 #global-navi-ir.even8 li.navi8 a {	background-position: -823px -100px; }

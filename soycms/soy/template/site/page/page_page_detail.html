@@ -1,0 +1,74 @@
+<div id="main-window1" class="main-window"> 
+					
+<div soy:id="window_title_wrap" id="window-title-directory" class="window-title"> 
+	<h2><span><!-- soy:id="page_name*" /-->の設定 ( <a soy:id="page_uri_link"><em><!-- soy:id="page_uri_text*" /--></em></a> )</span></h2> 
+</div soy:id="window_title_wrap"> 
+
+<div class="window-content"> 
+
+	<div class="tab-menu">
+		
+		<ul class="tab-index"> 
+			<li><a href="#tab0">情報</a></li>
+			<li><a href="#tab1">基本設定</a></li>
+			<li><a href="#tpl_config">要素設定</a></li>
+			<li><a soy:id="tab_editor_link">エディタ設定</a></li>
+			<li><a soy:id="tab_customfield_link">カスタムフィールド設定</a></li>
+			
+			<!-- soy:id="ext_menu_list" -->
+			<li><a soy:id="ext_menu_link">#######</a></li>
+			<!-- /soy:id="ext_menu_list" -->
+		</ul> 
+		<ul class="tab-contents">
+			<li id="tab0_contents">
+				<!-- soy:id="page_info" /-->
+			</li>
+			 
+			<li id="tab1_contents"> 
+				<form soy:id="basic_config_form" method="post" id="post1" name="post1">
+					<!-- soy:id="basic_config" /-->
+				</form>
+			</li><!-- /tab1_contents --> 
+					
+			<li id="tpl_config_contents">		
+				<!-- soy:id="item_config" /-->
+
+			</li> <!-- /tab2_contents --> 
+			
+			<!-- soy:id="ext_page_list" -->
+			<li soy:id="ext_page"></li>
+			<!-- /soy:id="ext_page_list" -->
+		
+		</ul> 
+
+		</div> 
+		<!--  // .tab-menu --> 
+		
+	
+	</div> 
+	<!--  // .window-content --> 
+</div> 
+<!--  // #main-window1 --> 
+
+
+<div id="sitemap_container"></div>
+
+
+<script type="text/javascript">
+$(function(){
+	$("#sitemap_container").load(SOYCMS_ROOT_URL + "site/page/detail/sitemap/",function(html){
+		
+		if(location.href.match(/detail\/([0-9]+)/)){
+			targetId = "#page-" + RegExp.$1;
+			var ele = $(targetId);
+			ele.show();
+			$(targetId +  " > dl").addClass("new-directory");
+			$(targetId +  " .page-child li").show();
+		}
+		
+		$("#main-window-sitemap .pagelist-content a").click(function(){
+			$(this).attr("href",$(this).attr("href") + location.hash);
+		});
+	});
+});
+</script>

@@ -1,0 +1,120 @@
+<div id="main-window" class="main-window">
+
+<div id="window-title-layout" class="window-title"> 
+	<h2><span>記事テンプレートの詳細</span></h2> 
+</div>
+
+<div class="window-content"> 
+
+	<div class="section">
+		<div class="pagelist-menu"> 
+			<ul> 
+				<li class="back"><a soy:link="entry/template/list">記事テンプレート一覧</a></li>
+			</ul> 
+		</div>
+		
+		<div class="title">
+			<h3>[<!-- soy:id="directory_name" /-->] <!-- soy:id="template_name_text" /-->の詳細</h3>
+		</div>
+
+		<div class="content">
+			<form soy:id="form">
+			
+			<div class="form-section">
+				<div class="label">
+					<h4>記事テンプレート名</h4>
+				</div>
+				<div class="item">
+					<p class="article-title">
+						<input soy:id="template_name" type="text" id="post1-1" name="post1-1" value="" class="xm-area" />
+					</p>
+				</div>
+			</div>
+			
+			<div class="form-section">
+				<div class="label">
+					<h4>記事テンプレートの説明</h4>
+				</div>
+				<div class="item">
+					<textarea soy:id="template_description" class="m-area liq-area" rows="3"></textarea>
+				</div>
+			</div>
+			
+			<div class="form-section">
+				<div class="label">
+					<h4>記事のタイトル</h4>
+				</div>
+				<div class="item">
+					<p class="article-title">
+						<input soy:id="template_title" type="text" id="post1-1" name="post1-1" value="" class="xm-area" />
+					</p>
+					<p>
+						<a class="s" href="javascript:void(0);" onclick="$(this).parent().next().show();$(this).hide();">example</a>
+						<ul class="s" style="display:none;">
+							<li>作成年 %YYYY%</li>
+							<li>作成月 %MM%</li>
+							<li>作成日 %DD%</li>
+							<li>記事数 %VOL%</li>
+						</ul>
+					</p>
+				</div>
+			</div>
+			
+			<div id="sections_preview" class="form-section">
+				<div class="label">
+					<h4>プレビュー</h4>
+				</div>
+				<div class="item">
+					<div id="sections_container" class="content">
+						
+						<!-- soy:id="section_list" -->
+						ここを要素毎に繰り返す
+						<!-- /soy:id="section_list" -->
+						
+						<div id="append_new_section" class="panel panel-line" style="display:none;">
+							<!-- soy:id="append_new_sections" -->
+							新しい要素
+							<!-- /soy:id="append_new_sections" -->
+							<div soy:id="add_child_entry_snippet" class="panel-parts"><a soy:id="add_child_entry_link" class="icon-sh-btn btn-nextpage" title="次のページ"><em>次のページ</em></a></div>
+						</div>
+						
+						<div id="insert_new_sections" class="panel-parts interval" style="display:none;">
+							<!-- soy:id="insert_new_sections" -->
+							新しい要素
+							<!-- /soy:id="insert_new_sections" -->
+						</div>
+						
+						
+					</div><!--  // #sections_container -->
+				</div>
+			</div><!-- // #sections_preview -->
+			
+			<div class="form-btn ce" style="margin-bottom:50px;">
+				<p class="lbreak">
+					<input name="save" type="submit" value="保存する" class="l-btn" />
+					<input name="entry" type="submit" value="この記事テンプレートから記事を作成する" class="l-btn" />
+				</p>
+				
+				<p class="lbreak">
+					<a href="javascript:void(0);" onclick="$('#remove_btn_wrap').show();">この記事テンプレートを削除する</a>
+				</p>
+				
+				<div id="remove_btn_wrap" style="display:none;"> 
+					<p class="xl">この記事テンプレートを削除します。この処理は戻せません。よろしいですか？</p>
+					<input name="remove" type="submit" value="この記事テンプレートを削除する" class="l-btn" />
+				</div>
+			</div>
+			
+			
+			</form>
+		</div><!-- // .content -->
+		
+	</div><!-- // .section -->
+</div> 
+<!--  // .window-content --> 
+</div>
+<!--  // #main-window -->
+
+<script type="text/javascript" soy:id="ajax_action"></script>
+<script type="text/javascript" soy:src="../common/wysiwyg/aobata.js"></script>
+<script type="text/javascript" soy:src="../common/js/soycms_entry/editor.js"></script>

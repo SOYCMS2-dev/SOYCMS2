@@ -1,0 +1,73 @@
+<div id="main-window1" class="main-window">
+		
+	<div class="window-title">
+		<h2 class="title-text">「<!-- soy:id="name*" /-->」のバックアップ</h2>
+	</div>
+	
+	<div class="window-content">
+		<div class="section content">
+			
+			<div class="pagelist-menu"> 
+				<ul> 
+					<li class="back"><a soy:id="detail_link">戻る</a></li> 
+					
+				</ul> 
+			</div> 
+			
+			<!-- soy:id="not_recent_history" -->
+			<div class="overwrite_warning" style="background-color:pink;padding:5px;margin:0px 0 12px;border:double 4px #ffffff;">
+				<p>これより新しい履歴があります。</p>
+			</div>
+			<!-- /soy:id="not_recent_history" -->
+			
+			
+				<div id="post1-section1" class="form-section">
+				
+					<div class="label">
+						<h4><label for="post1-1">タイトル</label></h4>
+					</div>
+					<div class="item">
+						<p class="xxxl">
+							<!-- soy:id="history_title_text" /-->
+						</p>
+					</div>
+					
+					<div class="label">
+						<h4><label for="post1-1">保存時刻</label></h4>
+					</div>
+					<div class="item">
+						<p>
+							<!-- soy:id="history_date" /-->
+						</p>
+					</div>
+					
+					<form soy:id="form" method="post" id="entry_form">
+			
+						<div id="rollback_alert" class="form-btn ce" style="margin:15px 0;">
+							<input name="do_rollback" type="submit" value="このバックアップに復元する" id="save_submit_btn" class="l-btn" />
+						</div>
+					
+					<div class="label">
+						<h4>本文</h4>
+					</div>
+					<div class="item">
+						<textarea class="resizable m-area liq-area html-editor" rows="5" soy:id="history_content" readonly="readonly" onclick="return false;"></textarea>
+						
+					</div>
+					<!--  // .item -->
+					
+					<div class="form-btn ce" style="margin:15px 0;">
+						<input name="remove" type="submit" value="このバックアップを削除する" id="remove_submit_btn" class="m-btn" onclick="return confirm('削除してもよろしいですか？この処理は戻せません。');" />
+					</div>
+					
+					</form><!-- // #entry_form -->
+	
+				</div>
+				<!--  // .post1-section1 -->
+		</div>
+		<!--  // .content -->
+		
+	</div>
+	<!--  // .window-content -->
+</div>
+<!--  // #main-window1 -->

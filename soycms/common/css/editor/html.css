@@ -1,0 +1,28 @@
+#soycms_template_content{
+	/* font-size:12px; */
+}
+
+.html_editor_box{
+	margin-bottom:13px;
+	padding:3px 8px;
+	border:solid 1px #888;
+	
+	background-color:#ce9999;
+}
+
+.html_editor_box span{
+	font-weight:bold;
+}
+
+.html_editor_box textarea{
+	display:block;
+	width:99%;
+	margin-left:1%;
+	min-height:150px;
+}
+
+textarea.html-editor{
+	font-size:13px;
+	/* for ie textarea font-family bug */
+	font-family: "ヒラギノ角ゴ Pro W3","Hiragino Kaku Gothic Pro","ＭＳ Ｐゴシック","MS P Gothic", Osaka,Verdana,Helvetica,sans-serif;
+}

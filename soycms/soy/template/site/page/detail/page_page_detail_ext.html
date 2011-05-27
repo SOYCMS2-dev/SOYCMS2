@@ -1,0 +1,43 @@
+<div id="main-window1" class="main-window"> 
+
+
+<div soy:id="window_title_wrap" id="window-title-directory" class="window-title"> 
+	<h2><span><!-- soy:id="page_name*" /-->の設定 ( <a soy:id="page_uri_link"><em><!-- soy:id="page_uri_text*" /--></em></a> )</span></h2> 
+</div soy:id="window_title_wrap"> 
+
+<div class="window-content"> 
+
+	<div class="tab-menu">
+		
+		<ul class="tab-index"> 
+			<li><a soy:id="tab_info_link">情報</a></li>
+			<li><a soy:id="tab_basic_link">基本設定</a></li>
+			<li><a soy:id="tab_item_link">要素設定</a></li>
+			<li><a soy:id="tab_editor_link">エディタ設定</a></li>
+			<li><a soy:id="tab_customfield_link">カスタムフィールド設定</a></li>
+			
+			<!-- soy:id="ext_menu_list" -->
+			<li soy:id="ext_menu_link_wrap"><a soy:id="ext_menu_link">#######</a></li>
+			<!-- /soy:id="ext_menu_list" -->
+		</ul>
+		
+	</div>
+			
+<form soy:id="form">
+	
+<div class="section">
+	<div class="title"> 
+		<h3 soy:id="ext_title">拡張名称</h3> 
+	</div>	
+	
+	<div class="content">
+		<!-- soy:id="ext_content" /-->
+	</div><!-- /content -->
+
+</div><!-- /section -->
+
+</form>
+
+
+</div><!-- //.window-content -->
+</div><!-- //.main-widnow -->

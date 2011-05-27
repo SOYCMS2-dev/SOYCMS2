@@ -1,0 +1,88 @@
+<div id="main-window2" class="main-window"> 
+				
+<div class="window-title"> 
+	<h2>サイトユーザー管理</h2> 
+</div> 
+
+<div class="window-content"> 
+
+	<div class="form-section section">
+		<div class="title">
+			<h3>このWEBサイトにログイン可能なユーザー一覧</h3>
+		</div>
+		<div class="content">
+			
+			<table class="list-table"> 
+				<thead> 
+					<tr> 
+						<th width="17%" scope="col">ユーザー</th>
+						<th width="63%" scope="col">ロール</th>  
+						<th width="20%" class="s-cell" scope="col">設定</th> 
+					</tr> 
+				</thead> 
+				<tbody> 
+					<!-- soy:id="user_list" -->
+					<tr> 
+						<td>
+							<img soy:id="user_icon_small" />
+							<!-- soy:id="user_name" /-->
+						</td>
+						<td>
+							<!-- soy:id="role_list_text" /-->
+						</td> 
+						<td>
+							<a soy:id="detail_link" class="sh-btn"><em>編集</em></a>
+						</td> 
+					</tr> 
+					<!-- /soy:id="user_list" --> 
+				</tbody> 
+			</table> 
+			
+			
+			
+		</div><!-- // .content -->
+	</div><!-- //. section -->
+
+	<!-- soy:id="noroleuser_exists" -->
+	<div class="section">
+		<a name="new_user"></a>
+		<div class="title">
+			<h3>既存のユーザーをサイトに追加</h3>
+		</div>
+		<div class="content"> 
+			<form soy:id="add_form">
+				<select soy:id="user_select"></select>
+				<input type="submit" class="s-btn" value="追加" />
+			</form>
+		</div>
+	</div>
+	<!-- /soy:id="noroleuser_exists" -->
+	
+	<div class="section">
+		<a name="new_user"></a>
+		<div class="title">
+			<h3>新しいユーザーを追加する</h3>
+		</div>
+		<div class="pagelist-menu">
+				<ul> 
+					<li class="plus-btn"><a soy:link="../admin/user/create">新しいユーザーの追加</a></li> 
+				</ul>
+		</div>
+	</div>
+	
+	<div class="section">
+		<a name="new_user"></a>
+		<div class="title">
+			<h3>公開権限設定</h3>
+		</div>
+		<div class="content"> 	
+			<a soy:link="user/workflow">公開権限設定</a>
+		</div>
+	</div>
+	
+	
+</div> 
+<!--  // .window-content --> 
+</div> 
+<!--  // #main-window2 -->
+

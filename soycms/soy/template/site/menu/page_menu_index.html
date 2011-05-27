@@ -1,0 +1,184 @@
+<div id="main-window1" class="main-window"> 
+					
+	<div class="window-title"> 
+		<h2>クイックメニュー</h2>
+		
+		<p class="window-title-btn-edit btn"> 
+			<a soy:link="menu/edit" title="クイックメニュー編集">クイックメニュー編集</a>	
+		</p>
+	</div> 
+	
+	<div class="window-content"> 
+		<div class="section"> 
+			<div class="content" id="quickmenu_list"> 
+				<ul class="quickmenu-list">
+					<!-- soy:id="menu_list" -->
+					<li class="quickmenu">
+						<dl>
+							<dt>
+								<a soy:id="menu_link">
+									<img soy:id="menu_img" width="60" height="60" />
+								</a>
+							</dt>
+							<dd>
+								<p>
+									<a soy:id="menu_link*">
+										<!-- soy:id="menu_title" /-->
+									</a>
+								</p>
+								<a class="s-btn popup-btn" soy:id="edit_link">edit</a>
+								<a class="s-btn" soy:id="remove_link">remove</a>
+								
+								<div soy:id="edit_area" class="popup-content" style="display:none;">
+									<form soy:id="edit_form">
+										<input type="hidden" soy:id="menu_id" />
+											
+										<table class="form-table"> 
+											<tr>
+												<th scope="row"><label for="post1-1">名前</label></th> 
+												<td><input type="text" soy:id="edit_title" class="l-area liq-area" /></td> 
+											</tr>
+											<tr>
+												<th scope="row"><label for="post1-1">リンク先</label></th> 
+												<td>
+													<p class="intro">
+														<input type="text" soy:id="edit_link_input" class="s-area liq-area" />
+													</p>
+													<p class="intro">
+														<input type="checkbox" soy:id="edit_target_blank" />
+													</p>
+													( onclick=" <input type="text" soy:id="edit_onclick" class="s-area" size="40" /> " )
+												</td> 
+											</tr>
+											<tr>
+												<th scope="row"><label for="post1-1">アイコン</label></th> 
+												<td>
+													<img soy:id="menu_img*" class="quickmenu-icon" />
+													<input type="file" name="edit_icon" />
+												</td>
+											</tr>
+										</table>
+									
+										<div class="form-btn ce">
+											<input type="submit" name="save" value="変更" class="l-btn" />
+										</div>
+									
+									</form>
+								
+								</div soy:id="edit_area">
+							</dd>
+						</dl>
+					</li>
+					<!-- /soy:id="menu_list" -->
+				
+				</ul>
+				
+				<div class="update_sort ce" style="display:none;clear:both;">
+					<form soy:id="save_order_form">
+						<input id="orders_input" type="hidden" name="orders" value="" />
+						<input class="l-btn" type="submit" name="save_order" onclick="return save_orders();" value="表示順の保存" />
+					</form>
+				</div>
+				
+			</div> 
+		</div> 
+		<!--  // .section --> 
+		
+		<!-- soy:id="add_form_area" -->
+		<div class="section"> 
+			<div class="content"> 
+				<div class="title"> 
+					<h3>項目を追加する</h3> 
+				</div>
+				
+				<form soy:id="add_form"> 
+					<table class="form-table"> 
+						<tr>
+							<th scope="row"><label for="post1-1">名前</label></th> 
+							<td><input type="text" class="xm-area w200" size="50" soy:id="add_title" /></td> 
+						</tr>
+						<tr>
+							<th scope="row"><label for="post1-1">リンク先</label></th> 
+							<td>
+								<p class="intro">
+									<input type="text" soy:id="add_link" class="s-area w200" size="70" />
+									<input id="add_target_blank" type="checkbox" soy:id="add_target_blank" />
+									<label for="add_target_blank"><span class="s"> 新しいウィンドウで開く</span></label>
+								</p>
+								(onclick=" <input type="text" soy:id="add_onclicks" class="s-area" size="50" /> ")
+							</td> 
+						</tr>
+						<tr>
+							<th scope="row"><label for="post1-1">アイコン</label></th> 
+							<td>
+								<input type="file" name="add_icon" />
+							</td>
+						</tr>
+					</table>
+					
+					<div class="form-btn ce">
+						<input type="submit" name="add" value="追加" class="l-btn" />
+					</div>
+				</form>
+				
+			
+			</div> 
+		</div> 
+		<!--  // .section --> 
+		<!-- /soy:id="add_form_area" -->
+	
+	</div> 
+	<!--  // .window-content --> 
+</div> 
+<!--  // #main-window1 -->
+
+<style type="text/css">
+.quickmenu .handle{
+	width:15px;
+	height:15px;
+	position:absolute;
+	right:0;
+	top:0;
+	cursor:move;
+	
+	background-color:#666;
+	
+}
+
+</style> 
+<!-- soy:id="mode_edit" -->
+<style type="text/css">
+.quickmenu{
+	border:solid 1px #eee;
+}
+</style>
+<script type="text/javascript">
+$(function(){
+	$("#quickmenu_list").sortable({
+		handle : ".handle",
+		items : ".quickmenu",
+		start : function(){
+			$(".update_sort").show();
+		}
+	});
+});
+
+function save_orders(){
+	try {
+		var values = [];
+		
+		$(".quickmenu .menu_id").each(function(){
+			values.push($(this).val());
+		});
+		
+		$("#orders_input").val(values.join(","));
+		
+		return true;
+	}catch(e){
+		
+	}
+	
+	return false;	
+}
+</script>
+<!-- /soy:id="mode_edit" -->

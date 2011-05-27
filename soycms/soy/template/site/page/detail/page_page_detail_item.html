@@ -1,0 +1,74 @@
+<div class="section">
+	
+<ul class="crumbs">
+	<li><a soy:link="./" title="管理画面トップ" class="home_btn">管理画面トップ</a></li>
+	<li><a soy:link="page/template">テンプレートの管理</a></li>
+	<li><a soy:id="template_link"><!-- soy:id="template_name" /--></a></li>
+	<li><a href="#tab0" onclick="$('.tab-index li:first').click();"><!-- soy:id="page_name*" /--></a></li>
+	<li>要素設定</li>
+</ul>
+
+	
+<div class="title"> 
+	<h3><!-- soy:id="template_name*" /-->の使用中の要素</h3> 
+</div>	
+	
+<div class="content">
+	
+
+
+
+<form soy:id="form">
+	
+<div class="intro">
+<!-- soy:id="template_item_manager" -->
+レイアウトとか入るよ
+<!-- /soy:id="template_item_manager" -->
+</div>
+
+<div class="form-btn ce">
+	<input type="submit" class="l-btn" value="保存" />
+</div>
+
+</form>
+
+</div><!-- /content -->
+</div><!-- /section -->
+
+<!-- soy:id="property_exists" -->
+
+<div class="section">
+	
+<div class="title"> 
+	<h3>プロパティ設定</h3> 
+</div>	
+	
+<div class="content">
+	
+	<form soy:id="property_form">
+		
+		<table class="form-table"> 
+			<!-- soy:id="property_list" -->
+			<tr> 
+				<th scope="row"><!-- soy:id="property_key" /--></th> 
+				<td>
+					<input type="text" soy:id="property_value" value="" class="m-area liq-area" />
+				</td> 
+			</tr>
+			<!-- /soy:id="property_list" --> 
+		</table>
+	
+		<div class="form-btn ce">
+			<input type="submit" name="save_properties" class="l-btn" value="保存" />
+		</div>
+
+	</form>
+
+</div><!-- /content -->
+</div><!-- /section -->
+
+<!-- /soy:id="property_exists" -->
+
+
+<!-- soy:quickhelp="tmpl_item_drug" help:closed="1" /-->
+<!-- ヘルプ：テンプレートの要素の使い方 -->

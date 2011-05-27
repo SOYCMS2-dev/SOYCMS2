@@ -1,0 +1,111 @@
+<div id="main-window1" class="main-window"> 
+
+
+<div id="window-title-layout" class="window-title">
+	<h2><span>ライブラリ：<!-- soy:id="library_name_text*" /-->の編集</span></h2> 
+</div>
+				
+		
+<div class="window-content">
+
+	<div class="tab-menu">
+	
+		<ul class="tab-index"> 
+			<li><a soy:link="./page/template">テンプレートの管理</a></li>
+			<li class="on"><a soy:link="./page/library">ライブラリの管理</a></li>
+			<li><a soy:link="./page/navigation">ナビゲーションの管理</a></li>
+		</ul> 
+
+		<ul class="tab-contents">
+			<li>
+			<div id="main-section1" class="section">
+				
+				<ul class="crumbs">
+					<li><a soy:link="./" title="管理画面トップ" class="home_btn">管理画面トップ</a></li>
+					<li><a soy:link="page/template">テンプレートの管理</a></li>
+					<li><a soy:link="page/library">ライブラリの管理</a></li>
+					<li><!-- soy:id="library_name_text*" /--></li>
+				</ul>
+				
+				<div class="content"> 
+
+					<form soy:id="form" method="post" action="xxx" id="post1" name="post1"> 
+					
+						<div id="post1-section1" class="form-section">
+							
+							
+							<div class="label"> 
+								<h3> 
+									<label for="post1-1">ライブラリID</label> 
+								</h3> 
+							</div> 
+							<div class="item">
+								<p class="xxl">
+									ID名: <strong><!-- soy:id="library_id_text" /--></strong>
+								</p> 
+							</div> 
+							
+							 
+
+							<div class="label"> 
+								<h4> 
+									<label for="post1-1">名前</label> 
+								</h4> 
+							</div> 
+							<div class="item">
+								<p>
+									<input soy:id="library_name" type="text" class="m-area" size="50" />
+								</p> 
+							</div> 
+							
+							<div class="label"> 
+								<h4> 
+									<label for="post1-1">説明</label>
+								</h4> 
+							</div> 
+							<div class="item"> 
+								<p class="intro">わかりやすい説明を入れてください。</p>
+								<p>
+									<textarea soy:id="library_description" rows="2" cols="70" class="liq-area" style="font-size:13px;"></textarea>
+								</p> 
+							</div> 
+
+							<div class="label"> 
+								<h4>html</h4> 
+							</div> 
+							<div class="item"> 
+								<textarea soy:id="library_content" rows="20" class="m-area liq-area resizable html-editor" name="post1-2">htmlソースが表示されます</textarea>
+							</div> 
+
+
+						<div class="form-btn ce"> 
+							<input type="submit" value="保存する" id="post1-submit" name="post1-submit" class="l-btn" />
+							<a soy:id="copy_link" class="m-btn"><em>コピーを作成する</em></a>
+						</div> 
+
+						</div> 
+						
+
+					</form>
+			
+				</div><!-- //.tab-menu -->
+			
+			
+				</div><!-- // .content --> 
+			</div> 
+			<!--  // #main-section1 -->
+			
+			</li>
+		</ul>
+			
+	</div><!-- // .tab-menu -->
+			
+</div>
+<!--  // .window-content --> 
+</div> 
+<!--  // #main-window1 -->
+ 
+
+<!-- soy:id="history_index" -->
+履歴の表示
+<!-- /soy:id="history_index" -->

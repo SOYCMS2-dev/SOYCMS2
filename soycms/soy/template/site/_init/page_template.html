@@ -1,0 +1,135 @@
+<div id="main-window1" class="main-window"> 
+				
+	<div class="window-title"> 
+		<h2>新しいサイトの作成</h2> 
+	</div> 
+	
+	<div class="window-content"> 
+		
+		<div id="main-section1" class="section"> 
+
+			<div class="content"> 
+
+				<form soy:id="form"> 
+				
+					<div id="post1-section1" class="form-section"> 
+						
+						<h3>新しいサイトの作成 (3/4)</h3> 
+
+
+
+						<div class="label"> 
+							<h4> 
+								<label for="post1-1">初期テンプレートの選択</label>
+							</h4> 
+						</div> 
+						<div class="item"> 
+							<table class="form-table"> 
+								<tr> 
+									<td class="ce"><strong class="xl"> 
+										標準テンプレート<br /> 
+										(サンプルサイト入り)
+									</strong></td> 
+									<td class="ce"><strong class="xl">ブランクテンプレート<br /> 
+										(カスタマイズ用)
+									</strong></td> 
+								</tr> 
+								<tr> 
+									<td width="33%" class="ce"><img soy:src="../common/img/default_tpml_01.gif" width="140" height="105"><strong class="xl"><br /> 
+										<input soy:id="config_template0" name="tmpl_active" type="radio" id="radio" value="radio" checked> 
+									</strong></td> 
+									<td width="33%" class="ce"><img soy:src="../common/img/default_tpml_02.gif" width="140" height="105"><strong class="xl"><br /> 
+										<input soy:id="config_template2" name="tmpl_active" type="radio" id="radio" value="radio"> 
+									</strong></td> 
+								</tr> 
+								<tr> 
+									<td class="ce"> 
+										<strong>生成されるページ</strong> 
+										<ul> 
+											<li>トップページ</li> 
+											<li>(新着情報)記事一覧</li> 
+											<li>画像一覧</li> 
+											<li>検索機能</li> 
+											<li>お問い合わせフォーム</li> 
+										</ul> 
+									</td> 
+									<td class="ce"><strong>生成されるページ</strong> 
+										<ul> 
+											<li>トップページ</li> 
+											<li>(新着情報)記事一覧</li> 
+										</ul></td> 
+								</tr> 
+							</table>
+						</div>
+						
+						<div class="label"> 
+							<h4> 
+								<label for="post1-1">サイトテンプレートファイルから選択</label>
+							</h4> 
+						</div> 
+						<div class="item"> 
+							<p class="ri">
+								<a href="#skeleton_upload_form" class="popup-btn">サイトテンプレートファイルの選択<br />(ファイルアップロード)</a>
+							</p>
+							
+							<!-- soy:id="no_skeleton" -->
+							<p class="intro">現在利用可能なサイトテンプレートはありません</p>
+							<!-- /soy:id="no_skeleton" -->
+							
+							<div>
+							<!-- soy:id="skeleton_list" -->
+							<div class="ce" style="width:28%;border:solid 1px #e4e3e0;padding-top:10px;margin:1%;float:left;">
+								<p>
+									<img soy:id="skeleton_thumbnail" width="140" height="105">
+								</p>
+								<p class="intro">
+									<input soy:id="skeleton_selected" type="radio" />
+									
+									<strong class="xl"><label soy:id="skeleton_selected_label"><!-- soy:id="skeleton_name" /--></label></strong>
+								</p> 
+							</div>
+							<!-- /soy:id="skeleton_list" -->
+							
+							<br style="clear:both;" />
+							</div>
+						</div>
+
+
+
+
+
+
+
+					<div class="form-btn ce"> 
+						<input type="submit" value="戻る" name="go_back" class="l-btn" /> 
+						　
+						<input type="submit" value="次へ" name="go_next" class="l-btn" /> 
+					</div> 
+
+
+
+					</div> 
+					
+				</form> 
+
+			</div> 
+		</div> 
+		<!--  // #main-section1 --> 
+
+
+	</div> 
+	<!--  // .window-content --> 
+</div> 
+<!--  // #main-window1 --> 
+
+<div id="skeleton_upload_form" class="popup-content">
+	<h4>サイトテンプレートファイルのアップロード</h4>
+	<form soy:id="skeleton_upload_form">
+		
+		<input type="file" name="skeleton" value="" />
+		
+		<div class="form-btn ce">
+			<input type="submit" name="skeleton_upload" value="アップロード" />
+		</div>
+	</form>
+</div>

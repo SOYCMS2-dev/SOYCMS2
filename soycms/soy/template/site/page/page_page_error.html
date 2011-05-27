@@ -1,0 +1,74 @@
+<div id="main-window1" class="main-window"> 
+				
+	<div class="window-title"> 
+		<h2>エラーページの設定</h2> 
+	</div> 
+	
+	<div class="window-content"> 
+		
+		<div class="section"> 
+		
+		<ul class="crumbs">
+			<li><a soy:link="./" title="管理画面トップ" class="home_btn">管理画面トップ</a></li>
+			<li><a soy:link="page/list">ディレクトリの管理</a></li>
+			<li>エラーページの設定</li>
+		</ul>
+		
+		<div class="content">
+			<br />
+		<div class="pagelist-content">
+			<form soy:id="form">
+
+				<ul>
+					<!-- soy:id="page_list" -->
+					<li soy:id="page_list_wrap"> 
+						<dl class="page-item">
+							<dt class="image">
+								<a soy:id="detail_link*">
+									<img soy:id="page_icon" style="width:32px;height:32px;" />
+								</a>
+							</dt>
+							<dt class="name">
+								<strong class="l"><!-- soy:id="page_name" /--></strong>
+								<input soy:id="page_order" type="hidden" />
+							</dt> 
+							<dd class="pagelist-tool-wrap">
+									<ul class="pagelist-tool">
+										<!-- soy:id="is_not_directory" -->
+										<li class="page-add mode-contents role-editor"><a soy:id="edit_entry_link">ページの編集</a></li>
+										<li class="index-set"><a soy:id="config_link">設定</a></li>
+										<li class="delete"><a soy:id="remove_link">削除</a></li>
+										<!-- /soy:id="is_not_directory" -->
+										<!-- soy:id="is_directory" -->
+										<li class="page-add"><a soy:id="error_page_403">非公開のページ</a></li>
+										<li class="page-add"><a soy:id="error_page_404">存在しないページ</a></li>
+										<li class="page-add"><a soy:id="error_page_500">その他のエラー</a></li>
+										<!-- /soy:id="is_directory" -->
+									</ul>
+								
+							</dd> 
+						</dl>
+						<!-- soy:id="tree_child" -->
+						<ul class="page-child">
+							<!-- soy:id="tree" -->ここが再帰的に実行<!-- /soy:id="tree" -->
+						</ul>
+						<!-- /soy:id="tree_child" --> 
+						
+					</li soy:id="page_list_wrap">
+					<!-- /page_list -->
+					
+				</ul>
+				
+				
+				</form>
+			</div><!-- // .pagelist-content -->
+		</div><!-- // .content -->
+			
+			
+		</div> <!-- // .section -->
+
+		
+	</div> 
+	<!--  // .window-content --> 
+</div> 
+<!--  // #main-window1 -->

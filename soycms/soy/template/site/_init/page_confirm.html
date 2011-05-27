@@ -1,0 +1,177 @@
+<div id="main-window1" class="main-window"> 
+				
+	<div class="window-title"> 
+		<h2>新しいサイトの作成</h2> 
+	</div> 
+	
+	<div class="window-content"> 
+		
+		<div id="main-section1" class="section"> 
+
+			<div class="content"> 
+
+				<form soy:id="update_form"> 
+				
+					<div id="post1-section1" class="form-section"> 
+						
+						<h3>新しいサイトの作成 (4/4)</h3> 
+						<p class="intro">設定を確認してください。</p> 
+
+						<div class="label"> 
+							<h4> 
+								<label for="post1-1">サイトID</label></h4> 
+						</div> 
+						<div class="item"> 
+							<p class="xl" soy:id="site_id">***************</p> 
+						</div> 
+
+
+						<div class="label"> 
+							<h4> 
+								<label for="post1-1">サイトの名前 (設定後変更可能)</label></h4> 
+						</div> 
+						<div class="item"> 
+							<p class="xl" soy:id="site_name">***************</p> 
+						</div> 
+						
+
+						<div class="label"> 
+							<h4> 
+								<label for="post1-1">サイトディレクトリ</label></h4> 
+						</div> 
+						<div class="item"> 
+							<p class="xl" soy:id="site_dir">/home/apache/htdocs/soycms2/tttt <a href="#">変更する</a></p> 
+						</div> 
+
+
+
+						<div class="label"> 
+							<h4> 
+								<label for="post1-1">サイトのURL</label></h4> 
+						</div> 
+						<div class="item"> 
+							<p class="xl" soy:id="site_url_text">http://soycms_new.demo.soycms.biz/tttt <a href="#">変更する</a></p> 
+						</div> 
+		
+
+						<div class="label"> 
+							<h4> 
+								<label for="post1-1">データベース種別</label></h4> 
+						</div> 
+						<div class="item"> 
+							<p class="xl" soy:id="db_type">***************</p> 
+						</div>
+						
+						<div id="mysql_option" soy:id="mysql" style="display:none;margin:10px 20px;background-color:#ccc;padding:10px;width:65%;">
+							<div class="label">
+								<h4><label for="post1-1">MySQL接続先</label></h4>
+							</div>
+							<div class="item">
+								<p><span soy:id="mysql_dsn" /></p>
+							</div>
+							
+							<div class="label">
+								<h4><label for="post1-1">MySQLユーザID</label></h4>
+							</div>
+							<div class="item">
+								<p><span soy:id="mysql_user" /></p>
+							</div>
+							
+							<div class="label">
+								<h4><label for="post1-1">MySQLパスワード</label></h4>
+							</div>
+							<div class="item">
+								<p><span soy:id="mysql_password" /></p>
+							</div>
+						</div soy:id="mysql">									
+						
+						<div class="label"> 
+							<h4> 
+								<label for="post1-3">文字コード</label> (設定後変更可能)</h4> 
+						</div> 
+						<div class="item"> 
+							<p class="xl" soy:id="config_encoding">***************</p> 
+						</div> 
+
+
+						<div class="label"> 
+							<h4> 
+								<label for="post1-3">タイムゾーン</label> (設定後変更可能)</h4> 
+						</div> 
+						<div class="item"> 
+							<p class="xl" soy:id="config_timezone">***************</p> 
+						</div> 
+						
+						
+						<!-- 
+						<div class="label"> 
+							<h4>WEBサイトの公開設定 (設定後変更可能)</h4> 
+						</div> 
+						<div class="item"> 
+							<p class="xl" soy:id="config_public">***************</p> 
+						</div> 
+						-->
+
+
+						<!--
+						<div class="label"> 
+							<h4>WEBサイト全体のフィード[RSS,atom]出力 (設定後変更可能)</h4> 
+						</div> 
+						<div class="item"> 
+							<p class="xl">***************</p> 
+						</div> 
+						-->
+
+
+
+
+						<div class="label"> 
+							<h4>画像/ファイルのアップロード先</h4> 
+						</div> 
+						<div class="item"> 
+							<p class="xl" soy:id="config_upload">***************</p> 
+						</div> 
+
+
+						<div class="label"> 
+							<h4>初期テンプレートの選択</h4> 
+						</div> 
+						<div class="item"> 
+							<p class="xl" soy:id="config_template">標準テンプレート1</p> 
+						</div> 
+
+
+
+
+					<div class="form-btn ce"> 
+						<input type="submit" value="戻る" name="go_template" class="l-btn" />
+						<!-- 
+						<input type="submit" value="最初に戻る" name="go_back" class="l-btn" />
+						--> 
+						　
+						<input type="submit" value="この設定でサイトを作成" id="post1-submit" name="post1-submit" class="l-btn" /> 
+					</div> 
+
+
+
+					</div> 
+					
+				</form> 
+
+
+
+
+
+
+
+			</div> 
+		</div> 
+		<!--  // #main-section1 --> 
+
+		
+
+
+	</div> 
+	<!--  // .window-content --> 
+</div> 
+<!--  // #main-window1 --> 

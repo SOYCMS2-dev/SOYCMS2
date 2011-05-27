@@ -1,0 +1,58 @@
+<div id="command-menu">
+	
+<div id="command-menu-section2" class="section">
+	<div class="title">
+		<h2>記事の状態</h2>
+	</div>
+	<div class="content">
+		
+		<div class="form-section">
+			<div class="label">
+				<h3>
+					<label for="post6-1">プレビュー</label>
+				</h3>
+			</div>
+			<div class="item">
+				<a class="s-btn" soy:id="preview_link"><em>バックアップのプレビュー</em></a>
+			</div>
+		</div>
+		
+		<div class="form-section">
+			<div class="label">
+				<h3>
+					<label for="post6-1">記事編集画面に戻る</label>
+				</h3>
+			</div>
+			<div class="item">
+				<a class="s-btn" soy:id="entry_detail_link"><em>記事編集画面に戻る</em></a>
+			</div>
+		</div>
+		
+	</div>
+</div>
+
+<div id="command-menu-section4" class="section">
+	<div class="title">
+		<h2>バックアップ</h2>
+	</div>
+	<div class="content">
+		<p>最新：<!-- soy:id="last_histroy_text" /--></p>
+		<ul>
+			<!-- soy:id="history_list" -->
+			<li><a soy:id="history_link">
+				<!-- soy:id="histroy_save_date" /-->
+			</a></li>
+			<!-- /soy:id="history_list" -->
+		</ul>
+		<p class="ri s"><a href="#history_popup" class="popup-btn-L" onclick="show_hisotry_list();"><strong>すべてのバックアップを表示(<!-- soy:id="history_count" /-->)</strong></a></p>
+	</div>
+</div>
+<!--  // #command-menu-section4 -->
+
+			<div id="history_popup" class="popup-content">
+			</div>
+			<!--  // .popup-content -->
+			
+			
+			
+</div><!-- //#command-menu -->

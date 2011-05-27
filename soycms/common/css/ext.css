@@ -1,0 +1,283 @@
+/* common */
+.loading{
+	width:16px;
+	height:16px;
+	background:url("../img/loading.gif");
+	
+	display:inline-block;
+}
+
+.fr{
+	float:right;
+}
+.fl{
+	float:left;
+}
+
+.list-table tbody tr:first-child .up_btn{
+	display:none !important;
+}
+.list-table tbody tr:last-child .down_btn{
+	display:none !important;
+}
+
+a.external{
+	display:inline-block;
+	background:url("../img/pagelist-externallink-icon.gif") no-repeat scroll right top transparent;
+	overflow: hidden;
+	width:16px;
+	height:16px;
+}
+a.external em{
+	text-indent:-9999px;
+	visibility:hidden;
+}
+
+label{
+	margin-left:3px;
+}
+
+.mid{
+	vertical-align:middle;
+}
+
+.placeholder{
+	color:#999;
+}
+
+/* table sortable */
+table.sortable thead th{
+	cursor:pointer;
+}
+table.sortable thead th span{
+	background:url("../img/sortable-arrow.gif") no-repeat scroll right center transparent;
+	padding-right:10px;
+}
+
+
+/* panel.css */
+a.icon-btn p{
+	width: 28px;
+	height: 28px;
+	text-indent: 0;
+	font-weight:900;
+	line-height:28px;
+	text-align:center;
+}
+
+
+/* entry */
+.entry_trashed .entry_link{
+	text-decoration:line-through;
+	color:gray;
+}
+
+/* base.css */
+#main,#main-contents,#command-menu{
+	overflow:visible !important;
+}
+
+.form-section .article-body {
+	padding:0;
+}
+/* popup */
+#popupLayer{
+	z-index:2000001;
+}
+#overLayer,
+#overLayer-L{
+	z-index:2000001;
+}
+#overLayer p.close,
+#overLayer-L p.close {
+	position: absolute;
+	width: 24px;
+	height: 24px;
+	top: -16px;
+	right: -16px;
+	cursor: pointer;
+	
+	background:url('../img/close-btn.png');
+}
+
+#main-contents #command-menu{
+	float:right;
+	position:absolute;
+	right:0;
+	top:0;
+}
+.popup-inner iframe{
+	width:100%;
+	height:100%;
+	border:none;
+}
+
+/* inner tab */
+.tab_index li{
+	float:left;
+	margin-right:3px;
+	padding:3px 8px;
+	border:solid 1px #999;
+	border-style:solid solid none;
+}
+.tab_index .on{
+	font-weight:bold;
+	border-bottom:solid 2px white;
+	margin-bottom:-1px;
+}
+
+.tab_container{
+	border:solid 1px #999;
+	padding:13px;
+	clear:both;
+}
+
+/* option resizable */
+.ui-wrapper{
+	border:1px solid #AAAAAA;
+	border-style:solid solid none solid;
+}
+.ui-wrapper textarea{
+	border:none;
+}
+
+.ui-resizable-s{
+	background:url("../img/grippie.gif") no-repeat scroll center 2px #EEEEEE;
+	border:1px solid #AAAAAA;
+	bottom:0px;
+	margin-left:-1px;
+}
+
+/* attachment */
+.file_box{
+	float:left;
+	width:180px;
+	min-height:120px;
+	margin:20px;
+	border:solid 1px black;
+}
+.fileimage{
+	background-image:url("../img/icon-plain.gif");
+	background-repeat:no-repeat;
+	font-size:20px;
+	height:66px;
+	line-height:66px;
+	margin:10px auto;
+	width:65px;
+}
+
+/* status */
+#common_popup_status {
+	color: #000;
+	background-color:#FFC;
+	border-color:#999;
+	border-style:none solid solid;
+	border-width:1px;
+	border-radius: 0 0 10px 10px;
+	-moz-border-radius: 0 0 10px 10px;
+	-webkit-border-radius: 0 0 10px 10px;
+	left:50%;
+	margin-left:-100px;
+	padding:3px 10px;
+	position:fixed;
+	text-align:center;
+	width:200px;
+	z-index:2000001;
+}
+
+#common_popup_status .user_name{
+	cursor:pointer;
+}
+
+.user_name{
+	text-decoration:underline;
+}
+
+/* entry-tree */
+ul.inline li{
+	float:left;
+	margin-right: 1em;
+}
+ul.inline li label{
+	margin-left:2px;
+}
+.mode_sort{
+	border: solid 5px #eee;
+	padding:20px;
+}
+.mode_sort .page-child .page-item{
+	border:solid 5px tan;
+	margin:10px;
+	padding:10px 0 10px 10px;
+}
+.move_op{
+	padding-top:3px;
+}
+a.mode-all{
+	font-weight:bold;
+}
+.mode-dir a.mode-dir{
+	font-weight:bold;
+}
+.mode-dir a.mode-all{
+	font-weight:normal;
+}
+
+/* label */
+.label_icon{
+	position:absolute;
+	padding:2px 3px 0px;
+	font-size:8px;
+}
+dl.form-item dt{
+	font-weight:700;
+	margin-top:3px;
+	margin-bottom:2px;
+	width:20%;
+}
+dl.form-item dd{
+	margin-bottom:5px;
+	padding-left:5px;
+}
+
+
+/* #hoge */
+
+#hoge_main{
+	position:absolute;
+	width:500px;
+	height:300px;
+	background-color:white;
+	
+	top:50px;
+	left:50%;
+	margin-left:-250px;
+	border:solid 10px black;
+}
+#hoge_main #hoge_score{
+	position:absolute;top:5px;right:10px;
+	font-size:20px;
+	font-weight:bold;
+	color:red;
+}
+#hoge_timer{
+	font-size:18px;
+	font-weight:bold;
+	margin:3px;
+}
+#hoge_words{
+	margin:30px auto;
+}
+
+#hoge_words input{
+	width:40px;
+	height:40px;
+	font-size:20px;
+	text-align:center;
+	cursor:pointer;
+	margin:10px;
+}
+
+#hoge_words .hoge_input_active{
+	background-color:red;
+}
