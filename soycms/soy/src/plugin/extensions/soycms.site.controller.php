@@ -1,6 +1,11 @@
 <?php
 class SOYCMS_SiteControllerExtension implements SOY2PluginAction{
 	
+	//initial
+	function initialize(){
+		
+	}
+	
 	
 	//prepare
 	function prepare(){
@@ -26,6 +31,11 @@ class SOYCMS_SiteControllerDelegateAction implements SOY2PluginDelegateAction{
 	private $exception = null;
 
 	function run($extensionId,$moduleId,SOY2PluginAction $action){
+		
+		if($extensionId == "soycms.site.controller.initialize"){
+			$action->initialize();
+			return;
+		}
 		
 		if($extensionId == "soycms.site.controller.prepare"){
 			$action->prepare();

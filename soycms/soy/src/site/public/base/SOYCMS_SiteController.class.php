@@ -32,7 +32,7 @@ class SOYCMS_SiteController extends SOY2PageController{
 		
 		//invoke events
 		PluginManager::load("soycms.site.controller.*");
-		PluginManager::invoke("soycms.site.controller.prepare");
+		PluginManager::invoke("soycms.site.controller.initialize");
 		
 		
 		
@@ -76,6 +76,8 @@ class SOYCMS_SiteController extends SOY2PageController{
 				}
 			}
 		}
+		
+		PluginManager::invoke("soycms.site.controller.prepare");
 	}
 
 	function execute(){

@@ -50,7 +50,7 @@ class SOYCMS_SuperCacheCustomField extends SOYCMS_EntryCustomFieldBase{
 		}else{
 			$dirUrl = SOY2DAO::find("SOYCMS_Page",$entry->getDirectory())->getUri();
 			
-			switch($config["cache_type"]){
+			switch(@$config["cache_type"]){
 				case "clear":
 					soycms_supercache_clear();
 					break;

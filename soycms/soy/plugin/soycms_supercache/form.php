@@ -38,7 +38,7 @@ $entryDAO = SOY2DAOFactory::create("SOYCMS_EntryDAO");
 					<h4>フットプリント</h4>
 				</div>
 				<div class="item">
-					<input type="hidden" name="config[footprint]" value="0" />
+					<input type="hidden" name="config[footprint]" value="-1" />
 					<input id="config_footprint" type="checkbox" name="config[footprint]" value="1" <?php if(@$config["footprint"] == 1 || !@$config["footprint"]){ ?>checked<?php } ?>>
 					<label for="config_footprint">キャッシュ利用時にフットプリント(&lt;!-- cache:キャッシュ読み込み時間 sec. ---&gt;)を表示する</label>
 				</div>
@@ -52,7 +52,10 @@ $entryDAO = SOY2DAOFactory::create("SOYCMS_EntryDAO");
 					<table class="list-table">
 						<thead>
 							<tr>
-								<th width="40">有効</th>
+								<th width="40">
+									<input id="toggle_check" type="checkbox" onclick="$('.page_check').attr('checked',$(this).attr('checked'));" />
+									<label for="toggle_check">有効</label>
+								</th>
 								<th>ディレクトリ名</th>
 								<th width="80">有効期間</th>
 							</tr>
@@ -68,7 +71,7 @@ $entryDAO = SOY2DAOFactory::create("SOYCMS_EntryDAO");
 							<tr>
 								<td class="ce">
 									<input type="hidden" name="config[pages][<?php echo $url; ?>][active]" value="0" />
-									<input type="checkbox" name="config[pages][<?php echo $url; ?>][active]" value="1" <?php if(@$conf["active"] == 1){ ?>checked<?php } ?>>
+									<input class="page_check" type="checkbox" name="config[pages][<?php echo $url; ?>][active]" value="1" <?php if(@$conf["active"] == 1){ ?>checked<?php } ?>>
 								</td>
 								<td>
 									<strong><?php echo $page->getName(); ?></strong>

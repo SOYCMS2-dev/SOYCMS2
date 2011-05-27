@@ -40,8 +40,15 @@ class SOYCMS_SuperCachePlugin extends SOYCMS_SiteControllerExtension{
 		if(empty($uri))$uri = "_home";
 		if(isset($pages[$uri])){
 			if($pages[$uri]["active"] == 1){
-				//create cache
-				$this->createCache($html,@$this->config["footprint"],$pages[$uri]["limit"]);	
+				
+				//ページ種別で判定
+				$pageId = SOYCMS_Helper::get("page_id");
+				$page = SOY2DAO::find("SOYCMS_Page",$pageId);
+				
+				if($page->getType() != "app" && $page->getType() != "search"){
+					//create cache
+					$this->createCache($html,(@$this->config["footprint"] > 0),$pages[$uri]["limit"]);	
+				}
 			}
 		}
 		
