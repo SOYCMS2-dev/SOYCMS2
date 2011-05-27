@@ -18,34 +18,36 @@
 			<div class="content">
 				<form soy:id="new_field_form">
 				
-				<div class="form-section">
-					<div class="label">
-						<h4>
-							<label for="post1-1">項目名</label>
-						</h4>
-					</div>
-					<div class="item">
-						<p>
-							<input name="NewField[name]" type="text" value="" class="xm-area" style="width:400px;" placeholder="項目名" />
-						</p>
-					</div>
-				</div>
+
 				
 				<div class="form-section">
-					<div class="label">
-						<h4><label for="post1-1">ディレクトリ・ページ</label></h4>
-					</div>
+
 					<div class="item">
-						<!-- soy:id="page_not_selected*" -->
-						<p class="intro">カスタムフィールドを追加するディレクトリ／ページを選択してください。 </p>
-						<!-- /soy:id="page_not_selected*" -->
+
 						
 						<div class="label_directory_option">
 							<table class="form-table"> 
 								<tbody>
+									<tr>
+										<th scope="row">項目タイプ</th>
+										<td><select soy:id="field_type_select">
+										</select></td>
+									</tr>
+									<tr>
+										<th scope="row">項目名</th>
+										<td><input name="NewField[name]" type="text" value="" class="m-area" style="width:320px;" placeholder="項目名" /></td>
+									</tr>
+									<tr>
+										<th scope="row">項目ID</th>
+										<td><input name="NewField[fieldId]" class="m-area" style="width:320px;" placeholder="name" /></td>
+									</tr>
 									<tr> 
 										<th scope="row">ディレクトリ・<br />ページ</th>
 										<td>
+											<!-- soy:id="page_not_selected*" -->
+											<p>カスタムフィールドを追加するディレクトリ／ページを選択してください。</p>
+											<!-- /soy:id="page_not_selected*" -->
+											
 											<!-- soy:id="page_selected" -->
 											<input type="hidden" soy:id="selected_page_value" />
 											<p soy:id="selected_page_name">ディレクトリ名</p>
@@ -92,28 +94,7 @@
 							</div>
 					</div>
 				
-					<div class="form-section">
-						
-						<div class="item">		
-							<table class="form-table">
-								<tbody>	
-									<tr>
-										<th scope="row">項目ID</th>
-										<td>
-											<input name="NewField[fieldId]" class="m-area" style="width:200px;" placeholder="name" />
-										</td>
-									</tr>
-									
-									<tr>
-										<th scope="row">項目タイプ</th>
-										<td>
-											<select soy:id="field_type_select"></select>
-										</td>
-									</tr>
-								<tbody>
-							</table>
-						</div>
-					</div>
+					
 				</div>
 				
 				<div class="form-btn ce">

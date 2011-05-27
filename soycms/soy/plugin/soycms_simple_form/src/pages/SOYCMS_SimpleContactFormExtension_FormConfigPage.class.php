@@ -14,6 +14,21 @@ class SOYCMS_SimpleContactFormExtension_FormConfigPage extends HTMLPage{
 				if(!is_array($items)){
 					$items = array();
 				}
+				
+				if(!preg_match("/^[a-z][a-zA-Z0-9\-]+$/",$obj->getId())){
+					$obj->setId($obj->getType());
+				}
+				
+				//既に登録済みの場合
+				if(isset($items[$obj->getId()])){
+					$oldId = $obj->getId();
+					$counter = 1;
+					while(isset($items[$obj->getId()])){
+						$id = $oldId . "_" . $counter;
+						$obj->setId($id);
+						$counter++;
+					}
+				}
 				$items[$obj->getId()] = $obj;
 				$config["items"] = $items;
 			}
@@ -53,7 +68,7 @@ class SOYCMS_SimpleContactFormExtension_FormConfigPage extends HTMLPage{
 			$this->fields = $config["items"];
 			if(!is_array($this->fields))$this->fields = array();
 
-			if($this->fieldId){
+			if($this->fieldId && isset($this->fields[$this->fieldId])){
 				$this->field = $this->fields[$this->fieldId];
 			}
 		}catch(Exception $e){
@@ -293,7 +308,7 @@ class SOYCMS_SimpleContactFormExtension_FormConfigPage extends HTMLPage{
 				break;
 			case "mailaddress":
 				$form[] = '		<p class="important" cms:id="'.$id.'_format_error">'.$name.'の書式が正しくありません。</p>';
-				$item = '<input type="text" cms:id="contact_'.$id.'" />';
+				$item = '<input type="text" cms:id="contact_'.$id.'" class="l-area" />';
 				break;
 			case "input":
 				$form[] = '		<p class="important" cms:id="'.$id.'_format_error">'.$name.'の書式が正しくありません。</p>';

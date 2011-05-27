@@ -35,20 +35,20 @@ class SOYCMS_SimpleContactFormExtension extends SOYCMS_SiteApplicationExtension{
 				$values = $_POST;
 				$values["_go_next"] = time();
 				$values["_go_next_token"] = md5($values["_go_next"] . "_soycms_simple_form");
-				$html = $this->buildForm($uri,$html,$items,$values);
+				$html = $this->buildForm($this->mode,$uri,$html,$items,$values);
 				
 				break;
 				
 			case "complete":
 				$html = $config["complete_html"];
-				$html = $this->buildForm($uri,$html,$items,array("mode" => "complete"),$session_values);
+				$html = $this->buildForm($this->mode,$uri,$html,$items,array("mode" => "complete"),$session_values);
 				return $html;
 				break;
 				
 			case "form":
 			default:
 				$html = $config["form_html"];
-				$html = $this->buildForm($uri,$html,$items);
+				$html = $this->buildForm($this->mode,$uri,$html,$items);
 				break;
 		}
 		
@@ -177,7 +177,7 @@ class SOYCMS_SimpleContactFormExtension extends SOYCMS_SiteApplicationExtension{
 	/**
 	 * フォームを作る
 	 */
-	function buildForm($action,$html,$items,$array = array(),$values = null){
+	function buildForm($mode,$action,$html,$items,$array = array(),$values = null){
 		$builder = $this->getFormBuilder($html);
 		$builder->setItems($items);
 		
@@ -192,6 +192,11 @@ class SOYCMS_SimpleContactFormExtension extends SOYCMS_SiteApplicationExtension{
 			$values[$key] = $value;
 		}
 		$builder->setAction($action);
+		
+		if($mode == "form"){
+			$values = array();
+		}
+		
 		$html = $builder->getForm($html,$values);
 		
 		return $html;

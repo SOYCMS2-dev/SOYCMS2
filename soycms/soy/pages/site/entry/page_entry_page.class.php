@@ -18,7 +18,6 @@ class page_entry_page extends SOYCMS_WebPageBase{
 		$entry = SOY2DAO::find("SOYCMS_Entry",array("directory" => $pageId));
 		$config = $page->getConfigObject();
 		$publish = ($config["public"] == 1) ? 1 : 0;
-			
 		if(count($entry) != 1){
 			foreach($entry as $obj){
 				$obj->remove();

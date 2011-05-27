@@ -24,7 +24,7 @@ class SOYCMS_ContactFormHelper {
 			$conf = $logic->getServerConfig();
 			$config = array(
 				"items" => self::getDefaultItems(),
-				"admin_addr" => $conf->getFromMailAddress(),
+				"admin_addr" => "",
 				"is_send_confirm_mail" => true,
 				"confirm_mail_input" => "your-mail", 
 				"is_show_confirm" => true,

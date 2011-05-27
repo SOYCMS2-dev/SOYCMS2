@@ -28,6 +28,7 @@ class SOYCMS_SimpleFormBuilder {
 	
 	function getValues() {
 		$values = array();
+		
 		foreach($this->items as $key => $field){
 			$id = $field->getId();
 			$name = $id;
@@ -53,7 +54,7 @@ class SOYCMS_SimpleFormBuilder {
 				$value = implode($sep,$tmp);
 			}
 			
-			if($type == "confirm"){
+			if($type == "confirm" && $value){
 				$value = $field->getName();
 			}
 			
@@ -126,7 +127,15 @@ class SOYCMS_SimpleFormBuilder {
 			
 			if($field->getRequire()){
 				
-				if(empty($value)){
+				//空の時
+				if((is_array($value) && count($value) < 1) || (!is_array($value) && strlen($value) < 1)
+				 || is_null($value)
+				){
+					$this->errors[$key] = "require";
+					
+				}
+				
+				if($type == "confirm" && !$value){
 					$this->errors[$key] = "require";
 				}
 				
@@ -316,7 +325,7 @@ class SOYCMS_SimpleForm_TemplatePage extends HTMLTemplatePage{
 				case "confirm":
 					$this->addCheckbox("contact_" . $key,array(
 						"elementId" => "contact_" . $key,
-						"isBoolean" => 1,
+						"isBoolean" => true,
 						"name" => $name,
 						"value" => 1,
 						"selected" => @$this->values[$key] == 1,
@@ -367,7 +376,7 @@ class SOYCMS_SimpleForm_TemplatePage extends HTMLTemplatePage{
 					if(@$option["confirm"] == 1){
 						$this->addInput("contact_" . $key . "_confirm",array(
 							"name" => $key . "_confirm",
-							"value" => $formValue,
+							"value" => @$this->values[$key . "_confirm"],
 							"soy2prefix" => "cms"
 						));
 					}

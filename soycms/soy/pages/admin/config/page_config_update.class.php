@@ -27,6 +27,7 @@ class page_config_update extends SOYCMS_WebPageBase{
 		
 		//アップデートの実行
 		if(isset($_POST["target"])){
+			set_time_limit(0);
 			$this->doUpdate($this->targetDir);
 			exit;
 		}
@@ -166,6 +167,7 @@ class page_config_update extends SOYCMS_WebPageBase{
 			foreach($files as $file){
 				$res = $this->checkIsWritable($dir . $file);
 				if(!$res){
+					$this->output("[ERROR]Permission Error:" . $dir . $file);
 					return false;
 				}
 			}

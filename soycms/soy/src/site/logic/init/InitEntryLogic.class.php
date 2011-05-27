@@ -9,7 +9,6 @@ class InitEntryLogic extends SOY2LogicBase{
 			$type = $config["template"];
 			
 			$dao = new SOY2DAO();
-			$dao->executeUpdateQuery("delete from soycms_site_entry");
 			
 			$base = new SOYCMS_Entry();
 			$base->setPublish(1);
@@ -50,8 +49,8 @@ class InitEntryLogic extends SOY2LogicBase{
 			}
 		}
 		
-		function generatePages($site,$config){
-			$logic = SOY2Logic::createInstance("site.logic.page.SOYCMS_PageLogic");
+	function generatePages($site,$config){
+		$logic = SOY2Logic::createInstance("site.logic.page.SOYCMS_PageLogic");
 		$type = $config["template"];
 		
 		$templates = array(
@@ -201,13 +200,13 @@ class InitEntryLogic extends SOY2LogicBase{
 		$page->setConfigParam("public",1);
 		$page->setConfigParam("title","#SiteName#");
 		$page->setTemplate("{$template}error");
+		$obj = $page->getObject();
+		$obj->setStatusCode(403);
 		$page->save();
 		$page->setProperties(array("BODY_CLASS" => "navi1"));
 		$logic->generatePageClass($page);
 		$logic->updatePageObject($page);
 		
-		$obj = $page->getObject();
-		$obj->setStatusCode(403);
 		$obj->save();
 		
 		$page = new SOYCMS_Page();
@@ -217,13 +216,13 @@ class InitEntryLogic extends SOY2LogicBase{
 		$page->setConfigParam("public",1);
 		$page->setConfigParam("title","#SiteName#");
 		$page->setTemplate("{$template}error");
+		$obj = $page->getObject();
+		$obj->setStatusCode(404);
 		$page->save();
 		$page->setProperties(array("BODY_CLASS" => "navi1"));
 		$logic->generatePageClass($page);
 		$logic->updatePageObject($page);
 		
-		$obj = $page->getObject();
-		$obj->setStatusCode(404);
 		$obj->save();
 		
 		$page = new SOYCMS_Page();
@@ -233,13 +232,13 @@ class InitEntryLogic extends SOY2LogicBase{
 		$page->setConfigParam("public",1);
 		$page->setConfigParam("title","#SiteName#");
 		$page->setTemplate("{$template}error");
+		$obj = $page->getObject();
+		$obj->setStatusCode(500);
 		$page->save();
 		$page->setProperties(array("BODY_CLASS" => "navi1"));
 		$logic->generatePageClass($page);
 		$logic->updatePageObject($page);
 		
-		$obj = $page->getObject();
-		$obj->setStatusCode(500);
 		$obj->save();
 		
 		$logic->updatePageMapping();

@@ -42,6 +42,7 @@ class SOYCMS_ErrorPage extends SOYCMS_PageBase{
 			$entry->setPublish(1);
 			$entry->setStatus("open");
 			$entry->save();
+			SOY2Debug::trace($entry);
 			
 		}
 		
