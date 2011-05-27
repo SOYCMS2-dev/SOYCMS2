@@ -2,6 +2,9 @@
 	<h3>コンタクトフォームの設定</h3>
 </div>
 <div class="content">
+<!-- soy:id="blank_admin_mailaddress" -->
+<p class="xl break">先に<strong><a style="color:red;" soy:link="../admin/config#tab2">サイト管理者のメールアドレス</a></strong>の設定を行わないとメールが送信されません。ご注意ください。</p>
+<!-- /soy:id="blank_admin_mailaddress" -->
 <div class="form-section">
 	
 	<ul class="tab_index">
@@ -97,7 +100,7 @@
 			<div class="form-section">
 				
 				<div class="label">
-					<h4>問い合わせ通知先メールアドレス (カンマ区切りで複数指定可能）</h4>
+					<h4>予備の通知先メールアドレス (カンマ区切りで複数指定可能)</h4>
 				</div>
 				<div class="item">
 					<p>
@@ -122,6 +125,9 @@
 					<p class="break">
 						<input id="is_send_confirm_mail" type="checkbox" soy:id="is_send_confirm_mail" />
 						<label for="is_send_confirm_mail">ユーザーへの確認メールを送信する</label>
+						
+						<span>次の項目に送信する：</span>
+						<select soy:id="confirm_mail_target_select"></select>
 					</p>
 					<div>
 						<p class="break">件名：<input soy:id="mail_title" type="text" class="m-area" style="width:510px" /></p>

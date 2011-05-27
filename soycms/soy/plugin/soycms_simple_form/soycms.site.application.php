@@ -111,7 +111,11 @@ class SOYCMS_SimpleContactFormExtension extends SOYCMS_SiteApplicationExtension{
 		
 		
 		//ユーザへ送信する宛先を取得
-		$sendto = @$values["mail"];
+		$target = @$config["confirm_mail_target"];
+		if(!$target){
+			$target = "mail";
+		}
+		$sendto = @$values[$target];
 		
 		
 		$config["mail_title"] =$builder->convertValues($config["mail_title"],false);
@@ -121,11 +125,23 @@ class SOYCMS_SimpleContactFormExtension extends SOYCMS_SiteApplicationExtension{
 		$config["admin_mail_body"] =$builder->convertValues($config["admin_mail_body"],false);
 		
 		//送信実行
+		$logic = SOY2Logic::createInstance("mail.SOYCMS_MailLogic");
+		$conf = $logic->getServerConfig();
+		
 		$logic->send(
-				@$config["admin_addr"],
-				@$config["admin_mail_title"],
-				@$config["admin_mail_body"]
+			$conf->getFromMailAddress(),
+			@$config["admin_mail_title"],
+			@$config["admin_mail_body"]
 		);
+		$address = explode(",",@$config["admin_addr"]);
+		foreach($address as $addr){
+			$logic->send(
+					$addr,
+					@$config["admin_mail_title"],
+					@$config["admin_mail_body"]
+			);
+		}
+		
 		if(@$config["is_send_confirm_mail"] && $sendto){
 			$logic->send(
 				$sendto,
@@ -167,9 +183,9 @@ class SOYCMS_SimpleContactFormExtension extends SOYCMS_SiteApplicationExtension{
 		
 		if($values){
 			$builder->setValues($values);
-		}else{
-			$array = array_merge($array,$builder->getValues());
 		}
+	
+		$array = array_merge($array,$builder->getValues());
 		
 		$values = array("soycms_simple_form" => $this->getVersion());
 		foreach($array as $key => $value){

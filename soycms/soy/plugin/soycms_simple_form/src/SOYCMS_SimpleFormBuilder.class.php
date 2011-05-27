@@ -42,17 +42,25 @@ class SOYCMS_SimpleFormBuilder {
 				if(!$sep)$sep = ",";
 				$items = $this->buildSubItems($subitem);
 				if(!is_array($value)){
-					$value = (!is_null($value)) ? array($value) : array();
+					$value = (!is_null($value)) ? explode($sep,$value) : array();
 				}
 				$tmp = array();
-				foreach($value as $_value){
-					$tmp[] = $items[$_value];
+				foreach($items as $_key => $item){
+					if(in_array($item,$value) || in_array($_key,$value)){
+						$tmp[] = $item;
+					}
 				}
 				$value = implode($sep,$tmp);
 			}
 			
+			if($type == "confirm"){
+				$value = $field->getName();
+			}
+			
 			$values[$key] = $value;
 		}
+		
+		$this->valuesTexts = $values;
 		
 		return $values;
 	}
@@ -62,6 +70,7 @@ class SOYCMS_SimpleFormBuilder {
 	private $html;
 	private $items = array();
 	private $values = array();
+	private $valuesTexts = array();
 	
 	private $isUserInputed = false;
 	private $errors = array();
@@ -210,7 +219,11 @@ class SOYCMS_SimpleFormBuilder {
 	}
 	
 	function convertValues($html,$isHTML = true){
-		$values = $this->values;
+		if(empty($this->valuesTexts)){
+			$values = $this->getValues();
+		}else{
+			$values = $this->valuesTexts;
+		}
 		
 		foreach($values as $key => $value){
 			if($isHTML)$value = nl2br($value);
@@ -402,10 +415,20 @@ class SOYCMS_SimpleForm_TemplatePage extends HTMLTemplatePage{
 				$value = implode($sep,$tmp);
 			}
 			
+			if($type == "textarea"){
+				$value = nl2br(htmlspecialchars($value));
+			}else{
+				$value = htmlspecialchars($value);
+			}
+			
+			if($type == "confirm"){
+				$value = $field->getName();
+			}
+			
 			
 			$this->addLabel("contact_" . $key . "_text",array(
 				"soy2prefix" => "cms",
-				"text" => $value
+				"html" => $value
 			));
 		}
 		

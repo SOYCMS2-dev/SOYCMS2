@@ -32,17 +32,9 @@ class SOYCMS_ContactFormHelper {
 				"confirm_html" => file_get_contents(dirname(__FILE__) . "/template/confirm.html"), 
 				"complete_html" => file_get_contents(dirname(__FILE__) . "/template/complete.html"),
 				"admin_mail_title" => "【問い合わせがあります】from: #name# (#mail#)",
-				"admin_mail_body" => "問い合わせがあります\r\n" .
-						"お名前：#name# 様\r\n" .
-						"メールアドレス：#mail#\r\n\r\n" .
-						"件名：#title#\r\n\r\n" .
-						"#body#",
+				"admin_mail_body" => file_get_contents(dirname(__FILE__) . "/template/admin_mail.html"),
 				"mail_title" => "お問い合わせありがとうございます。",
-				"mail_body" => 
-						"#name#様\r\n\r\n今回は○○にお問い合わせありがとうござます。\r\n近日中に返答いたします。\r\n" .
-						"\r\n" .
-						"※このメールはシステムによる自動返信メールです。直接このメールに返信は出来ませんのでご注意ください。\r\n" .
-						"\r\n\r\n株式会社○○\r\nTEL:XXX-XXX-XXX\r\n住所:東京都千代田区",
+				"mail_body" => file_get_contents(dirname(__FILE__) . "/template/client_mail.html"),
 			);
 		}
 		

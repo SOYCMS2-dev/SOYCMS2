@@ -231,7 +231,7 @@ class SOYCMS_SimpleContactFormExtension_FormConfigPage extends HTMLPage{
 			$confirm[] = '		<td><!-- cms:id="contact_'.$key.'_text" -->'.$field->getName().'<!-- /cms:id="contact_'.$key.'_text" --></td>';
 			$confirm[] = '	</tr>';
 
-			$mail[] = $field->getName() . " -> " . "##".$key."##";
+			$mail[] = $field->getName() . " -> " . "#".$key."#";
 
 			if($field->getType() == "mailaddress" && @$option["confirm"] == 1){
 				$field->setName($field->getName() . "(確認)");

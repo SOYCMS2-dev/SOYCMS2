@@ -21,11 +21,21 @@ class SOYCMS_SimpleContactFormExtension_ConfigPage extends HTMLPage{
 		$this->addLink("sample_code_link",array(
 			"link" => soycms_create_link("ext/soycms_simple_form?id=" . $this->pageObj->getId() . "&mode=sample&layer")
 		));
+		
+		
+		//サーバー管理者のメールアドレスが設定されているかどうか
+		$logic = SOY2Logic::createInstance("mail.SOYCMS_MailLogic");
+		$conf = $logic->getServerConfig();
+		$adminMail = $conf->getFromMailAddress();
+		
+		$this->addModel("blank_admin_mailaddress",array(
+			"visible" => empty($adminMail)
+		));
 	}
 	
 	function buildForm(){
 		$config = $this->getConfig();
-		
+		$items = $config["items"];
 		
 		$this->createAdd("field_list","ContactFormFieldList",array(
 			"list" => (is_array($config["items"])) ? $config["items"] : array(),
@@ -87,9 +97,18 @@ class SOYCMS_SimpleContactFormExtension_ConfigPage extends HTMLPage{
 			"value" => @$config["complete_html"]
 		));
 		
-		$this->addInput("confirm_mail_input",array(
-			"name" => "object[config][confirm_mail_input]",
-			"value" => @$config["confirm_mail_input"]
+		$mails = array();
+		foreach($items as $key => $field){
+			if($field->getType() == "mailaddress"){
+				$mails[$key] = $key . ":" . $field->getName();
+			}
+		}
+		
+		$this->addSelect("confirm_mail_target_select",array(
+			"name" => "object[config][confirm_mail_target]",
+			"selected" => @$config["confirm_mail_target"],
+			"options" => $mails,
+			"property" => "name"
 		));
 		
 		$this->addInput("field_items",array(
