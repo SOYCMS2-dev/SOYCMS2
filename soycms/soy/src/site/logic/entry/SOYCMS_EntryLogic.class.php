@@ -144,6 +144,16 @@ class SOYCMS_EntryLogic extends SOY2LogicBase{
 		$entry->setUri(null);
 		$uri = $pageObj->getEntryUri($entry);
 		$entry->setUri($uri);
+		
+		
+		if($pageObj->getEntryPosition() > 0){
+			$order = $dao->countByDirectory($dirId);
+			$entry->setOrder($order);
+		}else{
+			$entry->setOrder(0);
+			$dao->updateOrders();
+		}
+		
 		$entry->save();
 		
 		return $entry->getId();
