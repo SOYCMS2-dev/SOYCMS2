@@ -1,147 +1,241 @@
 <div id="main-window1" class="main-window"> 
-				
+
+
 	<div class="window-title"> 
 		<h2>WEBサイトの全体設定</h2> 
 	</div> 
-	
-	<div class="window-content"> 
-		
-		<div id="main-section1" class="section"> 
 
-			<div class="content">
-				
-				<form soy:id="form"> 
-				
-					<div id="post1-section1" class="form-section"> 
-					
-						<div class="label"> 
-							<h4> 
-								<label for="post1-1">WEBサイト名</label>
-							</h4> 
-						</div> 
-						<div class="item"> 
-							<p> 
-								<input soy:id="site_name" class="xm-area" id="post1-2" value="" size="60" style="width:400px" /> 
-							</p> 
-						</div> 
-						
-						<div class="label"> 
-							<h4> 
-								<label for="post1-1">WEBサイトディレクトリ</label>
-							</h4> 
-						</div> 
-						<div class="item"> 
-							<p class="xxl"> 
+	<div class="window-content">
+
+
+		<div id="main-section1" class="section">
+
+
+	<ul class="crumbs">
+		<li><a soy:link="./" title="管理画面トップ" class="home_btn">管理画面トップ</a></li>
+		<li>WEBサイトの全体設定</li>
+	</ul>
+
+
+
+<div id="post1-section1" class="form-section">
+
+
+
+				<form soy:id="form">
+
+
+				<div class="section cfg-menu">
+					<div class="cfg-menu-1">
+						<h3>WEBサイト名</h3>
+					</div><!--  // .cfg-menu-1 -->
+
+					<div class="cfg-menu-2">
+						<p class="sbreak"> 
+							<input soy:id="site_name" class="m-area" value="" style="width:420px" /> 
+						</p>
+						<p style="font-size: 10px;">cms:id="site_name"</p>
+					</div><!--  // .cfg-menu-2 -->
+				</div><!--  // .section -->
+
+				<hr class="design-hr" />
+
+
+
+
+				<div class="section cfg-menu">
+					<div class="cfg-menu-1">
+						<h3>WEBサイト<br />ディレクトリ</h3>
+					</div><!--  // .cfg-menu-1 -->
+
+					<div class="cfg-menu-2">
+							<p style="font-size: 14px;"> 
 								<!-- soy:id="site_directory" -->httpd....<!-- /soy:id="site_directory" -->
-							</p> 
-						</div>
-						
-						<div class="label"> 
-							<h4>WEBサイトの説明</h4> 
-						</div> 
-						<div class="item"> 
-							<textarea soy:id="site_description" class="m-area liq-area"></textarea> 
-						</div>
-						
-						<div class="label"> 
-							<h4> 
-								<label for="post1-1">SSLの設定</label>
-							</h4> 
-						</div> 
-						<div class="item"> 
+							</p>
+					</div><!--  // .cfg-menu-2 -->
+				</div><!--  // .section -->
+
+				<hr class="design-hr" />
+
+
+
+				<div class="section cfg-menu">
+					<div class="cfg-menu-1">
+						<h3>WEBサイトの説明</h3>
+						<h4>descriptionタグ</h4>
+					</div><!--  // .cfg-menu-1 -->
+
+					<div class="cfg-menu-2">
+					<p class="sbreak">
+						<textarea soy:id="site_description" rows="3" class="m-area" style="width: 420px;"></textarea>
+					</p>
+					<p style="font-size: 10px;">cms:id="meta_description"</p>
+					</div><!--  // .cfg-menu-2 -->
+				</div><!--  // .section -->
+
+				<hr class="design-hr" />
+
+
+
+				<div class="section cfg-menu">
+					<div class="cfg-menu-1">
+						<h3>SSLの設定</h3>
+					</div><!--  // .cfg-menu-1 -->
+
+					<div class="cfg-menu-2">
+							<p>
 							<input type="checkbox" soy:id="is_use_ssl" id="is_use_ssl" onclick="$('#ssl_option').toggle($(this).attr('checked'));" />
 							<label for="is_use_ssl">SSLを使用する</label>
-							<table id="ssl_option" soy:id="ssl_config_wrap" class="form-table">
+							</p>
+							<table id="ssl_option" soy:id="ssl_config_wrap" style="width: 400px;">
 									<tr>
 										<th>SSL用URL</th>
 										<td>
-											<input soy:id="ssl_url" name="post1-2" type="text" class="m-area" id="post1-2" value="" size="40" />
+											<input soy:id="ssl_url" type="text" class="m-area" value="" style="width: 220px;" />
 										</td>
 									</tr>
 									<tr>
 										<th>SSL用ディレクトリ</th>
 										<td>
-											<input soy:id="ssl_directory" name="post1-2" type="text" class="m-area" id="post1-2" value="" size="40" />
+											<input soy:id="ssl_directory" type="text" class="m-area" style="width: 220px;" />
 											<br />(index.php、.htaccessを書き出します。）
 										</td>
 									</tr>
 								</table> 
-						</div>
-						
-						<div class="label"> 
-							<h4><label for="post1-3">タイムゾーン</label></h4> 
-						</div> 
-						<div class="item"> 
-							<p> 
-								<select soy:id="timezone"></select> 
-							</p>
-						</div>
-						
-						<div class="label"> 
-							<h4><label for="post1-3">言語</label></h4> 
-						</div> 
-						<div class="item"> 
-							<p> 
-								<input soy:id="language" type="text" class="m-area" size="10" style="width:400px" /> 
-							</p> 
-						</div> 
-						
-						<div class="label"> 
-							<h4><label for="post1-3">Author</label></h4> 
-						</div> 
-						<div class="item"> 
-							<p> 
-								<input soy:id="author" type="text" class="m-area" size="60" style="width:400px" /> 
-							</p> 
-						</div>
-						
-						<div class="label"> 
-							<h4><label for="post1-3">Copyright</label></h4> 
-						</div> 
-						<div class="item"> 
-							<p> 
-								<input soy:id="copyright" type="text" class="m-area" size="60" style="width:400px" /> 
-							</p> 
-						</div>
-						
-						<div class="label"> 
-							<h4>
-								<label for="post1-3">favicon</label></h4> 
-						</div> 
-						<div class="item"> 
-							<p>
-								<img soy:id="favicon_img" width="32" height="32" style="margin-right:10px;"/>
-								<input type="file" name="favicon_upload" /> 
-							</p> 
-						</div>
-						
-						<div class="label"> 
-							<h4>
-								<label for="post1-3">サイト全体をBasic認証に設定する</label></h4> 
-						</div> 
-						<div class="item"> 
+					</div><!--  // .cfg-menu-2 -->
+				</div><!--  // .section -->
+
+				<hr class="design-hr" />
+
+
+
+				<div class="section cfg-menu">
+					<div class="cfg-menu-1">
+						<h3>タイムゾーン</h3>
+					</div><!--  // .cfg-menu-1 -->
+
+					<div class="cfg-menu-2">
+						<p> 
+							<select soy:id="timezone"></select>
+						</p>
+					</div><!--  // .cfg-menu-2 -->
+				</div><!--  // .section -->
+
+				<hr class="design-hr" />
+
+
+
+
+				<div class="section cfg-menu">
+					<div class="cfg-menu-1">
+						<h3>言語</h3>
+						<h4>Content-Language</h4>
+					</div><!--  // .cfg-menu-1 -->
+
+					<div class="cfg-menu-2">
+						<p class="sbreak">
+							<input soy:id="language" type="text" class="m-area" size="10" style="width:420px" />
+						</p>
+						<p style="font-size: 10px;">cms:id="meta_content_language"</p>
+					</div><!--  // .cfg-menu-2 -->
+				</div><!--  // .section -->
+
+				<hr class="design-hr" />
+
+
+
+
+				<div class="section cfg-menu">
+					<div class="cfg-menu-1">
+						<h3>Author</h3>
+						<h4>authorタグ</h4>
+					</div><!--  // .cfg-menu-1 -->
+
+					<div class="cfg-menu-2">
+						<p class="sbreak">
+							<input soy:id="author" type="text" class="m-area" style="width:420px" />
+						</p>
+						<p style="font-size: 10px;">cms:id="meta_author"</p>
+					</div><!--  // .cfg-menu-2 -->
+				</div><!--  // .section -->
+
+				<hr class="design-hr" />
+
+
+
+
+				<div class="section cfg-menu">
+					<div class="cfg-menu-1">
+						<h3>Copyright</h3>
+						<h4>copyrightタグ</h4>
+					</div><!--  // .cfg-menu-1 -->
+
+					<div class="cfg-menu-2">
+						<p class="sbreak">
+							<input soy:id="copyright" type="text" class="m-area" style="width:420px" /> 
+						</p>
+						<p style="font-size: 10px;">cms:id="meta_copyright"</p>
+					</div><!--  // .cfg-menu-2 -->
+				</div><!--  // .section -->
+
+				<hr class="design-hr" />
+
+
+
+
+				<div class="section cfg-menu">
+					<div class="cfg-menu-1">
+						<h3>faviconの設定</h3>
+					</div><!--  // .cfg-menu-1 -->
+
+					<div class="cfg-menu-2">
+						<p>
+							<img soy:id="favicon_img" width="32" height="32" style="margin-right:10px;"/>
+							<input type="file" name="favicon_upload" />
+						</p>
+					</div><!--  // .cfg-menu-2 -->
+				</div><!--  // .section -->
+
+				<hr class="design-hr" />
+
+
+
+
+				<div class="section cfg-menu">
+					<div class="cfg-menu-1">
+						<h3>サイト全体に<br />認証を設定する</h3>
+					</div><!--  // .cfg-menu-1 -->
+
+					<div class="cfg-menu-2">
 							<p>
 								<input type="checkbox" soy:id="mode_basic_auth" id="mode_basic_auth" onclick="$('#mode_basic_auth_option').toggle($(this).attr('checked'));" />
-								<label for="mode_basic_auth">サイト全体をBasic認証に設定する</label>
+								<label for="mode_basic_auth">サイト全体にユーザー認証を設定する</label>
 							</p> 
 							<div>
 								<table id="mode_basic_auth_option" soy:id="mode_basic_auth_option_wrap" class="form-table">
 									<tr>
-										<th>ユーザID</th>
+										<th>ユーザーID</th>
 										<td>
-											<input soy:id="mode_basic_auth_id" name="post1-2" type="text" class="m-area" id="post1-2" value="" size="40" />
+											<input soy:id="mode_basic_auth_id" type="text" class="m-area" value="" style="width: 220px;" />
 										</td>
 									</tr>
 									<tr>
 										<th>パスワード</th>
 										<td>
-											<input soy:id="mode_basic_auth_pass" name="post1-2" type="text" class="m-area" id="post1-2" value="" size="40" />
+											<input soy:id="mode_basic_auth_pass" type="text" class="m-area" value="" style="width: 220px;" />
+											<p style="font-size: 10px;margin: 6px 0">※サイト全体にユーザー認証を設定すると、<br />各ディレクトリのユーザー認証は無効になります。</p>
 										</td>
 									</tr>
 								</table>
+								
 							</div>
-						</div>
-						
+					</div><!--  // .cfg-menu-2 -->
+				</div><!--  // .section -->
+
+				<hr class="design-hr" />
+
+
+
 						<?php /**
 						<div class="label"> 
 							<h4>
@@ -156,85 +250,154 @@
 						</div>
 						
 						*/ ?>
-						
-						<div class="label"> 
-							<h4><label>記事のバックアップ保存数(最大100件)</label></h4> 
-						</div>
-						<p class="intro">記事毎に何件バックアップを保存するか設定します。</p>
-						<div class="item"> 
+
+
+
+				<div class="section cfg-menu">
+					<div class="cfg-menu-1">
+						<h3>記事<br />バックアップ保存数</h3>
+						<h4>最大100件</h4>
+					</div><!--  // .cfg-menu-1 -->
+
+					<div class="cfg-menu-2">
 							<p>
-								<input type="text" class="m-area" soy:id="entry_history_count" size="4" />件 
-							</p> 
-						</div>
-						
-						<div class="label"> 
-							<h4><label>テンプレートのバックアップ保存数(最大100件)</label></h4> 
-						</div>
-						<p class="intro">テンプレート・ライブラリ毎に何件バックアップを保存するか設定します。</p>
-						<div class="item"> 
+								<input type="text" class="m-area" soy:id="entry_history_count" style="width: 40px;" /> 件
+							</p>
+					</div><!--  // .cfg-menu-2 -->
+				</div><!--  // .section -->
+
+				<hr class="design-hr" />
+
+
+
+
+				<div class="section cfg-menu">
+					<div class="cfg-menu-1">
+						<h3>テンプレート<br />バックアップ保存数</h3>
+						<h4>最大100件</h4>
+					</div><!--  // .cfg-menu-1 -->
+
+					<div class="cfg-menu-2">
 							<p>
-								<input type="text" class="m-area" soy:id="template_history_count" size="4" />件 
-							</p> 
-						</div>
-						
-						<div class="label"> 
-							<h4><label>記事の自動保存設定</label></h4> 
-						</div>
-						<div class="item"> 
+								<input type="text" class="m-area" soy:id="template_history_count" style="width: 40px;" /> 件
+							</p>
+					</div><!--  // .cfg-menu-2 -->
+				</div><!--  // .section -->
+
+				<hr class="design-hr" />
+
+
+
+
+				<div class="section cfg-menu">
+					<div class="cfg-menu-1">
+						<h3>記事の自動保存設定</h3>
+					</div><!--  // .cfg-menu-1 -->
+
+					<div class="cfg-menu-2">
 							<p>
 								<input type="checkbox" class="m-area" soy:id="is_use_autosave" />
-								<label for="is_use_autosave">記事の自動保存を有効にする</label> 
+								<label for="is_use_autosave">記事の自動保存を有効にする</label>
 							</p>
-						</div>
-						
-						<div class="label"> 
-							<h4><label>クイックメニュー設定</label></h4> 
-						</div>
-						<div class="item"> 
+					</div><!--  // .cfg-menu-2 -->
+				</div><!--  // .section -->
+
+				<hr class="design-hr" />
+
+
+
+
+				<div class="section cfg-menu">
+					<div class="cfg-menu-1">
+						<h3>クイックメニュー設定</h3>
+					</div><!--  // .cfg-menu-1 -->
+
+					<div class="cfg-menu-2">
 							<p>
 								<input type="checkbox" class="m-area" soy:id="is_use_quickmenu" />
 								<label for="is_use_quickmenu">クイックメニューを使用する</label> 
-							</p> 
-						</div>
-						
-						<!-- soy:id="has_dashboard_config" -->
-						<div class="label"> 
-							<h4><label>サイトトップの設定</label></h4> 
-						</div>
-						<div class="item"> 
-							<p class="intro">サイトトップに表示する画面を選択してください</p>
+							</p>
+					</div><!--  // .cfg-menu-2 -->
+				</div><!--  // .section -->
+
+				<hr class="design-hr" />
+
+
+
+				<!-- soy:id="has_dashboard_config" -->
+				<div class="section cfg-menu">
+					<div class="cfg-menu-1">
+						<h3>管理画面トップの設定</h3>
+					</div><!--  // .cfg-menu-1 -->
+
+					<div class="cfg-menu-2">
+							<p class="intro">管理画面トップに表示する画面を選択してください</p>
+							<p>
 							<select soy:id="dashboard_config">
 								<option value="">サイトマップ</option>
 							</select>
-						</div>
-						<!-- /soy:id="has_dashboard_config" -->
-						
-						<div class="label"> 
-							<h4>更新Ping送信先</h4> 
-						</div>
-						<div class="item">
-							<p>1件毎に改行してください</p> 
+							</p>
+					</div><!--  // .cfg-menu-2 -->
+				</div><!--  // .section -->
+
+				<hr class="design-hr" />
+				<!-- /soy:id="has_dashboard_config" -->
+
+
+
+
+				<div class="section cfg-menu">
+					<div class="cfg-menu-1">
+						<h3>更新Ping送信先</h3>
+					</div><!--  // .cfg-menu-1 -->
+
+					<div class="cfg-menu-2">
 							<p>
-								<textarea class="m-area liq-area" soy:id="update_ping_target" rows="4"></textarea> 
-							</p> 
-						</div>
-						
+								<textarea soy:id="update_ping_target" rows="4" style="font-size: 12px;line-height:1.5em; width:420px;"></textarea> 
+							</p>
+							<p>1件ごとに改行してください</p>
+					</div><!--  // .cfg-menu-2 -->
+				</div><!--  // .section -->
+
+				<hr class="design-hr" />
+
+
+
+
+				<div class="section cfg-menu">
+					<div class="cfg-menu-1">
+						<h3>キャッシュのクリア</h3>
+					</div><!--  // .cfg-menu-1 -->
+
+					<div class="cfg-menu-2">
+							<p>
+								<input type="submit" value="キャッシュをクリアする" name="clear_cache" class="m-btn" />
+								<p style="font-size: 10px;">管理画面、テンプレート、コンテンツのキャッシュすべてを削除します</p>
+							</p>
+					</div><!--  // .cfg-menu-2 -->
+				</div><!--  // .section -->
+
+				<hr class="design-hr" />
+
+
+
+
 						<div class="form-btn ce"> 
 							<p class="lbreak">
 								<input type="submit" value="設定する" id="post1-submit" name="post1-submit" class="l-btn" />
 							</p>
-							<p>
-								<input type="submit" value="キャッシュのクリア" name="clear_cache" class="m-btn" />
-							</p> 
 						</div>
-					</div> 
-					
 
-				</form> 
-			</div> 
-		</div> 
-		<!--  // #main-section1 --> 
 
+
+				</form>
+
+
+
+
+			</div><!--  // .form-section -->
+
+		</div><!--  // #main-section1 -->
 		
 
 

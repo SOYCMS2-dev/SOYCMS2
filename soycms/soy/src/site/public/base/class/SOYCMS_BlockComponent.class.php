@@ -63,11 +63,12 @@ class SOYCMS_BlockComponent extends SOYBodyComponentBase{
 	
 	function replaceText($text){
 		$text = str_replace("#SiteName#",SOYCMS_DataSets::load("site_name",SOYCMS_SITE_ID),$text);
-		$text = str_replace("#SiteUrl#",soycms_get_site_url(),$text);
+		$text = str_replace("#SiteUrl#",soycms_get_page_url("/"),$text);
 		
 		if(!$this->directory)return $text;
 		$text = str_replace("#DirName#",$this->directory->getName(),$text);
 		$text = str_replace("#PageName#",$this->page->getName(),$text);
+		$text = str_replace("#BlockName#",$this->block->getName(),$text);
 		
 		$text = str_replace("#DirUrl#",soycms_get_page_url($this->directory->getUri()),$text);
 		$text = str_replace("#PageUrl#",soycms_get_page_url($this->page->getUri()),$text);

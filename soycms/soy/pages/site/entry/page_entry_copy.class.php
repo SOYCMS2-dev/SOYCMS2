@@ -10,7 +10,6 @@ class page_entry_copy extends SOYCMS_WebPageBase{
 		try{
 			if(empty($_POST["directory"]))throw new Exception("");
 			
-			
 			$logic = SOY2Logic::createInstance("site.logic.entry.SOYCMS_EntryLogic");
 			$id = $logic->copy($entry,$_POST["directory"]);
 			

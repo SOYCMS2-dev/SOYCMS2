@@ -31,6 +31,9 @@ class page_page_detail_basic extends SOYCMS_WebPageBase{
 		$this->addModel("is_not_directory",array(
 			"visible" => !$this->page->isDirectory()
 		));
+		$this->addModel("is_directory",array(
+			"visible" => $this->page->isDirectory()
+		));
 		
 		$this->addInput("page_name",array(
 			"name" => "Page[name]",

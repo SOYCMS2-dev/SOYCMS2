@@ -10,7 +10,7 @@
 
 	
 <div class="title"> 
-	<h3><!-- soy:id="template_name*" /-->の使用中の要素</h3> 
+	<h3>"<!-- soy:id="template_name*" /-->"の要素設定</h3> 
 </div>	
 	
 <div class="content">
@@ -26,6 +26,27 @@
 <!-- /soy:id="template_item_manager" -->
 </div>
 
+<!-- soy:id="property_exists" -->	
+<div class="title"> 
+	<h3>プロパティ設定</h3> 
+</div>
+	
+<div class="content">
+		
+<table class="form-table" style="margin: 0 0 14px;"> 
+	<!-- soy:id="property_list" -->
+	<tr> 
+		<th scope="row"><!-- soy:id="property_key" /--></th> 
+		<td>
+			<input type="text" soy:id="property_value" value="" class="m-area" style="width:420px;" />
+		</td> 
+	</tr>
+	<!-- /soy:id="property_list" --> 
+</table>
+
+<!-- /soy:id="property_exists" -->
+
+
 <div class="form-btn ce">
 	<input type="submit" class="l-btn" value="保存" />
 </div>
@@ -35,40 +56,4 @@
 </div><!-- /content -->
 </div><!-- /section -->
 
-<!-- soy:id="property_exists" -->
 
-<div class="section">
-	
-<div class="title"> 
-	<h3>プロパティ設定</h3> 
-</div>	
-	
-<div class="content">
-	
-	<form soy:id="property_form">
-		
-		<table class="form-table"> 
-			<!-- soy:id="property_list" -->
-			<tr> 
-				<th scope="row"><!-- soy:id="property_key" /--></th> 
-				<td>
-					<input type="text" soy:id="property_value" value="" class="m-area liq-area" />
-				</td> 
-			</tr>
-			<!-- /soy:id="property_list" --> 
-		</table>
-	
-		<div class="form-btn ce">
-			<input type="submit" name="save_properties" class="l-btn" value="保存" />
-		</div>
-
-	</form>
-
-</div><!-- /content -->
-</div><!-- /section -->
-
-<!-- /soy:id="property_exists" -->
-
-
-<!-- soy:quickhelp="tmpl_item_drug" help:closed="1" /-->
-<!-- ヘルプ：テンプレートの要素の使い方 -->

@@ -13,27 +13,37 @@ class SOYCMS_SimpleSearchExtension extends SOYCMS_SearchExtension{
 		$result = array();
 		
 		if(strlen($word) > 0){
-		
 			$wheres = array();
-			$binds = array();
+			$binds = array(
+				":publish" => 1,
+				":status" => "open"
+			);
 			
 			$words = explode(" ",$word);
 			foreach($words as $key => $text){
 				$wheres[] = "(title LIKE :text{$key} OR content LIKE :text{$key})";
 				$binds[":text{$key}"] = "%" . $text . "%";
 			}
+			
+			$and = array();
+			$and[] = "soycms_site_entry.entry_publish = :publish";
+			$and[] = "soycms_site_entry.entry_status = :status";
+			$and[] = "soycms_site_page.page_type NOT LIKE '.%'";
 		
 			$db = SOY2DAOFactory::create("SOYCMS_EntryDAO");
 			$db->setLimit($limit);
 			$db->setOffset($offset);
 			
 			$query = new SOY2DAO_Query();
-			$query->table = "soycms_site_entry";
-			$query->sql = "*";
+			$query->table = "soycms_site_entry left outer join soycms_site_page on(soycms_site_entry.directory = soycms_site_page.id)";
+			$query->sql = "soycms_site_entry.*";
 			$query->prefix = "select";
 			
-			$query->order = "update_date desc";
-			$query->where = implode(" OR ", $wheres);
+			$query->order = "soycms_site_entry.update_date desc";
+			$query->where = implode(" AND ", $and);
+			if(count($wheres) > 0){
+				$query->where .= " AND (" . implode(" OR ", $wheres) . ")";
+			}
 			
 			$res = $db->executeOpenEntryQuery($query,$binds);
 			
@@ -43,7 +53,7 @@ class SOYCMS_SimpleSearchExtension extends SOYCMS_SearchExtension{
 			
 			
 			//合計を取得
-			$query->sql = "count(id) as total_count";
+			$query->sql = "count(soycms_site_entry.id) as total_count";
 			$db->setLimit(null);
 			$db->setOffset(null);
 			$res = $db->executeOpenEntryQuery($query,$binds);

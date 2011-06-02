@@ -132,6 +132,9 @@ class SOYCMS_EntryLogic extends SOY2LogicBase{
 	function copy($entry,$dirId){
 		$entry->setId(null);
 		$entry->setDirectory($dirId);
+		$entry->setPublish(0);
+		$entry->setStatus("draft");
+		
 		$dao = SOY2DAOFactory::create("SOYCMS_EntryDAO");
 		$page = SOY2DAO::find("SOYCMS_Page",$dirId);
 		if(!$page->isDirectory())throw new Exception();

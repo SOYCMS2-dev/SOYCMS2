@@ -21,7 +21,18 @@
 					<li class="plus-btn"><a soy:id="create_link">コンタクトフォーム項目の追加</a></li>
 				</ul>
 			</div>
-			
+
+
+<style>
+.field-require {
+	color:#C00
+}
+.field-error {
+	color: #36C
+}
+</style>
+
+
 			<div class="label">
 				<h4>コンタクトフォーム項目</h4>
 			</div>
@@ -50,8 +61,10 @@
 						<!-- /soy:id="field_list" -->
 					</tbody>
 				</table>
+				<p  class="lbreak" style="font-size:10px;"><span class="field-require">*</span>・・必須項目　<span class="field-error">?</span>・・テンプレートに未挿入</p>
+				
 				<p class="under ce">
-					<a class="s-btn" onclick="return common_open_popup($(this).attr('href'));" soy:id="sample_code_link"><em>テンプレート用HTML生成</em></a>
+					<a class="m-btn" onclick="return common_open_popup($(this).attr('href'));" soy:id="sample_code_link"><em>テンプレート用HTML生成</em></a>
 				</p>
 				
 				<input type="hidden" soy:id="field_items" />

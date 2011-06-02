@@ -10,6 +10,7 @@ function append_new_section(ele,_section,_snippet,_form){
 	var section_list = $(ele).parents(".section_list");
 	var replace = (_form) ? $.map($("input,textarea,select",_form),function(n,i){
 		if($(n).attr("name").length < 1)return null;
+		if(!$(n).val())return $(n).attr("name") + "=";
 		return $(n).attr("name") + "=" + $(n).val().replace(/&/g,'%26');
 	}).join("&") : null;
 	var count = $(".section_list").size();
@@ -42,7 +43,7 @@ function append_new_section(ele,_section,_snippet,_form){
 		$(window).scrollTop(editor.frame.offset().top - 180);
 		
 		$(".aobata_editor_appended").removeClass("aobata_editor_appended");
-		editor.isActive(true);
+		editor.doActive(true);
 		editor.wrapper.addClass("aobata_editor_appended");
 		
 	});
@@ -480,7 +481,7 @@ function entry_editor_page_prepare(){
 	});
 	
 	$(".close-editor").unbind("click").click(function(){
-		if(aobata_editor.active)aobata_editor.active.isActive(false);
+		if(aobata_editor.active)aobata_editor.active.doActive(false);
 	});
 }
 

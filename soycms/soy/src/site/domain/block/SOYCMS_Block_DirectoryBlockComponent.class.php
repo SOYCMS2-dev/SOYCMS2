@@ -409,7 +409,7 @@ class SOYCMS_Block_DirectoryBlockComponent extends SOYCMS_Block_BlockComponentBa
 	private $labelOption = 0;
 	private $tags = array();
 	private $tagOption = 0;
-	private $order = "update_desc";
+	private $order = "create_desc";
 	private $countFrom;
 	private $countTo = 5;
 	private $includeChildDirectory = false;

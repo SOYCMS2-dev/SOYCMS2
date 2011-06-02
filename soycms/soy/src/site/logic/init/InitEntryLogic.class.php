@@ -268,6 +268,7 @@ class InitEntryLogic extends SOY2LogicBase{
 			$object->setDirectoryType(1);
 			$object->setDirectories(array($dir));
 			$newsblock->setObject($object);
+			$newsblock->setIndexUrl("#SiteUrl#news/");
 			
 			//index
 			$newsblock->save();
@@ -310,6 +311,7 @@ class InitEntryLogic extends SOY2LogicBase{
 				$object->setDirectoryType(1);
 				$object->setDirectories(array($dir));
 				$catalogBlock->setObject($object);
+				$catalogBlock->setIndexUrl("#SiteUrl#catalog/");
 				
 				//index
 				$catalogBlock->save();

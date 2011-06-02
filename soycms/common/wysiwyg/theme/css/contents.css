@@ -109,7 +109,6 @@ common class,clearfix
 }
 
  ul.icon-list > li {
-	min-height: 1px;
 	margin: 0;
 	padding: 0 0 5px 12px;
 	background: url(../img/icon-square.gif) 0 0.5em no-repeat;
@@ -117,7 +116,6 @@ common class,clearfix
 }
 
  ul.link-list > li {
-	min-height: 1px;
 	margin: 0;
 	padding: 0 0 5px 10px;
 	background: url(../img/icon-arrow.gif) -2000px 0.5em no-repeat;
@@ -126,7 +124,6 @@ common class,clearfix
 
  ul.link-list > li > a {
 	display: block;
-	min-height: 1px;
 	margin: 0 0 0 -10px;
 	padding: 0 0 0 10px;
 	background: url(../img/icon-arrow.gif) 0 0.5em no-repeat;

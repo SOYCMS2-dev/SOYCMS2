@@ -23,14 +23,13 @@
 					for (var i=0;i<z.length;i++){
 						var y
 						, zSaved = z[i]
-						, attrRE = /\=[a-zA-Z\.\:\[\]_\(\)\&\$\%#\@\!0-9]+[?\s+|?>]/g;
+						, attrRE = /\=[a-zA-Z\.\:\[\]_\(\)\&\$\%#\@\!0-9\-]+[?\s+|?>]/g;
 						z[i] = z[i].replace(/(<?\w+)|(<\/?\w+)\s/,function(a){return a.toLowerCase();});
 						y = z[i].match(attrRE);//deze match
-						
 						if (y){
 							var j = 0,len = y.length
 							while(j<len){
-								var replaceRE = /(\=)([a-zA-Z\.\:\[\]_\(\)\&\$\%#\@\!0-9]+)?([\s+|?>])/g;
+								var replaceRE = /(\=)([a-zA-Z\.\:\[\]_\(\)\&\$\%#\@\!0-9\-]+)?([\s+|?>])/g;
 								var replacer = function(){
 									var args = Array.prototype.slice.call(arguments),
 									value = args[2].toLowerCase(),
@@ -71,6 +70,9 @@
 			if(html.match(empty_tag_regexp)){
 				html = html.replace(empty_tag_regexp,'<$1$2 />');
 			}
+			
+			//br
+			html = html.replace(/<br([^>]+)>([^\n])/g,"<br$1>\n$2");
 			
 			this.argument = html;
 			return html;
@@ -166,6 +168,20 @@
 					
 				}
 				
+				if(tag_name.match(/br/)){
+					if(!ele.nextSibling){
+						$(ele).after("\n");
+						return;
+					}
+					var html =(ele.nextSibling.innerHTML) ? ele.nextSibling.innerHTML : ele.nextSibling.nodeValue;
+					if(ele.nextSibling.nodeType != 3 || !html.match(/^\n/)){
+						$(ele).after("\n");
+						return;
+					}
+					
+					return;
+				}
+				
 				if (!ele.childNodes || ele.childNodes.length < 1){
 					return;
 				}
@@ -187,7 +203,7 @@
 					//create new line
 					if(ele.childNodes[i].tagName && ele.childNodes[i].tagName.match(newline_regex)){
 						if (i == 0 || ele.childNodes[i - 1].nodeType != 3 /* Node.TEXT_NODE */) {
-							ele.insertBefore(d.createTextNode("\n" + (new Array(depth)).join("\t")), ele.childNodes[i]);
+							ele.insertBefore(d.createTextNode("\n"), ele.childNodes[i]);
 							i++;
 						}
 					}
@@ -195,7 +211,6 @@
 					format_element(ele.childNodes[i], depth + 1);
 					
 				}
-				
 				//end new line tags
 				if (ele.tagName.match(block_regex)) {
 					if(ele.innerHTML[ele.innerHTML.length -1] != "\n"){

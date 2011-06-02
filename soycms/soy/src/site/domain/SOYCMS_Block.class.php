@@ -78,11 +78,15 @@ class SOYCMS_Block {
 	 */
 	function getPreview(){
 		$html = array();
-		$html[] = '<!-- cms:id="entry_list" -->';
-		$html[] = '<h1><!-- cms:id="title" -->記事のタイトル<!-- /cms:id="title" --></h1>';
-		$html[] = '<div class="text">';
-		$html[] = '<!-- cms:id="content" -->記事の本文<!-- /cms:id="content" -->';
-		$html[] = '<!-- /cms:id="entry_list" -->';
+		$html[] = '<div class="section">';
+		$html[] = '	<h2><!-- cms:id="block_name" -->名前<!-- /cms:id="block_name" --></h2>';
+		$html[] = '	<dl class="archive-list">';
+		$html[] = '		<!-- cms:id="entry_list" -->';
+		$html[] = '		<dt cms:id="create_date" cms:format="Y.m.d">2010.04.20</dt>';
+		$html[] = '		<dd><a cms:id="entry_link"><!-- cms:id="title" -->テキストが入ります<!--/cms:id="title" --></a></dd>';
+		$html[] = '		<!-- /cms:id="entry_list" -->';
+		$html[] = '	</dl>';
+		$html[] = '	<p class="link-r"><a cms:id="block_index_link"><!-- cms:id="block_index_title" -->一覧用名前<!-- /cms:id="block_index_title" -->の一覧</a></p>';
 		$html[] = '</div>';
 		
 		return implode("\n",$html);
@@ -96,8 +100,8 @@ class SOYCMS_Block {
 	
 	private $description;
 	
-	private $indexTitle;
-	private $indexUrl;
+	private $indexTitle = "#BlockName#";
+	private $indexUrl = "#DirUrl#";
 	
 	private $path;
 	

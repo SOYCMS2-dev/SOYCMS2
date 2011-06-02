@@ -4,7 +4,7 @@ $user = SOY2Session::get("base.session.UserLoginSession");
 $config = $session->getConfig();
 ?>
 <div id="cms-version">
-	<p>SOY CMS <?php echo SOYCMS_VERSION; ?></p>
+	<p>SOY CMS2 (<?php echo SOYCMS_VERSION; ?>)</p>
 </div>
 
 <div id="user-info">

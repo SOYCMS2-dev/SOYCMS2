@@ -157,11 +157,11 @@ class ContactFormFieldList extends HTMLList{
 	}
 	
 	function populateItem($entity,$key){
-		$require = ($entity->getRequire()) ? "*" : "";
-		$exists = (strpos($this->html,$key) !== false) ? "" : "?";
+		$require = ($entity->getRequire()) ? "<span class=\"field-require\">*</span> " : "";
+		$exists = (strpos($this->html,"contact_" . $key) !== false) ? "" : " <span class=\"field-error\">?</span>";
 		
 		$this->addLabel("list_field_name",array("text" => $entity->getName()));
-		$this->addLabel("list_field_id",array("text" => $require . $entity->getId() . $exists));
+		$this->addLabel("list_field_id",array("html" => $require . $entity->getId() . $exists));
 		$this->addLink("list_field_detail_link",array(
 			"link" => $this->link . "&field=" . $entity->getId()
 		));

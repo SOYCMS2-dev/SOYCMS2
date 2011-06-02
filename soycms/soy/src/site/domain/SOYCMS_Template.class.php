@@ -274,7 +274,9 @@ class SOYCMS_Template implements SerialziedEntityInterface{
 	}
 	
 	function getDefaultBlocks(){
-		$class = "SOYCMS_" . ucfirst($this->getType()) . "Page";
+		$type = $this->getType();
+		if($type[0] == ".")$type = substr($type,1);
+		$class = "SOYCMS_" . ucfirst($type) . "Page";
 		
 		$items = array();
 		

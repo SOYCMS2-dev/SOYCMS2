@@ -66,8 +66,12 @@
 						continue;
 					}
 					
-					if($(elements[i]).parent().hasClass(class_name)){
-						$(elements[i]).parent().removeClass(class_name);
+					if($(elements[i]).parents().hasClass(class_name)){
+						$(elements[i]).parents().removeClass(class_name);
+						continue;
+					}
+					if($(elements[i]).hasClass(class_name)){
+						$(elements[i]).removeClass(class_name);
 						continue;
 					}
 					
@@ -216,6 +220,11 @@
 			
 			if(node[0].tagName.match(/body|ul|ol|dl|li|dt|dd/i)){
 				return true;
+			}
+			
+			if(node.css("textIndent")){
+				node.css("textIndent","");
+				node.css("textIndent",null);
 			}
 			
 			left = parseInt(node.css("marginLeft"));

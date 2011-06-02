@@ -249,6 +249,9 @@ aobata_editor.prototype = {
 	carent : null,
 	mode : true, // true is mode of wysiwyg.
 	command : [], 
+	_history : [],
+	_redoHistory : [],
+	_last_keycode : null,
 	
 	
 	initialize : function(target, options){
@@ -269,6 +272,9 @@ aobata_editor.prototype = {
 		$.extend(this.options,options)
 		this.textarea[0].editor = this;
 		this.textarea.addClass("aoboata_editor_textarea");
+		this.textarea.bind("keydown",function(){
+			inst.adjustTextAreaSize();
+		});
 		
 		//set id
 		if(this.textarea.attr("id").length<1)this.textarea.attr("id", "aobata_editor_textarea_" + aobata_editor.count);
@@ -373,6 +379,7 @@ aobata_editor.prototype = {
 				try {
 					//innerHTML
 					t.setHTML(t.textarea.val());
+					t.pushHistory();
 				}catch(e){
 					alert("failed to setHTML");
 				}
@@ -384,7 +391,7 @@ aobata_editor.prototype = {
 				
 				//textarea focus event
 				$(t.textarea).bind("focus",function(){
-					t.isActive(true);
+					t.doActive(true);
 				});
 				
 				if (t.options.editable) {
@@ -392,7 +399,7 @@ aobata_editor.prototype = {
 					//save cursor pos
 					$(d).bind("click", function(event){
 						t.saveCaret();
-						t.isActive(true);
+						t.doActive(true);
 						
 						if(t.getWindow().document.body.innerHTML.match(/^<p><\/p>\n*$/gi)){	//初期状態
 							event.preventDefault();
@@ -483,6 +490,13 @@ aobata_editor.prototype = {
 							t._last_keycode = t._last_keycode_result
 							return;
 						}
+						
+						switch(event.keyCode){
+							case 91:	/* command */
+							case 17:	/* ctrl */
+								return;
+								break;
+						}
 						t._last_keycode = event.keyCode;
 						
 					}).bind("contextmenu",function(e){
@@ -529,14 +543,14 @@ aobata_editor.prototype = {
 					t.wrapper.prepend("<div class='aobata_preview_overlay'></div>").css({
 						position:"relative"
 					}).bind("click",function(){
-						t.isActive(true);
+						t.doActive(true);
 						$("#insert_new_sections").hide();		//fix bug
 						t.header.show().addClass("text-mode");
 						t.footer.show();
 					});
 					
 					$(d).bind("click",function(){ 
-						t.isActive(true);
+						t.doActive(true);
 						$("#insert_new_sections").hide();		//fix bug
 						t.header.show().addClass("text-mode");
 						t.footer.show();
@@ -663,7 +677,6 @@ aobata_editor.prototype = {
 				break;
 			case "a":
 				showParam = true;
-				this.getRange().sel(ele);
 				break;
 			case "span":
 			case "b":
@@ -913,14 +926,16 @@ aobata_editor.prototype = {
 			$(this).attr("src",src);
 		});
 		
-			
+		//create copy of body
+		var _body = this.getWindow().document.body.cloneNode(true);
+		
 		try {
-			this.beforeGetHTML.dispatchEvent(this.getWindow().document.body);
+			this.beforeGetHTML.dispatchEvent(_body);
 		}catch(e){
 			
 		}
 		
-		var html = $(this.getWindow().document.body).html();
+		var html = $(_body).html();
 		
 		try {
 			res = this.onGetHTML.dispatchEvent(html);
@@ -973,7 +988,7 @@ aobata_editor.prototype = {
 		return this.frame[0].contentWindow.document;
 	},
 	
-	isActive : function(param, isStopEvent){
+	doActive : function(param, isStopEvent){
 	
 		t = this;
 		d = window.document;
@@ -1001,7 +1016,10 @@ aobata_editor.prototype = {
 		if(param){
 			this.wrapper.addClass("aobata_editor_actived");
 			this.header.show();
-			this.footer.show();
+		
+			if (this.mode) {
+				this.footer.show();
+			}
 			
 			$("#insert_new_sections").show().insertBefore(
 				this.header.find(".wysiwyg-mode-panel .panel-line .panel-parts:last")
@@ -1071,6 +1089,12 @@ aobata_editor.prototype = {
 				$(start).remove();
 				return false;
 			}
+			
+			if($(start).html() && $(start).html().length < 1){
+				event.preventDefault();
+				$(start).remove();
+				return false;
+			}
 		}
 		if(event.keyCode == 8 && this.getDocument().body.innerHTML.length < 1){
 			this.insertHTML("<p>\u200B</p>");
@@ -1083,6 +1107,14 @@ aobata_editor.prototype = {
 			this._currentfocuselement = this.getWindow().document.body;
 			this.showParam();
 			return true;
+		}
+		
+		//ctrl + z
+		if((event.ctrlKey && event.keyCode == 90) || (event.metaKey && event.keyCode == 90)){
+			if(this.popHistory()){
+				event.preventDefault();
+				return false;
+			}
 		}
 		
 		//enter
@@ -1282,7 +1314,7 @@ aobata_editor.prototype = {
 				//現在の位置に<span class="aobata_tab" style="white-space:pre">\t</span>を挿入
 				this.insertHTML('<span class="aobata_tab" style="white-space:pre">&nbsp;&nbsp;&nbsp;&nbsp;</span>');
 				this._keydown_tmp_counter = 0;	//reset counter
-			} 
+			}
 			return false;
 			
 		}/* event tab */
@@ -1379,6 +1411,8 @@ aobata_editor.prototype = {
 		this.adjustSize(true);
 		
 		this.removeCaret();
+		
+		this.pushHistory();
 	},
 	
 	removeCaret : function(){
@@ -1423,6 +1457,10 @@ aobata_editor.prototype = {
 			this.textarea.focus();
 			this.wrapper.find(".aobata_preview_overlay").hide();
 			this.header.find(".btn-html").addClass("active");
+			
+			//resize
+			this.adjustTextAreaSize(true);
+			
 		}
 	},
 	
@@ -1430,6 +1468,12 @@ aobata_editor.prototype = {
 	 * adjust size to iframe's content
 	 */
 	adjustSize : function(flag){
+		if(!this.mode){
+			this.adjustTextAreaSize(true);
+			return;
+		}
+		
+		
 		if (flag && this.options.editable && !this.options.locked) {
 			body = $(this.getWindow().document.body);
 			max = ($(".section_list").size() < 2) ? 400 : 200;
@@ -1451,6 +1495,48 @@ aobata_editor.prototype = {
 			$(".article-body", this.wrapper).height(
 				Math.min(200,$(this.getWindow().document.body).height() + 15)
 			);
+		}
+	},
+	
+	/**
+	 * adjust textarea's size
+	 * @param {Object} ele
+	 */
+	adjustTextAreaSize : function(flag){
+		var obj = this.textarea.get(0),height = (obj.style.height)? obj.style.height : obj.style.pixelHeight,inst = this;
+		
+		height = parseInt(height) - 30;
+		height = (height < 20) ? 20 : height;
+		obj.style.height = height + "px";
+			
+		
+		if (flag) {
+			
+			
+			obj.style.height = 10 + "px";
+			var fit_func = function(){
+				new_height = (parseInt(obj.scrollHeight) + 20);
+				
+				if (new_height < 200) new_height = 200;
+				obj.style.height = new_height + "px";
+				
+				
+				//parent size
+				$(".article-body", inst.wrapper).height(inst.textarea.height());
+			};
+			
+			if (is_ie) {
+				setTimeout(fit_func, 500);
+			} else {
+				fit_func();
+			}
+		}else{
+			new_height = (parseInt(obj.scrollHeight));
+			if(new_height < 200)new_height = 200;
+			obj.style.height = new_height + "px";
+			
+			//parent size
+			$(".article-body", inst.wrapper).height(inst.textarea.height());
 		}
 	},
 	
@@ -1490,6 +1576,7 @@ aobata_editor.prototype = {
 	
 	execCommand : function(a,b,c){
 		var res = false;
+		this.pushHistory();
 		
 		//fix bug for IE( when paramView is clicked, iframe lost it's focus)
 		if(aobata_editor.is_IE && this.caret){
@@ -1554,6 +1641,38 @@ aobata_editor.prototype = {
 	execNode : function(func){
 		if (this._currentfocuselement) {
 			func(this._currentfocuselement);
+		}
+	},
+	
+	pushHistory : function(){
+		this._history.push(this.getHTML());
+		this._last_keycode = null;
+		
+		if(this._history.length > 20){
+			this._history.unshift();
+		}
+		
+		this._redoHistory = [];
+	},
+	
+	popHistory : function(){
+		if(this._history.length > 0){
+			var html = this._history.pop();
+			if(this._last_keycode == null){
+				html = this._history.pop();
+				if(!html)return false;
+			}
+			this._redoHistory.push(this.getHTML());
+			this.setHTML(html);
+			return true;
+		}
+		return false;
+	},
+	
+	redoHistory : function(){
+		if (this._redoHistory.length > 0) {
+			var html = this._redoHistory.pop();
+			this.setHTML(html);
 		}
 	},
 	

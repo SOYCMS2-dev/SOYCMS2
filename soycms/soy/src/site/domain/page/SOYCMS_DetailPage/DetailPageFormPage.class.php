@@ -31,7 +31,12 @@ class DetailPageFormPage extends HTMLPage{
 		//url type
 		$type = $this->obj->getUrlType();
 		for($i=0;$i<=6;$i++){
-			$this->addCheckbox("url_type_" . $i,array("name"=>"object[urlType]","value"=>$i,"selected"=>($type == $i)));
+			$this->addCheckbox("url_type_" . $i,array(
+					"elementId" => "entry-cfg-" . $i,
+					"name"=>"object[urlType]",
+					"value"=>$i,
+					"selected"=>($type == $i)
+			));
 		}
 		$this->addInput("url_type_option",array("name"=>"object[urlTypeOption]","value"=>$this->obj->getUrlTypeOption()));
 		
@@ -40,6 +45,7 @@ class DetailPageFormPage extends HTMLPage{
 		
 		//feed
 		$this->addCheckbox("is_output_feed",array(
+			"elementId" => "is_output_feed",
 			"name" => "object[isOutputFeed]",
 			"value" => 1,
 			"isBoolean" => true,
@@ -75,6 +81,7 @@ class DetailPageFormPage extends HTMLPage{
 	function addFeedOption($key,$name,$array){
 		
 		$this->addCheckbox($key . "_output",array(
+			"elementId" => "feed-".$key."-output",
 			"name" => "object[$name][output]",
 			"value" => 1,
 			"isBoolean" => true,
@@ -102,12 +109,14 @@ class DetailPageFormPage extends HTMLPage{
 		));
 		
 		$this->addCheckbox($key . "_output_excerpt",array(
+			"elementId" => "feed-".$key."-cfg1",
 			"name" => "object[$name][output_type]",
 			"value" => "excerpt",
 			"selected" => @$array["output_type"] == "excerpt"
 		));
 		
 		$this->addCheckbox($key . "_output_all",array(
+			"elementId" => "feed-".$key."-cfg2",
 			"name" => "object[$name][output_type]",
 			"value" => "all",
 			"selected" => @$array["output_type"] == "all"

@@ -381,9 +381,19 @@ class SOYCMS_Page extends SOY2DAO_EntityBase{
 					break;
 			}
 			
+			
+			//index.htmlの時
 			if(strpos($this->getUri(),"index.html") !== false){
 				$object->order = 1;
+				$object->title = "#PageName# - #SiteName#";
 			}
+			
+			//HOME直下の場合
+			if($this->type != "detail" && dirname($this->getUri()) == "."){
+				$object->title = "#PageName# - #SiteName#";
+			}
+			
+			
 			
 			if($tmp){
 				SOY2::cast($object,(object)$tmp);

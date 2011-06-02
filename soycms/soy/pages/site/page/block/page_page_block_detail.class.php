@@ -19,10 +19,10 @@ class page_page_block_detail extends SOYCMS_WebPageBase{
 			$this->block->save();
 		}
 		
-		if($this->template){
-			$this->jump("/page/block/detail?updated&template=" . $this->template->getId() . "&id=" . $this->block->getId());
-		}else if($this->page){
+		if($this->page){
 			$this->jump("/page/block/detail?updated&page=" . $this->page->getId() . "&id=" . $this->block->getId());
+		}else if($this->template){
+			$this->jump("/page/block/detail?updated&template=" . $this->template->getId() . "&id=" . $this->block->getId());
 		}else if($this->navigation){
 			$this->jump("/page/block/detail?updated&navigation=" . $this->navigation->getId() . "&id=" . $this->block->getId());
 		}else{
@@ -58,6 +58,8 @@ class page_page_block_detail extends SOYCMS_WebPageBase{
 					$this->block->delete();
 					$this->jump("/page/block/detail?page=".$this->page->getId()."&id=" . $this->block->getId());
 				}
+				
+				$this->template = SOYCMS_Template::load($this->page->getTemplate());
 			}
 		}
 		
@@ -112,11 +114,14 @@ class page_page_block_detail extends SOYCMS_WebPageBase{
 	function page_page_block_detail() {
 		WebPage::WebPage();
 		
-		$this->buildPage();
 		
 		$this->createAdd("form","_class.form.BlockForm",array(
 			"block" => $this->block
 		));
+		
+		
+		$this->buildPage();
+		
 	}
 	
 	function buildPage(){
@@ -173,8 +178,55 @@ class page_page_block_detail extends SOYCMS_WebPageBase{
 			"link" => ($this->page) ? soycms_create_link("/page/block/detail?template=" . $this->page->getTemplate() . "&id=" . $this->block->getId()) : "" 
 		));
 		
+		
 		$this->addModel("mode_page",array(
-			"visible" => ($this->page && !file_exists($this->block->getPath()))
+			"visible" => $this->page
+		));
+		$this->addLabel("page_name",array(
+			"text" => ($this->page) ? $this->page->getName() : ""
+		));
+		$this->addLink("page_link",array(
+			"link" => ($this->page) ? soycms_create_link("/page/detail/" . $this->page->getId()) . "#tpl_config" : ""
+		));
+		$this->addModel("is_page_block",array(
+			"visible" => $this->page && file_exists($this->block->getPath())
+		));
+		
+		$this->addModel("mode_navigation",array(
+			"visible" => $this->navigation
+		));
+		$this->addLabel("navigation_name",array(
+			"text" => ($this->navigation) ? $this->navigation->getName() : ""
+		));
+		$this->addLink("navigation_link",array(
+			"link" => ($this->navigation) ? soycms_create_link("/page/navigation/detail?id=" . $this->navigation->getId()) : ""
+		));
+		
+		$this->addModel("mode_template",array(
+			"visible" => (!$this->page && $this->template)
+		));
+		$this->addLabel("template_name",array(
+			"text" => ($this->template) ? $this->template->getName() : ""
+		));
+		$this->addLink("template_link",array(
+			"link" => ($this->template) ? soycms_create_link("/page/template/detail?id=" . $this->template->getId()) . "#tpl_item" : ""
+		));
+		
+		$this->addLabel("block_id_crumbs",array(
+			"text" => $this->block->getId()
+		));
+		$this->addLabel("block_name",array(
+			"text" => $this->block->getName()
+		));
+		
+		
+		/* ブロックのサンプルコード */
+		$suffix = "";
+		if($this->page)$suffix = "page=" . $this->page->getId();
+		if($this->template && !$this->page)$suffix = "template=" . $this->template->getId();
+		if($this->navigation)$suffix = "navigation=" . $this->navigation->getId();
+		$this->addLink("block_code_link",array(
+			"link" => soycms_create_link("/page/block/code") . "?id=" . $this->block->getId() . "&" . $suffix
 		));
 		
 		$templateEditLink = null;

@@ -28,7 +28,7 @@
 	
 	<div id="footer"> 
 		<div class="copyright"> 
-			<address>Powerd by SOY CMS2</address> 
+			<address>Powered by SOY CMS2</address> 
 		</div> 
 	</div> 
 	

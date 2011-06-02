@@ -29,31 +29,34 @@ class SOYCMS_ListPageBase extends SOYCMS_SitePageBase{
 		$currentPage = -1;
 		$pagerUrl = soycms_get_page_url($page->getUri()) . "/";	//ページャー用のURL
 		
-		//表示中のみ検索する
-		if($visible){
+		
 			
-			//プラグインを指定しているかどうかで振り分け
-			if($listPage->getPlugin()){
+		//プラグインを指定しているかどうかで振り分け
+		if($listPage->getPlugin()){
+			//表示中のみ検索する
+			if($visible){
 				$plugin = $listPage->getPluginObject();
 				list($entries,$total) = $plugin->getEntries($this,$args);
+			}
+		
+		//標準動作
+		}else{
+		
+			$limit = $listPage->getLimit();
 			
-			//標準動作
-			}else{
 			
-				$limit = $listPage->getLimit();
+			if(count($args)>0){
+				if($args[0] == "tag"){
+					array_shift($tag);
+					$tag = array_shift($args);
+				}else if(is_numeric($args[count($args)-1])){
+					$currentPage = array_pop($args);
+				}else if(preg_match("/page-([0-9]+)/",$args[count($args)-1],$tmp)){
+					$currentPage = array_pop($args);
+				}
 				
-				
-				if(count($args)>0){
-					if($args[0] == "tag"){
-						$tag = $args[1];
-					}else if(is_numeric($args[count($args)-1])){
-						$currentPage = array_pop($args);
-					}else if(preg_match("/page-([0-9]+)/",$args[count($args)-1],$tmp)){
-						$currentPage = array_pop($args);
-					}
-					
-					
-					//ラベルの取得
+				//ラベルの取得
+				if(count($args) > 0){
 					try{
 						$labelDAO = SOY2DAOFactory::create("SOYCMS_LabelDAO");
 						$alias = rawurldecode(implode("/",$args));
@@ -63,29 +66,33 @@ class SOYCMS_ListPageBase extends SOYCMS_SitePageBase{
 					}catch(Exception $e){
 						throw new SOYCMS_NotFoundException();	//go 404
 					}
+				}
+				
+				//1ページ目の時は正規化のためにredirect
+				if($currentPage == 1){
+					$uri = ($page->getUri() == "index.html") ? $page->getParentDirectoryUri() : $page->getUri();
+					$url = soycms_get_page_url($uri);
 					
-					//1ページ目の時は正規化のためにredirect
-					if($currentPage == 1){
-						$uri = ($page->getUri() == "index.html") ? $page->getParentDirectoryUri() : $page->getUri();
-						$url = soycms_get_page_url($uri);
-						
-						//ラベルを指定している時
-						if($this->label){
-							$url = soycms_get_page_url($uri,$this->label->getAlias());
-						}
-						
-						SOY2PageController::redirect($url);	
+					//ラベルを指定している時
+					if($this->label){
+						$url = soycms_get_page_url($uri,$this->label->getAlias());
 					}
 					
-				} 
-				
-				if($currentPage < 0)$currentPage = 1;
-				$offset = max(0,($currentPage-1) * $limit);
-				list($entries,$total) = $this->getEntries($offset,$label,$tag);
-				
-				if($this->label){
-					$pagerUrl = soycms_get_page_url($page->getParentDirectoryUri(),$this->label->getAlias()) . "/";
+					SOY2PageController::redirect($url);	
 				}
+				
+			} 
+			
+			if($currentPage < 0)$currentPage = 1;
+			$offset = max(0,($currentPage-1) * $limit);
+			
+			//表示中のみ検索する
+			if($visible){
+				list($entries,$total) = $this->getEntries($offset,$label,$tag);
+			}
+			
+			if($this->label){
+				$pagerUrl = soycms_get_page_url($page->getParentDirectoryUri(),$this->label->getAlias()) . "/";
 			}
 		}
 		

@@ -1,7 +1,7 @@
 @charset "utf-8";
 /* author：Lebe Inc. */
 /* SOY CMS2 */
-/* update 110527 */
+/* update 110531 */
 
 body {
 	background: #FFF;
@@ -296,9 +296,10 @@ a:hover, a:focus, a:active {
 	color:#FFFF99;
 }
 
-#window-title-directory h2 span { background: url(../img/icon-mainwindow-directory.gif) 0 6px no-repeat; }
-#window-title-article h2 span { background: url(../img/icon-mainwindow-article.gif) 0 6px no-repeat; }
-#window-title-layout h2 span { background: url(../img/icon-mainwindow-layout.gif) 0 6px no-repeat; }
+/* 2.1 edit */
+#window-title-directory h2 span { background: url(../img/icon-mainwindow-directory.gif) 0 9px no-repeat; }
+#window-title-article h2 span { background: url(../img/icon-mainwindow-article.gif) 0 9px no-repeat; }
+#window-title-layout h2 span { background: url(../img/icon-mainwindow-layout.gif) 0 9px no-repeat; }
 
 .window-title  p.window-title-btn-edit a {
 	background-image:	url(../img/window-title-btn-bg.gif);

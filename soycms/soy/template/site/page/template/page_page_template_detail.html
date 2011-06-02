@@ -26,19 +26,8 @@
 					</ul>
 
 
-							<div class="title"> 
-								<h3>テンプレート名</h3> 
-							</div>
 
 
-								<div class="intro"> 
-										<input name="tpml-name" type="text" class="m-area" soy:id="template_name"" value="テンプレート名A" style="width:500px;" />
-										<a id="pages_popup_link" class="m-btn fr" soy:id="pages_link" onclick="common_open_popup($(this).attr('href'));return false;">一括設定</a>
-								</div>
-
-						 
-					<div class="content">
-						
 						<!-- soy:id="created*" -->
 						<p class="xl intro" style="border:solid 1px #cccccc;padding:5px;">
 							テンプレートを作成しました。
@@ -49,47 +38,73 @@
 
 
 
+				<div class="section cfg-menu">
+					<div class="cfg-menu-1">
+						<h3>テンプレート名</h3>
+					</div><!--  // .cfg-menu-1 -->
+
+					<div class="cfg-menu-2">
+					<p>
+						<input name="tpml-name" type="text" class="m-area" soy:id="template_name"" value="テンプレート名A" style="width:420px;" />
+					</p>
+					</div><!--  // .cfg-menu-2 -->
+				</div><!--  // .section -->
+
+				<hr class="design-hr" />
 
 
-						<div class="form-section"> 
+
+				<div class="section cfg-menu">
+					<div class="cfg-menu-1">
+						<h3>オプション</h3>
+					</div><!--  // .cfg-menu-1 -->
+
+					<div class="cfg-menu-2">
+
+						<p class="break">種類： <strong><!-- soy:id="template_type_text" /--></strong>
+						<span style="margin: 0 10px;"><a id="pages_popup_link" class="s-btn" soy:id="pages_link" onclick="common_open_popup($(this).attr('href'));return false;">一括設定</a></span>
+						</p>
+						<p class="break">
+						色設定：<span class="item colorSelector" style="width:20px;"><input type="text" class="s-area" id="template_color" soy:id="template_color" /></span> (管理画面用)
+						</p>
+					</div><!--  // .cfg-menu-2 -->
+				</div><!--  // .section -->
+
+				<hr class="design-hr" />
 
 
 
-								<table class="form-table">
-										<tr>
-											<th scope="row"><label for="post1-1">種類</label></th>
-											<td><p><!-- soy:id="template_type_text" /--></p></td>
-										</tr>
-										<tr>
-											<th scope="row">色設定</th>
-											<td><div class="item colorSelector" style="width:5em;"><input type="text" class="s-area" id="template_color" soy:id="template_color" size="7" /></div></td>
-										</tr>
-										<tr>
-											<th scope="row">使用中のページ・<br />
-											ディレクトリ</th>
-											<td>								<div class="item"> 
-									<!-- soy:id="page_list" -->
-										<a soy:id="page_link">ディレクトリへのリンク</a>
-										<a soy:id="page_public_link" class="external"><em>URL</em></a>
-										<!-- soy:id="not_last" -->|<!-- /soy:id="not_last" -->
-									<!-- /soy:id="page_list" -->
-									<!-- soy:id="no_page" -->
-									このテンプレートを使用中のページ・ディレクトリはありません
-									<!-- /soy:id="no_page" -->
-								</div>
-								
-								</td>
-										</tr>
-							</table>
 
-					</div><!--  // .form-section -->
-		
-						
+				<div class="section cfg-menu">
+					<div class="cfg-menu-1">
+						<h3>使用中のページ・<br />ディレクトリ</h3>
+					</div><!--  // .cfg-menu-1 -->
+
+					<div class="cfg-menu-2">
+						<div class="item"> 
+							<!-- soy:id="page_list" -->
+								<a soy:id="page_link">ディレクトリへのリンク</a>
+								<a soy:id="page_public_link" class="external"><em>URL</em></a>
+								<!-- soy:id="not_last" -->|<!-- /soy:id="not_last" -->
+							<!-- /soy:id="page_list" -->
+							<!-- soy:id="no_page" -->
+							このテンプレートを使用中のページ・ディレクトリはありません
+							<!-- /soy:id="no_page" -->
+							</div>
+					</div><!--  // .cfg-menu-2 -->
+				</div><!--  // .section -->
+
+				<hr class="design-hr" />
+
+
+
 						<div class="form-btn ce"> 
 							<input type="submit" value="テンプレート設定を保存する" id="post1-submit" name="save_config" class="m-btn" /> 
 						</div>
 						
-					</div><!-- //.content --> 
+
+
+
 					
 				</div>
 				

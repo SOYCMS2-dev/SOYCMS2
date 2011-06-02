@@ -508,6 +508,15 @@ position: relative;
 	padding: 0 10px 10px 10px;
 }
 
+
+#maincontent .entry .section {
+	margin: 0;
+	padding: 0;
+}
+
+
+
+
 #contents .sub .section {
 	line-height: 1.4;
 	padding: 0 9px 5px 9px;

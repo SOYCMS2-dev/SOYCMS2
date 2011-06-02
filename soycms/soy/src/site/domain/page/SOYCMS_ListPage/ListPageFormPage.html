@@ -1,131 +1,166 @@
-<div class="title"> 
-	<h3>記事一覧の設定</h3> 
-</div>
 
-<div class="content">
 
-	<!-- soy:id="require_directory_item" -->
-	<div class="form-section">
-		<div class="label"> 
-			<h4>ディレクトリ</h4> 
-		</div>
-		<div class="item"> 
-			<p class="intro">一覧を作成するディレクトリを一つ選択します。</p>
-			
-			<div class="pagelist-content">
-				<ul>
-					<!-- soy:id="directory_tree" -->
-					<li soy:id="page_list_wrap">
-						<dl> 
-							<dt class="image">
-								<img soy:id="page_icon" style="width:32px;height:32px;" />
-							</dt> 
-							<dt>
-								<input type="radio" soy:id="page_check" />
-							</dt>
-							<dd>
-								 ( <!-- soy:id="page_uri" /--> )
-							</dd> 
-						</dl>
-						<!-- soy:id="tree_child" -->
-						<ul>
-							<!-- soy:id="tree" -->ここが再帰的に実行<!-- /soy:id="tree" -->
-						</ul>
-						<!-- /soy:id="tree_child" --> 
+
+				<div class="title" style="margin-top: 40px;">
+					<h3 style="font-size:16px;">記事一覧の設定</h3>
+				</div>
+
+
+
+				<!-- soy:id="require_directory_item" -->
+				<div class="section cfg-menu">
+					<div class="cfg-menu-1">
+						<h3>表示ディレクトリ</h3>
+						<h4>記事一覧表示する<br />ディレクトリを選択</h4>
+					</div><!--  // .cfg-menu-1 -->
+
+					<div class="cfg-menu-2">
+					<p class="intro"><input type="checkbox" soy:id="is_include_child"></p>
+						<div class="pagelist-content">
+							<ul>
+								<!-- soy:id="directory_tree" -->
+								<li soy:id="page_list_wrap">
+									<dl> 
+										<dt class="image">
+											<img soy:id="page_icon" style="width:32px;height:32px;" />
+										</dt> 
+										<dt>
+											<input type="radio" soy:id="page_check" />
+										</dt>
+										<dd>
+											 ( <!-- soy:id="page_uri" /--> )
+										</dd> 
+									</dl>
+									<!-- soy:id="tree_child" -->
+									<ul>
+										<!-- soy:id="tree" -->ここが再帰的に実行<!-- /soy:id="tree" -->
+									</ul>
+									<!-- /soy:id="tree_child" --> 
+									
+								</li soy:id="page_list_wrap">
+								<!-- /directory_tree -->
+							</ul>
+						</div><!-- // .pagelist-content -->
 						
-					</li soy:id="page_list_wrap">
-					<!-- /directory_tree -->
-				</ul>
-			</div>
-			
-			<input type="checkbox" soy:id="is_include_child">
-		</div>
-	</div><!-- // .form-section -->
-	<!-- /soy:id="require_directory_item" -->
-	
-	<!-- soy:id="require_period_item" -->
-	<div class="form-section">
-		<div class="label"> 
-			<h4>期間</h4> 
-		</div> 
-		<div class="item">
-			<p class="intro">記事の日付で絞り込みを行います。</p>
-			
-			<input type="text" class="s-area" soy:id="period_from" name="post1-1" value="" />
-			〜
-			<input type="text" class="s-area" soy:id="period_to" name="post1-1" value="" />
-		</div>
-	</div><!-- // .form-section -->
-	<!-- /soy:id="require_period_item" -->
-	
-	<!-- soy:id="require_sort_item" -->
-	<div class="form-section">
-		<div class="label"> 
-			<h4>並び順</h4> 
-		</div> 
-		<div class="item">
-			<ul>
-				<li>
-					<input name="sort_type_1" type="radio" soy:id="sort_type_1" id="sort_type_1" />
-					<label for="sort_type_1">更新順（新しい物が前）</label>
-				</li>
-				<li>
-					<input name="sort_type_2" type="radio" soy:id="sort_type_2" id="sort_type_2" />
-					<label for="sort_type_2">更新順（新しい物が後）</label>
-				</li>
-				<li>
-					<input name="sort_type_3" type="radio" soy:id="sort_type_3" id="sort_type_3" />
-					<label for="sort_type_3">作成日順（新しい物が前)</label>
-				</li>
-				<li>
-					<input name="sort_type_4" type="radio" soy:id="sort_type_4" id="sort_type_4" />
-					<label for="sort_type_4">作成日順（新しい物が後)</label>
-				</li>
-				<li id="sort_type_directory">
-					<input name="sort_type_5" type="radio" soy:id="sort_type_5" id="sort_type_5" />
-					<label for="sort_type_5">ディレクトリでの並び順</label>
-				</li>
-			</ul>
-		</div>
-	</div><!-- // .form-section -->
-	<!-- /soy:id="require_sort_item" -->
-	
-	<!-- soy:id="require_limit_item" -->
-	<div class="form-section">
-		<div class="label"> 
-			<h4>表示件数</h4> 
-		</div> 
-		<div class="item">
-			<p class="intro">空の場合は全て表示します</p>
-			<input type="text" class="s-area" soy:id="limit" name="post1-1" value="" />件表示
-		</div>
-	</div><!-- // .form-section -->
-	<!-- /soy:id="require_limit_item" -->
-	
-	<!-- soy:id="plugin_config_form" -->
-	プラグインでの設定がここに表示されます。
-	<!-- /soy:id="plugin_config_form" -->
-	
-	<!-- soy:id="plugin_exists" -->
-	<div class="form-section">
-		<div class="label"> 
-			<h4>拡張機能の設定</h4> 
-		</div>
-		<div class="item">
-			<select soy:id="plugin_select">
-				<option value="">標準機能(ディレクトリから記事一覧)</option>
-			</select>
-		</div>
-	</div>
-	<!-- /soy:id="plugin_exists" -->
-	
-	<div class="form-btn ce"> 
-		<input type="submit" value="設定する" id="post1-submit" name="save_basic" class="l-btn" /> 
-	</div> 
+					</div><!--  // .cfg-menu-2 -->
+				</div><!--  // .section -->
+
+				<hr class="design-hr" />
+				<!-- /soy:id="require_directory_item" -->
 
 
 
-</div><!-- // .content -->
+				<!-- soy:id="require_period_item" -->
+				<div class="section cfg-menu">
+					<div class="cfg-menu-1">
+						<h3>期間</h3>
+						<h4>記事の日付で<br />絞り込み</h4>
+					</div><!--  // .cfg-menu-1 -->
+
+					<div class="cfg-menu-2">
+						<div class="content">
+						<p><input type="text" class="s-area" soy:id="period_from" value="" style="width: 180px;" />
+						〜
+						<input type="text" class="s-area" soy:id="period_to" value="" style="width: 180px;" /></p>
+						</div><!--  // .content -->
+					</div><!--  // .cfg-menu-2 -->
+				</div><!--  // .section -->
+
+				<hr class="design-hr" />
+				<!-- /soy:id="require_period_item" -->
+
+
+
+				<!-- soy:id="require_sort_item" -->
+				<div class="section cfg-menu">
+					<div class="cfg-menu-1">
+						<h3>記事の表示順</h3>
+					</div><!--  // .cfg-menu-1 -->
+
+					<div class="cfg-menu-2">
+						<ul>
+							<li>
+								<input name="sort_type_3" type="radio" soy:id="sort_type_3" id="sort_type_3" />
+								<label for="sort_type_3">新しい作成日順（新しい記事が前)</label>
+							</li>
+							<li>
+								<input name="sort_type_4" type="radio" soy:id="sort_type_4" id="sort_type_4" />
+								<label for="sort_type_4">古い作成日順（新しい記事が後)</label>
+							</li>
+							<li>
+								<input name="sort_type_1" type="radio" soy:id="sort_type_1" id="sort_type_1" />
+								<label for="sort_type_1">新しい更新順（新しい記事が前）</label>
+							</li>
+							<li>
+								<input name="sort_type_2" type="radio" soy:id="sort_type_2" id="sort_type_2" />
+								<label for="sort_type_2">古い更新順（新しい記事が後）</label>
+							</li>
+							<li id="sort_type_directory">
+								<input name="sort_type_5" type="radio" soy:id="sort_type_5" id="sort_type_5" />
+								<label for="sort_type_5">管理画面のディレクトリ表示順</label>
+							</li>
+						</ul>
+					</div><!--  // .cfg-menu-2 -->
+				</div><!--  // .section -->
+
+				<hr class="design-hr" />
+				<!-- /soy:id="require_sort_item" -->
+
+
+
+				<!-- soy:id="require_limit_item" -->
+				<div class="section cfg-menu">
+					<div class="cfg-menu-1">
+						<h3>1ページあたりの<br />表示件数</h3>
+					</div><!--  // .cfg-menu-1 -->
+
+					<div class="cfg-menu-2">
+						<p class="sbreak"><input type="text" class="m-area" soy:id="limit" name="post1-1" value="" style="width:40px;" /> 件表示</p>
+						<p style="font-size: 10px;">空の場合は全て表示します</p>
+					</div><!--  // .cfg-menu-2 -->
+				</div><!--  // .section -->
+
+				<hr class="design-hr" />
+				<!-- /soy:id="require_limit_item" -->
+
+
+
+				<!-- soy:id="plugin_config_form" -->
+				プラグインでの設定がここに表示されます。
+				<!-- /soy:id="plugin_config_form" -->
+
+
+
+				<!-- soy:id="plugin_exists" -->
+				<div class="section cfg-menu">
+					<div class="cfg-menu-1">
+						<h3>拡張機能の設定</h3>
+					</div><!--  // .cfg-menu-1 -->
+
+					<div class="cfg-menu-2">
+					<p>
+						<select soy:id="plugin_select">
+							<option value="">標準機能(ディレクトリから記事一覧)</option>
+						</select>
+					</p>
+					</div><!--  // .cfg-menu-2 -->
+				</div><!--  // .section -->
+
+				<hr class="design-hr" />
+				<!-- /soy:id="plugin_exists" -->
+
+
+
+
+
+				<div class="form-btn ce"> 
+					<input type="submit" value="設定する" id="post1-submit" name="save_basic" class="l-btn" /> 
+				</div>
+
+
+
+
+
 
 <script type="text/javascript" soy:src="../common/js/soy2_date_picker/soy2_date_picker.js"></script>
 <script type="text/javascript">

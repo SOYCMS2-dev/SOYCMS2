@@ -89,7 +89,7 @@ class TemplateEditHelper extends SOY2LogicBase{
 			}
 				
 			//ng
-			$res[] = $item;		
+			$res[] = $item;
 				
 		}
 		

@@ -31,10 +31,10 @@
 			}
 			
 		});"><em>画像・ファイル</em></a></div>
-		<div class="panel-parts"><a href="javascript:aobata_editor.get().execCommand('undo',false,null);" class="icon-btn btn-undo" title="アンドゥ"><em>アンドゥ</em></a></div>
-		<div class="panel-parts"><a href="javascript:aobata_editor.get().execCommand('redo',false,null);" class="icon-btn btn-redo interval" title="リドゥ"><em>リドゥ</em></a></div>
+		<div class="panel-parts"><a href="javascript:void(0);" onclick="aobata_editor.get().popHistory();" class="icon-btn btn-undo" title="アンドゥ"><em>アンドゥ</em></a></div>
+		<div class="panel-parts"><a href="javascript:void(0);" onclick="aobata_editor.get().redoHistory();" class="icon-btn btn-redo interval" title="リドゥ"><em>リドゥ</em></a></div>
 		
-		<div class="panel-parts close-editor" style="float:right;"><a class="icon-btn btn-close" href="javascript:void(0);" onclick="if(aobata_editor.active)aobata_editor.active.isActive(false);" title="閉じる"><em>閉じる</em></a></div>
+		<div class="panel-parts close-editor" style="float:right;"><a class="icon-btn btn-close" href="javascript:void(0);" onclick="if(aobata_editor.active)aobata_editor.active.doActive(false);" title="閉じる"><em>閉じる</em></a></div>
 		
 		<div class="panel-parts addelement-parts"><a class="icon-xme-btn btn-addelement" href="javascript:void(0);" title="セクションを追加" onclick="show_insert_lines(this);"><em><strong>セクションを追加</strong></em></a></div>
 	</div>

@@ -68,9 +68,9 @@ $(function(){
 		counter++;
 	});
 	
-	if(jump){
+	if(jump && $("a[name="+jump+"]").size() > 0){
 		location.hash = jump;
-		location.hash = hash;
+		location.hash = hash + "/" + jump;
 	}
 	
 });
@@ -470,7 +470,7 @@ var common_sitemap_mode = function(_mode){
 };
 
 var common_show_popup_status = function(array,ukey){
-	if (array.length < 1) {
+	if (!array && array.length < 1) {
 		$("#common_popup_status").hide();
 		return;
 	}
@@ -569,6 +569,9 @@ $(function(){
 	/* title */
 	text = $("#cms-menu li.on a:first").html();
 	if(text && text.length > 0){
+		document.title = text +" - " + document.title;
+	}else{
+		text = $(".window-title:first-child").text();
 		document.title = text +" - " + document.title;
 	}
 });

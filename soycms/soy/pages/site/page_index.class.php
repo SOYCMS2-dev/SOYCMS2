@@ -27,8 +27,10 @@ class page_index extends SOYCMS_WebPageBase{
 			try{
 				$logic->initDataBase($site);
 			}catch(Exception $e){
-				
 			}
+			
+			$dao = new SOY2DAO();
+			$dao->executeQuery("delete from soycms_site_page");
 			
 			$logic->initConfig($site,array(
 				"encoding" => "UTF-8",
@@ -36,7 +38,11 @@ class page_index extends SOYCMS_WebPageBase{
 			));
 			
 			SOY2::import("admin.domain.SOYCMS_Skeleton");
-			$logic->initDefaultTemplate($site,array("template" => "hoge"));
+			$config = array("template" => 0);
+			$logic->initDefaultTemplate($site,$config);
+			$logic->generatePages($site,$config);
+			$logic->generateEntries($site,$config);
+			$logic->generateBlocks($site,$config);	
 			
 			SOY2FancyURIController::jump("");
 			exit;

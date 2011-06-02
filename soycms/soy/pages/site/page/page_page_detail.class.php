@@ -168,12 +168,11 @@ class page_page_detail extends SOYCMS_WebPageBase{
 				$this->page->saveItemConfig($config);
 			}
 			
+			if(isset($_POST["properties"]) && is_array($_POST["properties"])){
+				$this->page->setProperties($_POST["properties"]);
+			}
+			
 			$this->jump("/page/template/check?id=" . $this->page->getTemplate() . "&page=" . $this->id . "&suffix=" . $suffix);
-		}
-		
-		if(isset($_POST["save_properties"]) && isset($_POST["properties"]) && is_array($_POST["properties"])){
-			$this->page->setProperties($_POST["properties"]);
-			$this->jump("/page/detail/" . $this->id . "?updated#tpl_config");
 		}
 		
 		

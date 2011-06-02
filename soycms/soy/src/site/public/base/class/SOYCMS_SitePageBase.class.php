@@ -99,25 +99,14 @@ class SOYCMS_SitePageBase extends WebPage{
 		//サイト全体がBasic
 		$modeBasicAuth = SOYCMS_DataSets::get("mode_basic_auth",0);
 		
+		if($modeBasicAuth){
+			soycms_basic_auth(SOYCMS_DataSets::get("mode_basic.id",""),SOYCMS_DataSets::get("mode_basic.pass",""));
+		}
+		
+		
 		//basic
-		if($config["public"] == 2 || $modeBasicAuth){
-			
-			//サイト全体のBasic設定
-			if($modeBasicAuth){
-				$config["public_option_id"] = SOYCMS_DataSets::get("mode_basic.id","");
-				$config["public_option_pass"] = SOYCMS_DataSets::get("mode_basic.pass","");
-			}
-			
-			if(!isset($_SERVER["PHP_AUTH_USER"]) || 
-					(@$_SERVER["PHP_AUTH_USER"] != $config["public_option_id"]
-				 &&  @$_SERVER["PHP_AUTH_PW"] != $config["public_option_pass"])
-			) {				
-				header("WWW-Authenticate: Basic realm=\"Please input...\"");
-				header("HTTP/1.1 401 Unauthorized");
-				echo "Authentication failure";
-				exit;
-			}
-			
+		if($config["public"] == 2 && !$modeBasicAuth){
+			soycms_basic_auth($config["public_option_id"],$config["public_option_pass"]);
 		}
 	}
 

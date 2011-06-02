@@ -9,29 +9,27 @@ class SOYCMS_SimpleContactFormExtension_FormConfigPage extends HTMLPage{
 			$config = $this->getConfig();
 
 			$obj = SOY2::cast("SOYCMS_ContactFormField", $_POST["NewField"]);
-			if($obj->getId()){
-				$items = $config["items"];
-				if(!is_array($items)){
-					$items = array();
-				}
-				
-				if(!preg_match("/^[a-z][a-zA-Z0-9\-]+$/",$obj->getId())){
-					$obj->setId($obj->getType());
-				}
-				
-				//既に登録済みの場合
-				if(isset($items[$obj->getId()])){
-					$oldId = $obj->getId();
-					$counter = 1;
-					while(isset($items[$obj->getId()])){
-						$id = $oldId . "_" . $counter;
-						$obj->setId($id);
-						$counter++;
-					}
-				}
-				$items[$obj->getId()] = $obj;
-				$config["items"] = $items;
+			$items = $config["items"];
+			if(!is_array($items)){
+				$items = array();
 			}
+			
+			if(strlen($obj->getId())<1 || !preg_match("/^[a-z][a-zA-Z0-9\-]+$/",$obj->getId())){
+				$obj->setId($obj->getType());
+			}
+			
+			//既に登録済みの場合
+			if(isset($items[$obj->getId()])){
+				$oldId = $obj->getId();
+				$counter = 1;
+				while(isset($items[$obj->getId()])){
+					$id = $oldId . "_" . $counter;
+					$obj->setId($id);
+					$counter++;
+				}
+			}
+			$items[$obj->getId()] = $obj;
+			$config["items"] = $items;
 
 			SOYCMS_ContactFormHelper::saveConfig($this->pageObj,$config);
 

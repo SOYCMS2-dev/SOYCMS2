@@ -27,7 +27,6 @@ class SOYCMS_EntrySection_PluginSection extends SOYCMS_EntrySection{
 		$options = array();
 		
 		//プラグイン実行
-		//カスタムフィールド(自動保存では保存しないようにする)
 		PluginManager::load("soycms.site.entry.section");
 		$list = PluginManager::invoke("soycms.site.entry.section",array(
 			"mode" => "list"
