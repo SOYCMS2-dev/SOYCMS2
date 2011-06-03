@@ -139,7 +139,7 @@ class SOYCMS_ObjectCustomField extends SOY2DAO_EntityBase{
 		return $this->value;
 	}
 	function setValue($value) {
-		if(($this->type == "date" || $this->type == "datetime") && is_array($value)){
+		if(($this->type == "date" || $this->type == "datetime" || $this->type == "time") && is_array($value)){
 			$value = implode(" ",$value);
 			if(strlen($value) > 1){
 				$value = strtotime($value);
@@ -310,6 +310,7 @@ class SOYCMS_ObjectCustomFieldConfig{
 			"url" => "URL",
 			"date" => "日付",
 			"datetime" => "日付と時刻",
+			"time" => "時刻",
 			"file" => "ファイル",
 			"image" => "画像",
 			"static" => "固定値",

@@ -21,15 +21,21 @@
 	</div>
 	<div class="content">
 			
-		<table class="form-table"> 
+		<table class="form-table">
+			<tr>
+				<th scope="row">タイプ</th>
+				<td>
+					<select soy:id="field_type_select"></select>
+				</td>
+			</tr>
 			<tr> 
-				<th scope="row">フィールドID</th> 
+				<th scope="row">項目ID</th> 
 				<td>
 					<span class="xxl" soy:id="field_id_text">*************</span>	
 				</td>
 			</tr>
 			<tr> 
-				<th scope="row">フィールド名</th> 
+				<th scope="row">項目名</th> 
 				<td>
 					<input soy:id="field_name" type="text" class="m-area" size="40" value="サムネイル" />	
 				</td>
@@ -57,19 +63,14 @@
 					</p>
 				</td>
 			</tr>
-			<tr>
-				<th scope="row">種別</th>
-				<td>
-					<select soy:id="field_type_select"></select>
-				</td>
-			</tr>
+			
 			
 			<!-- soy:id="has_option" -->
 			<tr>
 				<th scope="row">オプション</th> 
 				<td>
 					<p class="intro">項目を改行して入力してください</p>
-					<textarea soy:id="field_option" type="text" value="" rows="5" class="s-area liq-area"></textarea>
+					<textarea soy:id="field_option" type="text" value="" rows="5" class="m-area liq-area"></textarea>
 				</td> 
 			</tr>
 			<!-- /soy:id="has_option" -->
@@ -79,6 +80,7 @@
 				<th scope="row">初期値</th> 
 				<td>
 					<input soy:id="field_default_value" type="text" value="" class="s-area liq-area" />
+					<textarea soy:id="field_default_text" class="m-area liq-area" rows="5"></textarea>
 				</td> 
 			</tr>
 			<!-- /soy:id="is_not_group" -->

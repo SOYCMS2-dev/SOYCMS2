@@ -86,6 +86,17 @@ class SOYCMS_ObjectCustomFieldHelper {
 			));
 			
 			return;
+		}
+		
+		//時刻のフィールド
+		if($field->getType() == "time"){
+			$htmlObj->createAdd($field->getFieldId(),"DateLabel",array(
+				"value" => $value,
+				"soy2prefix" => "cms",
+				"defaultFormat" => "H:i"
+			));
+			
+			return;
 		} 
 		
 		$htmlObj->addLabel($field->getFieldId(),array(

@@ -99,9 +99,13 @@
 				<textarea soy:id="complete_html" class="m-area liq-area resizable html-editor" rows="8"></textarea>
 			</div>
 			
-			<div class="form-btn ce"> 
+			<div class="form-btn ce break"> 
 				<input type="submit" name="save_basic" class="l-btn" value="保存" />
 			</div> 
+			
+			<p class="under ce">
+				<a class="m-btn" onclick="return common_open_popup($(this).attr('href'));" soy:id="sample_code_link*"><em>テンプレート用HTML生成</em></a>
+			</p>
 		</li><!-- // #tab2_container -->
 		
 		<li id="tab2_container">

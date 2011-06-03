@@ -279,6 +279,13 @@
 			
 			return true;
 		});
+		
+		editor.addCommand("onpaste", function(node,html){
+			html = html.replace("\r","");
+			this.insertHTML(html);
+			return false;
+		});
+		
 	});
 	
 }());

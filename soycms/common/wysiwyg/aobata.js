@@ -379,7 +379,6 @@ aobata_editor.prototype = {
 				try {
 					//innerHTML
 					t.setHTML(t.textarea.val());
-					t.pushHistory();
 				}catch(e){
 					alert("failed to setHTML");
 				}
@@ -523,8 +522,6 @@ aobata_editor.prototype = {
 								text = text.replace(/<meta .*?>/g,"")
 									.replace(/\s*style=".*?"/g,"")
 									.replace(/<[^>]*><\/[^>]*>/g,"");
-								
-								
 								
 								//paste
 								t.insertHTML(text);
@@ -685,10 +682,6 @@ aobata_editor.prototype = {
 			case "del":
 				if (event == "click") {
 					showParam = true;
-					range = this.getRange();
-					if (range.collapsed) {
-						range.sel(ele);
-					}
 				}
 				break;
 			case "h1":
@@ -894,6 +887,10 @@ aobata_editor.prototype = {
 		this.getWindow().document.body.innerHTML = "";
 		this.getWindow().document.body.appendChild(bodyfragment);
 		
+		if(this._history.length < 1){
+			this.pushHistory(this.getWindow().document.body.innerHTML);
+		}
+		
 		/* convert relative url to absolute url in img */
 		/* for firefox and others... */
 		if (aobata_editor.option.base_url.length > 0) {
@@ -1090,11 +1087,20 @@ aobata_editor.prototype = {
 				return false;
 			}
 			
-			if($(start).html() && $(start).html().length < 1){
+			start = this.getDOMNode(start);
+			
+			if($(start).html() != null && $(start).html().length < 1){
 				event.preventDefault();
 				$(start).remove();
 				return false;
 			}
+			
+			if($(start).prev() && $(start).prev().html() != null && $(start).prev().html().replace(/[\r\n]/,"").length < 1){
+				event.preventDefault();
+				$(start).prev().remove();
+				return false;
+			}
+			
 		}
 		if(event.keyCode == 8 && this.getDocument().body.innerHTML.length < 1){
 			this.insertHTML("<p>\u200B</p>");
@@ -1111,7 +1117,7 @@ aobata_editor.prototype = {
 		
 		//ctrl + z
 		if((event.ctrlKey && event.keyCode == 90) || (event.metaKey && event.keyCode == 90)){
-			if(this.popHistory()){
+			if(this.undoHistory()){
 				event.preventDefault();
 				return false;
 			}
@@ -1119,7 +1125,6 @@ aobata_editor.prototype = {
 		
 		//enter
 		if(event.keyCode == 13){
-			
 			if(!ele){
 				this._keydown_tmp_counter = 0;	//reset counter
 				return false;
@@ -1655,7 +1660,7 @@ aobata_editor.prototype = {
 		this._redoHistory = [];
 	},
 	
-	popHistory : function(){
+	undoHistory : function(){
 		if(this._history.length > 0){
 			var html = this._history.pop();
 			if(this._last_keycode == null){
@@ -1792,6 +1797,14 @@ aobata_editor.prototype = {
 		}
 		
 		return url;
+	},
+	
+	getDOMNode : function(ele){
+		ele = $(ele);
+		while(ele[0].nodeType == 3 /* Node.TEXT_NODE */){ //TEXT NODE
+			ele = $(ele).parent();
+		}
+		return ele[0];
 	}
 	
 };
