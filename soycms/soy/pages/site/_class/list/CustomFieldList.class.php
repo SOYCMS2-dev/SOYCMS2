@@ -221,6 +221,8 @@ class CustomFieldList extends HTMLList{
 
 				break;
 			case "multi":
+				$h_value = (empty($h_value)) ? $config["defaultValue"] : $h_value ;
+			
 				$body = '<textarea class="textarea m-area liq-area"'
 						.' id="'.$idAttribute.'"'
 						.' name="'.$h_formName.'"'
@@ -278,6 +280,8 @@ class CustomFieldList extends HTMLList{
 					   
 				break;
 			case "wysiwyg":
+				$h_value = (empty($h_value)) ? $config["defaultValue"] : $h_value ;
+				
 				$html = array();
 				
 				$html[] = '<div class="section_list">
@@ -317,6 +321,14 @@ class CustomFieldList extends HTMLList{
 				if($type == "datetime"){
 					$html[] = '@<input type="text" class="m-area time-input" size="9" name="'.$h_formName.'[1]" value="'.$time.'" />';
 				}
+				$body = implode("",$html);
+				break;
+			case "time":
+				if(!is_numeric($h_value))$h_value = null;
+				$time = (strlen($h_value)>0) ? date("H:i",$h_value) : "";
+			
+				$html = array();
+				$html[] = '<input placeholder="00:00" type="text" class="m-area time-input" size="9" name="'.$h_formName.'[0]" value="'.$time.'" />';
 				$body = implode("",$html);
 				break;
 			case "url":

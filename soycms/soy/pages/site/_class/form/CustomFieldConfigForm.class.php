@@ -89,9 +89,16 @@ class CustomFieldConfigForm extends HTMLForm{
 			"value" => $config->getOption()
 		));
 		
+		$isMultiLineDefault = $this->checkMultiLineDefault($config->getType());
 		$this->addInput("field_default_value",array(
 			"name" => $this->formName . "[config][defaultValue]",
-			"value" => $config->getDefaultValue()
+			"value" => $config->getDefaultValue(),
+			"visible" => !$isMultiLineDefault
+		));
+		$this->addTextArea("field_default_text",array(
+			"name" => $this->formName . "[config][defaultValue]",
+			"value" => $config->getDefaultValue(),
+			"visible" => $isMultiLineDefault
 		));
 		
 		$this->addModel("has_option",array(
@@ -128,6 +135,18 @@ class CustomFieldConfigForm extends HTMLForm{
 		
 		return false;
 		
+	}
+	
+	function checkMultiLineDefault($type){
+		
+		switch($type){
+			case "wysiwyg":
+			case "multi";
+				return true;
+				break;
+		}
+		
+		return false;
 	}
 
 

@@ -26,8 +26,12 @@ class SOYCMS_SimpleFormBuilder {
 		return $array;
 	}
 	
+	/**
+	 *  投稿された値をテキストで返す
+	 */
 	function getValues() {
 		$values = array();
+		$texts = array();
 		
 		foreach($this->items as $key => $field){
 			$id = $field->getId();
@@ -36,22 +40,29 @@ class SOYCMS_SimpleFormBuilder {
 			$option = $field->getOptions();
 			
 			$value = @$this->values[$key];
+			$text = @$this->values[$key];
+			
 			$subitem = @$option["subitem"];
 			
 			if($subitem){
 				$sep = @$option["separate"];
 				if(!$sep)$sep = ",";
 				$items = $this->buildSubItems($subitem);
+				
 				if(!is_array($value)){
 					$value = (!is_null($value)) ? explode($sep,$value) : array();
 				}
+				
 				$tmp = array();
+				$tmpText = array();
 				foreach($items as $_key => $item){
-					if(in_array($item,$value) || in_array($_key,$value)){
-						$tmp[] = $item;
+					if(in_array($_key,$value)){ /* キーで判定*/
+						$tmp[] = $_key;
+						$tmpText[] = $item;
 					}
 				}
 				$value = implode($sep,$tmp);
+				$text = implode($sep,$tmpText);
 			}
 			
 			if($type == "confirm" && $value){
@@ -59,9 +70,10 @@ class SOYCMS_SimpleFormBuilder {
 			}
 			
 			$values[$key] = $value;
+			$texts[$key] = $text;
 		}
 		
-		$this->valuesTexts = $values;
+		$this->valuesTexts = $texts;
 		
 		return $values;
 	}
@@ -228,11 +240,7 @@ class SOYCMS_SimpleFormBuilder {
 	}
 	
 	function convertValues($html,$isHTML = true){
-		if(empty($this->valuesTexts)){
-			$values = $this->getValues();
-		}else{
-			$values = $this->valuesTexts;
-		}
+		$values = $this->getValuesTexts();
 		
 		foreach($values as $key => $value){
 			if($isHTML)$value = nl2br($value);
@@ -241,6 +249,11 @@ class SOYCMS_SimpleFormBuilder {
 		
 		$html = str_replace("#SITE_URL#", SOYCMS_SITE_URL, $html);
 		return $html;
+	}
+	
+	function getValuesTexts(){
+		$this->getValues();
+		return $this->valuesTexts;
 	}
 	
 	function setValues($values){
@@ -347,9 +360,13 @@ class SOYCMS_SimpleForm_TemplatePage extends HTMLTemplatePage{
 							$value = explode(",",$value);
 							$tmp = array();
 							foreach($value as $_value){
-								$search = array_search($_value,$items);
-								if($search !== false){
-									$tmp[] = $search;
+								if(is_numeric($_value)){
+									$tmp[] = $_value;
+								}else{
+									$search = array_search($_value,$items);
+									if($search !== false){
+										$tmp[] = $search;
+									}
 								}
 							}
 							$value = $tmp;
