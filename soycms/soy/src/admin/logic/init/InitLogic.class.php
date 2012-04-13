@@ -65,7 +65,7 @@ class InitLogic extends SOY2LogicBase{
 		include_once(SOYCMSConfigUtil::get("config_dir") . "db.conf.php");
 		SOY2DAOConfig::Dsn(SOYCMS_DB_DSN);
 		SOY2DAOConfig::user(SOYCMS_DB_USER);
-		SOY2DAOConfig::pass(SOYCMS_DB_PASS);
+		SOY2DAOConfig::password(SOYCMS_DB_PASS);
 		
 		//clear db
 		if(SOYCMS_IS_DEBUG())unlink(str_replace("sqlite:","",SOYCMS_DB_DSN));

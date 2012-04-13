@@ -145,14 +145,6 @@ class SOYCMS_EntryComment extends SOY2DAO_EntityBase{
 	function setAttributes($attributes) {
 		$this->attributes = $attributes;
 	}
-	
-
-	function get_attributes() {
-		return $this->_attributes;
-	}
-	function set_attributes($_attributes) {
-		$this->_attributes = $_attributes;
-	}
 	function getOrder() {
 		return $this->order;
 	}

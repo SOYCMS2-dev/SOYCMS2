@@ -167,6 +167,13 @@ class TemplateItemComponent_ItemList extends HTMLList{
 	private $removeLink;
 	private $templateLink;
 	
+	
+	private $configLink;
+	
+	function init(){
+		$this->configLink = soycms_create_link("/page/item/config");
+	}
+	
 	function setList($list){
 		
 		uasort($list,create_function('$a,$b','return ($a->getOrder() >= $b->getOrder());'));
@@ -182,6 +189,11 @@ class TemplateItemComponent_ItemList extends HTMLList{
 		$this->addLink("detail_link",array(
 			"link" => $link,
 			"visible" => (strlen($entity->getConfigLink())>0)
+		));
+		
+		$this->addLink("config_link",array(
+			"link" => $this->configLink . "?id=".$entity->getId()."&type=".$entity->getType()."&pageId=" . $this->pageId,
+			"visible" => ($this->mode == "page")
 		));
 		
 		//コピーリンク

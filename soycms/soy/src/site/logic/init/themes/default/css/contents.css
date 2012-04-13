@@ -125,7 +125,7 @@ common class,clearfix
 }
 
 #contents ul.link-list > li > a {
-	display: block;
+	/* display: block; */
 	min-height: 1px;
 	margin: 0 0 0 -10px;
 	padding: 0 0 0 10px;

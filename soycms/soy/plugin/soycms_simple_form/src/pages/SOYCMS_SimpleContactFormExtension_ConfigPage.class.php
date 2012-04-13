@@ -43,6 +43,11 @@ class SOYCMS_SimpleContactFormExtension_ConfigPage extends HTMLPage{
 			"html" => $config["form_html"]
 		));
 		
+		$this->addInput("from_addr",array(
+			"name" => "object[config][from_addr]",
+			"value" => @$config["from_addr"]
+		));
+		
 		$this->addInput("admin_addr",array(
 			"name" => "object[config][admin_addr]",
 			"value" => @$config["admin_addr"]

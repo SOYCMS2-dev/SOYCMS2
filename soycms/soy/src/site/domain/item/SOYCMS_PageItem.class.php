@@ -6,6 +6,25 @@ SOY2::import("site.domain.item.SOYCMS_HTMLItem");
  */
 class SOYCMS_PageItem extends SOYCMS_HTMLItem{
 	
+	public static function loadItemConfig($pageId){
+		if(is_object($pageId)){
+			$page = $pageId;
+			$pageId = $page->getId();
+		}else{
+			$page = SOY2DAO::find("SOYCMS_Page",$pageId);
+		}
+		$itemDir = $page->getPageDirectory() . "item/";
+		
+		$config = array();
+		$files = soy2_scandir($itemDir);
+		foreach($files as $file){
+			$file = explode(".",$file);
+			$config[$file[0]] = new SOYCMS_PageItemConfig($itemDir . $file[0] . "." . $file[1]);
+		}
+		
+		return $config;
+	}
+	
 	/**
 	 * ページの設定からブロックを取得、無ければテンプレートの設定を取得
 	 * ブロックの設定側で読み込め無い場合があるので、そのあたりの対策は必要
@@ -73,6 +92,50 @@ class SOYCMS_PageItem extends SOYCMS_HTMLItem{
 	}
 	function setPageId($pageId) {
 		$this->pageId = $pageId;
+	}
+}
+
+class SOYCMS_PageItemConfig{
+	
+	private $filepath = null;
+	private $options = array(
+		"after_second_page" => false,
+		"first_page" => false,
+		"before_last_page" => false,
+		"last_page" => false,
+		"select_label" => false,
+		"no_label" => false
+	);
+	private $rules = array();
+	
+	function SOYCMS_PageItemConfig($ini){
+		$this->filepath = $ini;
+	}
+	
+	public static function init($page,$id){
+		$path = $page->getPageDirectory() . "item/" . $id . ".ini";
+		return new SOYCMS_PageItemConfig($path);
+	}
+	
+	/* getter setter */
+
+	function getFilepath() {
+		return $this->filepath;
+	}
+	function setFilepath($filepath) {
+		$this->filepath = $filepath;
+	}
+	function getOptions() {
+		return $this->options;
+	}
+	function setOptions($options) {
+		$this->options = $options;
+	}
+	function getRules() {
+		return $this->rules;
+	}
+	function setRules($rules) {
+		$this->rules = $rules;
 	}
 }
 ?>

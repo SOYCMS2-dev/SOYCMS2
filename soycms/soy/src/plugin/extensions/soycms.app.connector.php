@@ -61,10 +61,13 @@ class SOYCMS_AppConnectorDelegateAction implements SOY2PluginDelegateAction{
 	function run($extensionId,$moduleId,SOY2PluginAction $action){
 		
 		if($this->mode == "menu"){
-			$this->menus[$moduleId] = array(
-				"title" => $action->getName(),
-				"menu" => $action->getMenu()
-			);
+			$menu = $action->getMenu();
+			if($menu){
+				$this->menus[$moduleId] = array(
+					"title" => $action->getName(),
+					"menu" => $menu
+				);
+			}
 			return;
 		}
 		

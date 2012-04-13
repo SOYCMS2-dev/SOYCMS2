@@ -32,6 +32,7 @@ $(function(){
 				
 					$(".tab-contents > li").hide();
 					$(".tab-contents li" + hash + "_contents").show();
+				
 				}
 				
 			});
@@ -52,17 +53,26 @@ $(function(){
 	
 	$(".tab_container > li").hide();
 	$(".tab_container li:first-child").show();
-	$(".tab_index li:first-child").addClass("on");
+	if($(".tab_index li.on").size() < 1){
+		$(".tab_index li:first-child").addClass("on");
+	}
 	
 	var counter = 0;
 	$(".tab_index li").each(function(){
+		$(this).find("a").click(function(){
+			$(this).parents("li").click();
+			return false;
+		});
 		$(this).click(function(index){
 			return function() {
 				$(".tab_container > li").hide();
 				$(".tab_index li.on").removeClass("on");
 				$(this).addClass("on");
 				$($(".tab_container > li").get(index)).show();
-				
+				var href = $(this).find("a").attr("href");
+				if(href.length > 0 && href[0] != "#"){
+					location.href = href;
+				}
 			};
 		}(counter));
 		counter++;
@@ -171,7 +181,23 @@ $(function(){
 	});
 	
 	$(".up_btn,.down_btn").click(function(){
-		$(".save_order_wrap").fadeIn();
+		$(this).parents("form").find(".save_order_wrap").fadeIn();
+	});
+	
+	$("tbody.sortable").sortable({
+		/*
+		 * http://stackoverflow.com/questions/1307705/jquery-ui-sortable-with-table-and-tr-width
+		 * for fix TR shrink the content bug
+		 */
+		helper: function(e, ui){
+			ui.children().each(function(){
+				$(this).width($(this).width());
+			});
+			return ui;
+		},
+		stop : function(){
+			$(this).parents("form").find(".save_order_wrap").fadeIn();
+		}
 	});
 
 
@@ -470,7 +496,7 @@ var common_sitemap_mode = function(_mode){
 };
 
 var common_show_popup_status = function(array,ukey){
-	if (!array && array.length < 1) {
+	if (!array || array.length < 1) {
 		$("#common_popup_status").hide();
 		return;
 	}
@@ -602,6 +628,7 @@ $(function(){
 		if(!flag)return;
 		
 		flag = false;
+		$.ajaxSettings.traditional = false;
 		$.post(url,data,function(res){
 			common_show_popup_status(res,ukey);
 			flag = true;
@@ -707,5 +734,32 @@ $(function(){
 		});
 
 	});
+	
+	$("form").bind("submit",function(){
+		$(".placeholder").val("");
+	});
 
+});
+
+/* rule */
+$(function(){
+	var alphacheck = function(){
+		if($(this).val().length > 0 && !$(this).val().match(/^[a-zA-Z0-9\-\_ ]+$/)){
+			var val = $(this).val().replace(/[^a-zA-Z0-9\-\_ ]/g,"");
+			$(this).val(val);
+			return false;
+		}
+	};
+	$(".rule-alpha").bind("keydown",alphacheck);
+	$(".rule-alpha").bind("blur",alphacheck);
+	
+	var numbercheck = function(){
+		if($(this).val().length > 0 && !$(this).val().match(/^[0-9\-]+$/)){
+			var val = $(this).val().replace(/[^0-9\-]/g,"");
+			$(this).val(val);
+			return false;
+		}
+	};
+	$(".rule-number").bind("keydown",numbercheck);
+	$(".rule-number").bind("blur",numbercheck);
 });

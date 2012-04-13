@@ -60,6 +60,9 @@ class CustomFieldConfigForm extends HTMLForm{
 			"value" => $config->getDescription()
 		));
 		
+		$this->addModel("allow_multi",array(
+			"visible" => $this->isAllowMulti($config->getType())
+		));
 		$this->addCheckbox("field_multi",array(
 			"elementId" => "field_multi",
 			"name" => $this->formName . "[multi]",
@@ -107,6 +110,19 @@ class CustomFieldConfigForm extends HTMLForm{
 		$this->addModel("has_label",array(
 			"visible" => $this->checkHasLabel($config->getType())
 		));
+		$this->addModel("has_template",array(
+			"visible" => $config->getType() == "group"
+		));
+		$this->addTextArea("field_template",array(
+			"name" => $this->formName . "[config][template]",
+			"value" => $config->getTemplate(),
+		));
+		$this->addCheckbox("field_template_check",array(
+			"selected" => (strlen($config->getTemplate()) > 0),
+			"attr:onclick" => '$("#field_template_config").toggle($(this).attr("checked"));',
+			"label" => "テンプレートを使用する",
+			"elementId" => "field_template_check"
+		));
 		
 		parent::execute();
 	}
@@ -116,6 +132,7 @@ class CustomFieldConfigForm extends HTMLForm{
 		switch($type){
 			case "select":
 			case "radio":
+			case "check":
 				return true;
 				break;
 		}
@@ -147,6 +164,18 @@ class CustomFieldConfigForm extends HTMLForm{
 		}
 		
 		return false;
+	}
+	
+	function isAllowMulti($type){
+		
+		switch($type){
+			case "check":
+				return false;
+				break;
+			
+		}
+		
+		return true;
 	}
 
 

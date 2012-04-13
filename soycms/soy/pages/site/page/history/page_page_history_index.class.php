@@ -14,10 +14,16 @@ class page_page_history_index extends SOYCMS_WebPageBase{
 		if(isset($_GET["objectId"]))$this->objectId = $_GET["objectId"];
 		
 		if(isset($_GET["type"])){
+			if(strpos($this->objectId, "!") !== false){
+				list($this->objectId,$optionId) = explode("!",$this->objectId);
+			}
+			
 			$class = "SOYCMS_" . ucfirst($this->type);
 			if(!class_exists($class))exit;
 			eval('$obj='."$class::load('".$this->objectId."');");
 			$this->name = $obj->getName();
+			
+			if($optionId)$this->objectId .= "!" . $optionId;
 		}
 		
 		
@@ -32,7 +38,6 @@ class page_page_history_index extends SOYCMS_WebPageBase{
 	}
 	
 	function buildPage(){
-		
 		$dao = SOY2DAOFactory::create("SOYCMS_HistoryDAO");
 		$dao->setLimit($this->limit);
 		$dao->setOffset($this->limit * ($this->page - 1));

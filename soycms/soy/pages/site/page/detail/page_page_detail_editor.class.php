@@ -15,12 +15,17 @@ class page_page_detail_editor extends page_page_detail{
 				$allows = $_POST["append_snippet_ids"];
 				
 				$config["append_snippet_order"] = $orders;
-				$config["allowed_append_snippet"] = $allows;	
+				$config["allowed_append_snippet"] = $allows;
+				
+			}else{
+				$list = SOYCMS_Snippet::getList(array());
+				$config["append_snippet_order"] = array_keys($list);
+				$config["allowed_append_snippet"] = array();
 			}
 			
 			if(isset($_POST["InsertSnippetOrder"])){
 				$ordersAppend = array_keys($_POST["InsertSnippetOrder"]);
-				$allowsAppend = $_POST["insert_snippet_ids"];
+				$allowsAppend = (isset($_POST["insert_snippet_ids"])) ? $_POST["insert_snippet_ids"] : array();
 				
 				$config["insert_snippet_order"] = $ordersAppend;
 				$config["allowed_insert_snippet"] = $allowsAppend;
@@ -92,16 +97,11 @@ class page_page_detail_editor extends page_page_detail{
 		//追加ボタン
 		$orders = (isset($config["append_snippet_order"])) ? $config["append_snippet_order"] : array();
 		$allowSnippet = (isset($config["allowed_append_snippet"])) ? $config["allowed_append_snippet"] : array();
-		
 		$list = SOYCMS_Snippet::sortSnippet($list,$orders);
-		
 		foreach($list as $key => $snippet){
 			if(!in_array($key,$orders)){
 				$allowSnippet[] = $key;
 			}
-		}
-		if(!in_array("nextpage",$orders)){
-			$allowSnippet[] = "nextpage";
 		}
 		
 		$this->createAdd("snippet_list","_class.list.SnippetList",array(
@@ -112,7 +112,7 @@ class page_page_detail_editor extends page_page_detail{
 		$this->addCheckbox("next_page_snippet",array(
 			"name" => "snippet_ids[]",
 			"value" => "nextpage",
-			"selected" => (empty($allowSnippet) || in_array("nextpage",$allowSnippet))
+			"selected" => (in_array("nextpage",$allowSnippet))
 		));
 		
 		$this->addModel("is_directory",array(

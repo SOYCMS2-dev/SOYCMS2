@@ -8,6 +8,8 @@ class SOYCMS_Library implements SerialziedEntityInterface{
 	private $content;
 	private $order = 0;
 	private $updateDate;
+	private $templateType = "template";
+	private $templates = array();
 	
 	/**
 	 * 全てのライブラリを取得
@@ -56,27 +58,32 @@ class SOYCMS_Library implements SerialziedEntityInterface{
 		if(!file_exists($dir . "/template.html")
 		|| !file_exists($dir . "/library.ini")
 		){
-			return false;	
-		}		
+			return false;
+		}
 		
 		$obj = new SOYCMS_Library();
 		$obj->setId(basename($dir));
-		$obj->setContent(file_get_contents($dir . "/template.html"));
-		$array = @parse_ini_file($dir . "/library.ini");
+		$obj->loadTemplate();
+		$array = @parse_ini_file($dir . "/library.ini",true);
 		$obj->setName(@$array["name"]);
 		$obj->setDescription(@$array["description"]);
-		$obj->setOrder(@$array["order"]);
+		if(isset($array["order"]))$obj->setOrder($array["order"]);
+		if(isset($array["templates"]))$obj->setTemplates($array["templates"]);
 		$obj->setUpdateDate(filemtime($dir . "/library.ini"));
 		
 		return $obj;
 	}
 	
 	public static function getLibraryDirectory(){
+		if(SOYCMSConfigUtil::get("library_dir")){
+			return SOYCMSConfigUtil::get("library_dir");
+		}
+		
 		$dir = SOYCMS_SITE_DIRECTORY . ".library/";
 		if(!file_exists($dir)){
 			mkdir($dir,0755);
 		}
-		return $dir;	
+		return $dir;
 	}
 	
 	public static function remove($id){
@@ -85,6 +92,14 @@ class SOYCMS_Library implements SerialziedEntityInterface{
 		if(is_dir($dir . $id)){
 			soy2_delete_dir($dir . $id);
 		}
+	}
+	
+	function loadTemplate(){
+		$dir = self::getLibraryDirectory() . $this->getId();
+		$type = $this->getTemplateType();
+		$type = str_replace(array(".","/","\\"),"",$type);
+		$this->setContent(@file_get_contents($dir . "/{$type}.html"));
+		return $this->getContent();
 	}
 	
 	/**
@@ -102,12 +117,24 @@ class SOYCMS_Library implements SerialziedEntityInterface{
 		}
 		
 		//template
-		file_put_contents($dir . "template.html",$this->getContent());
+		if($this->getTemplateType() == "template"){
+			file_put_contents($dir . "template.html",$this->getContent());
+		}else{
+			$type = $this->getTemplateType();
+			$type = str_replace(array(".","/","\\"),"",$type);
+			file_put_contents($dir . "{$type}.html",$this->getContent());
+		}
 		
 		//ini
-		$content = array();
+		$content = @parse_ini_file($dir . "/library.ini",true);
 		$content["name"] = $this->getName();
 		$content["description"] = $this->getDescription();
+		if($this->getTemplateType() != "template"){
+			if(!isset($content["templates"]))$content["templates"] = array(
+				"template" => "template",
+				$this->getTemplateType() => $this->getTemplateType()
+			);
+		}
 		
 		soy2_write_ini($dir . "library.ini",$content);
 		
@@ -168,6 +195,31 @@ class SOYCMS_Library implements SerialziedEntityInterface{
 	}
 	function setDescription($description) {
 		$this->description = $description;
+	}
+
+	public function getTemplates(){
+		return $this->templates;
+	}
+
+	public function setTemplates($templates){
+		$this->templates = $templates;
+		return $this;
+	}
+
+	public function getTemplateType(){
+		return $this->templateType;
+	}
+
+	public function setTemplateType($templateType){
+		$this->templateType = $templateType;
+		return $this;
+	}
+	
+	function getHistoryKey(){
+		if($this->templateType && $this->templateType != "template"){
+			return $this->id . "!" . $this->templateType;
+		}
+		return $this->id;
 	}
 }
 

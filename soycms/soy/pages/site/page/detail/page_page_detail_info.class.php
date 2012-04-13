@@ -36,7 +36,7 @@ class page_page_detail_info extends SOYCMS_WebPageBase{
 			"text" => $link
 		));
 		
-		$link = soycms_get_page_url($page->getUri()) . "?dynamic&SOYCMS_SSID=" . session_id();
+		$link = soycms_get_page_url($page->getUri()) . "?dynamic&" . soycms_get_ssid_token();
 		$this->addLink("dynamic_link",array("link" => $link));
 		$this->addLabel("dynamic_link_text",array(
 			"text" => "ダイナミック編集"
@@ -145,7 +145,7 @@ class page_page_detail_info extends SOYCMS_WebPageBase{
 		));
 		
 		$this->addLink("preview_link",array(
-			"link" => SOYCMS_SITE_URL . "?template_preview=" . $templateId . "&SOYCMS_SSID=" . session_id()
+			"link" => SOYCMS_SITE_URL . "?template_preview=" . $templateId . "&" . soycms_get_ssid_token()
 		));
 		
 		//tab

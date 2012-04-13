@@ -50,6 +50,10 @@ class LibraryForm extends HTMLForm{
 			"name" => "Library[content]",
 			"text" => $library->getContent()
 		));
+		$this->addTextArea("library_content_area",array(
+			"name" => "Library[content]",
+			"text" => $library->getContent()
+		));
 		
 		$this->addLabel("hoge",array("text"=>date("Ymd")));
 		

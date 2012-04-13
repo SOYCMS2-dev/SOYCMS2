@@ -61,12 +61,13 @@ class page_page_field_create extends SOYCMS_WebPageBase{
 		));
 		
 		$pageId = (isset($_GET["page"]) && is_numeric($_GET["page"])) ? $_GET["page"] : "";
+		if($pageId)$page = SOY2DAO::find("SOYCMS_Page",$pageId);
 		$this->addLabel("selected_page_name",array(
-			"text" => ($pageId) ? SOY2DAO::find("SOYCMS_Page",$pageId)->getName() : "共通"
+			"text" => ($pageId) ? $page->getName() : "共通"
 		));
 		$this->addInput("selected_page_value",array(
 			"name" => "type",
-			"value" => $pageId
+			"value" => ($pageId) ? $page->getUri() : null
 		));
 	}
 }

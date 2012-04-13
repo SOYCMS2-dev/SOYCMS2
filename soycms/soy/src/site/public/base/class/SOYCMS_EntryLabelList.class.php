@@ -7,6 +7,7 @@ class SOYCMS_EntryLabelList extends HTMLList{
 	
 	function populateItem($entity){
 		$labelId = $entity->getLabelId();
+		if(is_object($labelId))$labelId = -1;
 		$label = (isset($this->labels[$labelId])) ? $this->labels[$labelId] : new SOYCMS_Label();
 		
 		$this->addLabel("label_name",array(

@@ -95,6 +95,7 @@
 </style>
 
 <script type="text/javascript">
+var entry_create_attribute = <!-- soy:id="entry_create_attribute" /-->;
 $(function(){
 	$(".create_entry_link").click(function(){
 		label_id = $(".default_label_radio:checked").val();
@@ -103,6 +104,17 @@ $(function(){
 			href += (href.indexOf("?") > 0) ? "&label=" + label_id : "?label=" + label_id;
 			$(this).attr("href", href);
 		}
+		
+		var query = decodeURIComponent($.param({
+			attribute: entry_create_attribute
+		}));
+		
+		if(query){
+			href = $(this).attr("href");
+			href += (href.indexOf("?") > 0) ? "&" + query : "?" + query;
+			$(this).attr("href", href);
+		}
+		
 		return true;
 	});
 });

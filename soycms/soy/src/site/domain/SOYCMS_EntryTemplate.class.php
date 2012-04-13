@@ -72,7 +72,7 @@ class SOYCMS_EntryTemplate extends SOY2DAO_EntityBase{
 		
 		//VOL
 		if(strpos($title,'%VOL%') !== false){
-			$dao = SOY2DAOFactory::create("SOYCMS_EntryDAO");
+			$dao = SOY2DAOContainer::get("SOYCMS_EntryDAO");
 			$vol = $dao->countByDirectory($this->getDirectory());
 			$title = str_replace('%VOL%',$vol,$title);
 		}

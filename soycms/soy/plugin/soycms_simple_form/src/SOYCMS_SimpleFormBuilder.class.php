@@ -326,11 +326,10 @@ class SOYCMS_SimpleForm_TemplatePage extends HTMLTemplatePage{
 				case "select":
 					$items = $this->builder->buildSubItems(@$option["subitem"]);
 					$selected = (is_numeric($formValue)) ? $formValue : array_search($formValue,$items);
-					
 					$this->addSelect("contact_" . $key,array(
 						"name" => $key,
 						"options" => $items,
-						"selected" => $selected,
+						"selected" => ($selected !== false) ? $selected : null,
 						"soy2prefix" => "cms",
 						"indexOrder" => true
 					));
@@ -353,6 +352,7 @@ class SOYCMS_SimpleForm_TemplatePage extends HTMLTemplatePage{
 					
 					if($type == "radio" && !is_numeric($value)){
 						$value = array_search($value,$items);
+						if($value === false)$value = -1;
 					}
 					
 					if($type == "checkbox" && !is_array($value)){
@@ -374,13 +374,12 @@ class SOYCMS_SimpleForm_TemplatePage extends HTMLTemplatePage{
 							$value = array();
 						}
 					}
-					
 					foreach($items as $_key => $item){
 						$this->addCheckbox("contact_" . $key . "_" . $_key,array(
 							"elementId" => "contact_" . $key . "_" . $_key,
 							"name" => $name,
 							"value" => $_key,
-							"selected" => (is_array($value)) ? in_array($_key,$value) : $_key == $value,
+							"selected" => (is_array($value)) ? in_array($_key,$value) : $_key === $value,
 							"soy2prefix" => "cms"
 						));
 					}

@@ -27,7 +27,8 @@ create table soycms_site_entry(
 create index entry_udate on soycms_site_entry(update_date desc);
 create index entry_cdate on soycms_site_entry(create_date desc);
 create index entry_order on soycms_site_entry(display_order desc);
-alter table soycms_site_entry add foreign key parent_entry_id references soycms_site_entry(id); 
+alter table soycms_site_entry add foreign key parent_entry_id references soycms_site_entry(id);
+alter table soycms_site_entry add directory_uri varchar(255); 
 
 
 drop table soycms_entry_attribute;
@@ -165,13 +166,37 @@ create table soycms_group_permission(
 
 drop table soycms_site_object_field;
 create table soycms_site_object_field(
-	id integer primary key,
-	field_id varchar(14) not null,
+	id integer primary key auto_increment,
+	field_id varchar(32) not null,
 	field_type varchar(12) not null,
 	field_index integer not null default 0,
 	object_id integer not null,
 	object varchar(12) not null,
-	object_text text,
-	object_value integer,
+	object_text LONGTEXT,
+	object_value LONGTEXT,
 	unique(field_id,object_id,field_index,object)
+) TYPE=InnoDB;
+
+
+-- 2.0.8 20110710
+
+drop table if exists soycms_site_object;
+create table soycms_site_object(
+	id integer primary key,
+	object_title VARHCAR(512),
+	object_content TEXT,
+	object_type VARHCAR(12) not null,
+	owner_id INTEGER not null,
+	directory INTEGER not null,
+	create_date INTEGER not null
+) TYPE=InnoDB;
+
+
+drop table if exists soycms_page_attribute;
+create table soycms_page_attribute(
+	id integer primary key auto_increment,
+	page_id integer not null,
+	class_name varchar(255),
+	object_data text,
+	unique(page_id,class_name)
 ) TYPE=InnoDB;

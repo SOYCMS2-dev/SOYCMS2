@@ -76,7 +76,7 @@ class EntryList extends HTMLList{
  		
  		$this->addLink("entry_preview_link",array(
  			"link" => ($dirURL)
- 			 ? (($entity->isOpen()) ? $dirURL . $entity->getUri() : $dirURL . $entity->getUri() . "?preview&SOYCMS_SSID=" . session_id()) 
+ 			 ? (($entity->isOpen()) ? $dirURL . $entity->getUri() : $dirURL . $entity->getUri() . "?preview&" . soycms_get_ssid_token()) 
  			 : ""
  		));
  		

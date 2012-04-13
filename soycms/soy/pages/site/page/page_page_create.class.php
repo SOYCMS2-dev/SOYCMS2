@@ -13,10 +13,12 @@ class page_page_create extends SOYCMS_WebPageBase{
 		
 		//テンプレートの指定
 		if(isset($_POST["directory_template"])){
-			$page->setType("detail");
 			
 			//テンプレートIDを指定の場合
 			if(strlen($_POST["directory_template"]) > 0){
+				if($page->getType() != "alias"){
+					$page->setType("detail");
+				}
 				$page->setTemplate($_POST["directory_template"]);
 			}
 		
@@ -28,6 +30,7 @@ class page_page_create extends SOYCMS_WebPageBase{
 				$page->setType($template->getType());
 			}
 			$template = null;
+			
 		}
 		
 		if(isset($_POST["object_config"])){

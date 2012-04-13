@@ -20,6 +20,7 @@ class page_page_detail extends SOYCMS_WebPageBase{
 		if(isset($_POST["save_basic"])){
 			
 			try{
+				$this->page->getPageObject();
 				SOY2::cast($this->page,(object)$_POST["Page"]);
 				
 				if(isset($_POST["object"])){
@@ -65,6 +66,15 @@ class page_page_detail extends SOYCMS_WebPageBase{
 					}
 				}
 				
+				//public delegate
+				$config = $this->page->getConfigObject();
+				PluginManager::load("soycms.site.page.permisson");
+				PluginManager::invoke("soycms.site.page.permisson",array(
+					"mode" => "post",
+					"moduleId" => $config["public"],
+					"pageId" => $this->page->getId()
+				));
+				
 				$this->page->save();
 				
 				//ページの更新処理を行う
@@ -84,7 +94,7 @@ class page_page_detail extends SOYCMS_WebPageBase{
 			$config = $this->page->getConfigObject();
 			if(isset($config["icon"]) && $config["icon"] != ($this->page->getType() . ".gif")){
 				$filepath = SOYCMS_ROOT_DIR . "content/" . SOYCMS_LOGIN_SITE_ID . "/" . $config["icon"];
-				if(file_exists($filepath))@unlink($filepath);	
+				if(file_exists($filepath))@unlink($filepath);
 				$config["icon"] = $this->page->getType() . ".gif";
 				$this->page->setConfigObject($config);
 				$this->page->save();

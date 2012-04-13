@@ -122,7 +122,7 @@ class PageTreeComponent extends HTMLTree{
 		));
 		
 		$this->addLink("dynamic_edit_link",array(
-			"link" => soycms_get_page_url($entity->getUri()) . "?dynamic&SOYCMS_SSID=" . session_id()
+			"link" => soycms_get_page_url($entity->getUri()) . "?dynamic&" . soycms_get_ssid_token()
 		));
 		
 		$this->addLink("public_link",array(

@@ -12,10 +12,10 @@
 		<div class="panel-line"> 
 			<div class="panel-parts"><label>ファイルパス</label>
 			<input id="img_attr_src" name="post1-2" type="text" class="s-area" size="42" value="http://" onchange="var val=$(this).val();aobata_editor.get().execNode(function(node){$(node).attr('src',val)});" /></div> 
-			<div class="panel-parts"><input type="button" value="参照" id="post5-btn1" name="post5-btn1" class="s-btn" onclick="entry_editor_show_attachments(function(img,link){
+			<div class="panel-parts"><input type="button" value="参照" id="post5-btn1" name="post5-btn1" class="s-btn" onclick="aobata_editor.show_attachments(function(img,link){
 							$('#img_attr_width').val('');
 							$('#img_attr_height').val('');
-							if(!link)link='';
+							if(!link || link == "image")link='';
 							$('#img_attr_href').val(link).trigger('change');
 							$('#img_attr_src').val(img).trigger('change');
 							

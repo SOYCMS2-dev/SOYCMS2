@@ -43,15 +43,19 @@ class page_page_field_select extends SOYCMS_WebPageBase{
 		$entry = SOYCMS_ObjectCustomFieldConfig::loadObjectConfig("entry");
 		
 		$res = array();
+		$selected = array();
 		foreach($list as $key => $value){
-			if(isset($configs[$key]))continue;
 			if(isset($entry[$key]))continue;
+			if(isset($configs[$key])){
+				$selected[] = $key;
+			}
 			$res[$key] = $value;
 		}
 		
 		$this->createAdd("field_list","_class.list.CustomFieldConfigList",array(
 			"list" => $res,
-			"type" => "common"
+			"type" => "common",
+			"selected" => $selected
 		));
 		
 		$this->addModel("field_empty",array(

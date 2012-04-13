@@ -10,6 +10,7 @@ class page_config_index extends SOYCMS_WebPageBase{
 		$this->createAdd("info","config.page_config_info");
 		$this->createAdd("mail","config.page_config_mail");
 		$this->createAdd("custom","config.page_config_custom");
+		$this->createAdd("cron","config.page_config_cron");
 		
 	}
 }

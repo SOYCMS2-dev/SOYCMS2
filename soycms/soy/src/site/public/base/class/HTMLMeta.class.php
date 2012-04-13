@@ -13,7 +13,7 @@ class HTMLMeta extends SOY2HTML{
  	 * metaの末尾に改行が入るように
  	 */
  	function getStartTag(){
- 		return parent::getStartTag() . "\n";
+ 		return parent::getStartTag();
  	}
 }
 ?>

@@ -120,7 +120,7 @@ class SOYCMS_Label extends SOY2DAO_EntityBase{
 	
 	/* 便利メソッド */
 	public static function getByEntryId($entryId){
-		$dao = SOY2DAOFactory::create("SOYCMS_EntryLabelDAO");
+		$dao = SOY2DAOContainer::get("SOYCMS_EntryLabelDAO");
 		$list = $dao->getByEntryId($entryId);
 		
 		$res = array();
@@ -137,7 +137,7 @@ class SOYCMS_Label extends SOY2DAO_EntityBase{
 	}
 	
 	public static function putLabels($entryId,$labels){
-		$dao = SOY2DAOFactory::create("SOYCMS_EntryLabelDAO");
+		$dao = SOY2DAOContainer::get("SOYCMS_EntryLabelDAO");
 		$dao->deleteByEntryId($entryId);
 		
 		foreach($labels as $labelId){
@@ -152,7 +152,7 @@ class SOYCMS_Label extends SOY2DAO_EntityBase{
 	 * 記事にラベルを投入
 	 */
 	public static function setLabel($entryId,$labelId,$labelObj = null){
-		$dao = SOY2DAOFactory::create("SOYCMS_EntryLabelDAO");
+		$dao = SOY2DAOContainer::get("SOYCMS_EntryLabelDAO");
 		$obj = new SOYCMS_EntryLabel();
 		$obj->setLabelId($labelId);
 		$obj->setEntryId($entryId);
@@ -161,7 +161,7 @@ class SOYCMS_Label extends SOY2DAO_EntityBase{
 		//サブラベルの場合
 		if($labelObj && $labelObj instanceof SOYCMS_Label && $labelObj->getType() == 2){
 			$names = explode("/",$labelObj->getName());
-			$labelDAO = SOY2DAOFactory::create("SOYCMS_LabelDAO");
+			$labelDAO = SOY2DAOContainer::get("SOYCMS_LabelDAO");
 			
 			$name = "";
 			while(count($names) > 0){
@@ -183,7 +183,7 @@ class SOYCMS_Label extends SOY2DAO_EntityBase{
 	 * 記事からラベルを削除
 	 */
 	public static function clearLabel($entryId,$labelId){
-		$dao = SOY2DAOFactory::create("SOYCMS_EntryLabelDAO");
+		$dao = SOY2DAOContainer::get("SOYCMS_EntryLabelDAO");
 		$obj = new SOYCMS_EntryLabel();
 		$obj->setLabelId($labelId);
 		$obj->setEntryId($entryId);
@@ -202,13 +202,6 @@ class SOYCMS_Label extends SOY2DAO_EntityBase{
 	}
 	function setDirectory($directory) {
 		$this->directory = $directory;
-	}
-
-	function get_config() {
-		return $this->_config;
-	}
-	function set_config($_config) {
-		$this->_config = $_config;
 	}
 	function getType() {
 		return $this->type;
@@ -243,7 +236,7 @@ abstract class SOYCMS_LabelDAO extends SOY2DAO{
 		$this->executeUpdateQuery($this->getQuery(),$this->getBinds());
 	}
 
-	abstract function update(SOYCMS_Label $bean);	
+	abstract function update(SOYCMS_Label $bean);
 	
 	/**
 	 * @columns id,#order#
@@ -354,7 +347,7 @@ class SOYCMS_EntryLabel{
 	
 	public static function countByLabelId($labelId){
 		static $_dao;
-		if(!$_dao)$_dao = SOY2DAOFactory::create("SOYCMS_EntryLabelDAO");
+		if(!$_dao)$_dao = SOY2DAOContainer::get("SOYCMS_EntryLabelDAO");
 		
 		if(is_numeric($labelId)){
 			return $_dao->countByLabelId($labelId);
@@ -372,20 +365,20 @@ abstract class SOYCMS_EntryLabelDAO extends SOY2DAO{
 	 */
 	function insert(SOYCMS_EntryLabel $bean){
 		$this->delete($bean);
-		$this->insertImpl($bean);	
+		$this->insertImpl($bean);
 	}
 	
 	abstract function insertImpl(SOYCMS_EntryLabel $bean);
 	
 	/**
-	 * @query #entryId# = :entryId AND #labelId# = :labelId 
+	 * @query #entryId# = :entryId AND #labelId# = :labelId
 	 */
 	abstract function delete(SOYCMS_EntryLabel $bean);
 	
 	abstract function deleteByEntryId($entryId);
 	
 	abstract function getByEntryId($entryId);
-	abstract function getByLabelId($labelId);	
+	abstract function getByLabelId($labelId);
 	
 	/**
 	 * @columns count(entry_id) as count_entry

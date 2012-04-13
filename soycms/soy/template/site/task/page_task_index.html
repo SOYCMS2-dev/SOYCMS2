@@ -1,84 +1,45 @@
-<div id="task-window" class="main-window"> 
+<div class="main-window" style="margin-bottom:180px;">
+<table>
+<tr>
+	<th>ステータス</th>
+	<td>
+		<select>
+			<option value="">登録</option>
+			<option value="">完了済み</option>
+		</select>
+	</td>
+	<th>並び替え</th>
+	<td>
+		<select>
+			<option value="">登録順</option>
+			<option value="">優先順</option>
+		</select>
+	</td>
+</tr>
+</table>
+
+<input type="button" class="m-btn" value="タスク表示" />
+
+
+</div>
+<div id="task-window" class="main-window">
 					
 	<div class="window-title"> 
-		<h2>タスク</h2> 
+		<h2>登録</h2> 
 	</div> 
 	
 	<div class="window-content"> 
 		<div class="section"> 
-			<div class="content"> 
-				
-				<div class="task_container">
+			<div class="content">
+				<form>
+					<div class="form-section">
+						<textarea class="m-area liq-area" rows="5"></textarea>
+					</div>
 					
-					<form soy:id="task_form">
-					
-					<table class="list-table">
-						<thead> 
-							<tr>
-								<th>
-									タスク
-									<input type="submit" id="save_all" name="save_all" class="s-btn" value="全て保存" style="display:none;" />
-								</th>
-								<th width="9%" scope="col"> 
-									<a href="?clear"><em class="s-btn">完了したタスクの消去</em></a>
-								</th>
-							</tr>
-						</thead>
-						<tbody>
-						<!-- soy:id="task_list" -->
-						
-							<tr soy:id="task_list">
-								<td class="task_name" style="border-right:none;">
-									<input type="checkbox" soy:id="task_check" class="task_check" onclick="onclick_task_check($(this));" />
-									<span class="task_text" soy:id="task_title" onclick="if(!$(this).parents('tr').hasClass('task_complete'))$(this).parents('tr').toggleClass('edit_task');">サイトAの公開</span>
-									<p class="task_text s" soy:id="task_option_text"></p>
-									<textarea class="s-area liq-area" type="text" soy:id="task_title_edit"></textarea>
-								</td>
-								<td style="border-left:none;">
-									<input type="submit" soy:id="save_btn" class="s-btn save_btn" value="保存" />
-									<button soy:id="add_child_btn" type="button" class="s-btn add_child_btn save_btn">子タスクの追加</button>
-								</td>
-							</tr>
-						
-						
-						<!-- soy:id="tree_child" -->
-							<!-- soy:id="tree" -->ここが再帰的に実行<!-- /soy:id="tree" -->
-						<!-- /soy:id="tree_child" --> 
-						
-						<!-- /soy:id="task_list" -->
-						</tbody>
-						
-						<tfoot>
-							<tr class="edit_task">
-								<td>
-									<input type="text" soy:id="add_task_title" class="s-area liq-area" />
-								</td>
-								<td>
-									<input type="submit" name="add" class="s-btn" value="追加" />
-								</td>
-							</tr>
-							
-							<tr id="add_task_child" class="edit_task" style="display:none;">
-								<td class="task_name">
-									<input type="hidden" id="parent_task_id" name="ChildTask[parent]" />
-									<input type="text" name="ChildTask[title]" class="s-area liq-area " />
-								</td>
-								<td>
-									<input type="submit" name="add_child" class="s-btn" value="追加" />
-									<input type="button" class="s-btn" onclick="$('#add_task_child').slideUp();" value="Cancel" />
-								</td>
-							</tr>
-						</tfoot>
-					</table>
-					
-					
-					</form>
-				</div>
-				
-				<p class="intro">
-					<a soy:link="task/history">History</a>
-				</p>
-				 
+					<p class="ce">
+						<input type="submit" name="" value="登録" class="m-btn" />
+					</p>
+				</form>
 			</div> 
 		</div> 
 		<!--  // .section --> 
@@ -86,58 +47,14 @@
 	</div> 
 	<!--  // .window-content --> 
 </div> 
-<!--  // #task-window1 --> 
-
-<script type="text/javascript">
-function onclick_task_check(ele){
-	$("#save_all").show();
-	
-	var tr = $(ele).parents('tr').addClass('task_changed');
-	_value = $(ele).attr("checked");
-	
-	if (_value) {
-		tr.addClass('task_complete');
-	} else {
-		tr.removeClass('task_complete');
-	}
-	
-	$(".parent-" + $(ele).attr("task_id") + " .task_check").each(function(key, node){
-		$(node).attr("checked", _value);
-		onclick_task_check($(node));
-	});
-
-}
-
-</script>
+<!--  // #task-window1 -->
 
 <style type="text/css">
-.list-table td{
-	vertical-align:middle;
-}
-.task_container td textarea,
-.task_container td .save_btn{
-	display:none;
-}
-.task_container .edit_task textarea,
-.task_container .edit_task .save_btn,
-.task_container .task_changed .save_btn{
-	display:inline;
-}
-.task_container .edit_task .task_text,
-.task_container .edit_task .task_check{
-	display:none;
-}
-.task_complete span{
-	text-decoration:line-through;
-}
-
-.task-2 .task_name{ padding-left:18px; }
-.task-3 .task_name{ padding-left:36px; }
-.task-4 .task_name{ padding-left:54px; }
-.task-5 .task_name{ padding-left:72px; }
-.task-6 .task_name{ padding-left:90px; }
-
-.task-list:hover .add_child_btn{
-	display:block;
+#task-window{
+	position:fixed;
+	bottom:-10px;
+	width:95%;
 }
 </style>
+<br />
+<br />

@@ -287,7 +287,6 @@ $.extend(SOY2_DatePicker.prototype,{
 			}else{
 				$("#" + this.id + " .row-" + i).show();
 			}
-
 		}
 
 		return;

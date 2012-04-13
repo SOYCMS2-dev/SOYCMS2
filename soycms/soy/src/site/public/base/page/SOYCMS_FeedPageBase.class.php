@@ -21,7 +21,7 @@ class SOYCMS_FeedPageBase extends SOYCMS_SitePageBase{
 		$d_config = $this->directory->getConfigObject();
 		
 		$this->addLabel("site_url",array(
-			"text" => SOYCMS_SITE_URL,
+			"text" => soycms_get_site_url(true),
 			"soy2prefix" => "cms"
 		));
 		

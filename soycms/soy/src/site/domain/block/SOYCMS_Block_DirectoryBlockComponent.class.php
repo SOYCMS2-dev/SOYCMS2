@@ -108,8 +108,8 @@ class SOYCMS_Block_DirectoryBlockComponent extends SOYCMS_Block_BlockComponentBa
 		$isAndLabel = true;
 		
 		//ラベルを全て取得
-		$dao = SOY2DAOFactory::create("SOYCMS_LabelDAO");
-		$cDao = SOY2DAOFactory::create("SOYCMS_ObjectCustomFieldDAO");
+		$dao = SOY2DAOContainer::get("SOYCMS_LabelDAO");
+		$cDao = SOY2DAOContainer::get("SOYCMS_ObjectCustomFieldDAO");
 		
 		//条件
 		$conditions = $this->getLabelConditions();
@@ -272,7 +272,7 @@ class SOYCMS_Block_DirectoryBlockComponent extends SOYCMS_Block_BlockComponentBa
 		$sql->order = $this->buildSortQuery();
 		
 		//検索実行
-		$dao = SOY2DAOFactory::create("SOYCMS_EntryDAO");
+		$dao = SOY2DAOContainer::get("SOYCMS_EntryDAO");
 		if(!is_null($this->getCountFrom()) && $this->getCountFrom() > 0)$dao->setOffset($this->getCountFrom() - 1);
 		if(!is_null($this->getCountTo()))$dao->setLimit($this->getCountTo() - max(0,$this->getCountFrom() - 1));
 		$res = $dao->executeOpenEntryQuery($sql,$binds);

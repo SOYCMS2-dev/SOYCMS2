@@ -22,9 +22,8 @@ class SOYCMS_SiteRoleExtensionDelegateAction  implements SOY2PluginDelegateActio
 		
 		$roles = $action->getRoles();
 		
-		foreach($roles as $roleId => $roleName){
-			$roleId = $moduleId;
-			$this->roles[$roleId] = $roleName;
+		foreach($roles as $roleId => $array){
+			$this->roles[$roleId] = $array;
 		}
 		
 		

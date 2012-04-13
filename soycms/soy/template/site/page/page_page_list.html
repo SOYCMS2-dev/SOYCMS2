@@ -225,11 +225,10 @@ var cancel_page_order = function(){
 }
 
 $(function(){
-
 //<?php $mode = SOYCMS_UserData::get("sitemap_mode","all"); ?>
 //<?php if($mode == "dir"){ ?>
 
-	$(".pagelist-content .type-page").hide();
+	$(".pagelist-content .type-index").hide();
 	$(".sitemap-mode-navi").addClass("mode-dir");
 
 
@@ -237,7 +236,7 @@ $(function(){
 
 	if(location.search.match(/created=([0-9]+)/)){
 		$("#page-" + RegExp.$1 +  " > dl").addClass("new-directory");
-		$("#page-" + RegExp.$1 + " .type-page").show();
+		$("#page-" + RegExp.$1 + " .type-index").show();
 	}
 	
 	//tabs

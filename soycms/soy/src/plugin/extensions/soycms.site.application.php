@@ -18,6 +18,13 @@ class SOYCMS_SiteApplicationExtension implements SOY2PluginAction{
 	}
 	
 	/**
+	 * 公開側フォーム 読み込み時
+	 */
+	function onLoad($htmlObj,$page){
+		
+	}
+	
+	/**
 	 * 公開側フォーム POST時
 	 */
 	function doPost($htmlObj,$page){
@@ -53,6 +60,10 @@ class SOYCMS_SiteApplicationExtensionDelegateAction implements SOY2PluginDelegat
 		$this->action = $action;
 		
 		switch($this->mode){
+			case "load":
+				$action->onLoad($this->htmlObj,$this->pageObj);
+				break;
+				
 			case "post":
 				$action->doPost($this->htmlObj,$this->pageObj);
 				break;

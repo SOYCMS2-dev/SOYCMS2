@@ -123,7 +123,7 @@ common class,clearfix
 }
 
  ul.link-list > li > a {
-	display: block;
+	/* display: block; */
 	margin: 0 0 0 -10px;
 	padding: 0 0 0 10px;
 	background: url(../img/icon-arrow.gif) 0 0.5em no-repeat;

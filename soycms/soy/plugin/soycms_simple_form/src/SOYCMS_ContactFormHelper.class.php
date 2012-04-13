@@ -3,7 +3,11 @@
 class SOYCMS_ContactFormHelper {
 	
 	public static function saveConfig($page,$config){
-		$config["items"] = serialize($config["items"]);
+		$items = array();
+		foreach($config["items"] as $array){
+			$items[$array->getId()] = $array;
+		}
+		$config["items"] = serialize($items);
 		
 		$pageObj = $page->getPageObject();
 		$pageObj->setConfig($config);

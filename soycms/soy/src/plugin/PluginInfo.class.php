@@ -19,8 +19,10 @@ class PluginInfo {
 		$this->name = @$array["name"];
 		$this->description = @$array["description"];
 		$this->version = @$array["version"];
+		$this->priority = (isset($array["priority"])) ? @$array["priority"] : 0;
 		$this->types = explode(",",@$array["type"]);
-		$this->data = $array; 
+		$this->data = $array;
+		
 	}
 	
 	function load($extensionId){
@@ -64,6 +66,7 @@ class PluginInfo {
 	private $version;
 	private $types = array();
 	private $data;
+	private $priority = 0;
 	
 	private $isActive = false;
 
@@ -118,6 +121,15 @@ class PluginInfo {
 	}
 	function setIsActive($isActive) {
 		$this->isActive = $isActive;
+	}
+
+	public function getPriority(){
+		return $this->priority;
+	}
+
+	public function setPriority($priority){
+		$this->priority = $priority;
+		return $this;
 	}
 }
 ?>

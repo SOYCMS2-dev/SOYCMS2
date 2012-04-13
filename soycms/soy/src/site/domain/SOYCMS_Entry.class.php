@@ -27,6 +27,11 @@ class SOYCMS_Entry extends SOY2DAO_EntityBase{
 	
 	private $uri;
 	
+	/**
+	 * @column directory_uri
+	 */
+	private $directoryUri;
+	
 	private $content;
 	
 	private $sections;
@@ -35,7 +40,7 @@ class SOYCMS_Entry extends SOY2DAO_EntityBase{
 	/**
 	 * @column entry_publish
 	 */
-	private $publish = 0;	//trash:-1 close:0 open:1 
+	private $publish = 0;	//trash:-1 close:0 open:1
 	
 	/**
 	 * @column entry_status
@@ -80,7 +85,7 @@ class SOYCMS_Entry extends SOY2DAO_EntityBase{
 	/**
 	 * @column author_id
 	 */
-	private $authorId; 
+	private $authorId;
 	
 	private $author;
 	
@@ -106,7 +111,7 @@ class SOYCMS_Entry extends SOY2DAO_EntityBase{
 	private $_attributes = array();
 	
 	function getSectionsList(){
-		if(!$this->_sections){
+		if(!$this->_sections || !is_array($this->_sections)){
 			$this->_sections = SOYCMS_EntrySection::unserializeSection($this->sections);
 		}
 		
@@ -282,7 +287,7 @@ class SOYCMS_Entry extends SOY2DAO_EntityBase{
 		if(!$this->_attributes){
 			$this->_attributes = SOYCMS_EntryAttribute::getByEntryId($this->id);
 		}
-		return $this->_attributes; 
+		return $this->_attributes;
 	}
 	
 	
@@ -297,7 +302,7 @@ class SOYCMS_Entry extends SOY2DAO_EntityBase{
 		if(!$from && !$to)return "設定なし";
 		$_from = (!$from) ? "設定なし" : date("Y-m-d H:i",$from);
 		$_to = (!$to) ? "設定なし" : date("Y-m-d H:i",$to);
-		return $_from . "〜" . $_to; 
+		return $_from . "〜" . $_to;
 	}
 	
 	/* getter setter */
@@ -326,6 +331,7 @@ class SOYCMS_Entry extends SOY2DAO_EntityBase{
 		return $this->uri;
 	}
 	function setUri($uri) {
+		$uri = preg_replace(array('/^[\/]+/','/\/+$/'),"",trim($uri));
 		$this->uri = $uri;
 	}
 	function getContent() {
@@ -336,12 +342,6 @@ class SOYCMS_Entry extends SOY2DAO_EntityBase{
 	}
 	function getSections() {
 		return $this->sections;
-	}
-	function get_sections() {
-		return $this->_sections;
-	}
-	function set_sections($_sections) {
-		$this->_sections = $_sections;
 	}
 	function getPublish() {
 		return $this->publish;
@@ -375,7 +375,7 @@ class SOYCMS_Entry extends SOY2DAO_EntityBase{
 	}
 	function getOpenFrom($flag = false) {
 		if($flag){
-			return ($this->openFrom > self::DATE_MIN) ? $this->openFrom : null;  
+			return ($this->openFrom > self::DATE_MIN) ? $this->openFrom : null;
 		}
 		return $this->openFrom;
 	}
@@ -385,19 +385,13 @@ class SOYCMS_Entry extends SOY2DAO_EntityBase{
 	}
 	function getOpenUntil($flag = false) {
 		if($flag){
-			return ($this->openUntil < self::DATE_MAX) ? $this->openUntil : null;  
+			return ($this->openUntil < self::DATE_MAX) ? $this->openUntil : null;
 		}
 		return $this->openUntil;
 	}
 	function setOpenUntil($openUntil) {
 		if(!$openUntil)$openUntil = self::DATE_MAX;
 		$this->openUntil = $openUntil;
-	}
-	function get_labels() {
-		return $this->_labels;
-	}
-	function set_labels($_labels) {
-		$this->_labels = $_labels;
 	}
 	function getMemo() {
 		return $this->memo;
@@ -456,6 +450,13 @@ class SOYCMS_Entry extends SOY2DAO_EntityBase{
 	function setIsFeed($isFeed) {
 		$this->isFeed = $isFeed;
 	}
+
+	function getDirectoryUri() {
+		return $this->directoryUri;
+	}
+	function setDirectoryUri($directoryUri) {
+		$this->directoryUri = $directoryUri;
+	}
 }
 
 /**
@@ -479,7 +480,7 @@ abstract class SOYCMS_EntryDAO extends SOY2DAO{
 	/**
 	 * @trigger onUpdate
 	 */
-	abstract function update(SOYCMS_Entry $bean);	
+	abstract function update(SOYCMS_Entry $bean);
 	
 	/**
 	 * @columns #publish#,directory
@@ -505,6 +506,12 @@ abstract class SOYCMS_EntryDAO extends SOY2DAO{
 	 * @columns #order#,id
 	 */
 	abstract function updateOrder($id,$order);
+	
+	/**
+	 * @query #directory# = :directory
+	 * @columns #directoryUri#
+	 */
+	abstract function updateDirectoryUri($directoryUri,$directory);
 	
 	/**
 	 * @final
@@ -554,7 +561,7 @@ abstract class SOYCMS_EntryDAO extends SOY2DAO{
 	/**
 	 * @columns id,title,uri
 	 * @query #parent# = :parent OR id = :parent
-	 * @index id 
+	 * @index id
 	 */
 	abstract function getChildEntriesMap($parent);
 	
@@ -662,6 +669,8 @@ abstract class SOYCMS_EntryDAO extends SOY2DAO{
 	 */
 	abstract function getRecentEntries();
 	
+	
+	
 	/**
 	 * @final
 	 */
@@ -673,9 +682,10 @@ abstract class SOYCMS_EntryDAO extends SOY2DAO{
 	/**
 	 * 削除時
 	 * @final
-	 * @TODO 削除時の振る舞い
 	 */
 	function onDelete($sql,$binds){
+		$id = $binds[":id"];
+		SOY2DAOContainer::get("SOYCMS_EntryAttributeDAO")->deleteByEntryId($id);
 		return array($sql,$binds);
 	}
 	
@@ -786,7 +796,7 @@ class SOYCMS_EntrySection{
 		
 		
 		
-		return $res;	
+		return $res;
 	}
 	
 	public static function getSection($name,$type){
@@ -794,9 +804,9 @@ class SOYCMS_EntrySection{
 			$class = "SOYCMS_EntrySection_" . ucwords($type) . "Section";
 			$obj = new $class;
 		
-		//default			
+		//default
 		}else{
-			$obj = new SOYCMS_EntrySection();	
+			$obj = new SOYCMS_EntrySection();
 		}
 				
 		
@@ -820,8 +830,8 @@ class SOYCMS_EntrySection{
 		
 		$res = array();
 		$res[] = "<!-- section:" . $this->getType() .
-				" snippet=\"".$snippet. "\"" . 
-				" value=\"".addslashes($value)."\"" .
+				" snippet=\"".$snippet. "\"" .
+				((!empty($value)) ? " value=\"".addslashes($value)."\"" : "").
 				"-->";
 		$res[] = $this->getContent();
 		$res[] = "<!-- /section:" . $this->getType() . " -->";

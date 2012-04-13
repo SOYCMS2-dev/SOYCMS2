@@ -24,7 +24,6 @@ class SOYCMS_EntryAttribute {
 	 */
 	private $object;
 
-
 	function getId() {
 		return $this->id;
 	}
@@ -48,9 +47,14 @@ class SOYCMS_EntryAttribute {
 		$data = new SOYCMS_EntryAttribute();
 		$data->setEntryId($entryId);
 		$data->setClassName($class);
-		$data->setObject(soy2_serialize($obj));
+		
+		if(is_numeric($obj) || is_string($obj)){
+			$data->setObject($obj);
+		}else{
+			$data->setObject(soy2_serialize($obj));
+		}
 
-		$dao = SOY2DAOFactory::create("config.SOYCMS_EntryAttributeDAO");
+		$dao = SOY2DAOContainer::get("config.SOYCMS_EntryAttributeDAO");
 		$dao->clearByParams($entryId,$class);
 		
 		//nullの時は削除する
@@ -62,10 +66,23 @@ class SOYCMS_EntryAttribute {
 	public static function get($entryId,$class,$onNull = false){
 		
 		try{
-			$dao = SOY2DAOFactory::create("SOYCMS_EntryAttributeDAO");
+			$dao = SOY2DAOContainer::get("SOYCMS_EntryAttributeDAO");
 			$data = $dao->getByParams($entryId,$class);
 			
-			$res = soy2_unserialize($data->getObject());
+			$object = $data->getObject();
+			if(is_numeric($object)){
+				return $object;
+			}
+			
+			if(empty($object)){
+				throw new Exception();
+			}
+			
+			if(!preg_match('/^[a-zA-Z]:\d+/',$object)){
+				return $object;
+			}
+			
+			$res = soy2_unserialize($object);
 			if($res === false)throw new Exception();
 
 			return $res;
@@ -81,7 +98,7 @@ class SOYCMS_EntryAttribute {
 	}
 	
 	public static function getByEntryId($entryId){
-		$dao = SOY2DAOFactory::create("SOYCMS_EntryAttributeDAO");
+		$dao = SOY2DAOContainer::get("SOYCMS_EntryAttributeDAO");
 		$data = $dao->getByEntryId($entryId);
 		
 		$res = array();
@@ -93,7 +110,7 @@ class SOYCMS_EntryAttribute {
 	}
 	
 	public static function delete($entryId,$class){
-		$dao = SOY2DAOFactory::create("SOYCMS_EntryAttributeDAO");
+		$dao = SOY2DAOContainer::get("SOYCMS_EntryAttributeDAO");
 		$dao->clearByParams($entryId,$class);
 	}
 
@@ -119,10 +136,17 @@ abstract class SOYCMS_EntryAttributeDAO extends SOY2DAO{
 	abstract function getByParams($entryId,$class);
 	
 	/**
+	 * @query class_name = :class AND object_data = :data
+	 */
+	abstract function getByValues($class,$data);
+	
+	/**
 	 * @query entry_id = :entryId AND class_name = :class
 	 * @query_type delete
 	 */
 	abstract function clearByParams($entryId,$class);
+	
+	abstract function deleteByEntryId($entryId);
 	
 	abstract function get();
 	

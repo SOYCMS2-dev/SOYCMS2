@@ -7,7 +7,7 @@ class SOYCMS_PageLogic extends SOY2LogicBase{
 	/**
 	 * 作成
 	 * @param SOYCMS_Page
-	 * @param 引き継ぎ処理を行うかどうか(default true) 
+	 * @param 引き継ぎ処理を行うかどうか(default true)
 	 */
 	function create(SOYCMS_Page $page, $flag = true){
 		
@@ -16,15 +16,15 @@ class SOYCMS_PageLogic extends SOY2LogicBase{
 		$page->save();
 		
 		//Detailの時
-		if($page->isDirectory() && $page->getUri() != "_home"){
+		if(($page->getType() == "detail" || $page->getType() == "alias") && $page->getUri() != "_home"){
 			$uri = $page->getUri();
-			if(!$uri[strlen($uri)-1] != "/")$uri .= "/";
+			if($uri[strlen($uri)-1] != "/")$uri .= "/";
 			
 			//トップページを作成
 			$index = new SOYCMS_Page();
 			$index->setType("list");
 			$index->setName($page->getName());
-			$index->setUri($uri . "index.html");
+			$index->setUri(soycms_union_uri($uri,"index.html"));
 			
 			
 			//テンプレートを指定
@@ -41,7 +41,11 @@ class SOYCMS_PageLogic extends SOY2LogicBase{
 			//default value
 			$obj = $index->getPageObject();
 			if(method_exists($obj,"setDirectory")){
-				$obj->setDirectory($page->getId());
+				if($page->isDirectory()){
+					$obj->setDirectory($page->getId());
+				}else if($page->getType() == "alias"){
+					$obj->setDirectory($page->getPageObject()->getDirectory());
+				}
 				$obj->save();
 			}
 			
@@ -131,7 +135,6 @@ class SOYCMS_PageLogic extends SOY2LogicBase{
 		$this->copyClass($src,$dst);
 		
 		try{
-		
 			if($dst->getType() == "detail"){
 				
 				//index
@@ -145,7 +148,12 @@ class SOYCMS_PageLogic extends SOY2LogicBase{
 				$this->copyConfigure($oldIndex,$index);
 				
 				//copy class
-				$this->copyClass($oldIndex,$index);
+				$indexObj = $this->copyClass($oldIndex,$index);
+				if(method_exists($indexObj, "setDirectory")){
+					$indexObj->setDirectory($dst->getId());
+					$indexObj->save();
+				}
+				
 				
 				$oldIndex->setId($index->getId());
 				$oldIndex->setUri($index->getUri());
@@ -246,6 +254,11 @@ class SOYCMS_PageLogic extends SOY2LogicBase{
 				$entry->save();
 			}
 		}
+		
+		//save object
+		$obj = $page->getPageObject();
+		$obj->save();
+		
 		
 		//update mapping
 		$this->updatePageMapping();
@@ -468,6 +481,10 @@ class SOYCMS_PageLogic extends SOY2LogicBase{
 		//プロパティのコピ
 		$dst->setProperties($src->getProperties());
 		
+		//カスタムフィールドのコピー
+		$srcConfig = SOYCMS_ObjectCustomFieldConfig::loadObjectConfig("entry-" . $src->getId());
+		SOYCMS_ObjectCustomFieldConfig::saveConfig("entry-" . $dst->getId(), $srcConfig);
+		
 	}
 	
 	/**
@@ -485,6 +502,7 @@ class SOYCMS_PageLogic extends SOY2LogicBase{
 		SOY2::cast($dstObj,$srcObj);
 		
 		$dstObj->save();
+		return $dstObj;
 	}
 }
 ?>

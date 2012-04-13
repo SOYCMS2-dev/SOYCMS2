@@ -6,6 +6,7 @@ class page_page_template_detail extends SOYCMS_WebPageBase{
 	
 	function doPost(){
 		
+		/* @var $logic TemplateUpdateLogic */
 		$logic = SOY2Logic::createInstance("site.logic.page.template.TemplateUpdateLogic");
 		$suffix = "tpl_config";
 		
@@ -42,10 +43,21 @@ class page_page_template_detail extends SOYCMS_WebPageBase{
 		if(isset($_POST["save_template"]) && $_POST["Template"]){
 			SOY2::cast($this->template,$_POST["Template"]);
 			
-			//HTML変更イベントを呼び出し
-			$logic->updateTemplate($this->template,$options);
-			
-			SOYCMS_History::addHistory("template",$this->template);
+			if(isset($_GET["template"])){
+				$this->template->setTemplateType($_GET["template"]);
+				$this->template->save();
+				
+				//History用にIDを追加
+				SOYCMS_History::addHistory("template",array(
+					$this->template->getHistoryKey(),
+					$this->template
+				));
+				
+			}else{
+				//HTML変更イベントを呼び出し
+				$logic->updateTemplate($this->template,$options);
+				SOYCMS_History::addHistory("template",$this->template);
+			}
 		}
 		
 		//レイアウトの追加
@@ -105,7 +117,11 @@ class page_page_template_detail extends SOYCMS_WebPageBase{
 			$this->template->save();
 		}
 		
-		$this->jump("/page/template/check?id=" . $this->id . "&updated&suffix=" . $suffix);
+		if(isset($_GET["template"])){
+			$this->jump("/page/template/detail?id=" . $this->id . "&updated&template=" . $this->template->getTemplateType());
+		}else{
+			$this->jump("/page/template/check?id=" . $this->id . "&updated&suffix=" . $suffix);
+		}
 	}
 	
 	private $id;
@@ -116,6 +132,10 @@ class page_page_template_detail extends SOYCMS_WebPageBase{
 		$this->template = SOYCMS_Template::load($this->id);
 		if(!$this->template){
 			$this->jump("/page/template");
+		}
+		
+		if(isset($_GET["template"])){
+			$this->template->setTemplateType($_GET["template"]);
 		}
 		
 		parent::prepare();
@@ -136,7 +156,7 @@ class page_page_template_detail extends SOYCMS_WebPageBase{
 		
 		$this->addTextArea("template_content",array(
 			"name" => "Template[template]",
-			"value" => $this->template->loadTemplate()
+			"value" => $this->template->getContent()
 		));
 		
 		$this->addTextArea("template_property",array(
@@ -149,7 +169,7 @@ class page_page_template_detail extends SOYCMS_WebPageBase{
 		));
 		
 		$this->addLink("preview_link",array(
-			"link" => SOYCMS_SITE_URL . "?template_preview=" . $this->template->getId() . "&SOYCMS_SSID=" . session_id()
+			"link" => SOYCMS_SITE_URL . "?template_preview=" . $this->template->getId() . "&" . soycms_get_ssid_token()
 		));
 		
 		$pages = SOY2DAO::find("SOYCMS_Page",array("template" => $this->template->getId()));
@@ -171,7 +191,42 @@ class page_page_template_detail extends SOYCMS_WebPageBase{
 		$this->createAdd("history_index","page.history.page_page_history_index",array(
 			"type" => "template",
 			"name" => $this->template->getName(),
-			"objectId" => $this->id
+			"objectId" => $this->template->getHistoryKey()
 		));
+		
+		//テンプレートの種類で見栄えを変更
+		$types = $this->template->getTemplateTypes(true);
+		$this->addModel("template_type_normal",array("visible" => count($types) < 1));
+		$this->addModel("template_type_complex",array("visible" => count($types) > 0));
+
+		$this->createAdd("template_complex_type_list","_TemplateComplexTypeList",array(
+			"list" => $types,
+			"link" => soycms_create_link("/page/template/detail?id=") . $this->id
+		));
+	}
+}
+
+class _TemplateComplexTypeList extends HTMLList{
+	
+	private $link;
+	
+	function populateItem($entity,$key){
+		
+		$this->addModel("template_complex_type_item",array(
+			"attr:class" => ($key == @$_GET["template"]) ? "on" : ""
+		));
+		
+		$this->addLink("template_complex_type_link",array(
+			"link" => $this->link . "&template=" . $key,
+			"href" => "#" . $key
+		));
+		$this->addLabel("template_complex_type_name",array(
+			"text" => $entity
+		));
+		
+	}
+	
+	function setLink($link){
+		$this->link  =$link;
 	}
 }

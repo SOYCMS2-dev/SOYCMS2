@@ -30,9 +30,10 @@ class SOYCMS_EntryLogic extends SOY2LogicBase{
 		//保存
 		if(strlen($entry->getUri())<1){
 			
+			//page
+			$page = SOY2DAO::find("SOYCMS_Page",$entry->getDirectory());
+			
 			try{
-				//page
-				$page = SOY2DAO::find("SOYCMS_Page",$entry->getDirectory());
 				$obj = $page->getPageObject();
 				$uri = (method_exists($obj,"getEntryUri")) ? $obj->getEntryUri($entry) : "";
 			}catch(Exception $e){
@@ -40,10 +41,18 @@ class SOYCMS_EntryLogic extends SOY2LogicBase{
 			}
 			
 			$entry->setUri($uri);
+			$dirUri = $page->getUri();
+			$entry->setDirectoryUri($dirUri);
 			
 		}else{
 			$entry->setUri($entry->getUri());
+			
+			$page = SOY2DAO::find("SOYCMS_Page",$entry->getDirectory());
+			$dirUri = $page->getUri();
+			$entry->setDirectoryUri($dirUri);
 		}
+		
+		
 		
 		//保存実行
 		if($syncHistory)$this->onUpdate($entry);

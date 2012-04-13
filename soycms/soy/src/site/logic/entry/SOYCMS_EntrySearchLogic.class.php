@@ -6,6 +6,7 @@ class SOYCMS_EntrySearchLogic extends SOY2LogicBase{
 	
 	//期間指定
 	private $createDateRange = array();	
+	private $order = null;
 	
 	/**
 	 * SOY2DAO_Queryの作成
@@ -133,12 +134,21 @@ class SOYCMS_EntrySearchLogic extends SOY2LogicBase{
 		return $res;
 	}
 	
-	function searchByDirectories($directories){
+	function searchByDirectories($directories,$limit = null,$offset = null){
 		$ids = array();
 		foreach($directories as $value){
 			$ids[] = (int)$value;
 		}
 		if(empty($ids))return false;
+		
+		$dao = $this->getEntryDAO();
+		$dao->setLimit(null);
+		$dao->setOffset(null);
+		$dao->setOrder(null);
+		if($limit)$dao->setLimit($limit);
+		if($offset)$dao->setOffset($offset);
+		if($this->order)$dao->setOrder($this->order);
+		
 		return $this->getEntryDAO()->searchByDirectories($ids);
 	}
 	
@@ -152,13 +162,20 @@ class SOYCMS_EntrySearchLogic extends SOY2LogicBase{
 		return $this->entryDAO;
 	}
 	
-	
+	/* getter setter */
 
 	function getCreateDateRange() {
 		return $this->createDateRange;
 	}
 	function setCreateDateRange($createDateRange) {
 		$this->createDateRange = $createDateRange;
+	}
+
+	function getOrder() {
+		return $this->order;
+	}
+	function setOrder($order) {
+		$this->order = $order;
 	}
 }
 ?>

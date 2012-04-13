@@ -27,9 +27,16 @@ class page_page_copy extends SOYCMS_WebPageBase{
 			$page->setUri($_POST["uri_prefix"] . $page->getUri());
 		}
 		
+		if(isset($_POST["duplicate_alias"])){
+			$page->setType("alias");
+			if(!isset($_POST["object"]) || !is_array($_POST["object"]))$_POST["object"] = array();
+			$_POST["object"]["directory"] = $this->id;
+		}
+		
 		$page->setId(null);
 		
 		if($page->check()){
+			/* @var $logic SOYCMS_PageLogic */
 			$logic = SOY2Logic::createInstance("site.logic.page.SOYCMS_PageLogic");
 			$source = SOY2DAO::find("SOYCMS_Page",$this->id);
 			$logic->duplicate($source,$page);
@@ -38,6 +45,17 @@ class page_page_copy extends SOYCMS_WebPageBase{
 				$object = $page->getPageObject();
 				SOY2::cast($object,(object)$_POST["object"]);
 				$object->save();
+			}
+			
+			if(isset($_POST["duplicate_alias"])){
+				$source_index = SOY2DAO::find("SOYCMS_Page",array("uri" => $source->getIndexUri()));
+				$dst_index = clone($source_index);
+				$dst_index->setId(null);
+				$dst_index->setUri($page->getIndexUri());
+				if(method_exists($dst_index,"setTargetUri")){
+					$dst_index->setTargetUri($page->getUri());
+				}
+				$logic->duplicate($source_index,$dst_index);
 			}
 		}
 		

@@ -9,14 +9,13 @@
 		
 		<div class="panel-line"> 
 			<div class="panel-parts"><label>ファイルパス</label>
-			<input id="img_attr_src" name="post1-2" type="text" class="s-area input-link" size="42" value="http://" onchange="var val=$(this).val();aobata_editor.get().execNode(function(node){$(node).attr('src',val)});" /></div> 
-			<div class="panel-parts"><input type="button" value="参照" id="post5-btn1" name="post5-btn1" class="s-btn" onclick="entry_editor_show_attachments(function(img,link){
+			<input id="img_attr_src" name="post1-2" type="text" class="s-area input-link" size="42" value="http://" onchange="var val=$(this).val();aobata_editor.get().execNode(function(node){console.log(node,val);$(node).attr('src',val)});" /></div> 
+			<div class="panel-parts"><input type="button" value="参照" id="post5-btn1" name="post5-btn1" class="s-btn" onclick="aobata_editor.show_attachments(function(img,link){
 							$('#img_attr_width').val('');
 							$('#img_attr_height').val('');
-							if(!link)link='';
+							if(!link || link == 'image')link='';
 							$('#img_attr_href').val(link).trigger('change');
 							$('#img_attr_src').val(img).trigger('change');
-							
 						});" /></div> 
 			<div class="panel-parts"><label>代替テキスト</label>
 			<input name="post1-2" type="text" class="s-area" id="img_attr_alt" value="" size="16" onchange="var val=$(this).val();aobata_editor.get().execNode(function(node){$(node).attr('alt',val)});" /></div> 
@@ -64,7 +63,7 @@
 			</script>
 			<div class="panel-parts"><label>幅</label><input type="text" class="s-area" id="img_attr_width" size="3" onchange="var val=$(this).val();aobata_change_image_size(val,null);" /></div> 
 			<div class="panel-parts"><label>高さ</label><input type="text" class="s-area" id="img_attr_height" size="3" onchange="var val=$(this).val();aobata_change_image_size(null,val);" /></div> 
-			<div class="panel-parts"><label>縦横比を維持</label><input type="checkbox" id="img_attr_aspect" checked /></div>
+			<div class="panel-parts"><label>縦横比を維持</label><span><input type="checkbox" id="img_attr_aspect" checked /></span></div>
 			<div class="panel-parts"><label>テキストの位置</label>
 				<select id="img_align" onchange="aobata_editor.get().execNode(function(node){$(node).css('verticalAlign',$('#img_align').val());});">
 					<option value="baseline">ベースライン</option>

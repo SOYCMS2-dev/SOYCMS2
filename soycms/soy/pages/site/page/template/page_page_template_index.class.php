@@ -41,6 +41,11 @@ class page_page_template_index extends SOYCMS_WebPageBase{
 			if($template->getGroup()){
 				if(!isset($group[$template->getGroup()])){
 					$group[$template->getGroup()] = SOYCMS_Template::getTemplateGroup($template->getGroup());
+					$group[$template->getGroup()]["templates"] = array(
+						$key => $template
+					);
+				}else{
+					$group[$template->getGroup()]["templates"][$key] = $template;
 				}
 			}else{
 				$res[$key] = $template;
@@ -66,6 +71,10 @@ class TemplateGroupList extends HTMLList{
 		$this->addLabel("group_name",array(
 			"text" => $entity["name"]
 		));	
+		
+		$this->createAdd("group_template_list","_class.list.TemplateList",array(
+			"list" => $entity["templates"]
+		));
 	}
 	
 }

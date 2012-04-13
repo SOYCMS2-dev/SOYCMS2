@@ -168,10 +168,12 @@ var toggle_item_delete = function(ele){
 			$(box).removeClass("item_recovered");
 		}else{
 			var pos = $(box).attr("pos");
+			if($("#cell_" + pos).size() < 1)pos = "blank";
 			$("#cell_" + pos).append($(box));
 			$(box).addClass("item_recovered");
 		}
 	} else {
+		alert("here");
 		box.toggleClass("item_delete");
 	}
 	

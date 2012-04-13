@@ -145,9 +145,9 @@ class page_page_label_detail extends SOYCMS_WebPageBase{
 		
 		$this->createAdd("field_list","_class.list.CustomFieldList",array(
 			"list" => $configs,
-			"type" => "label",
 			"objectId" => $this->id,
-			"formName" => "LabelCustomField"
+			"formName" => "LabelCustomField",
+			"values" => SOYCMS_ObjectCustomField::getValues("label",$this->id)
 		));
 	} 
 }

@@ -20,7 +20,7 @@ class page_ajax_check_site_login extends SOYCMS_WebPageBase{
     	
     	SOY2DAOConfig::Dsn(SOYCMS_SITE_DB_DSN);
 		SOY2DAOConfig::user(SOYCMS_SITE_DB_USER);
-		SOY2DAOConfig::pass(SOYCMS_SITE_DB_PASS);
+		SOY2DAOConfig::password(SOYCMS_SITE_DB_PASS);
 		
 		SOY2::import("site.domain.SOYCMS_Role");
 		$roles = SOY2DAO::find("SOYCMS_Role",array("adminId"=> $userId));

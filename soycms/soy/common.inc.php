@@ -29,19 +29,29 @@ SOY2::imports("base.func.*");
 SOY2::imports("base.class.*");
 SOY2::import("plugin.PluginManager");
 
-//configure document root configure
-@include_once(SOYCMS_COMMON_DIR . "conf/user/doc.conf.php");
-
 //configure url
 define("SOYCMS_ROOT_URL", soy2_path2url(dirname(dirname(__FILE__))));	//SOYCMS_ROOT_DIR
 define("SOYCMS_COMMON_URL", soy2_path2url(dirname(dirname(__FILE__))) . "common/");	//SOYCMS_ROOT_DIR + /common/
 
-//include_config
-if(file_exists(SOYCMS_COMMON_DIR . "user.conf.php")){
-	soy2_require(SOYCMS_COMMON_DIR . "user.conf.php") or soycms_go_initialize();
+//configure document root configure
+if(isset($_SERVER["CONFIG_DIR"]) && isset($_SERVER["CONFIG_DB_DIR"])){
+	
+	SOYCMSConfigUtil::put("config_dir",soy2_realpath($_SERVER["CONFIG_DIR"]));
+	SOYCMSConfigUtil::put("db_dir",soy2_realpath($_SERVER["CONFIG_DB_DIR"]));
+	
 }else{
-	soy2_require(SOYCMS_COMMON_DIR . "conf/user/user.conf.php") or soycms_go_initialize();
+	
+	@include_once(SOYCMS_COMMON_DIR . "conf/user/doc.conf.php");
+	
+	//include_config
+	if(file_exists(SOYCMS_COMMON_DIR . "user.conf.php")){
+		soy2_require(SOYCMS_COMMON_DIR . "user.conf.php") or soycms_go_initialize();
+	}else{
+		soy2_require(SOYCMS_COMMON_DIR . "conf/user/user.conf.php") or soycms_go_initialize();
+	}
+
 }
+
 soy2_require(SOYCMSConfigUtil::get("config_dir") . "db.conf.php") or soycms_go_initialize();
 
 if(isset($_GET["soycms_pathinfo"])){

@@ -56,9 +56,16 @@ class SOYCMS_History extends SOY2DAO_EntityBase{
 	 * ヒストリーに追加する
 	 */
 	public static function addHistory($type,$_obj,$op_type = "update"){
+		if(is_array($_obj)){
+			$id = $_obj[0];
+			$_obj = $_obj[1];
+		}else{
+			$id = $_obj->getId();
+		}
+		
 		$obj = new SOYCMS_History();
 		$obj->setObject($type);
-		$obj->setObjectId($_obj->getId());
+		$obj->setObjectId($id);
 		$obj->setName($_obj->getName());
 		$obj->setContent($_obj->getContent());
 		$obj->setAdminId(SOYCMS_LOGIN_USER_ID);
@@ -68,7 +75,7 @@ class SOYCMS_History extends SOY2DAO_EntityBase{
 		
 		//履歴から除去
 		$count = SOYCMS_DataSets::get("template_history_count",20);
-		SOYCMS_History::clearHistory($type,$_obj->getId(),$count);
+		SOYCMS_History::clearHistory($type,$id,$count);
 		
 		return $obj;
 	}
@@ -103,7 +110,7 @@ class SOYCMS_History extends SOY2DAO_EntityBase{
 	}
 	
 	function getTypeText(){
-		return @self::$TYPES[$this->getType()];	
+		return @self::$TYPES[$this->getType()];
 	}
 	
 	function getSubmitDate() {
@@ -118,12 +125,30 @@ class SOYCMS_History extends SOY2DAO_EntityBase{
 	function getSourceObject(){
 		
 		switch($this->object){
+			case "template":
+				$class = "SOYCMS_" . ucwords($this->object);
+				if(strpos($this->objectId,"!")!==false){
+					list($objectId,$optionId) = explode("!",$this->objectId);
+					$object = call_user_func_array(array($class,"load"),array($objectId));
+					$object->setTemplateType($optionId);
+				}else{
+					$object = call_user_func_array(array($class,"load"),array($this->objectId));
+				}
+				return $object;
+				break;
 			case "history":
 			case "library":
 			case "navigation":
 			default:
 				$class = "SOYCMS_" . ucwords($this->object);
-				$object = call_user_func_array(array($class,"load"),array($this->objectId));
+				if(strpos($this->objectId,"!")!==false){
+					list($objectId,$optionId) = explode("!",$this->objectId);
+					$object = call_user_func_array(array($class,"load"),array($objectId));
+					$object->setTemplateType($optionId);
+				}else{
+					$object = call_user_func_array(array($class,"load"),array($this->objectId));
+				}
+				
 				return $object;
 				break;
 		}
@@ -266,7 +291,7 @@ abstract class SOYCMS_HistoryDAO extends SOY2DAO{
 			$this->init($dsn);
 		}
 		
-		$pdo = SOY2DAO::_getDataSource($dsn);
+		$pdo = SOY2DAO::_getDataSource($dsn,"","");
 		
 		try{
 			$this->check();
@@ -274,23 +299,27 @@ abstract class SOYCMS_HistoryDAO extends SOY2DAO{
 			$this->init($dsn);
 		}
 		
-		return $pdo;	
+		return $pdo;
 	}
 	
 	/**
 	 * @final
 	 */
 	function init($dsn){
-		$pdo = SOY2DAO::_getDataSource($dsn);
-		$sql = file_get_contents(SOYCMS_COMMON_DIR . "sql/site/history.sql");
-		$sqls = explode(";",$sql);
-
-		foreach($sqls as $sql){
-			try{
-				if(empty($sql))continue;
-				$pdo->exec($sql);
-			}catch(Exception $e){
+		try{
+			$pdo = SOY2DAO::_getDataSource($dsn,"","");
+			$sql = file_get_contents(SOYCMS_COMMON_DIR . "sql/site/history.sql");
+			$sqls = explode(";",$sql);
+	
+			foreach($sqls as $sql){
+				try{
+					if(empty($sql))continue;
+					$pdo->exec($sql);
+				}catch(Exception $e){
+				}
 			}
+		}catch(Exception $e){
+			
 		}
 		 
 	}

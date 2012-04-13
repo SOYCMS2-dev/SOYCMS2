@@ -140,9 +140,45 @@ class page_page_detail_basic extends SOYCMS_WebPageBase{
 		$this->addModel("type_error",array(
 			"visible" => $this->page->getType() == ".error"
 		));
+		
+		/* extension_list */
+		PluginManager::load("soycms.site.page.permisson");
+		$delegate = PluginManager::invoke("soycms.site.page.permisson",array(
+			"mode" => "list",
+			"pageId" => $this->page->getId()
+		));
+		
+		$this->createAdd("public_extension_list","PublicExtensionList",array(
+			"list" => $delegate->getList(),
+			"selected" => @$config["public"]
+		));
 	}
 	
 	function getLayout(){
 		return "blank";
 	}
+}
+
+class PublicExtensionList extends HTMLList{
+	
+	private $selected;
+	
+	function populateItem($entity,$key){
+		$this->addCheckbox("public_extension_radio",array(
+			"name" => "Page[config][public]",
+			"value" => $key,
+			"selected" => ($key == $this->selected),
+			"label" => $entity["name"]
+		));
+		
+		$this->addLabel("public_extension_form",array(
+			"html" => $entity["form"]
+		));
+	}
+	
+	function setSelected($selected){
+		$this->selected = $selected;
+	}
+	
+	
 }

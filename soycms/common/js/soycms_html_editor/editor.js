@@ -10,7 +10,7 @@ var SOYCMS_TemplateEditor = {
 		this.inited = true;
 		this.wrapper = option.wrapper;
 		this.textarea = option.textarea;
-		this.parse();
+		this.parse(this.textarea.val());
 	},
 	
 	sync: function(){
@@ -110,7 +110,7 @@ SOYCMS_TemplateEditor.parser = {
 	parse : function(html){
 		this.html_list = [];
 		
-		this.lines = html.split("<");
+		this.lines = (html) ? html.split("<") : "".split("<");
 		
 		while(this.lines.length > 0){
 			line = this.lines.shift();

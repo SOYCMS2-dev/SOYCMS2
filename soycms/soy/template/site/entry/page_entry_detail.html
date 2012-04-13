@@ -8,26 +8,34 @@
 	</div>
 	
 	<div class="window-content">
+	
 		<!-- soy:id="has_child_entry" -->
 		<div class="tab-menu">
-			<ul class="tab-index"> 
+			<ul class="tab-index">
 				<!-- soy:id="child_entry_list" -->
 				<li soy:id="entry_detail_link_wrap">
 					<a soy:id="entry_detail_link"><!-- soy:id="entry_title" /--></a>
 				</li>
 				<!-- /soy:id="child_entry_list" -->
-			</ul> 
+			</ul>
 		</div>
 		<!-- /soy:id="has_child_entry" -->
 		<ul class="tab-contents">
 			<li>
 				<div class="section content">
-					
+				
 					<!-- soy:id="overwrite_warning" -->
 					<div class="overwrite_warning" style="background-color:#FAAFBE;padding:5px 10px;margin:0px 0 12px;border:double 4px #ffffff;">
 						<p class="xl">この記事は公開後に編集されています。(<!-- soy:id="update_date_text" /-->)<br />公開側に反映するには「更新する」ボタンを押してください。</p>
 					</div>
 					<!-- /soy:id="overwrite_warning" -->
+				
+					<ul class="crumbs">
+						<li><a soy:link="./" title="管理画面トップ" class="home_btn">管理画面トップ</a></li>
+						<li><a soy:link="entry">記事の管理</a></li>
+						<li><a soy:id="list_link*">ディレクトリ名</a></li>
+						<li><!-- soy:id="entry_title_text*" /--></li>
+					</ul>
 					
 					<form soy:id="form" method="post" id="entry_form">
 						<div id="post1-section1" class="form-section">
@@ -51,18 +59,18 @@
 									<a href="javascript:void(0);" onclick="$('#entry_url').hide();$('#entry_url_edit').show();$('#entry_uri_input').focus();" class="sh-btn inline-btn"><em>編集</em></a>
 								</p>
 								<div id="entry_url_edit" style="display:none;">
-									<table class="form-table article-url-table"> 
-										<tr> 
-											<td class="fix-url"><!-- soy:id="directory_url" /--></td> 
+									<table class="form-table article-url-table">
+										<tr>
+											<td class="fix-url"><!-- soy:id="directory_url" /--></td>
 											<td class="article-url">
 												<input soy:id="entry_uri*" type="hidden" id="entry_uri_old" />
-												<input soy:id="entry_uri" type="text" id="entry_uri_input" name="post1-2" class="m-area liq-area" onfocus="focus_url(this);" />												
-											</td> 
+												<input soy:id="entry_uri" type="text" id="entry_uri_input" name="post1-2" class="m-area liq-area" onfocus="focus_url(this);" />
+											</td>
 											<td>
 												<a class="s-btn" href="javascript:void(0);" onclick="save_entry_uri($(this));"><em>Save</em></a>
 												<a class="s-btn" href="javascript:void(0);" onclick="$('#entry_uri_input').val($('#entry_uri_old').val());$('#entry_url_edit').hide();$('#entry_url').show();"><em>Cancel</em></a>
 											</td>
-										</tr> 
+										</tr>
 									</table>
 								</div>
 							</div>
@@ -145,7 +153,7 @@
 		<div id="attachments" class="popup-contents" style="display:none;">
 			<!-- soy:id="attachments" -->
 			添付ファイル
-			<!-- /soy:id="attachments" -->	
+			<!-- /soy:id="attachments" -->
 		</div><!-- // #attachments -->
 		
 		

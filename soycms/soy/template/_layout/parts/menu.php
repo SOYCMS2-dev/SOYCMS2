@@ -27,9 +27,10 @@ $session = SOY2Session::get("base.session.UserLoginSession");
 			<?php soycms_print_menu("admin/user","ユーザー一覧"); ?>
 			<?php soycms_print_menu("admin/config","設定"); ?>
 				<?php if(SOYCMS_IS_DEBUG()){ ?>
-				<?php soycms_print_menu("admin/init","初期化"); ?>
+				<!-- <?php soycms_print_menu("admin/init","初期化"); ?> -->
 				<?php } ?>
 			<?php } ?>
+			
 		</ul>
 	</div>
 </div>

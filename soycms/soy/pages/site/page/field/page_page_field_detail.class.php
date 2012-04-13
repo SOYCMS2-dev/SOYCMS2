@@ -19,6 +19,15 @@ class page_page_field_detail extends SOYCMS_WebPageBase{
 			$this->jumpToDetail();
 		}
 		
+		
+		if(isset($_POST["remove_field"])){
+			$fieldId = $_POST["field_id"];
+			$fields = $this->config->getFields();
+			unset($fields[$fieldId]);
+			$this->config->setFields($fields);
+			$this->jumpToDetail();
+		}
+		
 		if(isset($_POST["fields"]) && isset($_POST["field_id"])){
 			$fieldId = $_POST["field_id"];
 			$fields = $this->config->getFields();
@@ -42,6 +51,7 @@ class page_page_field_detail extends SOYCMS_WebPageBase{
 			$this->jumpToDetail();
 		}
 		
+		
 		if(isset($_POST["NewField"])){
 			$field = SOY2::cast("SOYCMS_ObjectCustomFieldConfig",$_POST["NewField"]);
 			$fields = $this->config->getFields();
@@ -58,6 +68,7 @@ class page_page_field_detail extends SOYCMS_WebPageBase{
 				if(!isset($fields[$key]))continue;
 				$res[$key] = $fields[$key];
 			}
+			
 			$this->config->setFields($res);
 			
 			$this->jumpToDetail();

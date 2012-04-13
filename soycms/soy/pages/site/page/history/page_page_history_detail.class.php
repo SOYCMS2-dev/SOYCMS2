@@ -15,13 +15,17 @@ class page_page_history_detail extends SOYCMS_WebPageBase{
 			$obj = $this->history->getSourceObject();
 			
 			//add to history(revert)
-			SOYCMS_History::addHistory($this->history->getObject(),$obj,"revert");
-			
+			SOYCMS_History::addHistory($this->history->getObject(),array($this->history->getObjectId(),$obj),"revert");
 			
 			$obj->setContent($this->history->getContent());
 			$obj->save();
 			
-			$this->jump("/page/".$this->history->getObject()."/detail?id=" . $this->history->getObjectId() . "&updated");
+			if(strpos($this->history->getObjectId(), "!") !== false){
+				list($id,$template) = explode("!",$this->history->getObjectId());
+				$this->jump("/page/".$this->history->getObject()."/detail?id=" . $id . "&updated&template=" . $template);
+			}else{
+				$this->jump("/page/".$this->history->getObject()."/detail?id=" . $this->history->getObjectId() . "&updated");
+			}
 			
 		}
 		
@@ -29,6 +33,9 @@ class page_page_history_detail extends SOYCMS_WebPageBase{
 	
 	private $id;
 	private $object;
+	/**
+	 * @var SOYCMS_History
+	 */
 	private $history;
 	
 	function init(){

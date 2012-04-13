@@ -8,7 +8,7 @@ class SOYCMS_ApplicationPage extends SOYCMS_PageBase{
 	public static function getDefaultBlocks(){
 		return array(
 			"entry" => "記事表示",
-			"app_main" => "アプリケーションメイン(拡張によっては使用しません)",
+			"app_main" => "アプリケーションメイン",
 			"directory_label_list" => "ディレクトリラベル一覧ブロック",
 		);
 	}

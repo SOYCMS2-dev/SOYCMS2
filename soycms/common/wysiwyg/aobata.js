@@ -3,6 +3,7 @@
  * @requre jquery.js
  */
 var aobata_editor = function(target,options){
+	this._ID = "editor#" + aobata_editor.count;
 	this.initialize(target, options);
 	aobata_editor.count++;
 	aobata_editor.editors.push(this);
@@ -25,6 +26,11 @@ aobata_editor.paramView = null;
 aobata_editor.tableContextMenu = null;
 aobata_editor.debug = false;
 aobata_editor.ukey = "";
+aobata_editor.error = function(e){
+	if(console != null){
+		console.debug(e);
+	}
+}
 
 aobata_editor.get = function(val){
 	if (!val) {
@@ -214,6 +220,7 @@ aobata_editor.prepare = function(){
 		}
 	});
 	
+	
 	var link = document.createElement("link");
 	link.setAttribute("rel","stylesheet");
 	link.setAttribute("href",aobata_editor.root+'dat/style.css');
@@ -223,6 +230,12 @@ aobata_editor.prepare = function(){
 	$($("head")[0]).append(script);
 	
 	var script = $('<script type="text/javascript" src="'+aobata_editor.root+'dat/panel.js"></script>');
+	$($("head")[0]).append(script);
+	
+	var script = $('<script type="text/javascript" src="'+aobata_editor.root+'dat/editor.js"></script>');
+	$($("head")[0]).append(script);
+	
+	var script = $('<script type="text/javascript" src="'+aobata_editor.root+'dat/ZeroClipboard.js"></script>');
 	$($("head")[0]).append(script);
 	
 	//load plugins
@@ -238,6 +251,7 @@ aobata_editor.prepare = function(){
 
 aobata_editor.prototype = {
 	
+	_ID : null,
 	wrapper : null,
 	frame : null,
 	tool :null,
@@ -275,6 +289,7 @@ aobata_editor.prototype = {
 		this.textarea.bind("keydown",function(){
 			inst.adjustTextAreaSize();
 		});
+		inst._history = [];
 		
 		//set id
 		if(this.textarea.attr("id").length<1)this.textarea.attr("id", "aobata_editor_textarea_" + aobata_editor.count);
@@ -283,7 +298,7 @@ aobata_editor.prototype = {
 		this.textarea.wrap("<div id='"+this.textarea.attr("id")+"_editor_wrap' class='aobata_editor_wrap'></div>");
 		
 		//init iframe
-		this.frame = $("<iframe id='"+this.textarea.attr("id")+"_editr_fr' class='aobata_editor_fr' src='"+aobata_editor.root+"dat/blank.html?t="+(new Date())+"' frameborder='0'></iframe>");
+		this.frame = $("<iframe id='"+this.textarea.attr("id")+"_editr_fr' class='aobata_editor_fr' src='"+aobata_editor.root+"dat/blank.html?t="+(new Date()).getTime()+"' frameborder='0'></iframe>");
 		this.textarea.after(this.frame);
 		
 		this.wrapper = this.frame.parents(".section_list");
@@ -347,7 +362,7 @@ aobata_editor.prototype = {
 		//build footer
 		if(this.footer){
 			this.footer.bind("click",function(){
-				_hideallpopup();
+				aobata_editor.hideAllPopup();
 				inst.closeParam();
 			});
 		}
@@ -379,6 +394,7 @@ aobata_editor.prototype = {
 				try {
 					//innerHTML
 					t.setHTML(t.textarea.val());
+					t.pushHistory(t.getWindow().document.body.innerHTML);
 				}catch(e){
 					alert("failed to setHTML");
 				}
@@ -400,7 +416,7 @@ aobata_editor.prototype = {
 						t.saveCaret();
 						t.doActive(true);
 						
-						if(t.getWindow().document.body.innerHTML.match(/^<p><\/p>\n*$/gi)){	//初期状態
+						if(t.getWindow().document.body.innerHTML.match(/^<p>[\s\r\n]*<\/p>\n*$/gi)){	//初期状態
 							event.preventDefault();
 							
 							var range = t.getRange();
@@ -475,28 +491,32 @@ aobata_editor.prototype = {
 						
 						
 					}).bind("keydown", function(event){
-						t._last_keycode_result = null;
-						t.keydown(event);
-						aobata_editor.changed = true;
-						t.saveCaret();
-						
-						range = t.getRange();
-						ele = range.end()[0];
-						t._currentfocuselement = ele;
-						
-						//save the last keycode
-						if(t._last_keycode_result){
-							t._last_keycode = t._last_keycode_result
-							return;
-						}
-						
-						switch(event.keyCode){
-							case 91:	/* command */
-							case 17:	/* ctrl */
+						try {
+							t._last_keycode_result = null;
+							t.keydown(event);
+							aobata_editor.changed = true;
+							t.saveCaret();
+							
+							range = t.getRange();
+							ele = range.end()[0];
+							t._currentfocuselement = ele;
+							
+							//save the last keycode
+							if (t._last_keycode_result) {
+								t._last_keycode = t._last_keycode_result
 								return;
-								break;
+							}
+							
+							switch (event.keyCode) {
+								case 91: /* command */
+								case 17: /* ctrl */
+									return;
+									break;
+							}
+							t._last_keycode = event.keyCode;
+						}catch(e){
+							aobata_editor.error(e);
 						}
-						t._last_keycode = event.keyCode;
 						
 					}).bind("contextmenu",function(e){
 						
@@ -540,21 +560,23 @@ aobata_editor.prototype = {
 					t.wrapper.prepend("<div class='aobata_preview_overlay'></div>").css({
 						position:"relative"
 					}).bind("click",function(){
-						t.doActive(true);
+						if (!t.wrapper.hasClass("aobata_editor_actived")) {
+							t.doActive(true);
+						}
 						$("#insert_new_sections").hide();		//fix bug
 						t.header.show().addClass("text-mode");
 						t.footer.show();
 					});
 					
 					$(d).bind("click",function(){ 
-						t.doActive(true);
+						if (!t.wrapper.hasClass("aobata_editor_actived")) {
+							t.doActive(true);
+						}
 						$("#insert_new_sections").hide();		//fix bug
 						t.header.show().addClass("text-mode");
 						t.footer.show();
 					});
 				}
-				
-				_downallow();
 				
 				if (t.options.editable) {
 					//on wysiwyg
@@ -563,6 +585,10 @@ aobata_editor.prototype = {
 					}else{
 						d.designMode = "on";
 					}
+					$("iframe",d.body).each(function(){
+						$(this).get(0).contentWindow.document.designMode = "off";
+						$(this).get(0).contentWindow.document.body.contentEditable = false;
+					});
 				}
 				
 				aobata_editor.expandAll(true);
@@ -845,7 +871,7 @@ aobata_editor.prototype = {
 	},
 	
 	sync : function(){
-		if (this.mode) {
+		if (this.mode && this.options.editable) {
 			this.textarea.val(this.getHTML());
 		}else{
 			this.setHTML(this.textarea.val());
@@ -879,17 +905,19 @@ aobata_editor.prototype = {
 		var childNodes = tmphtml.childNodes;
 		
 		for(var i=0,l=childNodes.length;i<l;i++){
-			bodyfragment.appendChild(childNodes[i].cloneNode(true));
+			tmp_node = childNodes[i].cloneNode(true);
+			if(tmp_node.nodeType == 3 && tmp_node.data.replace(/[\r\n\s]+/,"").length > 0){
+				_tmp_node = d.createElement("p");
+				_tmp_node.appendChild(tmp_node);
+				tmp_node = _tmp_node;
+			}
+			bodyfragment.appendChild(tmp_node);
 		}
 		
 		if(!this.getWindow().document.body)return;
 		
 		this.getWindow().document.body.innerHTML = "";
 		this.getWindow().document.body.appendChild(bodyfragment);
-		
-		if(this._history.length < 1){
-			this.pushHistory(this.getWindow().document.body.innerHTML);
-		}
 		
 		/* convert relative url to absolute url in img */
 		/* for firefox and others... */
@@ -986,7 +1014,7 @@ aobata_editor.prototype = {
 	},
 	
 	doActive : function(param, isStopEvent){
-	
+		
 		t = this;
 		d = window.document;
 	
@@ -999,8 +1027,7 @@ aobata_editor.prototype = {
 		$(".article-footer",d).hide();
 		$(".article-header",d).hide();
 		
-		_hideallpopup();
-		_downallow();
+		aobata_editor.hideAllPopup();
 		$("#append_new_section").hide();
 		
 		//hide table context menu
@@ -1068,12 +1095,13 @@ aobata_editor.prototype = {
 		this._keydown_tmp_counter++;	//count key pressing
 								//when param window is visible, counter must be 0;
 		
+		
 		var _start = range.start(), _end = range.end();
 		start = ele = _start[0];
 		end = _end[0];
 		
-		_startText = (start) ? (start.nodeValue) ? start.nodeValue : start.innerHTML : "";
-		_endText = (end) ? (end.nodeValue) ? end.nodeValue : end.innerHTML : "";
+		_startText = (start) ? (start.nodeValue) ? start.nodeValue : start.innerText : "";
+		_endText = (end) ? (end.nodeValue) ? end.nodeValue : end.innerText : "";
 		
 		//backspace
 		if(event.keyCode == 8){
@@ -1187,6 +1215,7 @@ aobata_editor.prototype = {
 					this._keydown_tmp_counter = 0; //reset counter
 					return false;
 				}catch(e){
+					this.getWindow().focus();
 					return true;
 				}
 			}
@@ -1333,6 +1362,16 @@ aobata_editor.prototype = {
 			return false;
 		}
 		
+		//space 末尾
+		if(event.keyCode == 32 && this.getDOMNode(ele).tagName.match(/a/i) && _start[1] >= _startText.length){
+			var anchor = this.getDOMNode(ele);
+			$(anchor).after(this.getCaretCode());
+			$(this.getCaretNode()).after(" ");
+			this.removeCaret();
+			event.preventDefault();
+			return false;
+		}
+		
 		//when some keys(not enter, tab, backspace etc...) over 3 times, parameter windows will be hidden.
 		if(this._keydown_tmp_counter >= 2){
 			this.closeParam();
@@ -1408,7 +1447,7 @@ aobata_editor.prototype = {
 		
 		if (aobata_editor.is_IE) {
 			range.paste('<span id="__caret">___insert___</span>' + html + "\u200B");
-		}else{
+		} else {
 			range.paste(html + '<span id="__caret">___insert___</span>' + "\u200B");
 		}
 		
@@ -1530,7 +1569,7 @@ aobata_editor.prototype = {
 				$(".article-body", inst.wrapper).height(inst.textarea.height());
 			};
 			
-			if (is_ie) {
+			if (aobata_editor.is_ie) {
 				setTimeout(fit_func, 500);
 			} else {
 				fit_func();
@@ -1649,8 +1688,10 @@ aobata_editor.prototype = {
 		}
 	},
 	
-	pushHistory : function(){
-		this._history.push(this.getHTML());
+	pushHistory : function(html){
+		if(!html)html = this.getHTML();
+		
+		this._history.push(html);
 		this._last_keycode = null;
 		
 		if(this._history.length > 20){
@@ -1820,5 +1861,26 @@ $(function(){
 	});
 	$(".aobata_display").each(function(){
 		new aobata_editor($(this),{editable:false,locked:true});
+	});
+	
+	//btns
+	$(".btn-orderup").live("click",function(){
+		SectionController.moveUp($(this));
+	});
+	
+	$(".btn-orderdown").live("click",function(){
+		SectionController.moveDown($(this));
+	});
+	
+	$(".btn-delelement").live("click",function(){
+		SectionController.remove($(this));
+	});
+	
+	$(".undo-remove").live("click",function(){
+		SectionController.cancelRemove($(this));
+	});
+	
+	$(".close-editor").live("click",function(){
+		if(aobata_editor.active)aobata_editor.active.doActive(false);
 	});
 });

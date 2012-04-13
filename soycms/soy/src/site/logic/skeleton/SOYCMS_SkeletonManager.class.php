@@ -381,7 +381,7 @@ class SOYCMS_SkeletonManager extends SOY2LogicBase{
 				}
 			}
 		}
-		
+    	
 		
 		//圧縮実行
 		$helper->setFilter(array($this,"convertURLFromFile"));

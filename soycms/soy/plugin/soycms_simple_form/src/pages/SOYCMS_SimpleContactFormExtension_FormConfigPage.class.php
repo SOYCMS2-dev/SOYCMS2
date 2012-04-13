@@ -39,7 +39,7 @@ class SOYCMS_SimpleContactFormExtension_FormConfigPage extends HTMLPage{
 		if(isset($_POST["Field"])){
 			SOY2::cast($this->field,$_POST["Field"]);
 			$config = $this->getConfig();
-			$config["items"][$this->fieldId] = $this->field;
+			$config["items"][$this->field->getId()] = $this->field;
 			SOYCMS_ContactFormHelper::saveConfig($this->pageObj,$config);
 			SOY2PageController::redirect(soycms_create_link("ext/soycms_simple_form?id=".$this->id."&field=".$this->fieldId . "&updated"));
 		}
@@ -247,10 +247,11 @@ class SOYCMS_SimpleContactFormExtension_FormConfigPage extends HTMLPage{
 			$mail[] = $field->getName() . " -> " . "#".$key."#";
 
 			if($field->getType() == "mailaddress" && @$option["confirm"] == 1){
-				$field->setName($field->getName() . "(確認)");
-				$field->setId($field->getId() . "_confirm");
-				$field->setType("mailaddress_confirm");
-				$form[] = $this->buildSampleCodeByField($field);
+				$_field = clone($field);
+				$_field->setName($_field->getName() . "(確認)");
+				$_field->setId($_field->getId() . "_confirm");
+				$_field->setType("mailaddress_confirm");
+				$form[] = $this->buildSampleCodeByField($_field);
 			}
 		}
 
@@ -316,7 +317,7 @@ class SOYCMS_SimpleContactFormExtension_FormConfigPage extends HTMLPage{
 				$item = '<textarea type="text" cms:id="contact_'.$id.'" class="l-area" rows="6"></textarea>';
 				break;
 			case "select":
-				$item = '<select cms:id="contact_'.$id.'"></select>';
+				$item = '<select cms:id="contact_'.$id.'">'."\n<option value=\"\">選択して下さい</option>\n".'</select>';
 				break;
 			case "confirm":
 				$item = '<input type="checkbox" cms:id="contact_'.$id.'" /><label for="contact_'.$id.'">同意する</label>';

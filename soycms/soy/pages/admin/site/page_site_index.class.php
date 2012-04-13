@@ -13,7 +13,7 @@ class page_site_index extends SOYCMS_WebPageBase{
 				if(isset($_GET["return_url"])){
 					$return_url = $_GET["return_url"];
 					SOY2FancyURIController::redirect($return_url);
-				}else{ 
+				}else{
 					SOY2FancyURIController::redirect("../site/");
 				}
 			}
@@ -22,7 +22,6 @@ class page_site_index extends SOYCMS_WebPageBase{
 
 	function page_site_index(){
 		WebPage::WebPage();
-		
 		$siteDAO = SOY2DAOFactory::create("SOYCMS_SiteDAO");
 		$sites = $siteDAO->get();
 		

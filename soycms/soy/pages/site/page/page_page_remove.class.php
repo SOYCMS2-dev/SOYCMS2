@@ -7,8 +7,9 @@ class page_page_remove extends SOYCMS_WebPageBase{
 	private $id;
 	
 	function doPost(){
-		if(isset($_POST["next"])){
-			$dao = SOY2DAOFactory::create("SOYCMS_PageDAO");
+		$dao = SOY2DAOFactory::create("SOYCMS_PageDAO");
+		
+		if(isset($_POST["next"]) && soy2_check_token()){
 			$mapping = SOYCMS_DataSets::get("site.page_mapping",array());
 			$page = $dao->getById($this->id);
 			$uri = $page->getUri();

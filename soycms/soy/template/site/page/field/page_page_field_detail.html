@@ -52,6 +52,7 @@
 					<textarea soy:id="field_description" class="m-area" cols="40"></textarea>	
 				</td>
 			</tr>
+			<!-- soy:id="allow_multi" -->
 			<tr>	 
 				<th scope="row">複数設定</th> 
 				<td>
@@ -63,7 +64,7 @@
 					</p>
 				</td>
 			</tr>
-			
+			<!-- /soy:id="allow_multi" -->
 			
 			<!-- soy:id="has_option" -->
 			<tr>
@@ -84,6 +85,31 @@
 				</td> 
 			</tr>
 			<!-- /soy:id="is_not_group" -->
+			
+			<?php /* 
+			<!-- soy:id="has_template" -->
+			<tr>
+				<th scope="row">テンプレート</th> 
+				<td>
+					<input type="checkbox" soy:id="field_template_check" />
+					<div id="field_template_config" style="display:none;">
+						<p class="s">
+							フォームのテンプレートを自由に出力します。<br />
+							フィールドの値は#fieldId#でリプレースします。
+						</p>
+						<textarea soy:id="field_template" class="m-area liq-area" rows="10"></textarea>
+					</div>
+					<script type="text/javascript">
+					$(function(){
+						$("#field_template_config").toggle(
+							$("#field_template_check").attr("checked")
+						);
+					});
+					</script>
+				</td> 
+			</tr>
+			<!-- /soy:id="has_template" -->
+			*/ ?>
 		</table>
 		
 		<div class="form-btn ce">
@@ -138,14 +164,12 @@
 							<input soy:id="field_name" type="text" value="" class="s-area liq-area" />
 						</td> 
 					</tr>
-					<!-- soy:id="has_label" -->
 					<tr>
 						<th scope="row">ラベル</th> 
 						<td>
 							<input soy:id="field_label" type="text" value="" class="s-area liq-area" />
 						</td> 
 					</tr>
-					<!-- /soy:id="has_label" -->
 					<tr>	 
 						<th scope="row">説明</th> 
 						<td>
@@ -172,7 +196,7 @@
 				
 				<div class="form-btn ce">
 					<input type="submit" class="m-btn" name="save_config" value="保存" />
-					<input type="submit" value="削除" id="post1-submit" name="remove" class="m-btn ri" onclick="return confirm('この項目を削除して良いですか？');" />
+					<input type="submit" value="削除" name="remove_field" class="m-btn ri" onclick="return confirm('この項目を削除して良いですか？');" />
 				</div>
 				
 			</form soy:id="config_form">

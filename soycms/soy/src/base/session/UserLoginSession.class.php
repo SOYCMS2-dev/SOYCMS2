@@ -20,14 +20,14 @@ class UserLoginSession extends SOY2Session{
 	 */
 	function isLoggedIn(){
 		return $this->loggedIn;
-	}   
+	}
 	
 	function logout(){
 		$this->loggedIn = false;
 		$this->id = null;
 		$this->userId = null;
 		$this->name = null;
-	} 
+	}
 	
 	/**
 	 * ログイン実行

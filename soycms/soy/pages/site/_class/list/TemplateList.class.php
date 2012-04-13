@@ -49,7 +49,7 @@ class TemplateList extends HTMLList{
 		));
 			
 		$this->addLink("preview_link",array(
-			"link" => SOYCMS_SITE_ROOT_URL . "?template_preview=" . $entity->getId() . "&SOYCMS_SSID=" . session_id()
+			"link" => SOYCMS_SITE_ROOT_URL . "?template_preview=" . $entity->getId() . "&" . soycms_get_ssid_token()
 		));
 			
 			

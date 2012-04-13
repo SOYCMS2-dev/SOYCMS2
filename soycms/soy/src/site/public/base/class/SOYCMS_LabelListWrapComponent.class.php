@@ -11,6 +11,7 @@ class SOYCMS_LabelListWrapComponent extends SOYBodyComponentBase{
 			"dirUrl" => $this->dirUrl,
 			"soy2prefix" => "cms",
 			"list" => $this->list,
+			"buildEntryList" => false
 		));
 		
 		

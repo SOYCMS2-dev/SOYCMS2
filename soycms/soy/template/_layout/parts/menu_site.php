@@ -24,7 +24,8 @@ $menus = PluginManager::invoke("soycms.site.menu.*")->getMenus();
 			}
 			?>
 			
-			<?php if(SOYCMS_IS_DEBUG()){ ?><?php soycms_print_menu("site/?init","再生成(dev)"); ?><?php } ?>
+			<?php if(SOYCMS_IS_DEBUG()){ ?><!-- <?php soycms_print_menu("site/?init","再生成(dev)"); ?> --><?php } ?>
+			
 		</ul>
 	</div>
 </div>

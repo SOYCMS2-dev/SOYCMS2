@@ -21,7 +21,6 @@ function soycms_basic_auth($id,$pass){
 
 	//ログインしていない時
 	if(!$val){
-		@header("HTTP/1.1 401 Unauthorized");
 		echo <<<HTML
 		<!DOCTYPE html>
 		<html>

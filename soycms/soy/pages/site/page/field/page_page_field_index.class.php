@@ -4,6 +4,33 @@ class page_page_field_index extends SOYCMS_WebPageBase{
 	
 	function doPost(){
 		
+		if(isset($_POST["FieldOrder"]) && isset($_POST["save_order"])){
+			if(isset($_GET["type"])){
+				
+				$configs = SOYCMS_ObjectCustomFieldConfig::loadObjectConfig($_GET["type"]);
+				$res = array();
+				foreach($_POST["FieldOrder"] as $value => $null){
+					$res[$value] = $configs[$value];
+				}
+				
+				SOYCMS_ObjectCustomFieldConfig::saveConfig($_GET["type"],$res);
+			
+			}else{
+				
+				$configs = SOYCMS_ObjectCustomFieldConfig::loadConfig("common");
+				$res = array();
+				foreach($_POST["FieldOrder"] as $value => $null){
+					$res[$value] = $configs[$value];
+				}
+				
+				SOYCMS_ObjectCustomFieldConfig::saveConfig("common",$res);
+				
+			}
+			
+			
+			$this->jump("/page/field?updated");
+		}
+		
 	}
 	
 	function init(){
@@ -13,7 +40,7 @@ class page_page_field_index extends SOYCMS_WebPageBase{
 			if(isset($_GET["type"])){
 				$fields = SOYCMS_ObjectCustomFieldConfig::loadObjectConfig($_GET["type"]);
 				unset($fields[$id]);
-				SOYCMS_ObjectCustomFieldConfig::saveObjectConfig($_GET["type"],$fields);
+				SOYCMS_ObjectCustomFieldConfig::saveConfig($_GET["type"],$fields);
 				
 				$this->jump("/page/field?updated");
 			}else{
@@ -27,7 +54,6 @@ class page_page_field_index extends SOYCMS_WebPageBase{
 			
 		}
 		
-		
 	}
 
 	function page_page_field_index() {
@@ -39,6 +65,12 @@ class page_page_field_index extends SOYCMS_WebPageBase{
 	}
 	
 	function buildForm(){
+		
+		$this->addForm("entry_field_form",array(
+			"action" => soycms_create_link("/page/field?type=entry")
+		));
+		
+		$this->addForm("field_form");
 		
 	}
 	
@@ -74,7 +106,7 @@ class FieldTreeComponent extends PageTreeComponent{
 	
 	function populateItem($entity,$key,$depth,$isLast){
 		
-		$config = $this->getConfig($entity->getId());
+		$config = $this->getConfig($entity->getUri());
 		$config_text = array();
 		foreach($config as $_config){
 			$config_text[] = $_config->getName();
@@ -95,7 +127,7 @@ class FieldTreeComponent extends PageTreeComponent{
 		return parent::populateItem($entity,$key,$depth,$isLast);	
 	}
 	
-	function getConfig($id){
-		return SOYCMS_ObjectCustomFieldConfig::loadObjectConfig("entry-" . $id);
+	function getConfig($uri){
+		return SOYCMS_ObjectCustomFieldConfig::loadObjectConfig("entry-" . $uri);
 	}
 }

@@ -13,6 +13,9 @@ class SOYCMS_ListPage extends SOYCMS_PageBase{
 	private $plugin = null;
 	private $extension = array();
 	
+	/* 2.0.8 */
+	private $targetUri = null;
+	
 	/**
 	 * 検索する
 	 */
@@ -81,7 +84,7 @@ class SOYCMS_ListPage extends SOYCMS_PageBase{
 				break;
 		}
 		
-		$dao = SOY2DAOFactory::create("SOYCMS_EntryDAO");
+		$dao = SOY2DAOContainer::get("SOYCMS_EntryDAO");
 		if($offset)$dao->setOffset($offset);
 		if(strlen($this->getLimit())>0)$dao->setLimit($this->getLimit());
 		$res = $dao->executeOpenEntryQuery($sql,$binds);
@@ -227,5 +230,12 @@ class SOYCMS_ListPage extends SOYCMS_PageBase{
 	}
 	function setExtension($extension) {
 		$this->extension = $extension;
+	}
+
+	function getTargetUri() {
+		return $this->targetUri;
+	}
+	function setTargetUri($targetUri) {
+		$this->targetUri = $targetUri;
 	}
 }

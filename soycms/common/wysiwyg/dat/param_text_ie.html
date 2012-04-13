@@ -12,7 +12,7 @@
 			<div class="panel-parts"><a href="javascript:void(0);" class="icon-btn btn-del" title="打ち消し線" onclick="aobata_editor.get().execCommand('strikethrough');"><em>打ち消し線</em></a></div> 
 			
 			<div class="panel-parts">
-				<div id="downpanel19" class="downpanel"><a onclick="return _showoption(this);" href="javascript:void(0);" class="icon-btn btn-fontsize" title="文字サイズ"><em>文字サイズ</em></a><a href="javascript:void(0);" onclick="return _showoption(this);" class="downarrow-s-btn interval" title="文字サイズ・プルダウンメニュー"><em>文字サイズ・プルダウンメニュー</em></a></div>
+				<div id="downpanel19" class="downpanel"><a onclick="return aobata_editor.showOption(this);" href="javascript:void(0);" class="icon-btn btn-fontsize" title="文字サイズ"><em>文字サイズ</em></a><a href="javascript:void(0);" onclick="return aobata_editor.showOption(this);" class="downarrow-s-btn interval" title="文字サイズ・プルダウンメニュー"><em>文字サイズ・プルダウンメニュー</em></a></div>
 				<div id="downpanel19_option" class="downmenu-layer" style="display:none;"> 
 					<ul class="menu"> 
 						<li><a href="javascript:void(0);" onclick="aobata_editor.get().execCommand('alt_class','m',['m','l','xl','xxl','xxxl','s','xs']);" title="標準">標準</a></li> 
@@ -27,7 +27,7 @@
 			</div>
 			
 			<div class="panel-parts">
-				<div id="downpanel20" class="downpanel"><a href="javascript:void(0);" class="icon-btn btn-fontcolor" title="文字の色" style="background-color:#000;"><em>文字の色</em></a><a href="javascript:void(0);" onclick="return _showoption(this);" class="downarrow-s-btn" title="文字の色・プルダウンメニュー"><em>文字の色・プルダウンメニュー</em></a></div>
+				<div id="downpanel20" class="downpanel"><a href="javascript:void(0);" class="icon-btn btn-fontcolor" title="文字の色" style="background-color:#000;"><em>文字の色</em></a><a href="javascript:void(0);" onclick="return aobata_editor.showOption(this);" class="downarrow-s-btn" title="文字の色・プルダウンメニュー"><em>文字の色・プルダウンメニュー</em></a></div>
 				<div id="downpanel20_option" class="downpanel-layer" style="display:none;">
 					<ul class="colormenu">
 <li><a href="javascript:void(0);" onclick="aobata_editor.get().execCommand('foreColor',false,$(this).css('backgroundColor'));" style="background:#000000;"> </a></li>
@@ -74,7 +74,7 @@
 				</div> 	
 			</div> 
 			<div class="panel-parts">
-				<div id="downpanel22" class="downpanel"><a href="javascript:void(0);" class="icon-btn btn-bgcolor" title="文字背景の色" style="background-color:#FF0000;"><em>文字背景の色</em></a><a href="javascript:void(0);" onclick="return _showoption(this);" class="downarrow-s-btn interval" title="文字背景の色・プルダウンメニュー"><em>文字背景の色・プルダウンメニュー</em></a></div>
+				<div id="downpanel22" class="downpanel"><a href="javascript:void(0);" class="icon-btn btn-bgcolor" title="文字背景の色" style="background-color:#FF0000;"><em>文字背景の色</em></a><a href="javascript:void(0);" onclick="return aobata_editor.showOption(this);" class="downarrow-s-btn interval" title="文字背景の色・プルダウンメニュー"><em>文字背景の色・プルダウンメニュー</em></a></div>
 				<div id="downpanel22_option" class="downpanel-layer" style="display:none;">
 					<ul class="colormenu">
 						
@@ -138,7 +138,7 @@
 			<div class="panel-parts"><a href="javascript:void(0);" class="icon-btn btn-delformat interval" title="フォーマット解除"  onclick="aobata_editor.get().execCommand('removeFormat');"><em>フォーマット解除</em></a></div>
 			
 			<div class="panel-parts">
-				<div id="downpanel23" class="downpanel"><a href="javascript:void(0);" onclick="$('#downpanel23_option').toggleFade();" class="icon-btn btn-margin" title="マージン"><em>マージン</em></a><a href="javascript:void(0);" onclick="return _showoption(this);" class="downarrow-s-btn interval" title="マージン・プルダウンメニュー"><em>マージン・プルダウンメニュー</em></a></div>
+				<div id="downpanel23" class="downpanel"><a href="javascript:void(0);" onclick="$('#downpanel23_option').toggleFade();" class="icon-btn btn-margin" title="マージン"><em>マージン</em></a><a href="javascript:void(0);" onclick="return aobata_editor.showOption(this);" class="downarrow-s-btn interval" title="マージン・プルダウンメニュー"><em>マージン・プルダウンメニュー</em></a></div>
 				<div id="downpanel23_option" class="downmenu-layer downmenu-layer-right" style="display:none;"> 
 					<ul class="menu"> 
 						<li><a href="javascript:void(0);" title="マージンなし" onclick="aobata_editor.get().execNode(function(node){$(node).css('marginBottom',0);});">マージンなし</a></li> 
@@ -153,7 +153,7 @@
 		
 		<div class="panel-line"> 
 			<div class="panel-parts"><span class="label">リンク</span></div> 
-			<div class="panel-parts"><a href="javascript:void(0);" id="btn-link" class="icon-btn btn-link" title="リンク" onclick="aobata_editor.get().execCommand('createlink',false,'http://');$(this).parent().hide();$('#link_input_wrap').show();" ><em>リンク</em></a></div> 
+			<div class="panel-parts"><a href="javascript:void(0);" id="btn-link" class="icon-btn btn-link" title="リンク" onclick="aobata_editor.get().execCommand('createlink',false,$('#attr_href').val());$(this).parent().hide();$('#link_input_wrap').show();" ><em>リンク</em></a></div> 
 			<div class="panel-parts" id="link_input_wrap" style="display:none;">
 				<input name="post1-2" type="text" class="s-area input-link" id="attr_href" size="42" value="" onblur="aobata_editor.get().execCommand('createlink',false,$('#attr_href').val());" />
 				<!--
@@ -161,7 +161,7 @@
 				-->
 				<div class="panel-parts"><a href="javascript:void(0);" id="btn-execcommand_link" class="icon-btn btn-link" title="リンク" onclick="aobata_editor.get().paramView.hide();" ><em>リンク</em></a></div>
 				<div class="panel-parts"><a href="javascript:void(0);" class="icon-btn btn-dellink" title="リンク解除" onclick="aobata_editor.get().execCommand('unlink');$('#link_input_wrap').hide();aobata_editor.get().paramView.hide();"><em>リンク解除</em></a></div>
-				<div class="panel-parts"><input type="button" value="参照" id="post5-btn1" name="post5-btn1" class="s-btn" onclick="entry_editor_show_attachments(function(img,link){$('#attr_href').val(link).trigger('change');});" /></div>
+				<div class="panel-parts"><input type="button" value="参照" id="post5-btn1" name="post5-btn1" class="s-btn" onclick="aobata_editor.show_attachments(function(img,link){$('#attr_href').focus().val(link).trigger('change');});" /></div>
 			</div> 
 			<div class="panel-parts" style="display:none;"> 
 				<label>ターゲット</label>

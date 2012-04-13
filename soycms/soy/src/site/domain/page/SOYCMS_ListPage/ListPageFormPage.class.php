@@ -15,7 +15,7 @@ class ListPageFormPage extends HTMLPage{
 		$this->createAdd("directory_tree","_class.list.PageTreeComponent",array(
 			"type" => "detail",
 			"checkboxName" => "object[directory]",
-			"selected" => $this->obj->getDirectory() 
+			"selected" => $this->obj->getDirectory()
 		));
 		
 		$this->addCheckbox("is_include_child",array(
@@ -26,14 +26,16 @@ class ListPageFormPage extends HTMLPage{
 			"selected" => $this->obj->getIsIncludeChild()
 		));
 		
-		$this->createAdd("period_from","_class.component.HTMLDateInput",array(
+		$this->createAdd("period_from","HTMLDateInput",array(
 			"name" => "object[periodFrom]",
-			"value" => $this->obj->getPeriodFrom()
+			"value" => $this->obj->getPeriodFrom(),
+			"attr:class" => "s-area"
 		));
 		
 		$this->createAdd("period_to","_class.component.HTMLDateInput",array(
 			"name" => "object[periodTo]",
-			"value" => $this->obj->getPeriodTo()
+			"value" => $this->obj->getPeriodTo(),
+			"attr:class" => "s-area"
 		));
 		
 		//ソート順

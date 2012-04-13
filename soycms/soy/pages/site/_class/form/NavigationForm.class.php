@@ -44,6 +44,10 @@ class NavigationForm extends HTMLForm{
 			"name" => "Navigation[template]",
 			"text" => ($navigation->getTemplate()) ? $navigation->getTemplate() : $navigation->loadTemplate()
 		));
+		$this->addTextArea("navigation_content_area",array(
+			"name" => "Navigation[content]",
+			"text" => ($navigation->getTemplate()) ? $navigation->getTemplate() : $navigation->loadTemplate()
+		));
 		
 		//アイテム一覧
 		$this->createAdd("navigation_item_manager","_class.component.TemplateItemComponent",array(

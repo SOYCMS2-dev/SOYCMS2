@@ -33,9 +33,8 @@ class EntryForm extends HTMLForm{
 			);
 		}
 		
-		
-		$this->createAdd("section_list","entry.page_entry_editor",array(
-			"arguments" => array($sections)
+		$this->addLabel("section_list",array(
+			"html" => SOYCMS_EditorManager::buildSections($sections)
 		));
 		
 		$this->createAdd("create_date","_class.component.HTMLDateInput",array(

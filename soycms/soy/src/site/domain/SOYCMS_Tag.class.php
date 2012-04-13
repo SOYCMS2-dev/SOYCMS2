@@ -35,13 +35,13 @@ class SOYCMS_Tag extends SOY2DAO_EntityBase{
 	
 	/* 便利メソッド */
 	public static function getByEntryId($entryId){
-		$dao = SOY2DAOFactory::create("SOYCMS_TagDAO");
+		$dao = SOY2DAOContainer::get("SOYCMS_TagDAO");
 		$list = $dao->getByEntryId($entryId);
 		return $list;
 	}
 	
 	public static function updateTags($entryId,$tags){
-		$dao = SOY2DAOFactory::create("SOYCMS_TagDAO");
+		$dao = SOY2DAOContainer::get("SOYCMS_TagDAO");
 		
 		//clear
 		$dao->deleteByEntryId($entryId);
@@ -64,7 +64,7 @@ class SOYCMS_Tag extends SOY2DAO_EntityBase{
 	 * 
 	 */
 	public static function clearTag($entryId){
-		$dao = SOY2DAOFactory::create("SOYCMS_EntryTagDAO");
+		$dao = SOY2DAOContainer::get("SOYCMS_EntryTagDAO");
 		$dao->deleteByEntryId($entryId);
 	}
 	
@@ -75,7 +75,7 @@ class SOYCMS_Tag extends SOY2DAO_EntityBase{
 		$contents = strip_tags($contents);
 		$contents = str_replace(array(" ","\n","\r"),"",$contents);
 		
-		$dao = SOY2DAOFactory::create("SOYCMS_TagDAO");
+		$dao = SOY2DAOContainer::get("SOYCMS_TagDAO");
 		$dao->deleteByEntryId($entryId);
 		
 		$res = array();
@@ -101,7 +101,7 @@ class SOYCMS_Tag extends SOY2DAO_EntityBase{
 	}
 	
 	public static function getTagList(){
-		$dao = SOY2DAOFactory::create("SOYCMS_TagDAO");
+		$dao = SOY2DAOContainer::get("SOYCMS_TagDAO");
 		
 		$res = array();
 		$tags = $dao->getTagList();

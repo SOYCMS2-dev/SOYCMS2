@@ -3,7 +3,7 @@
  * cms:navigation="XXXX"を処理
  * ナビゲーションを読み込んで表示する
  */
-class SOYCMS_NavigationModulePlugin extends PluginBase{
+class SOYCMS_NavigationModulePlugin extends HTMLPluginBase{
 
 	protected $_soy2_prefix = "cms";
 		
@@ -12,40 +12,42 @@ class SOYCMS_NavigationModulePlugin extends PluginBase{
 		
 		$this->setInnerHTML(
 				'<!-- soy:id="navigation_'.$soyValue.'_wrap" -->' .
-				'<?php SOYCMS_ItemWrapComponent::startTag("navigation","'.$soyValue.'"); ?>' . 
-					'<?php SOYCMS_NavigationModulePlugin::loadNavigation("'.$soyValue.'"); ?>' .
+				'<?php SOYCMS_ItemWrapComponent::startTag("navigation","'.$soyValue.'"); ?>' .
+					'<?php SOYCMS_NavigationModulePlugin::loadNavigation("'.$soyValue.'","'.SOY2HTMLConfig::Language().'"); ?>' .
 				'<?php SOYCMS_ItemWrapComponent::endTag("navigation","'.$soyValue.'"); ?>' .
-				'<!-- /soy:id="navigation_'.$soyValue.'_wrap" -->'			
+				'<!-- /soy:id="navigation_'.$soyValue.'_wrap" -->'
 		);
-		
-		
-		//echo $this->_soy2_innerHTML;
-		//exit;	
 	}
 	
-	public static function loadNavigation($moduleName){
+	public static function loadNavigation($moduleName,$language = null){
 		
-		$dir = SOYCMS_SITE_DIRECTORY . ".navigation/" . $moduleName . "/";
+		$dir = SOYCMS_Navigation::getNavigationDirectory() . $moduleName . "/";
 		if(!file_exists($dir)){
 			echo "[ERROR]" . $moduleName . " is not found.\n";
 			return;
 		}
 		
-		$page = SOY2HTMLFactory::createInstance("SOYCMS_NavigationModulePage",array(
-			"arguments" => array("navigationId" => $moduleName),
-		));
-		
-		$page->display();
+		try{
+			$page = SOY2HTMLFactory::createInstance("SOYCMS_NavigationModulePage",array(
+				"arguments" => array("navigationId" => $moduleName,"language" => $language),
+			));
+			
+			$page->display();
+		}catch(Exception $e){
+			var_dump($e);
+		}
 	}
 }
 
 class SOYCMS_NavigationModulePage extends HTMLPage{
 	
+	private $language = null;
 	private $navigationId;
 	private $items = array();
 	
 	function SOYCMS_NavigationModulePage($args){
 		$this->navigationId = $args["navigationId"];
+		if(isset($args["language"]) && !empty($args["language"]))$this->language = $args["language"];
 		$navigation = SOYCMS_Navigation::load($this->navigationId);
 		$this->setId($this->navigationId);
 		
@@ -59,7 +61,11 @@ class SOYCMS_NavigationModulePage extends HTMLPage{
 	}
 	
 	function getTemplateFilePath(){
-		return SOYCMS_Navigation::getNavigationDirectory() . $this->getNavigationId() . "/template.html";
+		$dir = SOYCMS_Navigation::getNavigationDirectory() . $this->getNavigationId() . "/";
+		if($this->language && file_exists($dir . $this->language . ".html")){
+			return $dir . $this->language . ".html";
+		}
+		return $dir . "template.html";
 	}
 	
 	
@@ -123,7 +129,8 @@ class SOYCMS_NavigationModulePage extends HTMLPage{
 				
 			}else{
 				$this->addModel($item->getType() . "_" . $item->getId() . "_wrap",array(
-					"visible" => true
+					"visible" => true,
+					"soy2prefix" => "soy"
 				));
 			}
 			
@@ -150,5 +157,6 @@ class SOYCMS_NavigationModulePage extends HTMLPage{
 	function setItems($items) {
 		$this->items = $items;
 	}
+	
 }
 ?>

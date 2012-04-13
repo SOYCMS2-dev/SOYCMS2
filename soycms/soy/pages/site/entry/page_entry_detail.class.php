@@ -1,4 +1,6 @@
 <?php
+SOY2::import("site.logic.entry.SOYCMS_EditorManager");
+
 /**
  * @title 記事の作成
  */
@@ -11,7 +13,7 @@ class page_entry_detail extends SOYCMS_WebPageBase{
 		if(!$session->checkPermission($this->dir->getId(),true)){
 			if(isset($_GET["autosave"])){
 				echo "permission error";
-				exit;	
+				exit;
 			}else{
 				$this->goError();
 			}
@@ -139,7 +141,7 @@ class page_entry_detail extends SOYCMS_WebPageBase{
 						"entry",
 						$this->id,
 						$_POST["EntryCustomField"],
-						"entry-" . $this->entry->getDirectory()
+						"entry-" . $this->entry->getDirectoryUri()
 				);
 			}
 			
@@ -166,7 +168,7 @@ class page_entry_detail extends SOYCMS_WebPageBase{
 		
 		if(isset($_GET["preview"]) || isset($_GET["check"])){
 			$link = soycms_get_page_url($this->dir->getUri(),$this->entry->getUri());
-			if(isset($_GET["preview"]))$link .= "?SOYCMS_SSID=" . session_id() . "&preview" . (strlen($_GET["preview"])>0 ? "=" . $_GET["preview"] : "");
+			if(isset($_GET["preview"]))$link .= "?" . soycms_get_ssid_token() . "&preview" . (strlen($_GET["preview"])>0 ? "=" . $_GET["preview"] : "");
 			SOY2PageController::redirect($link);
 			exit;
 		}
@@ -226,7 +228,7 @@ class page_entry_detail extends SOYCMS_WebPageBase{
 		$ordersInsert = (isset($config["insert_snippet_order"])) ? $config["insert_snippet_order"] : array();
 		$allowInsert = (isset($config["allowed_insert_snippet"])) ? $config["allowed_insert_snippet"] : array();
 		
-		SOY2::import("site.logic.entry.SOYCMS_EditorManager");
+		
 		$this->addLabel("append_new_sections",array(
 			"html" => SOYCMS_EditorManager::bulidSectionMenus($orders,$allow)
 		));
@@ -257,7 +259,7 @@ class page_entry_detail extends SOYCMS_WebPageBase{
 		));
 		
 		$workflow = SOY2Logic::createInstance("site.logic.workflow.WrokflowManager");
-		$workflow->load(); 
+		$workflow->load();
 		$statusText = $workflow->getStatusText($this->entry->getStatus());
 		
 		$this->addModel("save_btn",array(
@@ -276,6 +278,10 @@ class page_entry_detail extends SOYCMS_WebPageBase{
 		
 		$this->addModel("overwrite_warning",array(
 			"visible" => $overwrited
+		));
+		
+		$this->addLabel("entry_title_text",array(
+			"text" => $this->entry->getTitle()
 		));
 		
 		//clear
@@ -375,15 +381,15 @@ class page_entry_detail extends SOYCMS_WebPageBase{
 	
 	function buildCommonCustomField($entry){
 		$fields = SOYCMS_ObjectCustomFieldConfig::loadObjectConfig("entry");
-		$fields2 = SOYCMS_ObjectCustomFieldConfig::loadObjectConfig("entry-" . $this->entry->getDirectory());
+		$fields2 = SOYCMS_ObjectCustomFieldConfig::loadObjectConfig("entry-" . $this->entry->getDirectoryUri());
 		$fields = array_merge($fields2,$fields);
 		$this->addModel("common_customfield_exists",array("visible" => count($fields) > 0));
 		
 		$this->createAdd("field_list","_class.list.CustomFieldList",array(
 			"list" => $fields,
-			"type" => "entry",
 			"objectId" => $this->id,
-			"formName" => "EntryCustomField"
+			"formName" => "EntryCustomField",
+			"values" => SOYCMS_ObjectCustomField::getValues("entry",$this->id)
 		));
 		
 		$this->addLabel("content_position",array(
@@ -392,11 +398,11 @@ class page_entry_detail extends SOYCMS_WebPageBase{
 	}
 	
 	function getSubMenu(){
-		
 		$menu = SOY2HTMLFactory::createInstance("entry.page_entry_detail_submenu",array(
 			"arguments" => array($this->id,$this->entry)
 		));
 		$menu->display();
+		
 	}
 }
 

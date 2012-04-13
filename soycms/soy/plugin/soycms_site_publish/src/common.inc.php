@@ -64,7 +64,7 @@ class SitePublishPlugin_Publisher{
 		//configure SOY2DAO
 		SOY2DAOConfig::Dsn(SOYCMS_SITE_DB_DSN);
 		SOY2DAOConfig::user(SOYCMS_SITE_DB_USER);
-		SOY2DAOConfig::pass(SOYCMS_SITE_DB_PASS);
+		SOY2DAOConfig::password(SOYCMS_SITE_DB_PASS);
 	}
 	
 	public static function publish(

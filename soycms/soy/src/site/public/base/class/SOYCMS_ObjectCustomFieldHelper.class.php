@@ -5,6 +5,8 @@
 class SOYCMS_ObjectCustomFieldHelper {
 	
 	public static function build($htmlObj,$config,$field){
+		$fieldId = $config->getFieldId();
+		
 		//複数では無い場合
 		if(is_array($field) && isset($field[-1])){
 			$field = $field[-1];
@@ -18,7 +20,19 @@ class SOYCMS_ObjectCustomFieldHelper {
 				foreach($fields as $key => $_config){
 					if(strlen($key)<1)continue;
 					$value = (isset($_value[$key])) ? $_value[$key] : $_config->getValueObject();
-					$value->setFieldId($key);
+					
+					if(!$value instanceof SOYCMS_ObjectCustomField){
+						$obj = new SOYCMS_ObjectCustomField();
+						$obj->setType($_config->getType());
+						$obj->setValue($value);
+						$value = $obj;
+					}
+					
+					if($_config->getType() == "check"){
+						self::build($htmlObj,$_config,$value);
+						continue;
+					}
+					if(is_object($value))$value->setFieldId($key);
 					self::_build($htmlObj,$value);
 				}
 				
@@ -28,12 +42,34 @@ class SOYCMS_ObjectCustomFieldHelper {
 			return self::_build($htmlObj,$field);
 		}
 		
+		if($config->getType() == "check"){
+			$htmlObj->createAdd($fieldId, "SOYCMS_HTMLLabel",array(
+				"list" => $field,
+				"soy2prefix" => "cms",
+			));
+			
+			$htmlObj->createAdd($fieldId . "_list", "SOYCMS_ObjectCustomFieldCheckListComponent",array(
+				"list" => $field,
+				"soy2prefix" => "cms",
+				"config" => $config
+			));
+			return;
+		}
+		
 		//複数の場合
-		$fieldId = $config->getFieldId();
 		$htmlObj->createAdd($fieldId . "_list", "SOYCMS_ObjectCustomFieldListComponent",array(
 			"list" => $field,
 			"soy2prefix" => "cms",
-			"config" => $config
+			"config" => $config,
+			"childSoy2Prefix" => "cms"
+		));
+		$sets_value = array();
+		foreach($field as $field){
+			$sets_value[] = $field->getValue();
+		}
+		$htmlObj->createAdd($fieldId . "_sets","SOYCMS_ObjectCustomFieldSetComponent",array(
+			"soy2prefix" => "cms",
+			"value" => implode(",",$sets_value)
 		));
 	}
 	
@@ -42,6 +78,7 @@ class SOYCMS_ObjectCustomFieldHelper {
 		$type = $field->getType();
 		$value = $field->getValue();
 		if(strlen($value)<1)$value = $field->getText();
+		if($type == "multi")$value = nl2br($value);
 		
 		//画像のみ
 		if($field->getType() == "image"){
@@ -99,6 +136,10 @@ class SOYCMS_ObjectCustomFieldHelper {
 			return;
 		} 
 		
+		if($field->getType() == "check"){
+			
+		}
+		
 		$htmlObj->addLabel($field->getFieldId(),array(
 			"html" => $value,
 			"soy2prefix" => "cms",
@@ -131,6 +172,10 @@ class SOYCMS_ObjectCustomFieldSetComponent extends SOYBodyComponentBase{
 		
 		parent::execute();
 	}
+	
+	function setValue($value){
+		$this->value = $value;
+	}
 		
 }
 
@@ -147,6 +192,50 @@ class SOYCMS_ObjectCustomFieldListComponent extends HTMLList{
 	
 	function setConfig($config){
 		$this->config = $config;
+	}
+	
+}
+
+class SOYCMS_ObjectCustomFieldCheckListComponent extends HTMLList{
+	private $config;
+	
+	function populateItem($entity){
+		if(!$entity instanceof SOYCMS_ObjectCustomField){
+			$entity = $this->config->getValueObject();
+		}
+		$this->addLabel("check_value",array(
+			"soy2prefix" => "cms",
+			"text" => $entity->getValue()
+		));
+	}
+	
+	function setConfig($config){
+		$this->config = $config;
+	}
+}
+
+class SOYCMS_HTMLLabel extends HTMLLabel{
+	
+	private $list = array();
+	private $separate = ",";
+	
+	function setList($list){
+		$this->list = $list;
+	}
+	
+	function execute(){
+		$tmp = array();
+		foreach($this->list as $obj){
+			$tmp[] = $obj->getValue();
+		}
+		$text = implode($this->separate,$tmp);
+		$this->setText($text);
+		
+		parent::execute();
+	}
+	
+	function setSeparate($value){
+		$this->separate = $value;
 	}
 	
 }

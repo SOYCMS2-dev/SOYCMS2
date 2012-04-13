@@ -115,7 +115,8 @@
 					<div class="label">
 						<h3>テンプレートのHTML</h3>
 					</div>
-					<div class="item break"> 
+					<div class="item break">
+						<!-- soy:id="template_type_normal" --> 
 						<ul class="tab_index">
 							<li><a href="javascript:void(0);">HTML</a></li>
 							<li><a href="javascript:void(0);">Layout</a></li>
@@ -168,6 +169,28 @@
 							
 							
 						</ul>
+						<!-- /soy:id="template_type_normal" -->
+						<!-- soy:id="template_type_complex" -->
+						<ul class="tab_index">
+							<!-- soy:id="template_complex_type_list" -->
+							<li soy:id="template_complex_type_item"><a soy:id="template_complex_type_link"><!-- soy:id="template_complex_type_name" /--></a></li>
+							<!-- /soy:id="template_complex_type_list" -->
+						</ul>
+						<ul class="tab_container">
+							<textarea soy:id="template_content*" name="Template[template]" cols="70" rows="17" class="m-area liq-area resizable html-editor" id="soycms_template_content">テンプレートhtmlが表示されます</textarea>
+							
+							<p>
+								<input type="checkbox" id="is_overwrite" name="is_overwrite" value="1" />
+								<label for="is_overwrite">既存のライブラリ・ナビゲーションを上書きする</label>
+							</p>
+							
+							<div class="html-editor-btn break">
+								<div class="form-btn ce"> 
+									<input type="submit" value="テンプレートを保存する" name="save_template" class="l-btn" /> 
+								</div>
+							</div>
+						</ul>
+						<!-- /soy:id="template_type_complex" -->
 					</div>
 					
 				

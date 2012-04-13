@@ -17,6 +17,99 @@ class SOYCMS_EditorManager extends SOY2LogicBase{
 		unset($inst);
 	}
 	
+	public static function buildSections($sections){
+		
+		if(empty($sections)){
+			$section = new SOYCMS_EntrySection();
+			$section->setType("wysiwyg");
+			$section->setValue("<p> </p>");
+			$section->setContent("<p> </p>");
+			$sections = array(
+				$section
+			);
+		}
+		
+		$inst = self::inst();
+		$html = array();
+		
+		foreach($sections as $key => $section){
+			$html[] = $inst->buildSection($key,$section);
+		}
+		return implode("",$html);
+	}
+	
+	
+	function buildSection($key,$section){
+		$html = array();
+		
+		$html[] = 	'<div class="section_list">';
+		$html[] = 		'<div class="article-header">';
+		$html[] = 			'<div class="text-mode-panel">';
+		$html[] = 				'<div class="panel">';
+		$html[] = 					'<div class="panel-line">';
+		$html[] = 						'<div class="panel-parts"><a href="javascript:void(0);" onclick="aobata_editor.find(this).swapMode();" class="icon-btn btn-html toggle-btn" title="HTML"><em>HTML</em></a></div>';
+		$html[] = 						'<div class="panel-parts has_form">';
+		$html[] = 							'<div id="downpanel_delformat" class="downpanel">';
+		$html[] = 								'<a href="javascript:void(0);" onclick="return aobata_editor.showOption(this);" class="icon-btn btn-delformat interval" title="ソースフォーマット"><em>ソースフォーマット</em></a>';
+		$html[] = 							'</div>';
+		$html[] = 							'<div id="downpanel_delformat_option" class="downpanel-fix" style="display:none;width:550px;">';
+		$html[] = 								'<div class="downpanel-fix-inner">';
+		$html[] = 									'<div class="mbreak">';
+		$html[] = 										'<ul>';
+		$html[] = 											'<!-- <li class="fl" style="width:50%;"><input type="checkbox" id="format_indent" checked /><label style="line-height:1;" for="format_indent">インデント</label></li> -->';
+		$html[] = 											'<li class="fl" style="width:50%;"><input type="checkbox" id="format_span" checked /><label style="line-height:1;" for="format_span">無駄なspanの除去</label></li>';
+		$html[] = 										'</ul>';
+		$html[] = 									'</div>';
+		$html[] = 									'<p class="ri" style="clear:both;">';
+		$html[] = 										'<input class="s-btn" type="button" onclick="aobata_editor.find(this).format($(\'#downpanel_delformat_option input:checked\').map(function(){ return $(this).attr(\'id\'); }).get());aobata_editor.hideAllPopup();" value="OK" />';
+		$html[] = 										'<input class="s-btn" type="button" onclick="aobata_editor.hideAllPopup();" value="Cancel" />';
+		$html[] = 									'</p>';
+		$html[] = 								'</div>';
+		$html[] = 							'</div>';
+		$html[] = 						'</div>';
+		$html[] = 						'<div class="panel-parts">';
+		$html[] = 							'<a class="icon-xme-btn btn-addelement" href="javascript:void(0);" title="セクションを追加" onclick="aobata_editor.show_insert_lines(this);"><em><strong>セクションを追加</strong></em></a>';
+		$html[] = 						'</div>';
+		$html[] = 					'</div>';
+		$html[] = 				'</div>';
+		$html[] = 			'</div>';
+		$html[] = 			'<div class="wysiwyg-mode-panel">';
+		$html[] = 			'</div>';
+		$html[] = 		'</div>';
+		$html[] = 		'<div class="article-body">';
+		$html[] = 			'<input type="hidden" name="section['.$key.'][type]" value="'.$this->_h($section->getType()).'" />';
+		$html[] = 			'<input type="hidden" name="section['.$key.'][snippet]" value="'.$this->_h($section->getSnippet()).'" />';
+		$html[] = 			'<input type="hidden" name="section['.$key.'][value]" value="'.$this->_h($section->getValue()).'" />';
+		$html[] = 			'<input type="hidden" class="section_remove" name="section['.$key.'][remove]" value="0" />';
+		
+		$classes = array("m-area","liq-area","html-editor");
+		if($section->getType() == "wysiwyg"){
+			$classes[] = "aobata_editor";
+		}else if($section->getType() == "preview"){
+			$classes[] = "aobata_display";
+		}else{
+			$classes[] = "aobata_preview";
+		}
+		$style = ($section->getSectionHeight()) ? "height:" . $entity->getSectionHeight() . "px" : "";
+		
+		$html[] = 		'<textarea name="section['.$key.'][content]" class="'.implode(" ",$classes).'" style="'.$style.'">'.$this->_h($section->getContent()).'</textarea>';
+		$html[] = 		'</div><!-- // .article-body -->';
+		$html[] = 		'<div class="article-footer">';
+		$html[] = 			'<div class="panel">';
+		$html[] = 				'<div class="panel-line">';
+		$html[] = 					'<div class="panel-parts"><a class="icon-btn btn-orderup" href="javascript:void(0);" title="上と入れ換え"><em><strong>上と入れ換え</strong></em></a></div>';
+		$html[] = 					'<div class="panel-parts"><a class="icon-btn btn-orderdown" href="javascript:void(0);" title="下と入れ換え"><em><strong>下と入れ換え</strong></em></a></div>';
+		$html[] = 					'<div class="panel-parts do-remove"><a class="icon-xme-btn btn-delelement" href="javascript:void(0);" title="セクションを削除"><em><strong>セクションを削除</strong></em></a></div>';
+		$html[] = 					'<div class="panel-parts undo-remove"><a class="icon-sh-btn btn-undo" href="javascript:void(0);" title="キャンセル"><em><strong>キャンセル</strong></em></a></div>';
+		$html[] = 					'<div class="panel-parts close-editor" style="float:right;"><a class="icon-btn btn-close" href="javascript:void(0);" title="閉じる"><em>閉じる</em></a></div>';
+		$html[] = 				'</div>';
+		$html[] = 			'</div>';
+		$html[] = 		'</div><!--  // .panel -->';
+		$html[] = 	'</div><!-- // .section_list -->';
+		
+		return implode("",$html);
+	}
+	
 	/**
 	 * 要素の追加で呼ばれる画面を使用
 	 */
@@ -78,12 +171,12 @@ class SOYCMS_EditorManager extends SOY2LogicBase{
 		$id = $snippet->getId();
 		
 		$onclick = ($snippet->getForm()) ?
-						"show_new_section_form('$key');"
-					: (($this->mode == "append") ? "append_new_section" : "insert_new_section") . '(this,\''.$snippet->getType().'\',\''.$id.'\');';
+						"aobata_editor.show_new_section_form('$key');"
+					: (($this->mode == "append") ? "aobata_editor.append_new_section" : "aobata_editor.insert_new_section") . '(this,\''.$snippet->getType().'\',\''.$id.'\');';
 		
 		$_class = ($snippet->getForm()) ? "has_form" : "";
 		$parts_class = ($this->mode == "append") ? (($child) ? "icon-xsh-btn" : "icon-sh-btn") : "icon-btn";
-		$funcName = (($this->mode == "append") ? "append_new_section" : "insert_new_section");
+		$funcName = (($this->mode == "append") ? "aobata_editor.append_new_section" : "aobata_editor.insert_new_section");
 		$downpanel_class = ($this->mode == "append") ? "downarrow-btn" : "downarrow-s-btn";
 		
 		$html[] = '<div class="panel-parts '.$_class.'">';
@@ -92,7 +185,7 @@ class SOYCMS_EditorManager extends SOY2LogicBase{
 		$html[] = '<em>'.$snippet->getName().'</em>';
 		$html[] = '</a>';
 		if($child){
-			$html[] = '<a href="javascript:void(0);" class="'.$downpanel_class.'" title="'.$snippet->getName().'" onclick="_showoption(this);">';
+			$html[] = '<a href="javascript:void(0);" class="'.$downpanel_class.'" title="'.$snippet->getName().'" onclick="aobata_editor.showOption(this);">';
 			$html[] = '<em>'.$snippet->getName().'</em>';
 			$html[] = '</a>';
 		}
@@ -132,6 +225,10 @@ class SOYCMS_EditorManager extends SOY2LogicBase{
 		if(!$this->list)$this->list = SOYCMS_Snippet::getList();
 		$this->list = SOYCMS_Snippet::sortSnippet($this->list,$orders);
 		return $this->list;
+	}
+	
+	private function _h($value){
+		return htmlspecialchars($value);
 	}
 }
 ?>

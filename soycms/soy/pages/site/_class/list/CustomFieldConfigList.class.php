@@ -5,8 +5,11 @@ class CustomFieldConfigList extends HTMLList{
 	private $type = "common";
 	private $types = array();
 	private $link = null;
+	private $selected = array();
 	
-	
+	function setSelected($array){
+		$this->selected = $array;
+	}
 
 	function getType() {
 		return $this->type;
@@ -46,13 +49,12 @@ class CustomFieldConfigList extends HTMLList{
 			
 			//common
 			$pages["entry"] = array(
-				"name" => "共通"
+				"name" => "共通",
+				"uri" => "entry"
 			);
 			
-			
-			
 			foreach($pages as $id => $page){
-				$configs = SOYCMS_ObjectCustomFieldConfig::loadObjectConfig("entry-" . $id);
+				$configs = SOYCMS_ObjectCustomFieldConfig::loadObjectConfig("entry-" . $page["uri"]);
 				if($configs){
 					foreach($configs as $key => $_array){
 						if(!isset($mapping[$key]))$mapping[$key] = array();
@@ -103,7 +105,11 @@ class CustomFieldConfigList extends HTMLList{
 			"link" => $this->link ."?remove&id=" . $entity->getFieldId() . "&type=" . $this->type
 		));
 		
-		$this->addCheckbox("field_check",array("name" => "fields[]", "value"=>$entity->getFieldId()));
+		$this->addCheckbox("field_check",array(
+			"name" => "fields[]",
+			"value"=>$entity->getFieldId(),
+			"selected" => (in_array($entity->getFieldId(),$this->selected))
+		));
 		
 		$this->addLabel("order_input",array(
 			"name" => "FieldOrder[{$entity->getFieldId()}]"

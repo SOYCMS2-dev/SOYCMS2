@@ -5,6 +5,7 @@ class SOYCMS_LabelListComponent extends HTMLList{
 	private $mode = "list";
 	private $dirUrl = null;
 	private $labelId = null;
+	private $buildEntryList = true;
 	
 	function getStartTag(){
 		if($this->mode == "list")return parent::getStartTag();
@@ -35,6 +36,8 @@ class SOYCMS_LabelListComponent extends HTMLList{
 			"link" => soycms_get_page_url($this->dirUrl, rawurlencode($entity->getAlias())),
 			"soy2prefix" => "cms"
 		));
+		
+		if(!$this->buildEntryList)return;
 		
 		$entries = $entity->getEntries();
 		
@@ -82,6 +85,13 @@ class SOYCMS_LabelListComponent extends HTMLList{
 	}
 	function setLabelId($labelId) {
 		$this->labelId = $labelId;
+	}
+
+	function getBuildEntryList() {
+		return $this->buildEntryList;
+	}
+	function setBuildEntryList($buildEntryList) {
+		$this->buildEntryList = $buildEntryList;
 	}
 }
 ?>

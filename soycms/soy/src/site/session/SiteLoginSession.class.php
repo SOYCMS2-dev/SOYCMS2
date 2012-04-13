@@ -23,7 +23,7 @@ class SiteLoginSession extends SOY2Session{
 	function applyConfig(){
 		SOY2DAOConfig::Dsn(SOYCMS_SITE_DB_DSN);
 		SOY2DAOConfig::user(SOYCMS_SITE_DB_USER);
-		SOY2DAOConfig::pass(SOYCMS_SITE_DB_PASS);
+		SOY2DAOConfig::password(SOYCMS_SITE_DB_PASS);
 	}
 	
 	/**
@@ -52,7 +52,7 @@ class SiteLoginSession extends SOY2Session{
 		
 		SOY2DAOConfig::Dsn(SOYCMS_SITE_DB_DSN);
 		SOY2DAOConfig::user(SOYCMS_SITE_DB_USER);
-		SOY2DAOConfig::pass(SOYCMS_SITE_DB_PASS);
+		SOY2DAOConfig::password(SOYCMS_SITE_DB_PASS);
 		
 		if(!defined("SOYCMS_LOGIN_SITE_ID") && !defined("SOYCMS_SITE_URL")){
 			$root = "";//SOY2PageController::createRelativeLink("/",true);
@@ -61,14 +61,19 @@ class SiteLoginSession extends SOY2Session{
 			define("SOYCMS_SITE_ROOT_URL",	$this->siteRootURL);
 		}
 		
+		if(!defined("SOYCMS_SITE_ID")){
+			define("SOYCMS_SITE_ID",	$this->siteId);
+		}
+		
 		if(!class_exists("SOYCMS_DataSets")){
 			SOY2::imports("site.domain.*");
 			SOY2::imports("site.domain.group.*");
 		}
 		
 		//timezone
-		$default = date_default_timezone_get();
-		$timezone = SOYCMS_DataSets::get("timezone",date_default_timezone_get());
+		$default = @date_default_timezone_get();
+		if(!$default)$default = "Asia/Tokyo";
+		$timezone = SOYCMS_DataSets::get("timezone",@date_default_timezone_get());
 		if($timezone != $default){
 			date_default_timezone_set($timezone);
 		}
@@ -399,7 +404,7 @@ abstract class SOYCMS_SiteUserActivityDAO extends SOY2DAO{
 						"user_name varchar," .
 						"uri VARHCAR not null," .
 						"token VARHCAR not null," .
-						"http_query VARCHAR," . 
+						"http_query VARCHAR," .
 						"submit_date integer" .
 					");";
 			$this->executeUpdateQuery($sql);
@@ -439,6 +444,7 @@ abstract class SOYCMS_SiteUserActivityDAO extends SOY2DAO{
 	 * AutoLoginSessionと同じ
 	 */
 	function getDataSource(){
+		if(!defined("SOYCMS_LOGIN_SITE_ID"))return null;
 		$path = "sqlite:" . SOYCMSConfigUtil::get("db_dir") . SOYCMS_LOGIN_SITE_ID . "_session.db";
 		return SOY2DAO::_getDataSource($path,"","");
 	}

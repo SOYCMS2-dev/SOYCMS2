@@ -6,28 +6,20 @@
 <?php soy2html_layout_include("parts/tag_head.php"); ?>
 </head>
 <body class="layout-1c" style="width:680px;min-width:680px;">
-<div id="container" style="width:99%;">
-	
-	<div id="contents">
-			
-		<div id="main">
-			
-			<?php soy2html_layout_include("parts/status.php"); ?>
+
+<div id="main">
 		
-			<div id="main-contents" style="width:99%;">
-				<?php echo $html; ?>
-			</div>
-			<!--  // #main-contents -->
-						
-			
+		<?php soy2html_layout_include("parts/status.php"); ?>
+	
+		<div style="width:99%;text-align:left;">
+			<?php echo $html; ?>
 		</div>
-		<!--  // #main -->
+		<!--  // #main-contents -->
+					
 		
-	</div>
-	<!-- // #contents -->
-	
 </div>
-<!--  // #container -->	
+<!--  // #main -->
+	
 
 <style type="text/css">
 .pagelist-menu{

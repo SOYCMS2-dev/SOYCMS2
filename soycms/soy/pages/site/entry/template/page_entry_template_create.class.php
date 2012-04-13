@@ -1,4 +1,6 @@
 <?php
+SOY2::import("site.logic.entry.SOYCMS_EditorManager");
+
 /**
  * 記事雛形の作成
  */
@@ -106,8 +108,8 @@ class page_entry_template_create extends SOYCMS_WebPageBase{
 			$sections[$key]->setType("preview");
 		}
 		
-		$this->createAdd("section_list","entry.page_entry_editor",array(
-			"arguments" => array($sections)
+		$this->addLabel("section_list",array(
+			"html" => SOYCMS_EditorManager::buildSections($sections)
 		));
 	}
 	

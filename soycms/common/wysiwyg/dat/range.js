@@ -311,7 +311,7 @@ $.range = function(selection,_document){
 				endContainer :  null,
 				endOffset :  0,
 				
-				_initRange :  function(selection){
+				_initRange :  function(selection,_document){
 					this.collapsed = (!this.text || this.text.length < 1);
 					
 					if(this.item){
@@ -322,7 +322,23 @@ $.range = function(selection,_document){
 								
 						}
 					}else{
-						this.startContainer = this.endContainer = this.parentElement(); 
+						this.startContainer = this.endContainer = this.parentElement();
+					}
+					
+					try{
+						var docRange = _document.selection.createRange();
+						var textRange = _document.body.createTextRange();
+						var elm = textRange.parentElement();
+						textRange.moveToElementText(elm);
+						var range = textRange.duplicate();
+						range.setEndPoint('EndToStart', docRange);
+						this.startOffset = range.text.length;
+						
+						var range = textRange.duplicate();
+						range.setEndPoint('EndToEnd', docRange);
+						this.endOffset = range.text.length;
+					} catch(e) {
+						
 					}
 				},
 		
@@ -498,7 +514,7 @@ $.range = function(selection,_document){
 	}
 	
 	if(range._initRange){
-		range._initRange();
+		range._initRange(selection,_document);
 	}
 	
 	return range;

@@ -18,8 +18,10 @@ class SOYCMS_CommentListComponent extends HTMLList{
 	}
 	
 	function init(){
-		$list = SOY2DAO::find("SOYCMS_EntryComment",array("entryId" => $this->entry->getId()));
-		$this->setList($list);
+		if($this->entry){
+			$list = SOY2DAO::find("SOYCMS_EntryComment",array("entryId" => $this->entry->getId()));
+			$this->setList($list);
+		}
 	}
 
 	function populateItem($entity){

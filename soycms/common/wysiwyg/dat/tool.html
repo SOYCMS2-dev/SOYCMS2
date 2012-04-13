@@ -4,38 +4,12 @@
 		<div class="panel-parts"><a href="javascript:void(0);" onclick="aobata_editor.expandAll();"class="icon-btn btn-windowexpansion" title="ウィンドウ最大化"><em>ウィンドウ最大化</em></a></div>
 		<div class="panel-parts"><a href="javascript:void(0);" onclick="aobata_editor.collapseAll();" class="icon-btn btn-windowreduction interval" title="ウィンドウ縮小"><em>ウィンドウ縮小</em></a></div>
 		 
-		<div class="panel-parts"><a href="javascript:void(0);" class="icon-sh-btn btn-image" title="画像・添付ファイル" onclick="entry_editor_show_attachments(function(inner,link){
-			aobata_editor.get().insertHTML('<span id=____new____img___></span>');
-			d = aobata_editor.get().getWindow().document;
-			if(inner.match(/https?:\/\//)){
-				if(inner == link)link = null;
-				inner=$('<img />').attr('src',inner);
-			}else{
-				inner=$('<span></span>').html(inner);
-			}
-			try{
-				if(link){
-					newimg=$('<a></a>');
-					newimg.append(inner);
-					newimg.attr('href',link);
-					
-				}else{
-					newimg=inner;
-				}
-				
-				$('#____new____img___',d).after(newimg).remove();
-			
-			//for ie6 bug
-			}catch(e){
-				aobata_editor.get().insertHTML(newimg.html());
-			}
-			
-		});"><em>画像・ファイル</em></a></div>
+		<div class="panel-parts"><a href="javascript:void(0);" class="icon-sh-btn btn-image" title="画像・添付ファイル" onclick="aobata_editor.show_attachments(aobata_editor.select_attachment);"><em>画像・ファイル</em></a></div>
 		<div class="panel-parts"><a href="javascript:void(0);" onclick="aobata_editor.get().undoHistory();" class="icon-btn btn-undo" title="アンドゥ"><em>アンドゥ</em></a></div>
 		<div class="panel-parts"><a href="javascript:void(0);" onclick="aobata_editor.get().redoHistory();" class="icon-btn btn-redo interval" title="リドゥ"><em>リドゥ</em></a></div>
 		
 		<div class="panel-parts close-editor" style="float:right;"><a class="icon-btn btn-close" href="javascript:void(0);" onclick="if(aobata_editor.active)aobata_editor.active.doActive(false);" title="閉じる"><em>閉じる</em></a></div>
 		
-		<div class="panel-parts addelement-parts"><a class="icon-xme-btn btn-addelement" href="javascript:void(0);" title="セクションを追加" onclick="show_insert_lines(this);"><em><strong>セクションを追加</strong></em></a></div>
+		<div class="panel-parts addelement-parts"><a class="icon-xme-btn btn-addelement" href="javascript:void(0);" title="セクションを追加" onclick="aobata_editor.show_insert_lines(this);"><em><strong>セクションを追加</strong></em></a></div>
 	</div>
 </div>

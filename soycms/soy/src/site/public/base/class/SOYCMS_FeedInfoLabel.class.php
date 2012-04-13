@@ -97,7 +97,7 @@ class SOYCMS_FeedInfoLabel extends HTMLLabel{
 			$html[] = '<link rel="alternate" type="application/atom+xml" title="'.$title.'" href="'.soycms_get_page_url($page->getUri(),$config["uri"]).'" />';
 		}
 		
-		if(count($html)>0)$html[] = "";
+		//if(count($html)>0)$html[] = "";
 		
 		return implode("\n",$html);
 	}

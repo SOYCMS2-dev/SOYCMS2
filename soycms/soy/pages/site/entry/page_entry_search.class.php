@@ -71,12 +71,11 @@ class page_entry_search extends SOYCMS_WebPageBase{
 		
 		if(isset($_GET["word"]) && strlen($_GET["word"]) > 0){
 			$wheres[] = "(title LIKE :text OR content LIKE :text)";
-			$binds[":text"] = $_GET["word"];
+			$binds[":text"] = "%" . $_GET["word"] . "%";
 		}
 		
 		if(strlen($query->where) > 0 && count($wheres) > 0)$query->where .= " AND ";
-		$query->where .= implode(" AND ", $wheres); 
-		
+		$query->where .= implode(" AND ", $wheres);
 		$dao = $logic->getEntryDAO();
 		$total = clone($query);
 		$total->sql = "count(id) as entry_count";

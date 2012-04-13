@@ -67,53 +67,14 @@ class page_task_index extends SOYCMS_WebPageBase{
 	
 	function page_task_index(){
 		
-		if(isset($_GET["clear"])){
-			SOY2DAOFactory::create("SOYCMS_TaskDAO")->hideCompleteTask();
-			$this->jump("/task");
-		}
+		
 		
 		WebPage::WebPage();	
 	
 	}
 	
-	function main(){
-		$this->buildPages();
-	}
-	
-	function buildPages(){
-		$this->addForm("task_form",array("action"=>soycms_create_link("/task")));
-		$this->buildAddForm();
-		$this->buildTaskList();
-	}
-	
-	function buildTaskList(){
-		$list = SOY2DAO::find("SOYCMS_Task",array("status"=>1));
-		$this->createAdd("task_list","TaskList",array(
-			"list" => $list
-		));
-	}
-	
-	function buildAddForm(){
-		$task = new SOYCMS_Task();
-		
-		$this->addInput("add_task_title",array(
-			"name" => "NewTask[title]",
-			"value" => $task->getTitle()
-		));
-		
-		$this->addInput("add_task_from",array(
-			"name" => "NewTask[start]",
-			"value" => $task->getStart()
-		));
-		
-		$this->addInput("add_task_to",array(
-			"name" => "NewTask[end]",
-			"value" => $task->getEnd()
-		));
-		
-	}
-	
 	function getLayout(){
+		if(isset($_GET["layer"]))return "layer.php";
 		return ($this->_soy2_parent) ? "blank.php" : "default.php"; 
 	}
 	

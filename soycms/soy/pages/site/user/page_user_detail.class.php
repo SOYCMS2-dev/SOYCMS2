@@ -62,6 +62,14 @@ class page_user_detail extends SOYCMS_WebPageBase{
 		//権限を全て取得
 		$logic = $this->getRoleManager();
 		$permissions = $logic->getPermissions();
+		foreach($permissions as $key => $value){
+			if(strpos($key,".") !== false){
+				list($parent,$type) = explode(".",$key);
+				if(!isset($this->roles[$parent])){
+					unset($permissions[$key]);
+				}
+			}
+		}
 		
 		$this->createAdd("role_list","_class.list.RoleList",array(
 			"list" => $permissions,
@@ -83,6 +91,9 @@ class page_user_detail extends SOYCMS_WebPageBase{
 		
 	}
 	
+	/**
+	 * @return RoleManager
+	 */
 	function getRoleManager(){
 		$logic = SOY2Logic::createInstance("site.logic.workflow.RoleManager");
 		return $logic;

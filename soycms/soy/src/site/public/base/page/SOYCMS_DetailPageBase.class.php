@@ -179,7 +179,7 @@ class SOYCMS_DetailPageBase extends SOYCMS_SitePageBase{
 		
 		//block:comment_list
 		$this->createAdd("comment_list","SOYCMS_CommentListComponent",array(
-			"entry" => $entry,
+			"entry" => $this->isItemVisible("default:comment_list") ? $entry : null,
 			"soy2prefix" => "block",
 			"visible" => $this->isItemVisible("default:comment_list")
 		));

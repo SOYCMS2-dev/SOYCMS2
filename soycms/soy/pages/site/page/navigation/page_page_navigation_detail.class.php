@@ -45,8 +45,16 @@ class page_page_navigation_detail extends SOYCMS_WebPageBase{
 			
 			$this->navigation->save();
 			
-			SOYCMS_History::addHistory("navigation",$this->navigation);
+			SOYCMS_History::addHistory("navigation",array($this->navigation->getHistoryKey(),$this->navigation));
 			
+		}
+		
+		if(isset($_POST["navigation_ini"]) && isset($_GET["ini"]) && soy2_check_token()){
+			$path = SOYCMS_Navigation::getNavigationDirectory() . $this->navigation->getId() . "/navigation.ini";
+			$content = $_POST["navigation_ini"];
+			if(parse_ini_string($content)){
+				file_put_contents($path, $content);
+			}
 		}
 		
 		if(isset($_POST["ItemDelete"])){
@@ -82,7 +90,11 @@ class page_page_navigation_detail extends SOYCMS_WebPageBase{
 		
 		
 		
-		$this->jump("/page/navigation/check?id=" . $this->id . "&updated");
+		if(isset($_GET["template"])){
+			$this->jump("/page/navigation/detail?id=" . $this->id . "&template=".$this->navigation->getTemplateType()."&updated#navi_template");
+		}else{
+			$this->jump("/page/navigation/check?id=" . $this->id . "&updated");
+		}
 	}
 	
 	private $id;
@@ -101,6 +113,11 @@ class page_page_navigation_detail extends SOYCMS_WebPageBase{
 		}
 		$this->navigation->setItems($items);
 		
+		if(isset($_GET["template"])){
+			$this->navigation->setTemplateType($_GET["template"]);
+			$this->navigation->loadTemplate();
+		}
+		
 		parent::prepare();
 	}
 
@@ -109,6 +126,30 @@ class page_page_navigation_detail extends SOYCMS_WebPageBase{
 		
 		$this->createAdd("form","_class.form.NavigationForm",array(
 			"navigation" => $this->navigation
+		));
+		
+		$this->addModel("template_type_normal",array(
+			"visible" => count($this->navigation->getTemplates()) < 1
+		));
+		
+		$this->addModel("template_type_complex",array(
+			"visible" => count($this->navigation->getTemplates()) > 0
+		));
+		
+		$this->addModel("mode_ini",array(
+			"visible" => (isset($_GET["ini"]))
+		));
+		
+		$this->addTextArea("ini_content",array(
+			"name" => "navigation_ini",
+			"value" => (isset($_GET["ini"])) ? file_get_contents(SOYCMS_Navigation::getNavigationDirectory() . $this->navigation->getId() . "/navigation.ini") : ""
+		));
+		
+		
+		$this->createAdd("template_complex_type_list","_class.list.TemplateComplexTypeList",array(
+			"list" => $this->navigation->getTemplates(),
+			"link" => soycms_create_link("page/navigation/detail?id=" . $this->navigation->getId()),
+			"suffix" => "#navi_template"
 		));
 		
 		
@@ -123,7 +164,7 @@ class page_page_navigation_detail extends SOYCMS_WebPageBase{
 		$this->createAdd("history_index","page.history.page_page_history_index",array(
 			"type" => "navigation",
 			"name" => $this->navigation->getName(),
-			"objectId" => $this->id
+			"objectId" => $this->navigation->getHistoryKey()
 		));
 	}
 }

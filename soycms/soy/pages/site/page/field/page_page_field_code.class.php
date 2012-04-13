@@ -64,6 +64,13 @@ class page_page_field_code extends SOYCMS_WebPageBase{
 					$res[] = "" . $this->getSampleCode($_fields);
 					$res[] = "</div>";
 					break;
+				case "check":
+					$res[] = '<!-- cms:id="'.$fieldId.'" cms:separate="," -->チェック<!-- /cms:id="'.$fieldId.'" -->';
+					$res[] = '';
+					$res[] = '<!-- cms:id="'.$fieldId.'_list"  -->';
+					$res[] = '	<span cms:id="check_value">値</span>';
+					$res[] = '<!-- /cms:id="'.$fieldId.'_list"  -->';
+					break;
 				case "image":
 					$res[] = "<p>";
 					$res[] = "<img cms:id=\"{$fieldId}_image\" />";
@@ -81,7 +88,7 @@ class page_page_field_code extends SOYCMS_WebPageBase{
 				case "date":
 				case "datelabel":
 					$res[] = "<p>";
-					$res[] = "日時表示：<!-- cms:id=\"$fieldId\" cms:format=\"Y年n月j日\" /-->";
+					$res[] = "<!-- cms:id=\"$fieldId\" cms:format=\"Y年n月j日\" /-->";
 					$res[] = "ex)Timeタグを使った場合:<time cms:id=\"$fieldId\" cms:format=\"Y年n月j日\" cms:pubdate=\"Y-m-d\">".date("Y年n月j日")."</time>";
 					$res[] = "</p>";
 					break;
@@ -91,7 +98,7 @@ class page_page_field_code extends SOYCMS_WebPageBase{
 			
 			if($default){
 				$res[] = "<p>";
-				$res[] = "" . $config->getName() ."の値は<!-- cms:id=\"$fieldId\" /-->です。";
+				$res[] = "<!-- cms:id=\"$fieldId\" /-->";
 				$res[] = "</p>";
 			}
 			

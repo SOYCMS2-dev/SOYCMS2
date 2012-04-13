@@ -2,6 +2,7 @@
 function soycms_union_uri(){
 	
 	$arguments = func_get_args();
+	$isQuery = false;
 	
 	$tmp = array();
 	foreach($arguments as $key => $value){
@@ -22,11 +23,12 @@ function soycms_union_uri(){
 			$value = preg_replace('/^\/|\/$/',"",$value);
 		}
 		if(strlen($value)<1)continue;
+		if(!$isQuery && strpos($value,"?")!==false)$isQuery = true;
 		$tmp[] = $value;
 	}
 	
 	$last = $arguments[count($arguments)-1];
-	if(strpos($last,".")===false){
+	if(strpos($last,".")===false && !$isQuery){
 		$tmp[] = "";
 	}
 	

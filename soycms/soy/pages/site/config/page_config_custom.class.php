@@ -44,7 +44,6 @@ class page_config_custom extends SOYCMS_WebPageBase{
 		if(isset($_FILES["favicon"]) && $_FILES["favicon"]["size"] > 0){
 			$img = SOYCMS_ROOT_DIR . "content/" . SOYCMS_LOGIN_SITE_ID . ".ico";
 			$res = move_uploaded_file($_FILES["favicon"]["tmp_name"],$img);
-			if(file_exists($img))soy2_resizeimage($img,$img,32,32);
 		}
 		if(isset($_POST["custom_css"])){
 			$css = SOYCMS_ROOT_DIR . "content/" . SOYCMS_LOGIN_SITE_ID . ".css";

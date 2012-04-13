@@ -62,6 +62,12 @@ img:hover{
 	opacity:0.8;
 }
 
+/* iframe */
+iframe{
+	border:solid 2px #8b8b8b;
+	margin:10px;
+	padding:10px;
+}
 
 /*** hidden ***/
 .hidden-navi {

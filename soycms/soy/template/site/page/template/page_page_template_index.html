@@ -35,24 +35,13 @@
 							</ul>
 						</div>
 						
-						<!-- soy:id="group_list_exists" -->
-						<div class="template-group">
-							<h4>グループ</h4>
-							<ul>
-								<!-- soy:id="group_list" -->
-								<li><a soy:id="list_link"><!-- soy:id="group_name" /--></a></li>
-								<!-- /soy:id="group_list" -->
-							</ul>
-						</div>
-						<!-- /soy:id="group_list_exists" -->
-						
 						<h3>テンプレート一覧</h3>
 
 						<div class="save_order_wrap form-btn ce break" style="display:none;">
 							<input type="submit" value="表示順を保存する" id="post1-submit" name="post1-submit" class="l-btn-red" />
 						</div>
 
-						<div id="post1-section1" class="form-section">
+						<div class="form-section break">
 
 							<!-- soy:id="template_exists" -->
 							<table id="template_list" class="list-table">
@@ -71,9 +60,11 @@
 									<tr>
 										<td>
 											<span soy:id="template_color_box">■</span>
-											<!-- soy:id="template_name" -->テンプレート名A<!-- /template_name --></td>
+											<!-- soy:id="template_name" -->テンプレート名A<!-- /template_name -->
+										</td>
 										<td>
-											<!-- soy:id="template_type" -->テンプレート名A<!-- /template_type -->
+											<!-- soy:id="template_type" -->テンプレート名A<!-- /template_type --><br />
+											<!-- soy:id="template_id_text" -->template id<!-- /soy:id="template_id_text" -->
 										</td>
 										<td>
 											<!-- soy:id="page_list" -->
@@ -104,7 +95,59 @@
 							<p>テンプレートはありません</p>
 							<!-- /soy:id="template_not_exists" -->
 
-							</div>
+						</div>
+					
+						<!-- soy:id="group_list" -->
+						<div class="form-section under">
+							<h3><!-- soy:id="group_name" /--></h3>
+							
+							<table id="template_list" class="list-table">
+								<thead>
+									<tr>
+										<th width="18%" scope="col">テンプレート名</th>
+										<th width="12%" class="col" scope="col">種類</th>
+										<th width="30%" scope="col">使用中のディレクトリ・ページ</th>
+										<th width="10%" class="s-cell" scope="col">プレビュー</th>
+										<th width="10%" class="s-cell" scope="col">表示順</th>
+										<th width="10%" class="s-cell" scope="col">設定</th>
+									</tr>
+								</thead>
+								<tbody>
+									<!-- soy:id="group_template_list" -->
+									<tr>
+										<td>
+											<span soy:id="template_color_box">■</span>
+											<!-- soy:id="template_name" -->テンプレート名A<!-- /template_name -->
+										</td>
+										<td>
+											<!-- soy:id="template_type" -->テンプレート名A<!-- /template_type --><br />
+											<!-- soy:id="template_id_text" -->template id<!-- /soy:id="template_id_text" -->
+										</td>
+										<td>
+											<!-- soy:id="page_list" -->
+												<a soy:id="page_link">ディレクトリへのリンク</a>
+												<!-- soy:id="not_last" -->|<!-- /soy:id="not_last" -->
+											<!-- /soy:id="page_list" -->
+										</td>
+										<td>
+											<a soy:id="preview_link">プレビュー</a>
+										</td>
+										<td>
+											<a href="javascript:void(0);" class="sh-btn up_btn"><em>↑</em></a>
+											<a href="javascript:void(0);" class="sh-btn down_btn"><em>↓</em></a>
+										</td>
+										<td>
+											<input type="hidden" soy:id="template_order" />
+											<a soy:id="template_edit_link" class="sh-btn"><em>編集</em></a>
+											<a soy:id="template_copy_link" class="sh-btn"><em>コピー</em></a>
+											<a soy:id="template_remove_link" class="sh-btn"><em>削除</em></a>
+										</td>
+									</tr>
+									<!-- /soy:id="group_template_list" -->
+								</tbody>
+							</table>
+						</div>
+						<!-- /soy:id="group_list" -->
 					</div>
 
 					<div class="save_order_wrap form-btn ce under" style="display:none;">

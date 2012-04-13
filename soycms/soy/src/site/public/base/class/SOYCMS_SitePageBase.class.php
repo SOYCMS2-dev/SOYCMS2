@@ -10,7 +10,7 @@ class SOYCMS_SitePageBase extends WebPage{
 	function SOYCMS_SitePageBase($args = array()){
 		$this->setPageObject($args["page"]);
 		$this->setArguments($args["arguments"]);
-
+		
 		WebPage::WebPage();
 	}
 	
@@ -30,7 +30,6 @@ class SOYCMS_SitePageBase extends WebPage{
 	 * 共通のbuild
 	 */
 	public final function common_build($args){
-		
 		$pageObj = $this->getPageObject();
 		$config = $pageObj->getConfigObject();
 		
@@ -39,7 +38,6 @@ class SOYCMS_SitePageBase extends WebPage{
 			"htmlObj" => $this,
 			"pageObj" => $pageObj
 		));
-		
 		
 		//該当ページの公開設定確認
 		$this->checkPagePublicConfig($config);
@@ -77,6 +75,7 @@ class SOYCMS_SitePageBase extends WebPage{
 		}
 		
 		$this->build($args);
+	
 	}
 	
 	/**
@@ -85,6 +84,24 @@ class SOYCMS_SitePageBase extends WebPage{
 	 * Basic認証を発行する
 	 */
 	function checkPagePublicConfig($config){
+		
+		//プラグイン拡張
+		if(!is_numeric($config["public"])){
+			PluginManager::load("soycms.site.page.permisson");
+			$delegate = PluginManager::invoke("soycms.site.page.permisson",array(
+				"mode" => "page",
+				"pageId" => $this->getPageObject()->getId(),
+				"moduleId" => $config["public"]
+			));
+			
+			//error
+			if(!$delegate->getResult()){
+				throw new Exception("closed");
+			}else{
+				return true;
+			}
+		}
+		
 		//非公開の時
 		if(@$config["public"] < 1){
 			
@@ -123,6 +140,7 @@ class SOYCMS_SitePageBase extends WebPage{
 	public final function common_execute(){
 		$pageObj = $this->getPageObject();
 		$config = $pageObj->getConfigObject();
+		$dirConfig = $this->directoryObject->getConfigObject();
 		
 		//invoke event
 		PluginManager::invoke("soycms.site.public.common_execute",array(
@@ -148,15 +166,26 @@ class SOYCMS_SitePageBase extends WebPage{
 		$this->addLink("site_link",array("link" => soycms_get_site_url(), "soy2prefix" => "cms"));
 		$this->addLink("site_url",array("text" => soycms_get_site_url(), "soy2prefix" => "cms"));
 		
+		$current_url = $_SERVER["REQUEST_URI"];
+		if(strpos($current_url,"?") !== false)$current_url = substr($current_url, 0, strpos($current_url,"?"));
+		if(strpos($current_url,"/index.html") !== false)$current_url = substr($current_url, 0, strpos($current_url,"/index.html"));
+		if(strpos($current_url, ".") === false && strlen($current_url) > 1 && $current_url[strlen($current_url)-1] != "/")$current_url .= "/";
+		
+		$this->addModel("page_link",array(
+			"link" => $current_url,
+			"soy2prefix" => "cms"
+		));
+		
 		//meta
-		$this->buildPageInfo($config);
+		$this->buildPageInfo($config,$dirConfig);
 		
 		$title = (strlen(@$config["title"]) > 0) ? @$config["title"] : $pageObj->getName();
 		$title = $this->convertTitle($title);
 		$this->setTitle($title);
 		
 		//for fix cache
-		$this->getBodyElement();$this->getHeadElement();
+		$this->getBodyElement();
+		$this->getHeadElement();
 		
 		//dynamic edit link
 		//ダイナミック編集中ではない時かつログインしている時
@@ -171,6 +200,31 @@ class SOYCMS_SitePageBase extends WebPage{
 			SOYCMS_DynamicEditHelper::prepare($this);
 		}
 		
+		//記事ブロックのカスタムフィールドの処理
+		//SOYCMS_EntryListComponentからのコピー
+		//記事のカスタムフィールドを全体でも利用するため
+		$commonConfig = SOYCMS_ObjectCustomFieldConfig::loadConfig("common");
+		$values = SOYCMS_ObjectCustomField::getValues("entry",SOYCMS_Helper::get("entry_id"));
+		
+		foreach($commonConfig as $key => $fieldConfig){
+			if(isset($values[$key])){
+				$value = $values[$key];
+			}else{
+				$value = $fieldConfig->getValueObject();
+				if($fieldConfig->isMulti()){
+					$value = array($value);
+				}
+			}
+			SOYCMS_ObjectCustomFieldHelper::build($this,$fieldConfig,$value);
+		}
+		
+		//
+		if(@SOYCMS_ADMIN_LOGINED){
+			//SOY2::import("site.public.dynamic.SOYCMS_DynamicEditHelper");
+			//if(strpos($config["content-type"],"html") !== false){
+			//	$this->getBodyElement()->appendHTML(SOYCMS_DynamicEditHelper::getTaskHTML());
+			//}
+		}
 	}
 	
 	/**
@@ -266,47 +320,17 @@ class SOYCMS_SitePageBase extends WebPage{
 		
 		$properties = (file_exists($propertyFile)) ? @parse_ini_file($propertyFile) : array();
 		$_properties = $this->pageObject->getProperties();
-	   	foreach($properties as $key => $value){
-	   		if(isset($_properties[$key])){
-	   			$properties[$key] = $_properties[$key];
-	   		}
-	   		
-	   		$this->_soy2_content = 
-	   			str_replace("##" . $key . "##", '<?php echo $page["_properties"]["'.$key.'"]; ?>' ,$this->_soy2_content);
-	   	}
-	   	
-	   	$this->_soy2_page["_properties"] = $properties;
-	   	
-	}
-	
-	//プラグインの実行
-	function executePlugin($key,$plugin){
-		while(true){
-			list($tag,$line,$innerHTML,$outerHTML,$value,$suffix,$skipendtag,$startnewline,$endnewline) =
-				$plugin->parse($key,"[a-zA-Z0-9\-_.]+",$this->_soy2_content);
-			
-			if(!strlen($tag))break;
-			$plugin->_attribute = array();
-			
-			$plugin->setTag($tag);
-			$plugin->setStartNewLine($startnewline);
-			$plugin->setEndNewLine($endnewline);
-			
-			$plugin->parseAttributes($line);
-			$plugin->setInnerHTML($innerHTML);
-			$plugin->setOuterHTML($outerHTML);
-			$plugin->setParent($this);
-			$plugin->setSkipEndTag($skipendtag);
-			$plugin->setSoyValue($value);
-			$plugin->execute();
-
-			$this->_soy2_content = $this->getContent($plugin,$this->_soy2_content);
-			
-			//閉じ忘れ対策
-			if(!$outerHTML){
-				$this->_soy2_content = str_replace("<".$line.">","",$this->_soy2_content);
+		foreach($properties as $key => $value){
+			if(isset($_properties[$key])){
+				$properties[$key] = $_properties[$key];
 			}
+			
+			$this->_soy2_content = 
+				str_replace("##" . $key . "##", '<?php echo $page["_properties"]["'.$key.'"]; ?>' ,$this->_soy2_content);
 		}
+		
+		$this->_soy2_page["_properties"] = $properties;
+		
 	}
 	
 	/**
@@ -341,7 +365,8 @@ class SOYCMS_SitePageBase extends WebPage{
 				}
 			}else{
 				$this->addModel($item->getType() . "_" . $item->getId() . "_wrap",array(
-					"visible" => $visible
+					"visible" => $visible,
+					"soy2prefix" => "soy"
 				));
 			}
 		}
@@ -350,7 +375,7 @@ class SOYCMS_SitePageBase extends WebPage{
 	/**
 	 * Metaとか
 	 */
-	function buildPageInfo($config){		
+	function buildPageInfo($config,$dirConfig){
 		
 		$this->addMeta("meta_content_type",array(
 			"attr:http-equiv" => "Content-Type",			
@@ -382,14 +407,24 @@ class SOYCMS_SitePageBase extends WebPage{
 			"attr:name" => "keywords",
 			"attr:content" => (@$config["keyword"]) ? @$config["keyword"] : "", 
 			"soy2prefix" => "cms",
-			"visible" => (strlen((@$config["keyword"])))
+			//"visible" => (strlen((@$config["keyword"])))
 		));
 		
 		$this->addMeta("meta_description",array(
 			"attr:name" => "description",
 			"attr:content" => (@$config["description"]) ? @$config["description"] : "",
 			"soy2prefix" => "cms",
-			"visible" => (strlen((@$config["description"])))
+			//"visible" => (strlen((@$config["description"])))
+		));
+		$this->addLabel("page_description",array(
+			"html" => (@$config["description"]) ? nl2br(htmlspecialchars($config["description"])) : "",
+			"soy2prefix" => "cms",
+			//"visible" => (strlen(@$config["description"]) > 0)
+		));
+		$this->addLabel("dir_description",array(
+			"html" => (@$dirConfig["description"]) ? nl2br(htmlspecialchars($dirConfig["description"])) : "",
+			"soy2prefix" => "cms",
+			//"visible" => (strlen(@$dirConfig["description"]) > 0)
 		));
 		
 		//標準のfaviconを使う
@@ -410,6 +445,18 @@ class SOYCMS_SitePageBase extends WebPage{
 			"visible" => (strlen($config["favicon"]) > 0),
 			"soy2prefix" => "cms"
 		));
+		
+		$this->addImage("page_image",array(
+			"src" => @$config["image"],
+			"visible" => (strlen($config["image"]) > 0),
+			"soy2prefix" => "cms"
+		));
+		$this->addImage("dir_image",array(
+			"src" => @$dirConfig["image"],
+			"visible" => (strlen($dirConfig["image"]) > 0),
+			"soy2prefix" => "cms"
+		));
+		
 		
 		$this->addModel("link_start",array(
 			"attr:rel" => "start",
@@ -457,8 +504,9 @@ class SOYCMS_SitePageBase extends WebPage{
 	 * ディレクトリのカテゴリリスト
 	 */
 	function buildDirectoryLabeList(){
+		
 		$labels = 
-			($this->isItemVisible("default:directory_label_list")) 
+			($this->isItemVisible("default:directory_label_list",false)) 
 				? SOY2DAO::find("SOYCMS_Label",array("directory" => $this->directoryObject->getId()))
 				: array();
 		

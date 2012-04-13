@@ -4,7 +4,7 @@ class SOYCMS_SuperCachePlugin extends SOYCMS_SiteControllerExtension{
 	private $isBuildCache = true;
 	private $config = array();
 	
-	function prepare(){
+	function prepare($controller){
 		if(defined("SOYCMS_ADMIN_LOGINED"))return;
 		
 		//POST時はキャッシュを生成しない
@@ -23,7 +23,7 @@ class SOYCMS_SuperCachePlugin extends SOYCMS_SiteControllerExtension{
 		}
 	}
 	
-	function tearDown(){
+	function tearDown($controller){
 		if(defined("SOYCMS_ADMIN_LOGINED"))return;
 		if(!$this->isBuildCache)return;
 		
@@ -34,6 +34,7 @@ class SOYCMS_SuperCachePlugin extends SOYCMS_SiteControllerExtension{
 		ob_end_clean();
 		
 		
+		$cache_created = false;
 		
 		//キャッシュを生成するか判定
 		$uri = SOYCMS_Helper::get("directory_uri");
@@ -47,10 +48,17 @@ class SOYCMS_SuperCachePlugin extends SOYCMS_SiteControllerExtension{
 				
 				if($page->getType() != "app" && $page->getType() != "search"){
 					//create cache
-					$this->createCache($html,(@$this->config["footprint"] > 0),$pages[$uri]["limit"]);	
+					$this->createCache($html,(@$this->config["footprint"] > 0),$pages[$uri]["limit"]);
+					$cache_created = true;
 				}
 			}
 		}
+		
+		if(!$cache_created){
+			echo $html;
+			return;
+		}
+		
 		
 		ob_start();
 			$ob = ob_start("ob_gzhandler");
@@ -58,7 +66,6 @@ class SOYCMS_SuperCachePlugin extends SOYCMS_SiteControllerExtension{
 			if($ob) ob_end_flush();
 			header("Content-Length: ".ob_get_length(), true);
 		ob_end_flush();
-		
 		
 	}
 	
@@ -123,6 +130,11 @@ class SOYCMS_SuperCachePlugin extends SOYCMS_SiteControllerExtension{
 		}
 		
 		//生成日時
+		$h[] = 'header("Cache-Control: max-age=" . ('.$limitTime.' - time()));';
+		$h[] = 'if (session_id()) {';
+		$h[] = 'header("Expires: " . gmdate("D, d M Y H:i:s T",'.$limitTime.'));';
+		$h[] = 'header("Pragma: cache");';
+		$h[] = '}';
 		$h[] = "header(\"Last-Modified: ".gmdate("D, d M Y H:i:s T", filemtime($cacheFilePath))."\");";
 		$h[] = "return true;";
 		$h[] = "}";
@@ -140,7 +152,7 @@ class SOYCMS_SuperCachePlugin extends SOYCMS_SiteControllerExtension{
 	
 	function getCacheFilePath(){
 		$cacheDir = SOY2HTMLConfig::CacheDir() . "supercache/";
-		$dirName = str_replace("/","_",str_replace(soycms_get_site_path(),"",@$_SERVER["REQUEST_URI"]));
+		$dirName = str_replace(array("/","\\"),"_",str_replace(soycms_get_site_path(),"",@$_SERVER["REQUEST_URI"]));
 		$md5_pathinfo = md5(@$_SERVER["REQUEST_URI"]);
 		$cache = "{$cacheDir}{$dirName}/{$md5_pathinfo[0]}/{$md5_pathinfo}.html";
 		return $cache;

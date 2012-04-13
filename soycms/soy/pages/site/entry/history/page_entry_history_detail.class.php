@@ -1,4 +1,5 @@
 <?php
+SOY2::import("site.logic.entry.SOYCMS_EditorManager");
 
 class page_entry_history_detail extends SOYCMS_WebPageBase{
 
@@ -111,8 +112,8 @@ class page_entry_history_detail extends SOYCMS_WebPageBase{
 			$sections[$key]->setType("preview");
 		}
 		
-		$this->createAdd("section_list","entry.page_entry_editor",array(
-			"arguments" => array($sections)
+		$this->addLabel("section_list",array(
+			"html" => SOYCMS_EditorManager::buildSections($sections)
 		));
 		
 		
@@ -130,7 +131,7 @@ class page_entry_history_detail extends SOYCMS_WebPageBase{
 	function getAdminName($id){
 		try{
 			$admin = SOY2DAOFactory::create("SOYCMS_UserDAO")->getById($id);
-			return $admin->getName(); 	
+			return $admin->getName();
 		}catch(Exception $e){
 			return "User#" . $id;
 		}

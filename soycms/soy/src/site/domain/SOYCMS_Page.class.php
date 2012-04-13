@@ -115,7 +115,14 @@ class SOYCMS_Page extends SOY2DAO_EntityBase{
 	 */
 	function getPageDirectory(){
 		$class = str_replace(array("-","/","."),"_",$this->getUri());
-		$dir = SOYCMS_SITE_DIRECTORY . ".page/" . $class . "/";
+		
+		if(SOYCMSConfigUtil::get("page_class_dir")){
+			$dir = SOYCMSConfigUtil::get("page_class_dir"). $class . "/";
+		}else{
+			$dir = SOYCMS_SITE_DIRECTORY . ".page/" . $class . "/";
+		}
+		
+		
 		if(!file_exists($dir)){
 			mkdir($dir,0755);
 		}
@@ -126,7 +133,7 @@ class SOYCMS_Page extends SOY2DAO_EntityBase{
 	 * オブジェクトの設定ファイル
 	 */
 	function getConfigFilePath(){
-		return $this->getPageDirectory() . "object.ini"; 
+		return $this->getPageDirectory() . "object.ini";
 	}
 	
 	/**
@@ -163,7 +170,7 @@ class SOYCMS_Page extends SOY2DAO_EntityBase{
 		}
 		
 		return $obj;
-	}	
+	}
 	
 	/**
 	 * 種別のテキスト
@@ -177,7 +184,7 @@ class SOYCMS_Page extends SOY2DAO_EntityBase{
 			"search" => "検索",
 			"app" => "アプリケーション",
 			".feed" => "フィード",
-			".error" => "エラー" 
+			".error" => "エラー"
 		);
 
 		return $types[$this->type];
@@ -197,7 +204,18 @@ class SOYCMS_Page extends SOY2DAO_EntityBase{
 		if($this->isUseCustomTemplate()){
 			return $this->getPageDirectory() . "template.html";
 		}else{
-			return SOYCMS_Template::getTemplateDirectory() . $this->template . "/template.html";
+			if(is_array($this->template)){
+				$filename = $this->template[1];
+				if(false === strpos($filename, "."))$filename .= ".html";
+				return SOYCMS_Template::getTemplateDirectory() . $this->template[0] . "/". $filename;
+			}else{
+				$dir = SOYCMS_Template::getTemplateDirectory() . $this->template . "/";
+				$lang = SOY2HTMLConfig::Language();
+				if($lang && file_exists($dir . $lang . ".html")){
+					return $dir . $lang . ".html";
+				}
+				return $dir . "template.html";
+			}
 		}
 	}
 	
@@ -205,7 +223,7 @@ class SOYCMS_Page extends SOY2DAO_EntityBase{
 	 * Itemを取得
 	 */
 	function getItems($type = null){
-		$isUseCustomTemplate = $this->isUseCustomTemplate(); 
+		$isUseCustomTemplate = $this->isUseCustomTemplate();
 		$items = array();
 		if(!$isUseCustomTemplate){
 			$template = SOYCMS_Template::load($this->getTemplate());
@@ -291,7 +309,7 @@ class SOYCMS_Page extends SOY2DAO_EntityBase{
 		if(empty($this->properties)){
 			$dir = $this->getPageDirectory();
 			if(file_exists($dir . "properties.ini")){
-				$this->properties = parse_ini_file($dir . "properties.ini",true);	
+				$this->properties = parse_ini_file($dir . "properties.ini",true);
 			}
 		}
 		return $this->properties;
@@ -367,8 +385,9 @@ class SOYCMS_Page extends SOY2DAO_EntityBase{
 					"title" => "#PageName# - #DirName# - #SiteName#",
 					"openPeriodStart" => null,
 					"openPeriodEnd" => null,
-					"public" => 1	,			//基本公開
+					"public" => 1,			//基本公開
 					"icon" => $type . ".gif",
+					"image" => "",
 					"favicon" => "",
 					"order" => 10
 			);
@@ -503,7 +522,7 @@ abstract class SOYCMS_PageDAO extends SOY2DAO{
 	/**
 	 * @trigger onUpdate
 	 */
-	abstract function update(SOYCMS_Page $bean);	
+	abstract function update(SOYCMS_Page $bean);
 	
 	/**
 	 * @trigger onDelete
@@ -546,6 +565,11 @@ abstract class SOYCMS_PageDAO extends SOY2DAO{
 	 * @final
 	 */
 	function onUpdate($sql,$binds){
+		//entry
+		if(isset($binds[":id"])){
+			SOY2DAOFactory::create("SOYCMS_EntryDAO")->updateDirectoryUri($binds[":uri"],$binds[":id"]);
+		}
+		
 		$binds[":updateDate"] = time();
 		return array($sql,$binds);
 	}

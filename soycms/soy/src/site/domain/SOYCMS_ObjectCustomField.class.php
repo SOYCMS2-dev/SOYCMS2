@@ -5,7 +5,7 @@
 class SOYCMS_ObjectCustomField extends SOY2DAO_EntityBase{
 	
 	public static function getValues($object,$objectId){
-		$dao = SOY2DAOFactory::create("SOYCMS_ObjectCustomFieldDAO");
+		$dao = SOY2DAOContainer::get("SOYCMS_ObjectCustomFieldDAO");
 		$values = $dao->getByParams($object,$objectId);
 		$res = array();
 		foreach($values as $value){
@@ -34,17 +34,21 @@ class SOYCMS_ObjectCustomField extends SOY2DAO_EntityBase{
 	}
 	
 	private static function _setValues($object,$objectId,$values,$configs){
-		$dao = SOY2DAOFactory::create("SOYCMS_ObjectCustomFieldDAO");
+		$dao = SOY2DAOContainer::get("SOYCMS_ObjectCustomFieldDAO");
 		$dao->deleteByParams($object,$objectId);
 		
 		foreach($values as $key => $value){
-			if(!isset($configs[$key]))continue;
+			if(!isset($configs[$key])){
+				continue;
+			}
+			
+			$type = $configs[$key]->getType();
 			
 			$obj = new SOYCMS_ObjectCustomField();
 			$obj->setFieldId($key);
 			$obj->setObject($object);
 			$obj->setObjectId($objectId);
-			$obj->setType($configs[$key]->getType());
+			$obj->setType($type);
 			
 			if($configs[$key]->isMulti()){
 				$counter = 0;
@@ -56,13 +60,68 @@ class SOYCMS_ObjectCustomField extends SOY2DAO_EntityBase{
 					$dao->insert($obj);
 					$counter++;
 				}
+			}else if($type == "check"){
+				$counter = 0;
+				if(is_array($value)){
+					foreach($value as $_index => $_value){
+						if(!is_numeric($_index))continue;
+						$obj->setIndex($counter);
+						$obj->setValue($_value);
+						$obj->setText($_value);
+						$dao->insert($obj);
+						$counter++;
+					}
+				}
+			}else if($type == "input"){
+				if(is_array($value))$value = implode("-",$value);
+				$obj->setValue($value);
+				$obj->setText($value);
+				$dao->insert($obj);
 			}else{
 				$obj->setValue($value);
 				$obj->setText($value);
 				$dao->insert($obj);
 			}
 		}
+	}
+	
+	/**
+	 * @return boolean
+	 */
+	function isEmpty(){
+		$tmp = $this->getValueObject();
+		if(is_array($tmp)){
+			$empty = true;
+			foreach($tmp as $_value){
+				if(is_object($_value)){
+					$empty &= $_value->isEmpty();
+				}else{
+					$empty &= empty($_value);
+				}
+			}
+			return $empty;
+		}
 		
+		return empty($this->value);
+	}
+	
+	function toString(){
+		switch($this->type){
+			case "date":
+				return (is_numeric($this->value)) ? date("Y-m-d",$this->value) : null;
+			case "datetime":
+				return (is_numeric($this->value)) ? date("Y-m-d H:i",$this->value) : null;
+			case "group":
+				$res = array();
+				$values = $this->getValueObject();
+				foreach($values as $value){
+					$res[] = $value->toString();
+				}
+				return implode(" ",$res);
+				break;
+			default:
+				return $this->getText();
+		}
 	}
 	
 	
@@ -139,9 +198,23 @@ class SOYCMS_ObjectCustomField extends SOY2DAO_EntityBase{
 		return $this->value;
 	}
 	function setValue($value) {
+		if($value instanceof SOYCMS_ObjectCustomField){
+			$value = $value->getValue();
+		}
+		
+		if($this->type == "date" && is_array($value)){
+			$_value = implode("-",$value);
+			if(preg_match("/^\d+-\d+-\d+$/",$_value)){
+				$value = $_value;
+				$this->setText($value);
+				$value = strtotime($value);
+			}
+		}
+		
 		if(($this->type == "date" || $this->type == "datetime" || $this->type == "time") && is_array($value)){
 			$value = implode(" ",$value);
 			if(strlen($value) > 1){
+				$this->setText($value);
 				$value = strtotime($value);
 			}else{
 				$value = null;
@@ -149,8 +222,30 @@ class SOYCMS_ObjectCustomField extends SOY2DAO_EntityBase{
 		}
 		
 		if($this->type == "group" && is_array($value)){
+			$fields = SOYCMS_ObjectCustomFieldConfig::loadConfig("_" . $this->getFieldId());
 			foreach($value as $key => $_value){
+				$config = @$fields[$key];
+				if(!$config)continue;
+				
+				if($config->getType() == "check"){
+					$array = array();
+					$counter = 0;
+					foreach($_value as $_index => $selectedValue){
+						if(!is_numeric($_index))continue;
+						$obj = clone($this);
+						$obj->setIndex($counter);
+						$obj->setValue($selectedValue);
+						$obj->setText($selectedValue);
+						$array[] = $obj;
+						$counter++;
+					}
+					$value[$key] = $array;
+					continue;
+				}
+				
+				
 				$_valueObj = new SOYCMS_ObjectCustomField();
+				$_valueObj->setType($config->getType());
 				$_valueObj->setValue($_value);
 				$value[$key] = $_valueObj;
 			}
@@ -162,9 +257,14 @@ class SOYCMS_ObjectCustomField extends SOY2DAO_EntityBase{
 		$this->value = $value;
 	}
 	function getText() {
+		if(strlen($this->text) < 1)return $this->value;
 		return $this->text;
 	}
 	function setText($text) {
+		if($text instanceof SOYCMS_ObjectCustomField){
+			$text = $text->getValue();
+		}
+		
 		if(is_array($text)){
 			$text = soy2_serialize($text);
 		}
@@ -172,7 +272,16 @@ class SOYCMS_ObjectCustomField extends SOY2DAO_EntityBase{
 	}
 	
 	function getValueObject(){
-		return soy2_unserialize($this->getValue());
+		$res = @soy2_unserialize($this->getValue());
+		if($res === false){
+			return null;
+		}
+		
+		return $res;
+	}
+	
+	function __toString(){
+		return $this->getText();
 	}
 
 	function getIndex() {
@@ -204,9 +313,26 @@ abstract class SOYCMS_ObjectCustomFieldDAO extends SOY2DAO{
 	abstract function get();
 	
 	/**
+	 * @final
+	 */
+	function getByParams($object,$objectId,$fieldId = null){
+		if($fieldId){
+			return $this->getObjectByParams($object,$objectId,$fieldId);
+		}else{
+			return $this->getByParamsImpl($object,$objectId);
+		}
+	}
+	
+	/**
 	 * @query #object# = :object AND #objectId# = :objectId
 	 */
-	abstract function getByParams($object,$objectId);
+	abstract function getByParamsImpl($object,$objectId);
+	
+	/**
+	 * @return object
+	 * @query #object# = :object AND #objectId# = :objectId AND #fieldId# = :fieldId
+	 */
+	abstract function getObjectByParams($object,$objectId,$fieldId);
 	
 } 
 
@@ -217,10 +343,21 @@ class SOYCMS_ObjectCustomFieldConfig{
 	 */
 	public static function loadConfig($type){
 		$dir = self::getConfigDirectory();
-		$filepath = $dir . $type . ".ini";
+		$filepath = $dir . str_replace("/","-",$type);
 		
-		if(file_exists($filepath)){
-			$res = soy2_unserialize(file_get_contents($filepath));
+		if(file_exists($filepath . ".json")){
+			$res = json_decode(file_get_contents($filepath . ".json"));
+			if($res){
+				$result = array();
+				foreach($res as $key => $array){
+					$result[$key] = SOY2::cast("SOYCMS_ObjectCustomFieldConfig",$array);
+				}
+				return $result;
+			}
+		}
+		
+		if(file_exists($filepath . ".ini")){
+			$res = soy2_unserialize(file_get_contents($filepath . ".ini"));
 			if($res && is_array($res)){
 				return $res;
 			}
@@ -251,17 +388,26 @@ class SOYCMS_ObjectCustomFieldConfig{
 	 */
 	public static function saveConfig($type,$configs){
 		$dir = self::getConfigDirectory();
-		$filepath = $dir . $type . ".ini";
+		$filepath = $dir . $type . ".json"; /* 20110725 jsonに変更 */
 		
 		$res = array();
 		foreach($configs as $config){
-			$res[$config->getFieldId()] = $config;
+			$fieldId = $config->getFieldId();
+			$fieldId = str_replace("-","_",$fieldId);
+			$config->setFieldId($fieldId);
+			
+			$res[$fieldId] = SOY2::cast("object",$config);
 		}
 		
-		file_put_contents($filepath, soy2_serialize($res));
+		file_put_contents($filepath, json_encode($res));
 	}
 	
 	public static function getConfigDirectory(){
+		
+		if(SOYCMSConfigUtil::get("field_dir")){
+			return SOYCMSConfigUtil::get("field_dir");
+		}
+		
 		$dir = SOYCMS_SITE_DIRECTORY . ".field/";
 		if(!file_exists($dir)){
 			mkdir($dir,0755);
@@ -275,7 +421,8 @@ class SOYCMS_ObjectCustomFieldConfig{
 	public static function getTypes(){
 		$types = self::getChildTypes();
 		$types["group"] = "グループ";
-		$types["wysiwyg"] = "HTML";
+		$types["wysiwyg"] = "HTML(WYSIWYGエディタ)";
+		$types["html"] = "HTML";
 		return $types;
 	}
 	
@@ -304,7 +451,10 @@ class SOYCMS_ObjectCustomFieldConfig{
 		return array(
 			"input" => "テキスト",
 			"multi" =>"複数行テキスト",
+			"number" => "数値",
+			"alphabet" => "半角英数字",
 			"checkbox" => "チェックボックス",
+			"check" => "チェックボックス(複数)",
 			"radio" => "ラジオボタン",
 			"select" => "セレクトボックス",
 			"url" => "URL",
@@ -341,7 +491,6 @@ class SOYCMS_ObjectCustomFieldConfig{
 		foreach($configs as $key => $config){
 			if(empty($key))unset($configs[$key]);
 		}
-		
 		self::saveConfig("_" . $this->getFieldId(),$configs);
 	}
 	
@@ -367,6 +516,9 @@ class SOYCMS_ObjectCustomFieldConfig{
 		return (boolean)$this->multi;
 	}
 	
+	function getTemplate(){
+		return @$this->config["template"];
+	}
 	function getDefaultValue(){
 		return @$this->config["defaultValue"];
 	}
@@ -375,6 +527,22 @@ class SOYCMS_ObjectCustomFieldConfig{
 	}
 	function getOption(){
 		return @$this->config["option"];
+	}
+	
+	function getOptionsArray(){
+		$res = array();
+		$options = explode("\n",str_replace(array("\r\n","\r"),"\n",$this->getOption()));
+		foreach($options as $key => $value){
+			$value = trim($value);
+			if(strlen($value) < 1)continue;
+			if(strpos($value,":")){
+				list($key,$value) = explode(":",$value);
+			}
+			
+			$res[$key] = $value;
+		}
+		
+		return $res;
 	}
 	
 	function getDescription(){
@@ -412,7 +580,7 @@ class SOYCMS_ObjectCustomFieldConfig{
 		return $this->config;
 	}
 	function setConfig($config) {
-		$this->config = $config;
+		$this->config = (array)$config;
 	}
 
 	function getEditable() {

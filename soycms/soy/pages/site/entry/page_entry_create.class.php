@@ -34,6 +34,7 @@ class page_entry_create extends SOYCMS_WebPageBase{
 				$id = $args[0];
 				$page = SOY2DAO::find("SOYCMS_Page",$id);
 				$entry->setDirectory($id);
+				$entry->setDirectoryUri($page->getUri());
 				
 				//一度保存
 				$entry->save();
@@ -95,6 +96,14 @@ class page_entry_create extends SOYCMS_WebPageBase{
 				
 				//addHistory
 				$entry->save();
+				
+				//属性の保存
+				if(isset($_GET["attribute"]) && is_array($_GET["attribute"])){
+					foreach($_GET["attribute"] as $key => $value){
+						SOYCMS_EntryAttribute::put($entry->getId(), $key, $value);
+					}
+				}
+				
 				$this->jump("/entry/detail/" . $entry->getId() . "?created");
 				
 			}catch(Exception $e){
@@ -107,6 +116,10 @@ class page_entry_create extends SOYCMS_WebPageBase{
 		
 		//ツリーを表示
 		$this->createAdd("directory_tree","_class.list.EntryTreeComponent",array(
+		));
+		
+		$this->addLabel("entry_create_attribute",array(
+			"html" => (!empty($_GET["attribute"])) ? json_encode($_GET["attribute"]) : "{}"
 		));
 	}
 	

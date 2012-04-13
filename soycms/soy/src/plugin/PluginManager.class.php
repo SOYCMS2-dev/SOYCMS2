@@ -3,8 +3,8 @@ SOY2::import("plugin.PluginInfo");
 
 /**
  * 準備
- * 
- * PluginManager::load(ext,module) ... 
+ *
+ * PluginManager::load(ext,module) ...
  */
 class PluginManager extends SOY2Plugin{
 	
@@ -38,7 +38,7 @@ class PluginManager extends SOY2Plugin{
 		$extensionId = preg_replace('/\.\*$/',"",$extensionId);
 		
 		//delegetorの読み込み
-		@SOY2::import("plugin.extensions.",$extensionId . ".php");
+		SOY2::import("plugin.extensions.",$extensionId . ".php");
 		
 		if(in_array(array($extensionId, $module), $loaded)){
 			return;
@@ -53,6 +53,7 @@ class PluginManager extends SOY2Plugin{
 					$plugin->load($extensionId);
 				}
 			}
+			
 
 		}else{
 			$plugin = self::getPluginInfo($module);
@@ -83,16 +84,26 @@ class PluginManager extends SOY2Plugin{
 		
 		foreach($files as $file){
 			$id = str_replace(".active","",$file);
-			if(file_exists($pluginDir . $id) && is_dir($pluginDir . $id)){
-				$this->plugins[$id] = new PluginInfo($id,soy2_realpath($pluginDir . $id));
-				$this->plugins[$id]->setIsActive(true);
-			}else if(file_exists($directory . $id) && is_dir($directory . $id)){
+			if(file_exists($directory . $id) && is_dir($directory . $id)){
 				$this->plugins[$id] = new PluginInfo($id,soy2_realpath($directory . $id));
 				$this->plugins[$id]->setIsActive(true);
+				$this->plugins[$id]->prepare();
+			}else if(file_exists($pluginDir . $id) && is_dir($pluginDir . $id)){
+				$this->plugins[$id] = new PluginInfo($id,soy2_realpath($pluginDir . $id));
+				$this->plugins[$id]->setIsActive(true);
+				$this->plugins[$id]->prepare();
 			}
 		}
+		$res = uasort($this->plugins, array($this,"sortByPriority"));
 		
 		return $this->plugins;
+	}
+	
+	function sortByPriority($a,$b){
+		if($a->getPriority() == $b->getPriority()){
+			return strcmp($a->getId(), $b->getId());
+		}
+		return ($a->getPriority() > $b->getPriority());
 	}
 	
 	public static function getPluginInfo($id){

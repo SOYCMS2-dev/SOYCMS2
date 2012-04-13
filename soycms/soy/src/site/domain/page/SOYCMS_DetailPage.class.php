@@ -40,7 +40,7 @@ class SOYCMS_DetailPage extends SOYCMS_PageBase{
 	 * 管理画面からユニークなURIを作成するルールを定める
 	 */
 	function getEntryUri(SOYCMS_Entry $entry){
-		$dao = SOY2DAOFactory::create("SOYCMS_EntryDAO");
+		$dao = SOY2DAOContainer::get("SOYCMS_EntryDAO");
 		
 		$urlType = $this->getUrlType();
 		$createDate = (is_string($entry->getCreateDate())) ? strtotime($entry->getCreateDate()) : $entry->getCreateDate();
@@ -116,7 +116,7 @@ class SOYCMS_DetailPage extends SOYCMS_PageBase{
 		$title = str_replace("%DD%",date("d"),$title);
 		
 		if(strpos($title,'%VOL%') !== false){
-			$dao = SOY2DAOFactory::create("SOYCMS_EntryDAO");
+			$dao = SOY2DAOContainer::get("SOYCMS_EntryDAO");
 			$vol = $dao->countByDirectory($this->getPage()->getId());
 			$title = str_replace('%VOL%',$vol,$title);
 		}
@@ -159,7 +159,7 @@ class SOYCMS_DetailPage extends SOYCMS_PageBase{
 	 */
 	function generateFeedPage(){
 		
-		$dao = SOY2DAOFactory::create("SOYCMS_PageDAO");
+		$dao = SOY2DAOContainer::get("SOYCMS_PageDAO");
 		$pageLogic = SOY2Logic::createInstance("site.logic.page.SOYCMS_PageLogic");
 		
 		$pageId = $this->getPage()->getId();

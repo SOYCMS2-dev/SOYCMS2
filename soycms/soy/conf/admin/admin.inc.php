@@ -14,7 +14,7 @@ if(soycms_mode_switch("SOYCMS_INIT_MODE")){
 	
 	SOY2DAOConfig::Dsn(SOYCMS_DB_DSN);
 	SOY2DAOConfig::user(SOYCMS_DB_USER);
-	SOY2DAOConfig::pass(SOYCMS_DB_PASS);
+	SOY2DAOConfig::password(SOYCMS_DB_PASS);
 	
 	//auto login
 	$session = SOY2Session::get("base.session.UserLoginSession");

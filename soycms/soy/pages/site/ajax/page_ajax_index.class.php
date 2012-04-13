@@ -34,6 +34,7 @@ class page_ajax_index extends SOYCMS_WebPageBase{
 	}
 	
 	function updateHelpStatus($id,$value){
+		
 		$config = SOYCMS_UserData::get("help_status",array());
 		if(!$config)$config = array();
 		
@@ -51,6 +52,7 @@ class page_ajax_index extends SOYCMS_WebPageBase{
 	 * ユーザの足跡を記録する
 	 */
 	function updateUserTrack(){
+ 		if(!defined("SOYCMS_LOGIN_SITE_ID"))return;
  		
  		$token = $_POST["token"];
  		$uri = $_POST["uri"];

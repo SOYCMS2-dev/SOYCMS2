@@ -65,6 +65,7 @@ class SOYCMS_EntryListComponent extends HTMLList{
 		if(false == ($entity instanceof SOYCMS_Entry)){
 			$entity = new SOYCMS_Entry();
 			$entity->setDirectory($this->directory);
+			$entity->setId(-1);
 		}
 		
 		//onOutput
@@ -150,13 +151,16 @@ class SOYCMS_EntryListComponent extends HTMLList{
 			"soy2prefix" => "cms"
 		));
 		
-		$link = (isset($mappings[$entity->getDirectory()])) ? soycms_get_page_url($mappings[$entity->getDirectory()]["uri"],rawurldecode($entity->getUri())) : "";
-		$link = preg_replace('/\/index\.html$/',"/",$link);
-		
-		$this->createAdd("entry_link","HTMLLink",array(
-			"link" => $link,
+		$this->createAdd("entry_link","EntryLink",array(
+			"link" => rawurldecode($entity->getUri()),
+			"dir" => (isset($mappings[$entity->getDirectory()])) ? soycms_get_page_url($mappings[$entity->getDirectory()]["uri"]) : "",
 			"soy2prefix" => "cms"
 		));
+		
+		
+		//entry_url_text
+		$link = (isset($mappings[$entity->getDirectory()])) ? soycms_get_page_url($mappings[$entity->getDirectory()]["uri"],rawurldecode($entity->getUri())) : "";
+		$link = preg_replace('/\/index\.html$/',"/",$link);
 		
 		$this->addLabel("entry_url",array(
 			"text" => $link,
@@ -226,7 +230,7 @@ class SOYCMS_EntryListComponent extends HTMLList{
 				"soy2prefix" => "cms",
 			));
 		}
-	
+		
 	}
 	
 	/**
@@ -263,21 +267,30 @@ class SOYCMS_EntryListComponent extends HTMLList{
 	function buildCustomFields($entity){
 		static $commonConfig = array();
 		if(!$commonConfig){
-			//カスタムフィールドは全部を処理する(無駄が多い)
 			$commonConfig = SOYCMS_ObjectCustomFieldConfig::loadConfig("common");
 		}
 		
-		$values = SOYCMS_ObjectCustomField::getValues("entry",$entity->getId());
-		
-		foreach($commonConfig as $key => $config){
-			if(isset($values[$key])){
-				$value = $values[$key];
-			}else{
-				$value = $config->getValueObject();
-				if($config->isMulti()){
-					$value = array($value);
+		//dummy
+		if($entity->getId() == -1 || !$entity->getId()){
+			$values = array();
+			foreach($commonConfig as $key => $config){
+				if(isset($values[$key])){
+					$value = $values[$key];
+				}else{
+					$value = $config->getValueObject();
+					if($config->isMulti() || $config->getType() == "check"){
+						$value = array($value);
+					}
 				}
+				SOYCMS_ObjectCustomFieldHelper::build($this,$config,$value);
 			}
+			return;
+		}
+		
+		$values = SOYCMS_ObjectCustomField::getValues("entry",$entity->getId());
+		foreach($values as $key => $value){
+			if(!isset($commonConfig[$key]))continue;
+			$config = $commonConfig[$key];
 			SOYCMS_ObjectCustomFieldHelper::build($this,$config,$value);
 		}
 		

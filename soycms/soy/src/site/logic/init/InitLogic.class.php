@@ -246,7 +246,7 @@ class InitLogic extends SOY2LogicBase{
 		
 		SOY2DAOConfig::Dsn($configObj["dsn"]);
 		SOY2DAOConfig::user($configObj["user"]);
-		SOY2DAOConfig::pass($configObj["pass"]);
+		SOY2DAOConfig::password($configObj["pass"]);
 		
 		if(!$this->initDefaultTemplate($this->site,$config)){
 			echo "Failed to initialize default template";

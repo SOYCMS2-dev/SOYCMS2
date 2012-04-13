@@ -53,14 +53,15 @@ class SOYCMS_Navigation implements SerialziedEntityInterface{
 		if(!file_exists($dir . "/template.html")
 		|| !file_exists($dir . "/navigation.ini")
 		){
-			return false;	
-		}		
+			return false;
+		}
 		
 		$obj = new SOYCMS_Navigation();
 		$obj->setId(basename($dir));
 		$array = parse_ini_file($dir . "/navigation.ini",true);
 		$obj->setName(@$array["name"]);
 		$obj->setDescription(@$array["description"]);
+		if(isset($array["templates"]))$obj->setTemplates($array["templates"]);
 		
 		if(isset($array["items"])){
 			$itemIds = explode(",",$array["items"]);
@@ -89,11 +90,15 @@ class SOYCMS_Navigation implements SerialziedEntityInterface{
 	}
 	
 	public static function getNavigationDirectory(){
+		if(SOYCMSConfigUtil::get("library_dir")){
+			return SOYCMSConfigUtil::get("library_dir");
+		}
+		
 		$dir = SOYCMS_SITE_DIRECTORY . ".navigation/";
 		if(!file_exists($dir)){
 			mkdir($dir,0755);
 		}
-		return $dir;	
+		return $dir;
 	}
 	
 	public static function remove($id){
@@ -118,10 +123,19 @@ class SOYCMS_Navigation implements SerialziedEntityInterface{
 		}
 		
 		//navigation
-		if(strlen($this->getTemplate())>0)file_put_contents($dir . "template.html",$this->getTemplate());
+		if(strlen($this->getTemplate())>0){
+			if($this->getTemplateType() == "template"){
+				file_put_contents($dir . "template.html",$this->getTemplate());
+			}else{
+				$type = $this->getTemplateType();
+				$type = str_replace(array(".","/","\\"),"",$type);
+				file_put_contents($dir . "{$type}.html",$this->getTemplate());
+			}
+		}
+	
 		
 		//ini
-		$content = array();
+		$content = @parse_ini_file($dir . "/navigation.ini",true);
 		$content["name"] = $this->getName();
 		$content["description"] = $this->getDescription();
 		
@@ -139,6 +153,13 @@ class SOYCMS_Navigation implements SerialziedEntityInterface{
 			$content[$obj->getType() . ":" . $obj->getId()] = $array;
 		}
 		
+		if($this->getTemplateType() != "template"){
+			if(!isset($content["templates"]))$content["templates"] = array(
+				"template" => "template",
+				$this->getTemplateType() => $this->getTemplateType()
+			);
+		}
+		
 		
 		soy2_write_ini($dir . "navigation.ini",$content);
 		
@@ -154,7 +175,9 @@ class SOYCMS_Navigation implements SerialziedEntityInterface{
 		$dir = self::getNavigationDirectory() . $this->id . "/";
 		if(!file_exists($dir))return "";
 		
-		$this->setTemplate(@file_get_contents($dir . "/template.html"));
+		$type = $this->getTemplateType();
+		$type = str_replace(array(".","/","\\"),"",$type);
+		$this->setTemplate(@file_get_contents($dir . "/{$type}.html"));
 		return $this->getTemplate();
 	}
 	
@@ -170,7 +193,7 @@ class SOYCMS_Navigation implements SerialziedEntityInterface{
 	}
 	
 	function getLayout(){
-		return array(	
+		return array(
 			$this->getId() => array(
 				"name" => $this->getName(),
 				"color" => "#CFCCCC"
@@ -222,6 +245,8 @@ class SOYCMS_Navigation implements SerialziedEntityInterface{
 	private $createDate;
 	private $updateDate;
 	
+	private $templateType = "template";
+	private $templates = array();
 	
 
 	function getId() {
@@ -267,6 +292,32 @@ class SOYCMS_Navigation implements SerialziedEntityInterface{
 	}
 	function setDescription($description) {
 		$this->description = $description;
+	}
+
+	public function getTemplateType(){
+		return $this->templateType;
+	}
+
+	public function setTemplateType($templateType){
+		$this->templateType = $templateType;
+		return $this;
+	}
+
+	public function getTemplates(){
+		return $this->templates;
+	}
+
+	public function setTemplates($templates){
+		$this->templates = $templates;
+		return $this;
+	}
+	
+
+	function getHistoryKey(){
+		if($this->templateType && $this->templateType != "template"){
+			return $this->id . "!" . $this->templateType;
+		}
+		return $this->id;
 	}
 }
 

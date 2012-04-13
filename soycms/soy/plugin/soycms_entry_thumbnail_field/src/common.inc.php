@@ -2,7 +2,7 @@
 
 class SOYCMS_EntryThumbnailFieldHelper{
 	
-	function getValue($entryId){
+	public static function getValue($entryId){
 		
 		$enable = SOYCMS_EntryAttribute::get($entryId,"soycms_entry_thumbnail_field",null);
 		$thumbnail = SOYCMS_EntryAttribute::get($entryId,"soycms_entry_thumbnail_field.thumbnail",null);
@@ -19,7 +19,7 @@ class SOYCMS_EntryThumbnailFieldHelper{
 		);	
 	}
 	
-	function putValue($entryId,$array){
+	public static function putValue($entryId,$array){
 		SOYCMS_EntryAttribute::put($entryId,"soycms_entry_thumbnail_field",$array["enabled"]);
 		
 		if(!$array["enabled"]){

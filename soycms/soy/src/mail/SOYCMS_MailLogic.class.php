@@ -51,6 +51,8 @@ class SOYCMS_MailLogic extends SOY2LogicBase{
 			$this->replyTo = new SOY2Mail_MailAddress($serverConfig->getReturnMailAddress(), $serverConfig->getReturnMailAddressName(), $serverConfig->getEncoding());
 		}
 		
+		return $this->sender;
+		
 	}
 	
 	/**

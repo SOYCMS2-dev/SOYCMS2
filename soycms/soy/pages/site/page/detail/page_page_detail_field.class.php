@@ -6,25 +6,27 @@ SOY2HTMLFactory::importWebPage("page.page_page_detail");
 class page_page_detail_field extends page_page_detail{
 	
 	function doPost(){
+		$uri = $this->page->getUri();
+		
 		if(isset($_POST["delete_column"])){
 			$keys = $_POST["delete_column"];
-			$fields = SOYCMS_ObjectCustomFieldConfig::loadConfig("entry-" . $this->id);
+			$fields = SOYCMS_ObjectCustomFieldConfig::loadConfig("entry-" . $uri);
 			foreach($keys as $key => $val){
 				unset($fields[$key]);
 			}
-			SOYCMS_ObjectCustomFieldConfig::saveConfig("entry-" . $this->id,$fields);
+			SOYCMS_ObjectCustomFieldConfig::saveConfig("entry-" . $uri,$fields);
 			$this->jump("/page/detail/field/".$this->id."?removed");
 		}
 		
 		if(isset($_POST["FieldOrder"])){
-			$fields = SOYCMS_ObjectCustomFieldConfig::loadConfig("entry-" . $this->id);
+			$fields = SOYCMS_ObjectCustomFieldConfig::loadConfig("entry-" . $uri);
 			
 			$res = array();
 			foreach($_POST["FieldOrder"] as $key => $value){
 				$res[$key] = $fields[$key];
 			}
 			
-			SOYCMS_ObjectCustomFieldConfig::saveConfig("entry-" . $this->id,$res);
+			SOYCMS_ObjectCustomFieldConfig::saveConfig("entry-" . $uri,$res);
 		}
 		
 		if(isset($_POST["content-position"])){
@@ -41,9 +43,9 @@ class page_page_detail_field extends page_page_detail{
 			SOYCMS_ObjectCustomFieldConfig::saveConfig("common",$fields);
 			
 			//ページに登録
-			$fields = SOYCMS_ObjectCustomFieldConfig::loadConfig("entry-" . $this->id);
+			$fields = SOYCMS_ObjectCustomFieldConfig::loadConfig("entry-" . $uri);
 			$fields[$field->getFieldId()] = $field;
-			SOYCMS_ObjectCustomFieldConfig::saveConfig("entry-" . $this->id,$fields);
+			SOYCMS_ObjectCustomFieldConfig::saveConfig("entry-" . $uri,$fields);
 			
 			//今作成した項目を追加する
 			$_POST["new_field"] = $field->getFieldId();
@@ -52,14 +54,14 @@ class page_page_detail_field extends page_page_detail{
 		if(isset($_POST["new_field"]) && isset($_POST["append-field"])){
 			$fieldId = $_POST["new_field"];
 			$entry = SOYCMS_ObjectCustomFieldConfig::loadConfig("entry");
-			$fields = SOYCMS_ObjectCustomFieldConfig::loadConfig("entry-" . $this->id);
+			$fields = SOYCMS_ObjectCustomFieldConfig::loadConfig("entry-" . $uri);
 			$common = SOYCMS_ObjectCustomFieldConfig::loadConfig("common");
 			
 			if(!isset($entry[$fieldId])){
 				$fields[$fieldId] = $common[$fieldId];
 			}
 			
-			SOYCMS_ObjectCustomFieldConfig::saveConfig("entry-" . $this->id,$fields);
+			SOYCMS_ObjectCustomFieldConfig::saveConfig("entry-" . $uri,$fields);
 			
 		}
 		
@@ -88,11 +90,11 @@ class page_page_detail_field extends page_page_detail{
 		));
 		
 		$this->addLink("append_field_link",array(
-			"link" => soycms_create_link("/page/field/select") . "?type=entry-" . $this->id
+			"link" => soycms_create_link("/page/field/select") . "?type=entry-" . $this->page->getUri()
 		));
 		
 		$this->addLink("field_code_link",array(
-			"link" => soycms_create_link("/page/field/code") . "?type=entry-" . $this->id
+			"link" => soycms_create_link("/page/field/code") . "?type=entry-" . $this->page->getUri()
 		));
 		
 		$this->addLink("page_entry_edit_link",array(
@@ -107,7 +109,7 @@ class page_page_detail_field extends page_page_detail{
 	
 	function buildForm(){
 		
-		$pageFields = SOYCMS_ObjectCustomFieldConfig::loadObjectConfig("entry-" . $this->id);
+		$pageFields = SOYCMS_ObjectCustomFieldConfig::loadObjectConfig("entry-" . $this->page->getUri());
 		$this->createAdd("field_list","_class.list.CustomFieldConfigList",array(
 			"list" => $pageFields
 		));

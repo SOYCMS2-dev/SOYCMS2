@@ -18,7 +18,7 @@
 			if(url.length > 0){
 				link.attr("href",url);
 			}else{
-				link.after($(node)).remove();
+				if(link.size() > 0)link.after($(node)).remove();
 			}
 			
 			return true;

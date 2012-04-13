@@ -2,12 +2,20 @@
 
 class SOYCMS_ErrorPageBase extends SOYCMS_SitePageBase{
 	
+	private $exception = null;
 	
 	function SOYCMS_ErrorPageBase($args = array()){
 		$this->setPageObject($args["page"]);
 		$this->setArguments($args["arguments"]);
 
 		WebPage::WebPage();
+	}
+	
+	function setArguments($args){
+		if(isset($args["exception"])){
+			$this->setException($args["exception"]);
+		}
+		parent::setArguments($args);
 	}
 	
 	function build($args){
@@ -27,5 +35,12 @@ class SOYCMS_ErrorPageBase extends SOYCMS_SitePageBase{
 		));
 	}
 
+
+	function getException() {
+		return $this->exception;
+	}
+	function setException($exception) {
+		$this->exception = $exception;
+	}
 }
 ?>

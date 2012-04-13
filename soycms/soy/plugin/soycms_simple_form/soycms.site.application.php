@@ -77,11 +77,11 @@ class SOYCMS_SimpleContactFormExtension extends SOYCMS_SiteApplicationExtension{
 			if($config["is_show_confirm"]){
 				$this->mode = "confirm";
 				
-				if(isset($_POST["back"])){
+				if(isset($_POST["back"]) || isset($_POST["back_x"])){
 					$this->mode = "form";
 					return;
 				}
-			
+				
 				if(isset($_POST["_go_next"]) && md5($_POST["_go_next"] . "_soycms_simple_form") == $_POST["_go_next_token"]){
 					$this->doSubmit($config,$_POST,$page);
 					exit;
@@ -127,6 +127,12 @@ class SOYCMS_SimpleContactFormExtension extends SOYCMS_SiteApplicationExtension{
 		//送信実行
 		$logic = SOY2Logic::createInstance("mail.SOYCMS_MailLogic");
 		$conf = $logic->getServerConfig();
+		
+		if(isset($config["from_addr"]) && strlen($config["from_addr"])){
+			$sender = $logic->getSender();
+			$sender->setFrom($config["from_addr"]);
+			$logic->setSender($sender);
+		}
 		
 		$logic->send(
 			$conf->getFromMailAddress(),

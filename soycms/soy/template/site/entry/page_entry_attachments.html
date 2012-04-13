@@ -161,10 +161,11 @@ var prepare_attachment = function(func){
 			var img = $(this).attr("href");
 			var link = $(this).attr("img");
 			if (func) {
+				if(link == "image")link = img;
 				func(img,link);
 			}
 		}catch(e){
-			
+			alert(e);
 		}
 		return false;
 	});
@@ -174,14 +175,7 @@ var prepare_attachment = function(func){
 			var img = $(this).attr("href");
 			var title = $(this).attr("title");
 			if (func) {
-				if (title == "image") {
-					title = img;
-					img = null;
-				}
-				if(title == img){
-					img = null;
-				}
-				func(title, img);
+				func(img,title);
 			}
 		}catch(e){
 			

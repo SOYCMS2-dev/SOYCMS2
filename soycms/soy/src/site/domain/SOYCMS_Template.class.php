@@ -4,22 +4,6 @@ SOY2::imports("site.domain.page.*");
 
 class SOYCMS_Template implements SerialziedEntityInterface{
 	
-	private $id;
-	private $type = "detail";
-	private $typeText = "";
-	private $name;
-	private $description = "";
-	private $items = array();
-	private $properties = array();
-	private $template;
-	private $layout;
-	private $createDate;
-	private $updateDate;
-	private $borderColor = "#cccccc"; 
-	
-	/* 2.0.7 追加 */
-	private $group = null;
-	
 	public static function getTemplateGroup($groupId){
 		$dirPath = self::getTemplateDirectory() . $groupId . "/";
 		$filepath = $dirPath . "group.ini";
@@ -39,14 +23,12 @@ class SOYCMS_Template implements SerialziedEntityInterface{
 	 */
 	public static function getList($targetDir = null){
 		$dir = ($targetDir) ? $targetDir : self::getTemplateDirectory();
-		
 		$list = array();
 		
 		$files = soy2_scandir($dir);
 		foreach($files as $file){
 			if(!is_dir($dir . $file))continue;
 			$template = self::load($file,$targetDir);
-			
 			if($template){
 				if(is_array($template)){
 					foreach($template as $key => $_template){
@@ -73,7 +55,10 @@ class SOYCMS_Template implements SerialziedEntityInterface{
 		$list = $tmp;
 		
 		//save keys
-		SOYCMS_DataSets::put("template.keys",array_keys($list));
+		$keys = SOYCMS_DataSets::get("template.keys",array());
+		if($keys != array_keys($list)){
+			SOYCMS_DataSets::put("template.keys",array_keys($list));
+		}
 		
 		return $list;
 	}
@@ -110,6 +95,7 @@ class SOYCMS_Template implements SerialziedEntityInterface{
 			foreach($files as $file){
 				if(!is_dir($dir . "/" . $file))continue;
 				$template = self::load($_dir . "/" . $file,$targetDir);
+				if(!$template)continue;
 				if($group)$template->setGroup($group);
 				
 				if($template){
@@ -122,7 +108,6 @@ class SOYCMS_Template implements SerialziedEntityInterface{
 					}
 				}
 			}
-			
 			return $list;
 		}
 		
@@ -130,8 +115,8 @@ class SOYCMS_Template implements SerialziedEntityInterface{
 		if(!file_exists($dir . "/template.html")
 		|| !file_exists($dir . "/template.ini")
 		){
-			return false;	
-		}		
+			return false;
+		}
 		
 		$obj = new SOYCMS_Template();
 		$obj->setId($_dir);
@@ -141,6 +126,7 @@ class SOYCMS_Template implements SerialziedEntityInterface{
 		$obj->setName(@$array["name"]);
 		$obj->setDescription(@$array["description"]);
 		if(@$array["borderColor"])$obj->setBorderColor($array["borderColor"]);
+		if(@$array["templates"])$obj->setTemplateTypes($array["templates"]);
 		
 		if(isset($array["items"])){
 			$itemIds = explode(",",$array["items"]);
@@ -172,11 +158,15 @@ class SOYCMS_Template implements SerialziedEntityInterface{
 	}
 	
 	public static function getTemplateDirectory(){
+		if(SOYCMSConfigUtil::get("template_dir")){
+			return SOYCMSConfigUtil::get("template_dir");
+		}
+		
 		$dir = SOYCMS_SITE_DIRECTORY . ".template/";
 		if(!file_exists($dir)){
 			soy2_mkdir($dir,0755);
 		}
-		return $dir;	
+		return $dir;
 	}
 	
 	public static function remove($id){
@@ -202,7 +192,12 @@ class SOYCMS_Template implements SerialziedEntityInterface{
 		
 		//template
 		if(strlen($this->template)>0){
-			file_put_contents($dir . "template.html",$this->getTemplate());
+			if($this->getTemplateType() == $this->getId()){
+				file_put_contents($dir . "template.html",$this->getTemplate());
+			}else{
+				$type = $this->getTemplateType();
+				file_put_contents($dir . "{$type}.html",$this->getTemplate());
+			}
 		}
 		
 		//ini
@@ -211,6 +206,9 @@ class SOYCMS_Template implements SerialziedEntityInterface{
 		$content["description"] = $this->getDescription();
 		$content["type"] = $this->getType();
 		$content["borderColor"] = $this->getBorderColor();
+		if(strlen($this->getTypeText())>0){
+			$content["type-text"] = $this->getTypeText();
+		}
 		
 		$itemIds = array();
 		foreach($this->items as $key => $obj){
@@ -235,6 +233,11 @@ class SOYCMS_Template implements SerialziedEntityInterface{
 				"layout" => $obj->getLayout(),
 				"order" => $obj->getOrder()
 			);
+		}
+		
+		//templatesを並び替える
+		if(isset($content["templates"])){
+			
 		}
 		
 		soy2_write_ini($dir . "template.ini",$content);
@@ -267,9 +270,10 @@ class SOYCMS_Template implements SerialziedEntityInterface{
 		return (isset($this->items[$key])) ? $this->items[$key] : null;
 	}
 	
-	function loadTemplate(){
+	function loadTemplate($type = "template"){
 		$dir = self::getTemplateDirectory() . $this->getId();
-		$this->setTemplate(@file_get_contents($dir . "/template.html"));
+		$type = str_replace(array(".","/","\\"),"",$type);
+		$this->setTemplate(@file_get_contents($dir . "/{$type}.html"));
 		return $this->getTemplate();
 	}
 	
@@ -378,12 +382,36 @@ class SOYCMS_Template implements SerialziedEntityInterface{
 	}
 	
 	function getContent(){
+		if($this->getTemplateType() != $this->getId()){
+			return $this->loadTemplate($this->getTemplateType());
+		}
 		return $this->loadTemplate();
 	}
 	
 	function setContent($html){
 		$this->setTemplate($html);
 	}
+	
+	
+	/* property */
+	
+	private $id;
+	private $type = "detail";
+	private $typeText = "";
+	private $name;
+	private $description = "";
+	private $items = array();
+	private $properties = array();
+	private $template;
+	private $layout;
+	private $createDate;
+	private $updateDate;
+	private $borderColor = "#cccccc";
+	
+	/* 2.0.7 追加 */
+	private $group = null;
+	private $templateType = null;
+	private $templateTypes = array();
 	
 	/* getter setter */
 	
@@ -398,6 +426,7 @@ class SOYCMS_Template implements SerialziedEntityInterface{
 		$this->type = $type;
 	}
 	function getName() {
+		if(strlen($this->name) < 1)return $this->getId();
 		return $this->name;
 	}
 	function setName($name) {
@@ -456,7 +485,7 @@ class SOYCMS_Template implements SerialziedEntityInterface{
 	function setProperty($str){
 		if(!is_null($str) && strlen($str) > 0){
 			$dir = self::getTemplateDirectory() . $this->getId();
-			file_put_contents($this->getPropertyFilePath(),$str);	
+			file_put_contents($this->getPropertyFilePath(),$str);
 		}
 	}
 	
@@ -492,6 +521,34 @@ class SOYCMS_Template implements SerialziedEntityInterface{
 	}
 	function setGroup($group) {
 		$this->group = $group;
+	}
+	
+	function getTemplateType(){
+		return (!$this->templateType) ? $this->getId() : $this->templateType;
+	}
+	
+	function setTemplateType($type){
+		if($type == $this->getId())return;
+		$this->templateType = str_replace(array(".","-","/"),"",$type);
+	}
+	
+	function getHistoryKey(){
+		if($this->templateType){
+			return $this->id . "!" . $this->templateType;
+		}
+		return $this->id;
+	}
+	
+	public function getTemplateTypes($flag = false){
+		if($flag && count($this->templateTypes) > 0){
+			return array_merge(array($this->getId() => $this->getName()),$this->templateTypes);
+		}
+		return $this->templateTypes;
+	}
+	
+	public function setTemplateTypes($templateTypes){
+		$this->templateTypes = $templateTypes;
+		return $this;
 	}
 	
 }

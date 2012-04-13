@@ -8,7 +8,7 @@ class page_index extends SOYCMS_WebPageBase{
 		
 		//ダイナミック編集に移動する
 		if(isset($_GET["dynamic"])){
-			SOY2PageController::redirect(SOYCMS_SITE_URL . "?dynamic&SOYCMS_SSID=" . session_id());
+			SOY2PageController::redirect(SOYCMS_SITE_URL . "?dynamic&" . soycms_get_ssid_token());
 			exit;
 		}
 		

@@ -3,6 +3,7 @@
 class SOYCMS_ListPageBase extends SOYCMS_SitePageBase{
 	
 	private $label;
+	private $checkLabel = true;
 	
 	function SOYCMS_ListPageBase($args = array()){
 		$this->setPageObject($args["page"]);
@@ -40,7 +41,7 @@ class SOYCMS_ListPageBase extends SOYCMS_SitePageBase{
 			}
 		
 		//標準動作
-		}else{
+		}else if($this->checkLabel){
 		
 			$limit = $listPage->getLimit();
 			
@@ -195,6 +196,9 @@ class SOYCMS_ListPageBase extends SOYCMS_SitePageBase{
 		$this->label = $label;
 	}
 
+	function setCheckLabel($value){
+		$this->checkLabel = $value;
+	}
 }
 
 class SOYCMS_ListPageBase_HTMLPager extends SOYCMS_HTMLPager{

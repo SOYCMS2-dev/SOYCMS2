@@ -10,6 +10,8 @@ class SOYCMS_SiteController extends SOY2PageController{
 	
 	private $pageObject;
 	private $directoryObject;
+	private $_binds = array();
+	private $webPage;
 
 	function prepare(){
 		
@@ -17,7 +19,7 @@ class SOYCMS_SiteController extends SOY2PageController{
 		//configure SOY2DAO
 		SOY2DAOConfig::Dsn(SOYCMS_SITE_DB_DSN);
 		SOY2DAOConfig::user(SOYCMS_SITE_DB_USER);
-		SOY2DAOConfig::pass(SOYCMS_SITE_DB_PASS);
+		SOY2DAOConfig::password(SOYCMS_SITE_DB_PASS);
 		SOY2HTMLConfig::CacheDir(SOYCMS_SITE_DIRECTORY . ".cache/");
 		
 		//リクエストURLから取得したサイトのURL
@@ -32,15 +34,20 @@ class SOYCMS_SiteController extends SOY2PageController{
 		
 		//invoke events
 		PluginManager::load("soycms.site.controller.*");
-		PluginManager::invoke("soycms.site.controller.initialize");
-		
-		
-		
-		
+		$delg = PluginManager::invoke("soycms.site.controller.initialize",array("controller" => $this));
 		
 		//セッションIDの引き継ぎ
 		if(isset($_GET["SOYCMS_SSID"])){
 			session_id($_GET["SOYCMS_SSID"]);
+			if(!isset($_SESSION))@session_start();
+			if(!isset($_SESSION["SOYCMS_SSID_TOKEN"]) || $_SESSION["SOYCMS_SSID_TOKEN"] != @$_GET["SOYCMS_SSID_TOKEN"]){
+				session_destroy();
+				$_SESSION["SOYCMS_SSID_TOKEN"] = md5(time());
+				$uri = $_SERVER["REQUEST_URI"];
+				$uri = substr($uri,0,strpos($uri,"?"));
+				
+				SOY2PageController::redirect($uri);
+			}
 		}
 		
 		$session = SOY2Session::get("site.session.SiteUserLoginSession");
@@ -48,6 +55,7 @@ class SOYCMS_SiteController extends SOY2PageController{
 			//ダイナミック終了
 			if(isset($_GET["dynamic"]) && $_GET["dynamic"] == "off"){
 				session_regenerate_id();
+				$_SESSION["SOYCMS_SSID_TOKEN"] = md5(time());
 				$uri = $_SERVER["REQUEST_URI"];
 				$uri = substr($uri,0,strpos($uri,"?"));
 				$session->setIsDynamic(false);
@@ -75,9 +83,25 @@ class SOYCMS_SiteController extends SOY2PageController{
 					define("SOYCMS_EDIT_ENTRY", true);
 				}
 			}
+			
+			register_shutdown_function(array($this,"onShutdown"));
 		}
 		
-		PluginManager::invoke("soycms.site.controller.prepare");
+		PluginManager::invoke("soycms.site.controller.prepare",array("controller" => $this));
+		
+		CMSExtension::prepare($_SERVER["REQUEST_URI"]);
+		
+		//call binds
+		$uri = $_SERVER["REQUEST_URI"];
+		foreach($this->_binds as $_uri => $array){
+			$_uri = str_replace("/","\\/",$_uri);
+			if(preg_match("/{$_uri}/",$uri)){
+				foreach($array as $_array){
+					call_user_func_array($_array["func"],$_array["args"]);
+				}
+			}
+		}
+		
 	}
 
 	function execute(){
@@ -93,7 +117,10 @@ class SOYCMS_SiteController extends SOY2PageController{
 		
 		$timer = array();
 		$timer[] = microtime(true);
-
+		
+		//フック
+		PluginManager::invoke("soycms.site.controller.load",array("controller" => $this));
+		
 		$pathBuilder = $this->getPathBuilder();
 		
 		//パスからURIと引数に変換
@@ -130,24 +157,33 @@ class SOYCMS_SiteController extends SOY2PageController{
 		}catch(Exception $e){
 			return $this->onNotFound($uri,$e);
 		}
-
+		
+		
 		//Helperに渡す
 		SOYCMS_Helper::set("page_id",$page->getId());
 		SOYCMS_Helper::set("page_uri",$page->getUri());
-		SOYCMS_Helper::set("directory_id",$page->getId());
+		SOYCMS_Helper::set("directory_id",$dir->getId());
 		SOYCMS_Helper::set("directory_uri",$dir->getUri());
 		$this->displayWebPage($uri,$page,$args);
 	}
 	
 	function displayWebPage($uri,$page,$args = array()){
 		
+		CMSExtension::execute($page,$args);
+		
+		$webPage = null;
+		$timer = array();$start = microtime(true);
 		try{
 			
 			$timer[] = microtime(true);
 			$webPage = $page->getWebPageObject($args);
+			$this->setWebPage($webPage);
+			
+			CMSExtension::display($page,$webPage,$args);
 			
 			$timer[] = microtime(true);
 			$webPage->common_build($args);
+			
 			
 			$timer[] = microtime(true);
 			$webPage->main($args);
@@ -158,20 +194,29 @@ class SOYCMS_SiteController extends SOY2PageController{
 			error_reporting(0);
 			
 			ob_start();
+			$timer[] = microtime(true);
 			$webPage->display();
 			$html = ob_get_contents();
 			ob_end_clean();
 			
+			$timer[] = microtime(true);
+			
 			echo $html;
 			
+
+			
 			//終了
-			PluginManager::invoke("soycms.site.controller.teardown");
+			PluginManager::invoke("soycms.site.controller.teardown",array("controller" => $this));
 		
 		}catch(SOYCMS_NotFoundException $e){
 			return $this->onNotFound($uri,$e);
 		}catch(SOYCMS_EntryCloseException $e){
 			return $this->onEntryCloseError($uri,$e);
 		}catch(Exception $e){
+			if($webPage && $webPage instanceof SOYCMS_ErrorPageBase){
+				$this->onDefaultError(-1,500,$e);
+				exit;
+			}
 			return $this->onError($uri,$e);
 		}
 	}
@@ -187,15 +232,18 @@ class SOYCMS_SiteController extends SOY2PageController{
 	}
 	
 	function onNotFound($uri,$e){
-		PluginManager::invoke("soycms.site.controller.notfound",array($e));
+		PluginManager::invoke("soycms.site.controller.notfound",array("controller" => $this,"exception" => $e));
 		$this->onDefaultError($uri,404,$e);
 	}
 	
 	function onDefaultError($uri,$type,$e){
+		
 		$dao = SOY2DAOFactory::create("SOYCMS_PageDAO");
 		$page = null;
 		
 		while(true){
+			
+			if($uri == -1)break;
 			
 			try{
 				$_uri = (!empty($uri)) ? soycms_union_uri($uri,$type . ".html") : $type . ".html";
@@ -213,7 +261,9 @@ class SOYCMS_SiteController extends SOY2PageController{
 		
 		try{
 			if($page){
-				$this->displayWebPage($uri,$page);
+				$this->displayWebPage($uri,$page,array(
+					"exception" => $e
+				));
 				exit;
 			}
 		}catch(Exception $e){
@@ -241,6 +291,7 @@ class SOYCMS_SiteController extends SOY2PageController{
 		echo "<html><head></head><body>";
 		echo "<h1>$header</h1>";
 		echo $e->getMessage();
+		echo "<!--" . var_dump($e) . "-->";
 		echo "</body></html>";
 		exit;
 		
@@ -296,6 +347,12 @@ class SOYCMS_SiteController extends SOY2PageController{
 		return false;
 	}
 	
+	function onShutdown(){
+		$error = error_get_last();
+		if ($error['type'] == E_ERROR || $error["type"] == E_PARSE || $error["type"] == E_STRICT) {
+			var_dump($error);
+		}
+	}
 	
 	function getPageObject() {
 		return $this->pageObject;
@@ -303,10 +360,39 @@ class SOYCMS_SiteController extends SOY2PageController{
 	function setPageObject($pageObject) {
 		$this->pageObject = $pageObject;
 	}
+	function getWebPage() {
+		return $this->webPage;
+	}
+	function setWebPage($pageObject) {
+		$this->webPage = $pageObject;
+	}
 	function getDirectoryObject() {
 		return $this->directoryObject;
 	}
 	function setDirectoryObject($directoryObject) {
 		$this->directoryObject = $directoryObject;
+	}
+	
+	/**
+	 * 特定のURIでイベントを発生
+	 * @param string $uri
+	 * @param function $func
+	 * @param array $args
+	 */
+	function bind($uri,$func,$args = array()){
+		if(!isset($this->_binds[$uri]))$this->_binds[$uri] = array();
+		$this->_binds[$uri][] = array(
+			"func" => $func,
+			"args" => $args
+		);
+	}
+	
+	/**
+	 * 特定のURIで特定のページを表示する
+	 * @param string $uriRule
+	 * @param string $triggerPageUri
+	 */
+	function bindPage($uri,$triggerPageUri){
+		$this->bind($uri,create_function('$uri','$_SERVER["ORIG_PATH_INFO"] = $_SERVER["PATH_INFO"];$_SERVER["PATH_INFO"] = $uri;'),$tiggerPageUri);
 	}
 }

@@ -44,7 +44,7 @@ class page_page_list extends SOYCMS_WebPageBase{
 		
 		$this->createAdd("page_list","_class.list.PageTreeComponent",array(
 			"list" => $pages
-		));		
+		));
 		
 		$this->addForm("form",array("action"=>soycms_create_link("page/list")));
 		

@@ -44,13 +44,16 @@ class SOYCMS_DataSets {
 		$data->setClassName($class);
 		$data->setObject(serialize($obj));
 
-		$dao = SOY2DAOFactory::create("config.SOYCMS_DataSetsDAO");
+		$dao = SOY2DAOContainer::get("config.SOYCMS_DataSetsDAO");
 		try{
 			$dao->clear($class);
 		}catch(Exception $e){
 			
 		}
-		$dao->insert($data);
+		
+		if($obj !== null){
+			$dao->insert($data);
+		}
 		
 		if(!isset($GLOBALS["SOYCMS_DataSets"])){
 			$GLOBALS["SOYCMS_DataSets"] = array();
@@ -77,7 +80,7 @@ class SOYCMS_DataSets {
 	public static function get($class,$onNull = false){
 
 		try{
-			$dao = SOY2DAOFactory::create("SOYCMS_DataSetsDAO");
+			$dao = SOY2DAOContainer::get("SOYCMS_DataSetsDAO");
 			$data = $dao->getByClass($class);
 
 			$res = unserialize($data->getObject());
@@ -98,7 +101,7 @@ class SOYCMS_DataSets {
 	}
 	
 	public static function delete($class){
-		$dao = SOY2DAOFactory::create("SOYCMS_DataSetsDAO");
+		$dao = SOY2DAOContainer::get("SOYCMS_DataSetsDAO");
 		$dao->clear($class);
 	}
 

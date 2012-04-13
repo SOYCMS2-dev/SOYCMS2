@@ -5,15 +5,28 @@ class SOYCMS_ApplicationPageBase extends SOYCMS_SitePageBase{
 	function SOYCMS_ApplicationPageBase($args = array()){
 		$this->setPageObject($args["page"]);
 		$this->setArguments($args["arguments"]);
-
+		
 		WebPage::WebPage();
+	}
+	
+	function init(){
+		parent::init();
+		
+		$page = $this->getPageObject();
+		$pageObj = $page->getPageObject();
+		PluginManager::load("soycms.site.application",$pageObj->getApplicationId());
+		
+		PluginManager::invoke("soycms.site.application",array(
+			"htmlObj" => $this,
+			"pageObj" => $pageObj,
+			"mode" => "load"
+		));
+		
 	}
 	
 	function doPost(){
 		$page = $this->getPageObject();
 		$pageObj = $page->getPageObject();
-		
-		PluginManager::load("soycms.site.application",$pageObj->getApplicationId());
 		
 		PluginManager::invoke("soycms.site.application",array(
 			"htmlObj" => $this,

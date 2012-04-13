@@ -1,6 +1,6 @@
 <?php
 
-class QuickHelpPlugin extends PluginBase{
+class QuickHelpPlugin extends HTMLPluginBase{
 	
 	public static function getHelpStatus(){
 		static $config = null;

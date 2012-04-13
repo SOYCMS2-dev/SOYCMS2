@@ -48,6 +48,8 @@ class SOYCMS_ZipHelper {
 		//追加する要素
 		$allItems = array();
 		
+		
+		
 		foreach($this->items as $array){
 			$targetPath = $array[0];
 			$filePath = $array[1];
@@ -75,19 +77,20 @@ class SOYCMS_ZipHelper {
 				$allItems[] = array($src,$dst);
 			}	
 		}
-		
+		var_dump(class_exists("ZipArchive"));
 		//圧縮
 		if(class_exists("ZipArchive")){
 			$zip = new ZipArchive();
 			$res = $zip->open($this->filepath, ZipArchive::CREATE);
+			
 			if($res !== true){
 				throw new Exception("failed");
 			}
 			
 			foreach($allItems as $array){
+				if(!file_exists($array[0]))continue;
 				$zip->addFile($array[0],$array[1]);
 			}
-			
 			$zip->close();
 		
 		}else if(SOYCMS_CommonConfig::get("zip_support",false)){

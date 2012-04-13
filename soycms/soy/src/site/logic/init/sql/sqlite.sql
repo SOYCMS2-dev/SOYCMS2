@@ -27,6 +27,7 @@ create table soycms_site_entry(
 create index entry_udate on soycms_site_entry(update_date desc);
 create index entry_cdate on soycms_site_entry(create_date desc);
 create index entry_order on soycms_site_entry(display_order desc);
+alter table soycms_site_entry add directory_uri varchar(255);
 
 
 
@@ -165,7 +166,7 @@ create table soycms_group_permission(
 
 
 
-drop tablesoycms_site_object_field;
+drop table soycms_site_object_field;
 create table soycms_site_object_field(
 	id integer primary key,
 	field_id varchar not null,
@@ -176,4 +177,27 @@ create table soycms_site_object_field(
 	object_text varchar,
 	object_value ineteger,
 	unique(field_id,object_id,field_index,object)
+);
+
+
+-- 2.0.8 20110710
+
+drop table soycms_site_object;
+create table soycms_site_object(
+	id integer primary key,
+	object_title VARCHAR(512),
+	object_content TEXT,
+	object_type VARCHAR(12) not null,
+	owner_id INTEGER not null,
+	directory INTEGER not null,
+	create_date INTEGER not null
+);
+
+drop table if exists soycms_page_attribute;
+create table soycms_page_attribute(
+	id integer primary key auto_increment,
+	page_id integer not null,
+	class_name varchar(255),
+	object_data text,
+	unique(page_id,class_name)
 );

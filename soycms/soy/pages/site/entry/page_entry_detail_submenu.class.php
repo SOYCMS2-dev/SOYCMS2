@@ -18,6 +18,7 @@ class page_entry_detail_submenu extends HTMLPage{
 		HTMLPage::HTMLPage();
 		
 		$this->buildPage();
+		
 	}
 	
 	function buildPage(){

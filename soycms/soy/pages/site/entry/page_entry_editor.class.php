@@ -1,4 +1,6 @@
 <?php
+SOY2::import("site.logic.entry.SOYCMS_EditorManager");
+
 class page_entry_editor extends SOYCMS_WebPageBase{
 	
 	private $sections;
@@ -160,6 +162,10 @@ class page_entry_editor extends SOYCMS_WebPageBase{
 			echo $section->getContent();
 			exit;
 		}
+		
+		//output end
+		echo SOYCMS_EditorManager::buildSections($this->sections);
+		exit;
 		
 	}
 	

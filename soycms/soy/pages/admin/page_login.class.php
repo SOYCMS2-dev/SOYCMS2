@@ -7,6 +7,7 @@ class page_login extends WebPage{
 	function doPost(){
 		if(isset($_POST["Login"])){
 			session_regenerate_id();
+			/* @var $session UserLoginSession */
 			$session = SOY2Session::get("base.session.UserLoginSession");
 			if($session->login($_POST["Login"]["userId"],$_POST["Login"]["password"])){
 				
