@@ -71,6 +71,11 @@ class SOYCMS_History extends SOY2DAO_EntityBase{
 		$obj->setAdminId(SOYCMS_LOGIN_USER_ID);
 		$obj->setType($op_type);
 		
+		$type_text = (method_exists($_obj, "getTemplateTypeText")) ? $_obj->getTemplateTypeText() : null;
+		if($type_text){
+			$obj->setName($_obj->getName() . " " . $type_text);
+		}
+		
 		$obj->save();
 		
 		//履歴から除去

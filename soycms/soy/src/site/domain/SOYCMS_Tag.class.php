@@ -61,7 +61,7 @@ class SOYCMS_Tag extends SOY2DAO_EntityBase{
 	
 	/**
 	 * 記事からラベルを削除
-	 * 
+	 *
 	 */
 	public static function clearTag($entryId){
 		$dao = SOY2DAOContainer::get("SOYCMS_EntryTagDAO");
@@ -165,6 +165,11 @@ abstract class SOYCMS_TagDAO extends SOY2DAO{
 	 * @order #order#
 	 */
 	abstract function getByEntryId($entryId);
+	
+	/**
+	 * @sql select distinct tag_text from soycms_site_tag left outer join soycms_site_entry on (soycms_site_tag.entry_id = soycms_site_entry.id) where directory = :directoryId order by tag_text
+	 */
+	abstract function getByDirectory($directoryId);
 	
 	/**
 	 * @distinct

@@ -1,0 +1,158 @@
+<div id="main-window1" class="main-window"> 
+
+
+<div id="window-title-layout" class="window-title">
+	<h2><span>"<!-- soy:id="item_name" /-->"の表示設定</span></h2> 
+</div>
+				
+		
+<div class="window-content">
+
+	<div id="main-section1" class="section">
+		
+		<ul class="crumbs">
+			<li><a soy:link="./" title="管理画面トップ" class="home_btn">管理画面トップ</a></li>
+			<li><a soy:link="page/template">テンプレートの管理</a></li>
+			<li><a soy:id="template_link"><!-- soy:id="template_name" /--></a></li>
+			<li><a soy:id="page_link"><!-- soy:id="page_name*" /--></a></li>
+			<li><a soy:id="page_item_link">要素設定</a></li>
+			<li>表示設定</li>
+		</ul>
+		
+		<div class="content"> 
+
+			<form soy:id="form" method="post" action="xxx" id="post1" name="post1"> 
+			
+				<div class="form-section">
+					
+					<div class="label"> 
+						<h4> 
+							<label for="post1-1">名前</label> 
+						</h4> 
+					</div> 
+					<div class="item">
+						<p class="xxl">
+							<!-- soy:id="item_type*" /-->  <!-- soy:id="item_name*" /-->
+						</p>
+					</div> 
+					
+					<div class="label"> 
+						<h4> 
+							<label for="post1-1">状況での設定</label>
+						</h4> 
+					</div> 
+					<div class="item"> 
+						<ul>
+							<li>
+								<input type="checkbox" soy:id="option_hide_after_second_page" />
+								<label for="option_hide_after_second_page">１ページ目以外で隠す</label>
+							</li>
+							<li>
+								<input type="checkbox" soy:id="option_hide_first_page" />
+								<label for="option_hide_first_page">１ページ目で隠す</label>
+							</li>
+							<li>
+								<input type="checkbox" soy:id="option_hide_before_last_page" />
+								<label for="option_hide_before_last_page">最後のページ以外で隠す</label>
+							</li>
+							<li>
+								<input type="checkbox" soy:id="option_hide_last_page" />
+								<label for="option_hide_last_page">最後のページで隠す</label>
+							</li>
+							<!-- soy:id="is_type_list" -->
+							<li>
+								<input type="checkbox" soy:id="option_hide_select_label" />
+								<label for="option_hide_select_label">ラベルが選択されている時に隠す</label>
+							</li>
+							<li>
+								<input type="checkbox" soy:id="option_hide_no_label" />
+								<label for="option_hide_no_label">ラベルが選択されていない時に隠す</label>
+							</li>
+							<!-- /soy:id="is_type_list" -->
+						</ul> 
+					</div> 
+
+					<div class="label"> 
+						<h4>URLでルール設定</h4> 
+					</div> 
+					<div class="item"> 
+						<table class="list-table break">
+						<thead>
+						<tr>
+							<th width="40">有効</th>
+							<th>ルール</th>
+							<th width="120">表示・非表示</th>
+							<th width="80">チェック順</th>
+							<th width="80"></th>
+						</tr>
+						</thead>
+						<tbody>
+							<!-- soy:id="rule_list" -->
+							<tr>
+								<td class="ce">
+									<input type="checkbox" soy:id="rule_active" />
+								</td>
+								<td>
+									<span>URLが</span>
+									<input type="text" class="s-area" size="50" soy:id="rule_url" />
+									<span>の時</span>
+								</td>
+								<td class="ce">
+									<select soy:id="rule_type"></select>
+								</td>
+								<td>
+									<input type="button" value="▲" class="s-btn up_btn" /> 
+									<input type="button" value="▼" class="s-btn down_btn" />
+								</td>
+								<td>
+									<input type="button" class="s-btn" value="削除" />
+								</td>
+							</tr>
+							<!-- /soy:id="rule_list" -->
+							<tfoot>
+								<tr>
+									<td class="ce">
+										<span><input type="checkbox" soy:id="option_hide_last" /></span>
+									</td>
+									<td>
+										<span>URLが</span>
+										<input type="text" class="s-area" size="50" soy:id="option_hide_last" />
+										<span>の時</span>
+									</td>
+									<td class="ce">
+										<select>
+											<option>表示する</option>
+											<option>表示しない</option>
+										</select>
+									</td>
+									<td>
+									
+									</td>
+									<td>
+										<input type="button" class="s-btn" value="ルールの追加" />
+									</td>
+								</tr>
+							</tfoot>
+						</table>
+					</div>
+
+				<div class="form-btn ce"> 
+					<input type="submit" value="保存する" class="l-btn" />
+				</div> 
+
+				</div> 
+				
+
+			</form>
+	
+		</div><!-- //.tab-menu -->
+	
+	
+		</div><!-- // .content --> 
+	</div> 
+	<!--  // #main-section1 -->
+			
+</div>
+<!--  // .window-content --> 
+</div> 
+<!--  // #main-window1 -->

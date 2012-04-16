@@ -299,8 +299,18 @@ class SOYCMS_Navigation implements SerialziedEntityInterface{
 	}
 
 	public function setTemplateType($templateType){
+		if(!isset($this->templates[$this->templateType])){
+			return $this;
+		}
 		$this->templateType = $templateType;
 		return $this;
+	}
+	
+	public function getTemplateTypeText(){
+		if(!isset($this->templates[$this->templateType])){
+			return null;
+		}
+		return $this->templates[$this->templateType];
 	}
 
 	public function getTemplates(){

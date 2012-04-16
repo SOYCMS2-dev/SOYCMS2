@@ -52,7 +52,7 @@ class SOYCMS_EditorManager extends SOY2LogicBase{
 		$html[] = 							'<div id="downpanel_delformat" class="downpanel">';
 		$html[] = 								'<a href="javascript:void(0);" onclick="return aobata_editor.showOption(this);" class="icon-btn btn-delformat interval" title="ソースフォーマット"><em>ソースフォーマット</em></a>';
 		$html[] = 							'</div>';
-		$html[] = 							'<div id="downpanel_delformat_option" class="downpanel-fix" style="display:none;width:550px;">';
+		$html[] = 							'<div id="downpanel_delformat_option" class="downpanel-fix" style="display:none;">';
 		$html[] = 								'<div class="downpanel-fix-inner">';
 		$html[] = 									'<div class="mbreak">';
 		$html[] = 										'<ul>';
@@ -194,7 +194,7 @@ class SOYCMS_EditorManager extends SOY2LogicBase{
 		
 		
 		if($snippet->getForm()){
-			$html[] = '<div id="'.$key.'_section_form" class="downpanel-fix" style="display:none;width:550px;">';
+			$html[] = '<div id="'.$key.'_section_form" class="downpanel-fix" style="display:none;">';
 			$html[] = 	'<div class="downpanel-fix-inner">';
 			$html[] = 		$snippet->buildForm();
 			$html[] = 		'<div class="panel-line ri break">';
@@ -210,7 +210,7 @@ class SOYCMS_EditorManager extends SOY2LogicBase{
 			$html[] = '<div id="section_'.$key.'_option" class="downmenu-layer" style="display:none;">';
 			$html[] = '<ul class="menu">';
 			foreach($child as $child_snippet){
-				$html[] = '<li><a onclick="'.$funcName.'(this,\''.$child_snippet->getType().'\',\''.$child_snippet->getId().'\');" href="javascript:void(0);" title="'.$child_snippet->getName().'">'.$child_snippet->getName().'</a></li>';												
+				$html[] = '<li><a onclick="'.$funcName.'(this,\''.$child_snippet->getType().'\',\''.$child_snippet->getId().'\');" href="javascript:void(0);" title="'.$child_snippet->getName().'">'.$child_snippet->getName().'</a></li>';
 			}
 			$html[] = '</ul>';
 			$html[] = '</div>';

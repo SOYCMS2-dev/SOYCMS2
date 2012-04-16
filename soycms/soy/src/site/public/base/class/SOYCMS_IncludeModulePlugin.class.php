@@ -35,6 +35,21 @@ class SOYCMS_IncludeModulePlugin extends HTMLPluginBase{
 	 */
 	public static function loadModule($moduleName,$language = null){
 		
+		//マネージ
+		if(SOYCMS_MANAGE_MODE){
+			try{
+				$module = SOYCMS_Library::load($moduleName);
+				if(!$module)throw new Exception("");
+				$suffix = $module->getId();
+				if($language){
+					$suffix .= "&template=" . $language;
+				}
+				SOYCMS_DynamicEditHelper::template("library", $module->getName(), SOYCMS_ADMIN_ROOT_URL . "site/page/library/detail?id=" . $suffix);
+			}catch(Exception $e){
+				
+			}
+		}
+		
 		$dir = SOYCMS_Library::getLibraryDirectory() . $moduleName;
 		
 		if(!file_exists($dir)){

@@ -6,34 +6,30 @@ SOY2HTMLFactory::importWebPage("page.page_page_detail");
 class page_page_detail_editor extends page_page_detail{
 	
 	function doPost(){
+		//再帰的に設定するかどうか
+		$isrecursive = (isset($_POST["save_editor_recursive"]) && $_POST["save_editor_recursive"] == 1);
+		
 		if(isset($_POST["save_editor_config"])){
 			
-			$config = $this->page->getConfigObject();
+			$pages = array($this->page->getId());
 			
-			if(isset($_POST["append_snippet_ids"])){
-				$orders = array_keys($_POST["append_snippet_ids"]);
-				$allows = $_POST["append_snippet_ids"];
-				
-				$config["append_snippet_order"] = $orders;
-				$config["allowed_append_snippet"] = $allows;
-				
-			}else{
-				$list = SOYCMS_Snippet::getList(array());
-				$config["append_snippet_order"] = array_keys($list);
-				$config["allowed_append_snippet"] = array();
+			//再帰的に
+			if($isrecursive){
+				$mappings = SOYCMS_DataSets::get("site.page_relation");
+				$pages = array_merge($pages,$mappings[$this->page->getId()]);
 			}
 			
-			if(isset($_POST["InsertSnippetOrder"])){
-				$ordersAppend = array_keys($_POST["InsertSnippetOrder"]);
-				$allowsAppend = (isset($_POST["insert_snippet_ids"])) ? $_POST["insert_snippet_ids"] : array();
+			$pageDAO = SOY2DAOFactory::create("SOYCMS_PageDAO");
+			foreach($pages as $pageId){
+				try{
+					$page = $pageDAO->getById($pageId);
+				}catch(Exception $e){
+					continue;
+				}
 				
-				$config["insert_snippet_order"] = $ordersAppend;
-				$config["allowed_insert_snippet"] = $allowsAppend;
+				$this->saveEditorConfig($page);
 			}
-			
-			$this->page->setConfigObject($config);
-			$this->page->save();
-			
+				
 			$this->jump("/page/detail/editor/" . $this->id . "?updated");
 			exit;
 		}
@@ -118,6 +114,38 @@ class page_page_detail_editor extends page_page_detail{
 		$this->addModel("is_directory",array(
 			"visible" => ($this->page->isDirectory())
 		));
+	}
+	
+	/**
+	 * エディターの設定を保存
+	 * @param SOYCMS_Page $page
+	 */
+	function saveEditorConfig(SOYCMS_Page $page){
+		$config = $page->getConfigObject();
+			
+		if(isset($_POST["append_snippet_ids"])){
+			$orders = array_keys($_POST["append_snippet_ids"]);
+			$allows = $_POST["append_snippet_ids"];
+			
+			$config["append_snippet_order"] = $orders;
+			$config["allowed_append_snippet"] = $allows;
+			
+		}else{
+			$list = SOYCMS_Snippet::getList(array());
+			$config["append_snippet_order"] = array_keys($list);
+			$config["allowed_append_snippet"] = array();
+		}
+		
+		if(isset($_POST["InsertSnippetOrder"])){
+			$ordersAppend = array_keys($_POST["InsertSnippetOrder"]);
+			$allowsAppend = (isset($_POST["insert_snippet_ids"])) ? $_POST["insert_snippet_ids"] : array();
+			
+			$config["insert_snippet_order"] = $ordersAppend;
+			$config["allowed_insert_snippet"] = $allowsAppend;
+		}
+		
+		$page->setConfigObject($config);
+		$page->save();
 	}
 	
 }

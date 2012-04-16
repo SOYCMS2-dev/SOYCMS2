@@ -2,6 +2,40 @@
 
 class SOYCMS_DynamicEditHelper {
 	
+	static private $_template = array();
+	
+	/**
+	 * テンプレート情報を追加
+	 * @param unknown_type $category
+	 * @param unknown_type $label
+	 * @param unknown_type $link
+	 * @param unknown_type $option
+	 */
+	public static function template($category, $label, $link, $option = array()){
+		
+		if(!isset(self::$_template[$category])){
+			self::$_template[$category] = array();
+		}
+		
+		self::$_template[$category][$link] = array(
+			"label" => $label,
+			"link" => $link,
+			"option" => $option
+		);
+	}
+	
+	
+	public static function getManageMenuHTML(){
+		$html = array();
+		$result = self::$_template;
+		
+		$root = SOYCMS_ADMIN_ROOT_URL;
+		$html[] = '<script type="text/javascript">var dynamic_manage_templates = '.json_encode($result).';</script>';
+		$html[] = '<script type="text/javascript" src="'.$root.'common/js/dynamic/manage.js"></script>';
+		$html[] = '<link rel="stylesheet" href="'.$root.'common/css/dynamic-manage.css" type="text/css" media="all" />';
+		return implode("", $html);
+	}
+	
 	public static function prepare($page){
 		$page->getBodyElement()->insertHTML(self::getMenuHTML($page));
 		$page->getBodyElement()->appendHTML(self::getPartHTML());

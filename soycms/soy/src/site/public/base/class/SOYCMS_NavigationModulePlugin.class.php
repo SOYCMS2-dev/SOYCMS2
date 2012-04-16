@@ -21,6 +21,23 @@ class SOYCMS_NavigationModulePlugin extends HTMLPluginBase{
 	
 	public static function loadNavigation($moduleName,$language = null){
 		
+		//マネージ
+		if(SOYCMS_MANAGE_MODE){
+			try{
+				$navigation = SOYCMS_Navigation::load($moduleName);
+				if(!$navigation)throw new Exception("");
+				$suffix = $navigation->getId();
+				$type = $navigation->getTemplateType();
+				if($language){
+					$suffix .= "&template=" . $language;
+				}
+				$suffix .= "#navi_template";
+				SOYCMS_DynamicEditHelper::template("navigation", $navigation->getName(), SOYCMS_ADMIN_ROOT_URL . "site/page/navigation/detail?id=" . $suffix);
+			}catch(Exception $e){
+				
+			}
+		}
+		
 		$dir = SOYCMS_Navigation::getNavigationDirectory() . $moduleName . "/";
 		if(!file_exists($dir)){
 			echo "[ERROR]" . $moduleName . " is not found.\n";

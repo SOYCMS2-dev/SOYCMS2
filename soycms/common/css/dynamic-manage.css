@@ -1,0 +1,39 @@
+
+#dynamic-edit-menu-wrap{
+	position:absolute;
+	top:0;
+	left:0;
+	z-index:9999999;
+}
+
+#dynamic-edit-menu-wrap .dynamic-edit-menu-box{
+	border: 1px dotted #3399CC !important;
+	background-color:#FFFFFF !important;
+	margin:10px;
+	text-align:left;
+}
+
+#dynamic-edit-menu-wrap .dynamic-edit-menu-box h2{
+	line-height: 1.2 !important;
+	margin: 0 !important;
+	padding: 5px !important;
+	border: none !important;
+	background: #669900 !important;
+	color: #FFF !important;
+	font-size: 12px !important;
+	font-weight:bold !important;
+	text-align:left !important;
+}
+
+
+#dynamic-edit-menu-wrap .dynamic-edit-menu-box ul li{
+	
+	height: 24px;
+	line-height: 24px;
+	margin: 0 0 0 0;
+	padding: 2px 6px 0 6px;
+	font-size: 12px;
+	list-style: none;
+	text-indent: 0px;
+	
+}

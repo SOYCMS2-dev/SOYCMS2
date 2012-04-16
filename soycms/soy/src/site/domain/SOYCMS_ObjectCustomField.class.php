@@ -212,6 +212,7 @@ class SOYCMS_ObjectCustomField extends SOY2DAO_EntityBase{
 		}
 		
 		if(($this->type == "date" || $this->type == "datetime" || $this->type == "time") && is_array($value)){
+			if(is_array($value[0]))$value[0] = implode(":",$value[0]);
 			$value = implode(" ",$value);
 			if(strlen($value) > 1){
 				$this->setText($value);
@@ -334,7 +335,7 @@ abstract class SOYCMS_ObjectCustomFieldDAO extends SOY2DAO{
 	 */
 	abstract function getObjectByParams($object,$objectId,$fieldId);
 	
-} 
+}
 
 class SOYCMS_ObjectCustomFieldConfig{
 	
@@ -388,7 +389,7 @@ class SOYCMS_ObjectCustomFieldConfig{
 	 */
 	public static function saveConfig($type,$configs){
 		$dir = self::getConfigDirectory();
-		$filepath = $dir . $type . ".json"; /* 20110725 jsonに変更 */
+		$filepath = $dir . str_replace("/","-",$type) . ".json"; /* 20110725 jsonに変更 */
 		
 		$res = array();
 		foreach($configs as $config){

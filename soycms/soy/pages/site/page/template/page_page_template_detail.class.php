@@ -19,7 +19,7 @@ class page_page_template_detail extends SOYCMS_WebPageBase{
 			SOY2Logic::createInstance("site.logic.page.template.TemplateEditHelper")
 				->toggleItemConfig($this->template->getId(),$itemId,$_POST["toggle"]);
 				
-			$this->jump("/page/template/check?id=" . $this->id . "&updated&suffix=" . $suffix);	
+			$this->jump("/page/template/check?id=" . $this->id . "&updated&suffix=" . $suffix);
 		}
 		
 		
@@ -36,7 +36,7 @@ class page_page_template_detail extends SOYCMS_WebPageBase{
 		//テンプレートの設定
 		if(isset($_POST["save_config"]) && $_POST["Template"]){
 			SOY2::cast($this->template,$_POST["Template"]);
-			$this->template->save(); 
+			$this->template->save();
 		}
 		
 		//テンプレートの保存
@@ -165,7 +165,7 @@ class page_page_template_detail extends SOYCMS_WebPageBase{
 		));
 		
 		$this->addLabel("layout_config",array(
-			"html" => json_encode($this->template->getLayout()) 
+			"html" => json_encode($this->template->getLayout())
 		));
 		
 		$this->addLink("preview_link",array(

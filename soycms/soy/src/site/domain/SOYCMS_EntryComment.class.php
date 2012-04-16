@@ -183,6 +183,12 @@ abstract class SOYCMS_EntryCommentDAO extends SOY2DAO{
 	abstract function update(SOYCMS_EntryComment $bean);
 	
 	/**
+	 * @return object
+	 * @param int $id
+	 */
+	abstract function getById($id);
+	
+	/**
 	 * @order id desc
 	 */
 	abstract function get();

@@ -1,0 +1,71 @@
+#dynamic-proofreading .dynamic-add-link-wrap{
+	width:27px;
+	font-size:12px;
+	text-aling:25px;
+	
+	position:fixed;
+	bottom:8px;
+	left:8px;
+	
+	border:solid 1px black;
+	border-radius:17px;
+	background-color:#999;
+	opacity:0.8;
+	
+	cursor:pointer;
+	text-shadow: 0 1px 0 #fcfcfc;
+	
+	z-index:101;
+}
+#dynamic-proofreading .dynamic-add-link-wrap:hover{
+	opacity:1;
+}
+
+.dynamic-proofreading-section{
+	width:300px;
+	background-color:#ff0000;
+	position:absolute;
+	display:none;
+}
+
+/* layer */
+#dynamic-proofreading-layer{
+	left:0;
+	top:0;
+	height:100%;
+	width:100%;
+	background:#000;
+	filter:alpha(opacity=60);
+	opacity: 0.75;
+	position:absolute;
+	z-index:100;
+}
+
+#dynamic-proofreading-window{
+	display:none;	
+	position: fixed;
+	top:50%;
+	left:50%;
+	width:710px;
+	padding: 10px 5px;
+	border: 5px solid #EEE;
+	background: #FFF;
+	text-align: left;
+	z-index:101;
+}
+
+#dynamic-proofreading-window p.close{
+	position: absolute;
+	width: 24px;
+	height: 24px;
+	top: -16px;
+	right: -16px;
+	cursor: pointer;
+	background: url(../img/close-btn.png) 0 0 no-repeat;
+}
+
+#dynamic-proofreading-window iframe{
+	border:none;
+	width:100%;
+	height:500px;
+}

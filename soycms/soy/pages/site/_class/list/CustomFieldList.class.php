@@ -83,4 +83,47 @@ class CustomFieldList extends HTMLList{
 		
 	}
 }
+
+if(!class_exists("HTMLRadioList")){
+class HTMLRadioList extends HTMLList{
+
+	protected $name = null;
+	protected $value = null;
+	protected $index = true;
+
+	function populateItem($entity,$key){
+		$elementId = $this->getId() . "_" . $key;
+		$name = $this->name;
+
+		$this->addLabel("item_label",array(
+			"attr:for" => $elementId,
+			"text" => $entity,
+		));
+
+		$value = ($this->index) ? $key : $entity;
+
+		$this->addCheckbox("item_checkbox",array(
+			"elementId" => $elementId,
+			"name" => $name,
+			"value" => ($this->index) ? $key : $entity,
+			"selected" => $value == $this->value
+		));
+	}
+
+	function setName($name){
+		$this->name = $name;
+	}
+
+	function setValue($value){
+		$this->value = $value;
+	}
+
+	function setIndex($index){
+		$this->index = $index;
+	}
+
+
+
+}
+}
 ?>

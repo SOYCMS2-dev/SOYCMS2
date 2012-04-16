@@ -23,12 +23,12 @@ create table soycms_site_entry(
 	allow_trackback INTEGER default 0,
 	feed_entry INTEGER default 1,
 	unique(directory,uri)
-) TYPE=InnoDB;
+) ENGINE=InnoDB;
 create index entry_udate on soycms_site_entry(update_date desc);
 create index entry_cdate on soycms_site_entry(create_date desc);
 create index entry_order on soycms_site_entry(display_order desc);
 alter table soycms_site_entry add foreign key parent_entry_id references soycms_site_entry(id);
-alter table soycms_site_entry add directory_uri varchar(255); 
+alter table soycms_site_entry add directory_uri varchar(255);
 
 
 drop table soycms_entry_attribute;
@@ -38,7 +38,7 @@ create table soycms_entry_attribute(
 	class_name varchar(255),
 	object_data text,
 	unique(entry_id,class_name)
-) TYPE=InnoDB;
+) ENGINE=InnoDB;
 
 
 
@@ -55,7 +55,7 @@ create table soycms_entry_comment(
 	comment_status integer not null,
 	comment_attributes varchar(255),
 	comment_order integer not null default 0
-) TYPE=InnoDB;
+) ENGINE=InnoDB;
 
 
 drop table soycms_entry_trackback;
@@ -69,7 +69,7 @@ create table soycms_entry_trackback(
 	submit_date integer not null,
 	trackback_status integer not null,
 	trackback_attributes varchar(255)
-) TYPE=InnoDB;
+) ENGINE=InnoDB;
 
 
 
@@ -83,7 +83,7 @@ create table soycms_site_label(
 	label_type integer default 0,
 	display_order integer default 0,
 	unique(name,directory)
-) TYPE=InnoDB;
+) ENGINE=InnoDB;
 
 drop table soycms_site_entry_label;
 create table soycms_site_entry_label(
@@ -91,7 +91,7 @@ create table soycms_site_entry_label(
 	label_id integer references soycms_site_label(id),
 	display_order integer default 2147483647,
 	unique(entry_id,label_id)
-) TYPE=InnoDB;
+) ENGINE=InnoDB;
 
 
 drop table soycms_site_tag;
@@ -101,7 +101,7 @@ create table soycms_site_tag(
 	hash_text varchar(12) not null,
 	display_order integer not null,
 	unique(entry_id,hash_text)
-) TYPE=InnoDB;
+) ENGINE=InnoDB;
 create index tag_hash on soycms_site_tag(hash_text);
 
 drop table soycms_site_page;
@@ -116,7 +116,7 @@ create table soycms_site_page(
 	is_deleted integer default 0,
 	create_date integer not null,
 	update_date integer not null
-) TYPE=InnoDB;
+) ENGINE=InnoDB;
 
 drop table soycms_admin_role;
 create table soycms_admin_role(
@@ -124,14 +124,14 @@ create table soycms_admin_role(
 	admin_id integer,
 	role varchar(255),
 	unique(admin_id,role)
-) TYPE=InnoDB;
+) ENGINE=InnoDB;
 
 drop table soycms_data_sets;
 create table soycms_data_sets(
 	id integer primary key auto_increment,
 	class_name varchar(255) unique,
 	object_data LONGTEXT
-) TYPE=InnoDB;
+) ENGINE=InnoDB;
 
 drop table soycms_group;
 create table soycms_group(
@@ -143,7 +143,7 @@ create table soycms_group(
 	group_config LONGTEXT,
 	create_date integer not null default 0,
 	update_date integer not null default 0
-) TYPE=InnoDB;
+) ENGINE=InnoDB;
 
 drop table soycms_admin_group;
 create table soycms_admin_group(
@@ -151,7 +151,7 @@ create table soycms_admin_group(
 	admin_id integer not null,
 	group_id varchar(14) not null,
 	unique(admin_id,group_id)
-) TYPE=InnoDB;
+) ENGINE=InnoDB;
 
 drop table soycms_group_permission;
 create table soycms_group_permission(
@@ -161,7 +161,7 @@ create table soycms_group_permission(
 	readable integer not null default 1,
 	writable integer not null default 1,
 	unique(page_id,group_id)
-) TYPE=InnoDB;
+) ENGINE=InnoDB;
 
 
 drop table soycms_site_object_field;
@@ -175,7 +175,7 @@ create table soycms_site_object_field(
 	object_text LONGTEXT,
 	object_value LONGTEXT,
 	unique(field_id,object_id,field_index,object)
-) TYPE=InnoDB;
+) ENGINE=InnoDB;
 
 
 -- 2.0.8 20110710
@@ -189,7 +189,7 @@ create table soycms_site_object(
 	owner_id INTEGER not null,
 	directory INTEGER not null,
 	create_date INTEGER not null
-) TYPE=InnoDB;
+) ENGINE=InnoDB;
 
 
 drop table if exists soycms_page_attribute;
@@ -199,4 +199,4 @@ create table soycms_page_attribute(
 	class_name varchar(255),
 	object_data text,
 	unique(page_id,class_name)
-) TYPE=InnoDB;
+) ENGINE=InnoDB;

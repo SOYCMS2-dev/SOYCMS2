@@ -4,11 +4,11 @@
 	<div class="item_box_title">
 		<div class="item_box_title_inner"><h4><!-- soy:id="item_name" /--> - <!-- soy:id="item_type_text" /--></h4></div>
 	</div>
-	<div class="item_box_content"> 
-		<div class="item_box_content_inner"> 
+	<div class="item_box_content">
+		<div class="item_box_content_inner">
 			<input type="hidden" class="item_position" soy:id="item_position" />
 			<input type="hidden" class="item_order" soy:id="item_order" />
-			<input type="hidden" class="item_delete" soy:id="item_delete" /> 
+			<input type="hidden" class="item_delete" soy:id="item_delete" />
 			
 			<ul class="item_menu">
 				<li>
@@ -39,9 +39,9 @@
 					<a class="button post_link" soy:id="whole_hide_link" href="javascript:void(0);" onclick="return confirm('一括で”非表示”に設定します。よろしいですか？\n\nこのテンプレートを利用している全てのページ・ディレクトリに影響があります。');">一括非表示設定</a>
 				</li>
 				
-			</ul> 
-		</div> 
-	</div> 
+			</ul>
+		</div>
+	</div>
 	
 	
 </div soy:id="item_box">
@@ -59,15 +59,15 @@
 		<div id="item_manager_div2">
 			
 			<div class="item_manager break">
-				<div class="cell"> 
-					<div class="cell-title-wrap"> 
-						<h4 class="cell-title">要素を追加する</h4> 
+				<div class="cell">
+					<div class="cell-title-wrap">
+						<h4 class="cell-title">要素を追加する</h4>
 					</div>
-					<ul class="item_menu_sub"> 
-						<li class="library"><a class="button" href="javascript:void(0);" onclick="javascript:load_widget_list('library',this);"><strong>ライブラリ</strong></a></li> 
-						<li class="navigation"><a class="button" href="javascript:void(0);" onclick="javascript:load_widget_list('navigation',this);">ナビ</a></li> 
-						<li><a class="button" href="javascript:void(0);" onclick="javascript:load_widget_list('block',this);">ブロック</a></li> 
-					</ul> 
+					<ul class="item_menu_sub">
+						<li class="library"><a class="button" href="javascript:void(0);" onclick="javascript:load_widget_list('library',this);"><strong>ライブラリ</strong></a></li>
+						<li class="navigation"><a class="button" href="javascript:void(0);" onclick="javascript:load_widget_list('navigation',this);">ナビ</a></li>
+						<li><a class="button" href="javascript:void(0);" onclick="javascript:load_widget_list('block',this);">ブロック</a></li>
+					</ul>
 				</div>
 				<div id="widget_list" class="cell">
 					<!-- ここが書き換わる -->
@@ -76,9 +76,9 @@
 			
 			<!-- soy:id="trash_box" -->
 			<div id="trash_box" class="item_manager">
-				<div class="cell"> 
-					<div class="cell-title-wrap"> 
-						<h4 class="cell-title">非表示中の要素</h4> 
+				<div class="cell">
+					<div class="cell-title-wrap">
+						<h4 class="cell-title">非表示中の要素</h4>
 					</div>
 				</div>
 				<div class="cell">
@@ -90,7 +90,7 @@
 			<!-- /soy:id="trash_box" -->
 			
 		</div>
-	</div>  
+	</div>
 </div>
 
 <script soy:src="../common/wysiwyg/default/colorpicker/js/colorpicker.js" type="text/javascript"></script>
@@ -153,7 +153,7 @@ $(function(){
 	if(heads.length > 0){
 		link = document.createElement("link");
 		link.setAttribute("rel","stylesheet");
-		link.setAttribute("href",url); 
+		link.setAttribute("href",url);
 		heads[0].appendChild(link);
 	}
 	
@@ -173,7 +173,7 @@ var toggle_item_delete = function(ele){
 			$(box).addClass("item_recovered");
 		}
 	} else {
-		alert("here");
+		
 		box.toggleClass("item_delete");
 	}
 	

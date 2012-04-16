@@ -67,6 +67,21 @@ class SOYCMS_CommonPartsExtension extends SOYCMS_SitePublicCommonExtension{
 					}
 				}
 				
+				//親記事があれば
+				$entry = SOY2DAO::find("SOYCMS_Entry", SOYCMS_Helper::get("entry_id"));
+				if($entry->getParent() > 0){
+					try{
+						$parent = SOY2DAO::find("SOYCMS_Entry", $entry->getParent());
+						$tree[] = ":parent";
+						$pages[":parent"] = array(
+							"uri" => soycms_union_uri($page->getUri(),$parent->getUri()),
+							"name" => $parent->getTitle()
+						);
+					}catch(Exception $e){
+						
+					}
+				}
+				
 				
 				$tree[] = ":end";
 				$pages[":end"] = array(
@@ -123,7 +138,7 @@ class SOYCMS_CommonPartsEntryListComponent extends SOYCMS_EntryListComponent{
 			"soy2prefix" => "cms"
 		));
 		
-		return parent::populateItem($entity,$key);	
+		return parent::populateItem($entity,$key);
 	}
 }
 

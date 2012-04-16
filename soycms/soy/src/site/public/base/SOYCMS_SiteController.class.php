@@ -12,7 +12,7 @@ class SOYCMS_SiteController extends SOY2PageController{
 	private $directoryObject;
 	private $_binds = array();
 	private $webPage;
-
+	
 	function prepare(){
 		
 		
@@ -76,6 +76,8 @@ class SOYCMS_SiteController extends SOY2PageController{
 				
 				if($siteSession->hasRole("super") || $siteSession->hasRole("designer")){
 					define("SOYCMS_EDIT_DYNAMIC", $session->isDynamic());
+					define("SOYCMS_MANAGE_MODE", true);	//ダイナミック編集起動用スイッチ
+					SOY2::import("site.public.dynamic.SOYCMS_DynamicEditHelper");
 				}
 				
 				define("SOYCMS_ADMIN_ROOT_URL",$session->getSoycmsRoot());
@@ -86,6 +88,9 @@ class SOYCMS_SiteController extends SOY2PageController{
 			
 			register_shutdown_function(array($this,"onShutdown"));
 		}
+		
+		//マネージモードはfalse
+		if(!defined("SOYCMS_MANAGE_MODE"))define("SOYCMS_MANAGE_MODE", false);
 		
 		PluginManager::invoke("soycms.site.controller.prepare",array("controller" => $this));
 		
@@ -201,9 +206,15 @@ class SOYCMS_SiteController extends SOY2PageController{
 			
 			$timer[] = microtime(true);
 			
-			echo $html;
 			
-
+			//管理モードオンの場合は表示を行う
+			if(SOYCMS_MANAGE_MODE == true){
+				if(preg_match("/<\/body>/i", $html)){
+					$html = preg_replace("/<\/body>/i", SOYCMS_DynamicEditHelper::getManageMenuHTML() . "</body>", $html);
+				}
+			}
+			
+			echo $html;
 			
 			//終了
 			PluginManager::invoke("soycms.site.controller.teardown",array("controller" => $this));
@@ -343,7 +354,7 @@ class SOYCMS_SiteController extends SOY2PageController{
 		$alias = implode("/",$args);
 		if($entryDAO->checkUri($alias,$directory)){
 			return true;
-		}	
+		}
 		return false;
 	}
 	

@@ -1,15 +1,15 @@
-<div id="main-window1" class="main-window"> 
+<div id="main-window1" class="main-window">
 
 
-<div soy:id="window_title_wrap" id="window-title-directory" class="window-title"> 
-	<h2><span><!-- soy:id="page_name*" /-->の設定 ( <a soy:id="page_uri_link"><em><!-- soy:id="page_uri_text*" /--></em></a> )</span></h2> 
-</div soy:id="window_title_wrap"> 
+<div soy:id="window_title_wrap" id="window-title-directory" class="window-title">
+	<h2><span><!-- soy:id="page_name*" /-->の設定 ( <a soy:id="page_uri_link"><em><!-- soy:id="page_uri_text*" /--></em></a> )</span></h2>
+</div soy:id="window_title_wrap">
 
-<div class="window-content"> 
+<div class="window-content">
 
 	<div class="tab-menu">
 		
-		<ul class="tab-index"> 
+		<ul class="tab-index">
 			<li><a soy:id="tab_info_link">情報</a></li>
 			<li><a soy:id="tab_basic_link">基本設定</a></li>
 			<li><a soy:id="tab_item_link">要素設定</a></li>
@@ -35,46 +35,46 @@
 	</ul>
 
 
-	<div class="title"> 
-		<h3>挿入ボタン設定</h3> 
-	</div>	
+	<div class="title">
+		<h3>挿入ボタン設定</h3>
+	</div>
 	
 	<div class="content">
 		
 
 		
-		<table class="list-table"> 
-			<thead> 
-				<tr> 
-					<th width="10" scope="col">表示</th> 
-					<th width="151" scope="col">ボタン名</th> 
-					<th width="57" scope="col">アイコン</th> 
-					<th width="459" scope="col">メモ</th> 
-					<th width="81" class="w10p" scope="col">表示順</th> 
-				</tr> 
-			</thead> 
-			<tbody> 
+		<table class="list-table">
+			<thead>
+				<tr>
+					<th width="10" scope="col">表示</th>
+					<th width="151" scope="col">ボタン名</th>
+					<th width="57" scope="col">アイコン</th>
+					<th width="459" scope="col">メモ</th>
+					<th width="81" class="w10p" scope="col">表示順</th>
+				</tr>
+			</thead>
+			<tbody>
 				<!-- soy:id="snippet_popup_list" -->
-				<tr> 
-					<td class="ce"><span class="s-cell"> 
-						<input soy:id="snippet_check" type="checkbox" /> 
-					</span></td> 
-					<td><!-- soy:id="snippet_name" -->ライブラリ名A<!-- /snippet_name --></td> 
+				<tr>
+					<td class="ce"><span class="s-cell">
+						<input soy:id="snippet_check" type="checkbox" />
+					</span></td>
+					<td><!-- soy:id="snippet_name" -->ライブラリ名A<!-- /snippet_name --></td>
 					<td class="ce">
 						<div class="panel-line">
 							<a href="javascript:void(0);" class="icon-btn <!-- soy:id="snippet_class" /-->" href="javascript:void(0);"><em></em></a>
 						</div>
-					</td> 
+					</td>
 					<td>
 						<!-- soy:id="snippet_comment" /-->
-					</td> 
+					</td>
 					<td>
 						<input type="hidden" soy:id="snippet_order" />
 						<ul class="btn-list ce">
 							<li><a href="javascript:void(0);" class="xxsh-btn up_btn"><em>↑</em></a></li>
 							<li><a href="javascript:void(0);" class="xxsh-btn down_btn"><em>↓</em></a></li>
 						</ul>
-					</td> 
+					</td>
 				</tr>
 				<!-- /soy:id="snippet_popup_list" -->
 			</tbody>
@@ -82,7 +82,11 @@
 		
 		
 			<div class="form-btn ce under">
-				<input type="submit" value="設定" name="save_editor_config" class="l-btn" /> 
+				<input type="submit" value="設定" name="save_editor_config" class="l-btn" />
+				<p class="intro">
+					<input type="checkbox" name="save_editor_recursive" value="1" id="save_editor_recursive" />
+					<label for="save_editor_recursive">子ディレクトリ全てに適用</label>
+				</p>
 			</div>
 		
 	
@@ -91,72 +95,76 @@
 </div><!-- /section -->
 
 <div class="section">
-	<div class="title"> 
-		<h3>追加ボタン設定</h3> 
-	</div>	
+	<div class="title">
+		<h3>追加ボタン設定</h3>
+	</div>
 	
 	<div class="content">
 		
-		<table class="list-table"> 
-			<thead> 
-				<tr> 
-					<th width="10" scope="col">表示</th> 
-					<th width="151" scope="col">ボタン名</th> 
-					<th width="57" scope="col">アイコン</th> 
-					<th width="459" scope="col">メモ</th> 
-					<th width="81" class="w10p" scope="col">表示順</th> 
-				</tr> 
-			</thead> 
-			<tbody> 
+		<table class="list-table">
+			<thead>
+				<tr>
+					<th width="10" scope="col">表示</th>
+					<th width="151" scope="col">ボタン名</th>
+					<th width="57" scope="col">アイコン</th>
+					<th width="459" scope="col">メモ</th>
+					<th width="81" class="w10p" scope="col">表示順</th>
+				</tr>
+			</thead>
+			<tbody>
 				<!-- soy:id="snippet_list" -->
-				<tr> 
-					<td class="ce"><span class="s-cell"> 
-						<input soy:id="snippet_check" type="checkbox" /> 
-					</span></td> 
-					<td><!-- soy:id="snippet_name" -->ライブラリ名A<!-- /snippet_name --></td> 
+				<tr>
+					<td class="ce"><span class="s-cell">
+						<input soy:id="snippet_check" type="checkbox" />
+					</span></td>
+					<td><!-- soy:id="snippet_name" -->ライブラリ名A<!-- /snippet_name --></td>
 					<td class="ce">
 						<div class="panel-line">
 							<a href="javascript:void(0);" class="icon-btn <!-- soy:id="snippet_class" /-->" href="javascript:void(0);"><em></em></a>
 						</div>
-					</td> 
+					</td>
 					<td>
 						<!-- soy:id="snippet_comment" /-->
-					</td> 
+					</td>
 					<td>
 						<input type="hidden" soy:id="snippet_order" />
 						<ul class="btn-list ce">
 							<li><a href="javascript:void(0);" class="xxsh-btn up_btn"><em>↑</em></a></li>
 							<li><a href="javascript:void(0);" class="xxsh-btn down_btn"><em>↓</em></a></li>
 						</ul>
-					</td> 
+					</td>
 				</tr>
 				<!-- /soy:id="snippet_list" -->
 			</tbody>
 			<tfoot soy:id="is_directory">
-				<tr> 
-					<td class="ce"><span class="s-cell"> 
-						<input soy:id="next_page_snippet" type="checkbox" /> 
-					</span></td> 
-					<td>次のページ</td> 
+				<tr>
+					<td class="ce"><span class="s-cell">
+						<input soy:id="next_page_snippet" type="checkbox" />
+					</span></td>
+					<td>次のページ</td>
 					<td class="ce">
 						<div class="panel-line">
 							<a href="javascript:void(0);" class="icon-btn btn-nextpage" href="javascript:void(0);"><em></em></a>
 						</div>
-					</td> 
+					</td>
 					<td>
 						複数ページが不要の場合はチェックを外してください
-					</td> 
+					</td>
 					<td>
 						<ul class="btn-list ce">
 						</ul>
-					</td> 
-				</tr> 
+					</td>
+				</tr>
 			</tfoot soy:id="is_directory">
 		</table>
 		
 
 			<div class="form-btn ce under">
 				<input type="submit" value="設定" name="save_editor_config" class="l-btn" />
+				<p class="intro">
+					<input type="checkbox" name="save_editor_recursive" value="1" id="append_config_recursive" />
+					<label for="append_config_recursive">子ディレクトリ全てに適用</label>
+				</p>
 			</div>
 
 		

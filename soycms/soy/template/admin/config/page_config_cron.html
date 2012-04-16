@@ -1,0 +1,59 @@
+<div class="section">
+	<div class="title"> 
+		<h3>クロンの設定</h3> 
+	</div>	
+	<div class="content"> 
+		
+		<p class="l">以下のような形でcronの設定を行って下さい</p>
+		<textarea soy:id="cron_sample" class="m-area liq-area" rows="5"></textarea>
+		
+		<div class="form-section">
+			<div class="title">
+				<h4>最終実行時刻</h4>
+			</div>
+			<div class="item">
+				<p class="l"><!-- soy:id="last_run_time" /--></p>
+				
+				<form soy:id="form">
+					<input type="submit" name="execute_now" class="m-btn" onclick="return confirm('実行してもよろしいですか？');" value="今すぐ実行" />
+				</form>
+			</div>
+		</div>
+		
+		<!-- soy:id="cron_loaded" -->
+		<div class="form-section">
+			<div class="title">
+				<h4>実行結果</h4>
+			</div>
+			<div class="item">
+				<textarea soy:id="cron_log" class="m-area liq-area" rows="11"></textarea>
+			</div>
+		</div>
+		<!-- /soy:id="cron_loaded" -->
+		
+		<div class="form-section">
+			<div class="title">
+				<h4>最終実行時刻(Daily)</h4>
+			</div>
+			<div class="item">
+				<p class="l"><!-- soy:id="daily_last_run_time" /--></p>
+			</div>
+		</div>
+		
+		<!-- soy:id="cron_daily_loaded" -->
+		<div class="form-section">
+			<div class="title">
+				<h4>実行結果(Daily)</h4>
+			</div>
+			<div class="item">
+				<textarea soy:id="cron_daily_log" class="m-area liq-area" rows="11"></textarea>
+			</div>
+		</div>
+		<!-- /soy:id="cron_daily_loaded" -->
+		
+		
+		
+	</div>
+		 
+</div> 
+<!--  // .section --> 

@@ -48,8 +48,9 @@ class SOYCMS_ListPageBase extends SOYCMS_SitePageBase{
 			
 			if(count($args)>0){
 				if($args[0] == "tag"){
-					array_shift($tag);
+					array_shift($args);
 					$tag = array_shift($args);
+					SOYCMS_Helper::set("current_tag", $tag);
 				}else if(is_numeric($args[count($args)-1])){
 					$currentPage = array_pop($args);
 				}else if(preg_match("/page-([0-9]+)/",$args[count($args)-1],$tmp)){
@@ -79,10 +80,10 @@ class SOYCMS_ListPageBase extends SOYCMS_SitePageBase{
 						$url = soycms_get_page_url($uri,$this->label->getAlias());
 					}
 					
-					SOY2PageController::redirect($url);	
+					SOY2PageController::redirect($url);
 				}
 				
-			} 
+			}
 			
 			if($currentPage < 0)$currentPage = 1;
 			$offset = max(0,($currentPage-1) * $limit);
@@ -184,7 +185,7 @@ class SOYCMS_ListPageBase extends SOYCMS_SitePageBase{
 		if($this->label){
 			$title = str_replace("#LabelName#",$this->label->getName(),$title);
 		}
-		return $title;	
+		return $title;
 	}
 	
 	/* getter setter */

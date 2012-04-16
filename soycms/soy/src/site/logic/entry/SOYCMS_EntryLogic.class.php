@@ -1,10 +1,40 @@
 <?php
 
 class SOYCMS_EntryLogic extends SOY2LogicBase{
+	
+	/**
+	 * 記事を作成
+	 * @param SOYCMS_Entry $entry
+	 */
+	function create(SOYCMS_Entry $entry,$format = "post-#NUM#.html"){
+		if($entry->getId())throw new Exception();
+		
+		$dao = SOY2DAOContainer::get("SOYCMS_EntryDAO");	/* @var $dao SOYCMS_EntryDAO */
+		
+		$counter = $dao->countByDirectory($entry->getDirectory());
+		while(true){
+			if($dao->checkUri($entry->getUri(), $entry->getDirectory())){
+				$uri = str_replace("#NUM#",$counter,$format);
+				if($uri == $entry->getUri()){
+					throw new Exception("invalid format");
+				}
+				$entry->setUri($uri);
+			}else{
+				break;
+			}
+			
+			$counter++;
+		}
+		
+		$id = $dao->insert($entry);
+		$entry->setId($id);
+		
+		return $entry->getId();
+	}
 
 	/**
 	 * @param $entry 保存する記事
-	 * @param $force 
+	 * @param $force
 	 * @param $syncHistory = true ヒストリーに追加するか
 	 */
 	function update(SOYCMS_Entry $entry, $force = false, $syncHistory = true){

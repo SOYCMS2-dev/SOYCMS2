@@ -126,7 +126,10 @@ class SOYCMS_Template implements SerialziedEntityInterface{
 		$obj->setName(@$array["name"]);
 		$obj->setDescription(@$array["description"]);
 		if(@$array["borderColor"])$obj->setBorderColor($array["borderColor"]);
-		if(@$array["templates"])$obj->setTemplateTypes($array["templates"]);
+		if(@$array["templates"]){
+			asort($array["templates"],SORT_STRING);
+			$obj->setTemplateTypes($array["templates"]);
+		}
 		
 		if(isset($array["items"])){
 			$itemIds = explode(",",$array["items"]);
@@ -237,7 +240,7 @@ class SOYCMS_Template implements SerialziedEntityInterface{
 		
 		//templatesを並び替える
 		if(isset($content["templates"])){
-			
+			asort($content["templates"],SORT_STRING);
 		}
 		
 		soy2_write_ini($dir . "template.ini",$content);
@@ -532,6 +535,13 @@ class SOYCMS_Template implements SerialziedEntityInterface{
 		$this->templateType = str_replace(array(".","-","/"),"",$type);
 	}
 	
+	function getTemplateTypeText(){
+		if(!isset($this->templateTypes[$this->templateType])){
+			return null;
+		}
+		return $this->templateTypes[$this->templateType];
+	}
+	
 	function getHistoryKey(){
 		if($this->templateType){
 			return $this->id . "!" . $this->templateType;
@@ -541,7 +551,11 @@ class SOYCMS_Template implements SerialziedEntityInterface{
 	
 	public function getTemplateTypes($flag = false){
 		if($flag && count($this->templateTypes) > 0){
-			return array_merge(array($this->getId() => $this->getName()),$this->templateTypes);
+			if(isset($this->templateTypes["template"])){
+				return $this->templateTypes;
+			}else{
+				return array_merge(array($this->getId() => $this->getName()),$this->templateTypes);
+			}
 		}
 		return $this->templateTypes;
 	}

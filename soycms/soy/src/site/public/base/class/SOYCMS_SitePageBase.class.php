@@ -2,6 +2,10 @@
 class SOYCMS_SitePageBase extends WebPage{
 
 	private $entryTitle = "";
+	
+	/**
+	 * @var SOYCMS_Page
+	 */
 	private $pageObject;
 	private $directoryObject;
 	private $_itemConfig;
@@ -17,6 +21,18 @@ class SOYCMS_SitePageBase extends WebPage{
 	function init(){
 		PluginManager::load("soycms.site.public.*");
 		PluginManager::load("soycms.site.entry.output.*");
+		
+		if(SOYCMS_MANAGE_MODE){
+			$template = SOYCMS_Template::load($this->pageObject->getTemplate());
+			if($template){
+				$suffix = $template->getId();
+				$type = $template->getTemplateType();
+				if($template->getId() != $type){
+					$suffix .= "&template=" . $type;
+				}
+				SOYCMS_DynamicEditHelper::template("template", $template->getName(), SOYCMS_ADMIN_ROOT_URL . "site/page/template/detail?id=" . $suffix);
+			}
+		}
 	}
 	
 	/**
@@ -279,7 +295,7 @@ class SOYCMS_SitePageBase extends WebPage{
 			"soy2prefix" => "block",
 			"visible" => $visible,
 			"directory" => $entry->getDirectory(),
-			"link" => (defined("SOYCMS_ADMIN_ROOT_URL")) ? SOYCMS_ADMIN_ROOT_URL . "site/entry/detail/" : "" 
+			"link" => (defined("SOYCMS_ADMIN_ROOT_URL")) ? SOYCMS_ADMIN_ROOT_URL . "site/entry/detail/" : ""
 		));
 		
 		//entry_list_wrap
@@ -325,7 +341,7 @@ class SOYCMS_SitePageBase extends WebPage{
 				$properties[$key] = $_properties[$key];
 			}
 			
-			$this->_soy2_content = 
+			$this->_soy2_content =
 				str_replace("##" . $key . "##", '<?php echo $page["_properties"]["'.$key.'"]; ?>' ,$this->_soy2_content);
 		}
 		
@@ -378,7 +394,7 @@ class SOYCMS_SitePageBase extends WebPage{
 	function buildPageInfo($config,$dirConfig){
 		
 		$this->addMeta("meta_content_type",array(
-			"attr:http-equiv" => "Content-Type",			
+			"attr:http-equiv" => "Content-Type",
 			"attr:content" => $config["content-type"] . "; charset=" . $config["encoding"],
 			"soy2prefix" => "cms"
 		));
@@ -405,7 +421,7 @@ class SOYCMS_SitePageBase extends WebPage{
 		
 		$this->addMeta("meta_keyword",array(
 			"attr:name" => "keywords",
-			"attr:content" => (@$config["keyword"]) ? @$config["keyword"] : "", 
+			"attr:content" => (@$config["keyword"]) ? @$config["keyword"] : "",
 			"soy2prefix" => "cms",
 			//"visible" => (strlen((@$config["keyword"])))
 		));
@@ -471,11 +487,11 @@ class SOYCMS_SitePageBase extends WebPage{
 		
 		//feed周りのmeta
 		$this->createAdd("site_feed","SOYCMS_FeedInfoLabel",array(
-			"soy2prefix" => "cms" 
+			"soy2prefix" => "cms"
 		));
 		$this->createAdd("directory_feed","SOYCMS_FeedInfoLabel",array(
 			"page" => $this->getPageObject(),
-			"soy2prefix" => "cms" 
+			"soy2prefix" => "cms"
 		));
 	}
 
@@ -505,8 +521,8 @@ class SOYCMS_SitePageBase extends WebPage{
 	 */
 	function buildDirectoryLabeList(){
 		
-		$labels = 
-			($this->isItemVisible("default:directory_label_list",false)) 
+		$labels =
+			($this->isItemVisible("default:directory_label_list",false))
 				? SOY2DAO::find("SOYCMS_Label",array("directory" => $this->directoryObject->getId()))
 				: array();
 		
@@ -530,7 +546,7 @@ class SOYCMS_SitePageBase extends WebPage{
 		if(isset($this->_itemConfig[$id])){
 			return ($this->_itemConfig[$id]["hidden"] > 0) ? false : true;
 		}else{
-			return $default;	
+			return $default;
 		}
 	}
 

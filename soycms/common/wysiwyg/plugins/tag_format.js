@@ -59,7 +59,7 @@
 			
 			//erase all temporary classes
 			html = html.replace(/\s*class="([^"]*)"/g,function(args){
-				res = args.replace(/(Apple\-|apple-|aobata_)[^"]+/, "");
+				res = args.replace(/(Apple\-|apple-|aobata_|Mso)[^"]+/, "");
 				if(res.match(/\s*class=""/))return "";
 				return res;
 			});
@@ -80,6 +80,10 @@
 		
 		editor.beforeGetHTML.add(function(editor,body){
 			
+			//replace zero width space
+			var destroyZWS = new RegExp(String.fromCharCode(8203), "g");
+			$(body).html(body.innerHTML.replace(destroyZWS, ""));
+			
 			//all font tag convert to span
 			$(body).find("font").each(function(index){
 				try {
@@ -98,17 +102,21 @@
 				}
 			});
 			
-			var marge_span = function(span){
-				parent = $(span);
-				child = $(span.firstChild);
-				
-				if(parent.attr("id") && child.attr("id"))return;
-				_class = [];
-				
-				
-				
-				
-			};
+			//all empty span tag will clear
+			$(body).find("span").addClass('-tmp-span');
+			while($(body).find("span.-tmp-span").size() > 0){
+				$(body).find("span.-tmp-span").each(function(){
+					res = $('<span>').append($(this).clone().empty()).html();
+					if(res.match(/<span class="-tmp-span"><\/span>/i)){
+						$(this).after($(this).html()).remove();
+					}else{
+						$(this).removeClass("-tmp-span");
+					}
+				});
+			}
+			
+			
+			
 			var has_value = function(obj){
 				return _ele.attr("id").length < 1
 					&& _ele.attr("class").length < 1
@@ -148,21 +156,20 @@
 					return;
 				}
 				
-				if(tag_name.match(/span/)){
+				if(tag_name.match(/^(span|strong|b|i|s|em|)$/)){
 					
-					if(ele.innerHTML.length < 1){
-						$(ele).remove();
+					var nested_check = new RegExp("<" + tag_name + ">","ig");
+					new_depth = depth + 1;
+					if($(ele).html().match(nested_check)){
+						$(ele).children().each(function(index,_ele){
+							format_element(_ele,new_depth)
+						});
+						$(ele).after($(ele).html()).remove();
 						return;
 					}
 					
-					_ele = $(ele);
-					
-					
-					//span -> span
-					if(ele.childNodes.length == 1
-					&& ele.childNodes[0].nodeType != 3
-					&& ele.childNodes[0].tagName.match(/span/i)){
-						marge_span(ele);
+					if(ele.innerHTML.length < 1){ //if empty clear
+						$(ele).remove();
 						return;
 					}
 					

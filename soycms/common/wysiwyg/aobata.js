@@ -292,7 +292,7 @@ aobata_editor.prototype = {
 		inst._history = [];
 		
 		//set id
-		if(this.textarea.attr("id").length<1)this.textarea.attr("id", "aobata_editor_textarea_" + aobata_editor.count);
+		if(!this.textarea.attr("id") || this.textarea.attr("id").length<1)this.textarea.attr("id", "aobata_editor_textarea_" + aobata_editor.count);
 		
 		//wrap div
 		this.textarea.wrap("<div id='"+this.textarea.attr("id")+"_editor_wrap' class='aobata_editor_wrap'></div>");
@@ -533,22 +533,39 @@ aobata_editor.prototype = {
 						
 					});
 					
+					var on_paste = function(tet){
+						//replace
+						text = text.replace(/<meta .*?>/gi,"")
+							.replace(/\s*style=".*?"/gi,"")
+							.replace(/<[^>]*><\/[^>]*>/gi,"");
+						
+						if(text.match(/<body[^>]*>/i)){
+							var pos = text.search(/(<body[^>]*>)/i);
+							text = text.substr(pos + RegExp.$1.length);
+							text = text.replace(/[\r\n]*<\/(html|body)[^>]*>[\r\n]*/gi,"");
+						}
+						
+						//clar all comment
+						text = text.replace(/[\r\n]*<!--[^>]+-->[\r\n]*/gi,"");
+						
+						
+						//paste
+						t.insertHTML(text);
+					};
+					
 					if(aobata_editor.isWebkit){
 						t_window.addEventListener("paste",function(event){
+							
 							if(event.clipboardData){
 								text = event.clipboardData.getData("text/html");
 								if(!text)text = event.clipboardData.getData("Text");
-								//replace
-								text = text.replace(/<meta .*?>/g,"")
-									.replace(/\s*style=".*?"/g,"")
-									.replace(/<[^>]*><\/[^>]*>/g,"");
-								
-								//paste
-								t.insertHTML(text);
 								event.preventDefault();
+								return;
 							}
+							
 						},false);
 					}
+					
 					
 				}else{
 					
@@ -728,7 +745,6 @@ aobata_editor.prototype = {
 				showParam = (range._collapsed != undefined) ? !range._collapsed : !range.collapsed;
 				break;
 		}
-		
 		t.updateParam(ele);
 		
 		if (showParam) {
@@ -771,11 +787,14 @@ aobata_editor.prototype = {
 			
 		if(link === null)link = "";
 		
+		var class_val = $(ele).attr("class") + "";
+		
 		$("#attr_href").val(link);
 		$("#attr_target").val($(ele).attr("target") + "");
 		$("#attr_title").val($(ele).attr("title") + "");
 		$("#attr_id").val($(ele).attr("id") + "");
-		$("#attr_class").val($(ele).attr("class").replace(/aobata_[^\s]+\s?/g,"") + "");
+		$("#attr_class").val(class_val.replace(/aobata_[^\s]+\s?/g,"") + "");
+		
 		
 		try {
 			if (link.length > 0) {
@@ -839,6 +858,7 @@ aobata_editor.prototype = {
 		
 		//attributes(img)
 		src = t.convertUrlByBase($(ele).attr("src"),true);
+		
 		$("#img_attr_src").val(src + "");
 		$("#img_attr_alt").val($(ele).attr("alt"));
 		$("#img_attr_href").val( ($(ele).parents("a").attr("href")) ? $(ele).parents("a").attr("href") : "" );
@@ -846,7 +866,8 @@ aobata_editor.prototype = {
 		$("#img_attr_width").val(($(ele)[0].getAttribute("width")) ? $(ele).attr("width") + "" : "");
 		$("#img_attr_height").val(($(ele)[0].getAttribute("height")) ? $(ele).attr("height") + "" : "");
 		$("#img_attr_id").val($(ele).attr("id") + "");
-		$("#img_attr_class").val($(ele).attr("class").replace(/aobata_[^\s]+\s?/g,"") + "");	
+		var class_val = $(ele).attr("class") + "";
+		$("#img_attr_class").val(class_val.replace(/aobata_[^\s]+\s?/g,"") + "");	
 		
 		if ($("#img_attr_src").val() != "undefined" && $("#img_attr_src").val().length > 0) {
 			$("#img_attr_src").addClass("active");
