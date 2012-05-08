@@ -41,8 +41,8 @@ aobata_editor.showPopup = function(ele){
 aobata_editor.showOption = function(ele){
 	
 	var option = $("#" + $(ele).parents(".downpanel").attr("id") + "_option");
+	var is_visible = option.is(":visible");
 	
-	is_visible = option.is(":visible");
 	aobata_editor.hideAllPopup();
 	
 	if(is_visible){

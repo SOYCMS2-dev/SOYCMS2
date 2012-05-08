@@ -1,0 +1,79 @@
+<div id="dashboard-window" class="main-window">
+					
+	<div class="window-title">
+		<h2>文言の管理</h2>
+	</div>
+	
+	<div class="window-content">
+		<div class="section">
+		
+			<ul class="crumbs">
+				<li><a soy:link="./" title="管理画面トップ" class="home_btn">管理画面トップ</a></li>
+				<li><a soy:link="string">文言の管理</a></li>
+			</ul>
+		
+			<div class="content">
+			
+			<table class="form-table">
+				<tbody>
+					<tr>
+						<th>基準言語</th>
+						<td>
+							<!-- soy:id="base_language" /-->
+							<!--
+							<p>基準言語を変更する
+								<select>
+									<option value="">--</option>
+									<option value="">
+								</select>
+								<input type="submit" name="" value="変更する" />
+							</p>
+							 -->
+						</td>
+					</tr>
+					<!--
+					<tr>
+						<th>対応言語</th>
+						<td>
+							<p class="intro">日本語,英語,フランス語</p>
+							
+							<p>次の言語を追加する
+								<select>
+									<option value="">--</option>
+									<option value="">
+								</select>
+								<input type="submit" name="" value="追加する" />
+							</p>
+						</td>
+					</tr>
+					-->
+					<!-- soy:id="language_list" -->
+					<tr>
+						<th><!-- soy:id="language_text" /--></th>
+						<td>
+							<div class="item break">
+								<table class="form-table">
+									<tbody>
+										<tr>
+											<th>最終更新日時</th>
+											<td><!-- soy:id="language_update_date" /--></td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+							
+							<p>
+								<a soy:id="edit_link" class="m-btn"><em>編集する</em></a>
+								<a soy:id="show_history_link" class="m-btn">履歴を表示(<!-- soy:id="history_count" /-->)</a>
+							</p>
+						</td>
+					</tr>
+					<!-- /soy:id="language_list" -->
+				</tbody>
+			</table>
+		</div><!-- //.content -->
+	</div><!-- //.section -->
+		
+	</div>
+	<!--  // .window-content -->
+</div>

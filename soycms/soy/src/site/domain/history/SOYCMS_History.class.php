@@ -55,25 +55,33 @@ class SOYCMS_History extends SOY2DAO_EntityBase{
 	/**
 	 * ヒストリーに追加する
 	 */
-	public static function addHistory($type,$_obj,$op_type = "update"){
-		if(is_array($_obj)){
-			$id = $_obj[0];
-			$_obj = $_obj[1];
+	public static function addHistory($type,$target,$op_type = "update"){
+		if(is_array($target)){
+			$id = $target[0];
+			$_obj = $target[1];
 		}else{
-			$id = $_obj->getId();
+			$id = $target->getId();
+			$_obj = $target;
 		}
 		
 		$obj = new SOYCMS_History();
 		$obj->setObject($type);
 		$obj->setObjectId($id);
-		$obj->setName($_obj->getName());
-		$obj->setContent($_obj->getContent());
 		$obj->setAdminId(SOYCMS_LOGIN_USER_ID);
 		$obj->setType($op_type);
 		
-		$type_text = (method_exists($_obj, "getTemplateTypeText")) ? $_obj->getTemplateTypeText() : null;
-		if($type_text){
-			$obj->setName($_obj->getName() . " " . $type_text);
+		if(is_object($_obj)){
+			$obj->setName($_obj->getName());
+			$obj->setContent($_obj->getContent());
+			
+			$type_text = (method_exists($_obj, "getTemplateTypeText")) ? $_obj->getTemplateTypeText() : null;
+			if($type_text){
+				$obj->setName($_obj->getName() . " " . $type_text);
+			}
+			
+		}else{
+			$obj->setName($target[2]);
+			$obj->setContent($_obj);
 		}
 		
 		$obj->save();
@@ -144,7 +152,6 @@ class SOYCMS_History extends SOY2DAO_EntityBase{
 			case "history":
 			case "library":
 			case "navigation":
-			default:
 				$class = "SOYCMS_" . ucwords($this->object);
 				if(strpos($this->objectId,"!")!==false){
 					list($objectId,$optionId) = explode("!",$this->objectId);
@@ -155,6 +162,9 @@ class SOYCMS_History extends SOY2DAO_EntityBase{
 				}
 				
 				return $object;
+				break;
+			default:
+				return null;
 				break;
 		}
 		

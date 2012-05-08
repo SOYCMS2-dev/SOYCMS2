@@ -14,18 +14,26 @@ class page_page_history_detail extends SOYCMS_WebPageBase{
 			//Object
 			$obj = $this->history->getSourceObject();
 			
-			//add to history(revert)
-			SOYCMS_History::addHistory($this->history->getObject(),array($this->history->getObjectId(),$obj),"revert");
+			if($obj){
+				//add to history(revert)
+				SOYCMS_History::addHistory($this->history->getObject(),array($this->history->getObjectId(),$obj),"revert");
+				
+				$obj->setContent($this->history->getContent());
+				$obj->save();
+				
+				if(strpos($this->history->getObjectId(), "!") !== false){
+					list($id,$template) = explode("!",$this->history->getObjectId());
+					$this->jump("/page/".$this->history->getObject()."/detail?id=" . $id . "&updated&template=" . $template);
+				}else{
+					$this->jump("/page/".$this->history->getObject()."/detail?id=" . $this->history->getObjectId() . "&updated");
+				}
 			
-			$obj->setContent($this->history->getContent());
-			$obj->save();
-			
-			if(strpos($this->history->getObjectId(), "!") !== false){
-				list($id,$template) = explode("!",$this->history->getObjectId());
-				$this->jump("/page/".$this->history->getObject()."/detail?id=" . $id . "&updated&template=" . $template);
 			}else{
-				$this->jump("/page/".$this->history->getObject()."/detail?id=" . $this->history->getObjectId() . "&updated");
+				if($this->history->getObject() == "string"){
+					$this->jump("/page/string/detail?rollback=" . $this->history->getId());
+				}
 			}
+			
 			
 		}
 		

@@ -499,15 +499,19 @@ class SOYCMS_SitePageBase extends WebPage{
 	 * 文字コード変換して出力
 	 */
 	function display(){
+		
+		$pageObj = $this->getPageObject();
+		$config = null;
+		if($pageObj)$config = $pageObj->getConfigObject();
+		
 		ob_start();
 		parent::display();
 		$html = ob_get_contents();
 		ob_end_clean();
 
-		$pageObj = $this->getPageObject();
 		
-		if($pageObj){
-			$config = $pageObj->getConfigObject();
+		
+		if($config){
 			if(!isset($config["encoding"]))$config["encoding"] = "UTF-8";
 			header("Content-Type: " . $config["content-type"] . "; encoding=" .$config["encoding"] );
 			echo mb_convert_encoding($html,$config["encoding"],"UTF-8");

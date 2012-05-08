@@ -6,48 +6,16 @@ function init_site_i18n($lang = "ja"){
 	//language file directory
 	$lang_dir = SOYCMS_SITE_DIRECTORY . ".i18n/";
 	if(!file_exists($lang_dir))return;
+	if(!file_exists($lang_dir . "site.json"))return;
 	
-	$domain = "default";
+	//多言語対応
+	SOY2String::language($lang);
 	
-	$path = SOYCMS_SITE_DIRECTORY . ".cache/i18n/" . $lang . "/LC_MESSAGES/default.mo";
-	if(!file_exists($path) && file_exists($lang_dir . $lang . ".mo")){
-		@mkdir(dirname($path),0700,true);
-		copy($lang_dir . $lang . ".mo", $path);
-	}
-	
-	bindtextdomain($domain, SOYCMS_SITE_DIRECTORY . ".cache/i18n/");
-	textdomain($domain);
-	putenv('LC_ALL=' . $lang);
-	//setlocale(LC_ALL, $lang);
-}
-
-function generate_site_i18n(){
-	chdir(SOYCMS_SITE_DIRECTORY);
-	
-	exec('find . -iname "*.html" | xargs xgettext -o .i18n/messages.pot \
-		--from-code=UTF-8 \
-		-F \
-		-k"_" \
-		-k"__" \
-		-k"_e"'
-	);
-	
-	exec('find .plugin -iname "*.php" | xargs xgettext -o .i18n/messages.pot \
-		--from-code=UTF-8 \
-		-k"_" \
-		-k"__" \
-		-k"_e"'
-	);
-}
-
-function generate_site_language_file($lang){
-	chdir(SOYCMS_SITE_DIRECTORY);
-	
-	if(!file_exists(SOYCMS_SITE_DIRECTORY . ".i18n/" . $lang . ".po")){
-		exec('copy .i18n/messages.pot i18n/'.$lang.'.po');
+	if(defined("SOYCMS_ADMIN_LOGINED") && SOYCMS_ADMIN_LOGINED){
+		//管理画面にログイン中はキャッシュしない
 	}else{
-		exec('msgmerge -U .i18n/messages.pot .i18n/'.$lang.'.po');
+		SOY2String::doCache(SOY2HTMLConfig::CacheDir());
 	}
-
-	exec('msgfmt --o .i18n/'.$lang.'.mo .i18n/'.$lang.'.po');
+	
+	SOY2String::load($lang_dir . "site.json");
 }

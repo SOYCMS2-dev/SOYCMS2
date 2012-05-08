@@ -5,10 +5,10 @@
 	
 	<div class="item">
 		
-		<div id="upload_popup"> 
+		<div id="upload_popup">
 			
 			<form soy:id="form" target="target_fr">
-				<div class="form-section"> 
+				<div class="form-section">
 					<div class="label">
 						<h4>ファイルを選択してください</h4>
 					</div>
@@ -54,7 +54,7 @@
 				<div class="ce lbreak">
 					<input type="submit" name="upload" value="アップロード" class="l-btn" onclick="save_auto_resize_config(this);save_make_thumbnail_config(this);" />
 				</div>
-			</form> 
+			</form>
 
 
 		<p>画像下のサムネイルのリンク(例:300x200)をクリックすることで画像の挿入・選択が出来ます。</p>
@@ -119,6 +119,7 @@ var notify = function(d){
 				$("#overLayer-L p.close,#overLayer p.close").click();
 				var img = $(this).attr("href");
 				var link = $(this).attr("img");
+				
 				if (func) {
 					func(img, link);
 				}
@@ -158,11 +159,11 @@ var prepare_attachment = function(func){
 	$(".thumbnail_link").one("click",function(){
 		try {
 			$("#popupLayer").click();
-			var img = $(this).attr("href");
+			var img_link = $(this).attr("href");
 			var link = $(this).attr("img");
 			if (func) {
-				if(link == "image")link = img;
-				func(img,link);
+				if(link == "image")link = img_link;
+				func(img_link,link);
 			}
 		}catch(e){
 			alert(e);
@@ -172,10 +173,10 @@ var prepare_attachment = function(func){
 	$(".attachment_link").one("click",function(){
 		try {
 			$("#popupLayer").click();
-			var img = $(this).attr("href");
+			var link = $(this).attr("href");
 			var title = $(this).attr("title");
 			if (func) {
-				func(img,title);
+				func(link,title);
 			}
 		}catch(e){
 			

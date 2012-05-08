@@ -1,29 +1,29 @@
-<div id="text-property-panel" class="property-panel"> 
-	<div class="panel-header"> 
-		<div class="panel-title"><strong>プロパティ</strong></div> 
-		<div class="panel-close" title="閉じる" onclick="aobata_editor.get().closeParam();"><span></span></div> 
+<div id="text-property-panel" class="property-panel">
+	<div class="panel-header">
+		<div class="panel-title"><strong>プロパティ</strong></div>
+		<div class="panel-close" title="閉じる" onclick="aobata_editor.get().closeParam();"><span></span></div>
 	</div>
 	<div class="panel icon-btn-panel">
-		<div class="panel-line"> 
-			<div class="panel-parts"><span class="label">装飾</span></div> 
-			<div class="panel-parts"><a href="javascript:void(0);" class="icon-btn btn-bold" title="太字" onclick="aobata_editor.get().execCommand('bold');"><em>太字</em></a></div> 
-			<div class="panel-parts"><a href="javascript:void(0);" class="icon-btn btn-italic" title="斜体" onclick="aobata_editor.get().execCommand('class','italic');"><em>斜体</em></a></div> 
-			<div class="panel-parts"><a href="javascript:void(0);" class="icon-btn btn-underline" title="アンダーライン" onclick="aobata_editor.get().execCommand('class','underline');"><em>アンダーライン</em></a></div> 
-			<div class="panel-parts"><a href="javascript:void(0);" class="icon-btn btn-del" title="打ち消し線" onclick="aobata_editor.get().execCommand('strikethrough');"><em>打ち消し線</em></a></div> 
+		<div class="panel-line">
+			<div class="panel-parts"><span class="label">装飾</span></div>
+			<div class="panel-parts"><a href="javascript:void(0);" class="icon-btn btn-bold" title="太字" onclick="aobata_editor.get().execCommand('bold');"><em>太字</em></a></div>
+			<div class="panel-parts"><a href="javascript:void(0);" class="icon-btn btn-italic" title="斜体" onclick="aobata_editor.get().execCommand('class','italic');"><em>斜体</em></a></div>
+			<div class="panel-parts"><a href="javascript:void(0);" class="icon-btn btn-underline" title="アンダーライン" onclick="aobata_editor.get().execCommand('class','underline');"><em>アンダーライン</em></a></div>
+			<div class="panel-parts"><a href="javascript:void(0);" class="icon-btn btn-del" title="打ち消し線" onclick="aobata_editor.get().execCommand('strikethrough');"><em>打ち消し線</em></a></div>
 			
 			<div class="panel-parts">
 				<div id="downpanel19" class="downpanel"><a onclick="return aobata_editor.showOption(this);" href="javascript:void(0);" class="icon-btn btn-fontsize" title="文字サイズ"><em>文字サイズ</em></a><a href="javascript:void(0);" onclick="return aobata_editor.showOption(this);" class="downarrow-s-btn interval" title="文字サイズ・プルダウンメニュー"><em>文字サイズ・プルダウンメニュー</em></a></div>
-				<div id="downpanel19_option" class="downmenu-layer" style="display:none;"> 
-					<ul class="menu"> 
-						<li><a href="javascript:void(0);" onclick="aobata_editor.get().execCommand('alt_class','m',['m','l','xl','xxl','xxxl','s','xs']);" title="標準">標準</a></li> 
-						<li><a href="javascript:void(0);" onclick="aobata_editor.get().execCommand('alt_class','l',['m','l','xl','xxl','xxxl','s','xs']);" title="大">大</a></li> 
-						<li><a href="javascript:void(0);" onclick="aobata_editor.get().execCommand('alt_class','xl',['m','l','xl','xxl','xxxl','s','xs']);" title="特大">特大</a></li> 
+				<div id="downpanel19_option" class="downmenu-layer" style="display:none;">
+					<ul class="menu">
+						<li><a href="javascript:void(0);" onclick="aobata_editor.get().execCommand('alt_class','m',['m','l','xl','xxl','xxxl','s','xs']);" title="標準">標準</a></li>
+						<li><a href="javascript:void(0);" onclick="aobata_editor.get().execCommand('alt_class','l',['m','l','xl','xxl','xxxl','s','xs']);" title="大">大</a></li>
+						<li><a href="javascript:void(0);" onclick="aobata_editor.get().execCommand('alt_class','xl',['m','l','xl','xxl','xxxl','s','xs']);" title="特大">特大</a></li>
 						<li><a href="javascript:void(0);" onclick="aobata_editor.get().execCommand('alt_class','xxl',['m','l','xl','xxl','xxxl','s','xs']);" title="超特大">超特大</a></li>
-						<li><a href="javascript:void(0);" onclick="aobata_editor.get().execCommand('alt_class','xxxl',['m','l','xl','xxl','xxxl','s','xs']);" title="極大">極大</a></li> 
-						<li><a href="javascript:void(0);" onclick="aobata_editor.get().execCommand('alt_class','s',['m','l','xl','xxl','xxxl','s','xs']);" title="小">小</a></li> 
-						<li><a href="javascript:void(0);" onclick="aobata_editor.get().execCommand('alt_class','xs',['m','l','xl','xxl','xxxl','s','xs']);" title="極小">極小</a></li>  
-					</ul> 
-				</div> 
+						<li><a href="javascript:void(0);" onclick="aobata_editor.get().execCommand('alt_class','xxxl',['m','l','xl','xxl','xxxl','s','xs']);" title="極大">極大</a></li>
+						<li><a href="javascript:void(0);" onclick="aobata_editor.get().execCommand('alt_class','s',['m','l','xl','xxl','xxxl','s','xs']);" title="小">小</a></li>
+						<li><a href="javascript:void(0);" onclick="aobata_editor.get().execCommand('alt_class','xs',['m','l','xl','xxl','xxxl','s','xs']);" title="極小">極小</a></li>
+					</ul>
+				</div>
 			</div>
 			
 			<div class="panel-parts">
@@ -71,8 +71,8 @@
 <li><a href="javascript:void(0);" onclick="aobata_editor.get().execCommand('foreColor',false,$(this).css('backgroundColor'));" style="background:#CC99CC;"> </a></li>
 <li><a href="javascript:void(0);" onclick="aobata_editor.get().execCommand('foreColor',false,$(this).css('backgroundColor'));" style="background:#FFFFFF;"> </a></li></ul>
 					<p class="othercolor"><a href="javascript:void(0);" onclick="aobata_editor.get().execCommand('foreColor',false,'');">指定無し</a></p>
-				</div> 	
-			</div> 
+				</div>
+			</div>
 			<div class="panel-parts">
 				<div id="downpanel22" class="downpanel"><a href="javascript:void(0);" class="icon-btn btn-bgcolor" title="文字背景の色" style="background-color:#FF0000;"><em>文字背景の色</em></a><a href="javascript:void(0);" onclick="return aobata_editor.showOption(this);" class="downarrow-s-btn interval" title="文字背景の色・プルダウンメニュー"><em>文字背景の色・プルダウンメニュー</em></a></div>
 				<div id="downpanel22_option" class="downpanel-layer" style="display:none;">
@@ -119,41 +119,41 @@
 <li><a href="javascript:void(0);" onclick="aobata_editor.get().execCommand('backColor',false,$(this).css('backgroundColor'));" style="background:#CC99CC;"> </a></li>
 <li><a href="javascript:void(0);" onclick="aobata_editor.get().execCommand('backColor',false,$(this).css('backgroundColor'));" style="background:#FFFFFF;"> </a></li></ul>
 	<p class="othercolor"><a href="javascript:void(0);" onclick="aobata_editor.get().execCommand('backcolor',false,'');">指定無し</a></p>
-				</div> 	
-			</div> 
+				</div>
+			</div>
 			<!--
-			<div class="panel-parts"> 
+			<div class="panel-parts">
 				<select id="format_select" onchange="aobata_editor.get().execCommand('formatblock',false,$(this).val());">
-					<option value="p" selected="selected">見出し(指定なし)</option> 
-					<option value="h1" >見出し1(h1)</option> 
-					<option value="h2" >見出し2(h2)</option> 
-					<option value="h3" >見出し3(h3)</option> 
-					<option value="h4" >見出し4(h4)</option> 
-					<option value="h5" >見出し5(h5)</option> 
-					<option value="h6" >見出し6(h6)</option> 
-				</select> 
-			</div> 
+					<option value="p" selected="selected">見出し(指定なし)</option>
+					<option value="h1" >見出し1(h1)</option>
+					<option value="h2" >見出し2(h2)</option>
+					<option value="h3" >見出し3(h3)</option>
+					<option value="h4" >見出し4(h4)</option>
+					<option value="h5" >見出し5(h5)</option>
+					<option value="h6" >見出し6(h6)</option>
+				</select>
+			</div>
 			-->
 			
 			<div class="panel-parts"><a href="javascript:void(0);" class="icon-btn btn-delformat interval" title="フォーマット解除"  onclick="aobata_editor.get().execCommand('removeFormat');"><em>フォーマット解除</em></a></div>
 			
 			<div class="panel-parts">
 				<div id="downpanel23" class="downpanel"><a href="javascript:void(0);" onclick="$('#downpanel23_option').toggleFade();" class="icon-btn btn-margin" title="マージン"><em>マージン</em></a><a href="javascript:void(0);" onclick="return aobata_editor.showOption(this);" class="downarrow-s-btn interval" title="マージン・プルダウンメニュー"><em>マージン・プルダウンメニュー</em></a></div>
-				<div id="downpanel23_option" class="downmenu-layer downmenu-layer-right" style="display:none;"> 
-					<ul class="menu"> 
-						<li><a href="javascript:void(0);" title="マージンなし" onclick="aobata_editor.get().execNode(function(node){$(node).css('marginBottom',0);});">マージンなし</a></li> 
+				<div id="downpanel23_option" class="downmenu-layer downmenu-layer-right" style="display:none;">
+					<ul class="menu">
+						<li><a href="javascript:void(0);" title="マージンなし" onclick="aobata_editor.get().execNode(function(node){$(node).css('marginBottom',0);});">マージンなし</a></li>
 						<li><a href="javascript:void(0);" title="マージン小(1行分)" onclick="aobata_editor.get().execNode(function(node){$(node).css('marginBottom','1em');});">マージン小(1行分)</a></li>
 						<li><a href="javascript:void(0);" title="マージン中(2行分)" onclick="aobata_editor.get().execNode(function(node){$(node).css('marginBottom','2em');});">マージン中(2行分)</a></li>
 						<li><a href="javascript:void(0);" title="マージン大(3行分)" onclick="aobata_editor.get().execNode(function(node){$(node).css('marginBottom','3em');});">マージン大(3行分)</a></li>
-						<li><a href="javascript:void(0);" title="標準に戻す" onclick="aobata_editor.get().execNode(function(node){$(node).css('marginBottom',null);});">標準に戻す</a></li> 
+						<li><a href="javascript:void(0);" title="標準に戻す" onclick="aobata_editor.get().execNode(function(node){$(node).css('marginBottom',null);});">標準に戻す</a></li>
 					</ul>
-				</div> 
-			</div>  
-		</div> 
+				</div>
+			</div>
+		</div>
 		
-		<div class="panel-line"> 
-			<div class="panel-parts"><span class="label">リンク</span></div> 
-			<div class="panel-parts"><a href="javascript:void(0);" id="btn-link" class="icon-btn btn-link" title="リンク" onclick="aobata_editor.get().execCommand('createlink',false,$('#attr_href').val());$(this).parent().hide();$('#link_input_wrap').show();" ><em>リンク</em></a></div> 
+		<div class="panel-line">
+			<div class="panel-parts"><span class="label">リンク</span></div>
+			<div class="panel-parts"><a href="javascript:void(0);" id="btn-link" class="icon-btn btn-link" title="リンク" onclick="aobata_editor.get().execCommand('createlink',false,$('#attr_href').val());$(this).parent().hide();$('#link_input_wrap').show();" ><em>リンク</em></a></div>
 			<div class="panel-parts" id="link_input_wrap" style="display:none;">
 				<input name="post1-2" type="text" class="s-area input-link" id="attr_href" size="42" value="" onblur="aobata_editor.get().execCommand('createlink',false,$('#attr_href').val());" />
 				<!--
@@ -161,34 +161,34 @@
 				-->
 				<div class="panel-parts"><a href="javascript:void(0);" id="btn-execcommand_link" class="icon-btn btn-link" title="リンク" onclick="aobata_editor.get().paramView.hide();" ><em>リンク</em></a></div>
 				<div class="panel-parts"><a href="javascript:void(0);" class="icon-btn btn-dellink" title="リンク解除" onclick="aobata_editor.get().execCommand('unlink');$('#link_input_wrap').hide();aobata_editor.get().paramView.hide();"><em>リンク解除</em></a></div>
-				<div class="panel-parts"><input type="button" value="参照" id="post5-btn1" name="post5-btn1" class="s-btn" onclick="aobata_editor.show_attachments(function(img,link){$('#attr_href').focus().val(link).trigger('change');});" /></div>
-			</div> 
-			<div class="panel-parts" style="display:none;"> 
+				<div class="panel-parts"><input type="button" value="参照" id="post5-btn1" name="post5-btn1" class="s-btn" onclick="aobata_editor.show_attachments(function(img,link){$('#attr_href').focus().val(img).trigger('change');});" /></div>
+			</div>
+			<div class="panel-parts" style="display:none;">
 				<label>ターゲット</label>
-				<select id="attr_target" onchange="aobata_editor.get().execNode(function(node){$(node).attr('target',$('#attr_target').val());});"> 
-					<option value="" selected="selected">指定なし</option> 
-					<option value="_blank" >_blank</option> 
-					<option value="_parent" >_parent</option> 
-					<option value="_self" >_self</option> 
-					<option value="_top" >_top</option> 
-				</select> 
-			</div> 
+				<select id="attr_target" onchange="aobata_editor.get().execNode(function(node){$(node).attr('target',$('#attr_target').val());});">
+					<option value="" selected="selected">指定なし</option>
+					<option value="_blank" >_blank</option>
+					<option value="_parent" >_parent</option>
+					<option value="_self" >_self</option>
+					<option value="_top" >_top</option>
+				</select>
+			</div>
 				 
 			 
-		</div> 
-		
-		<div class="panel-line"> 
-			<div class="panel-parts"><span class="label">位置</span></div> 
-			<div class="panel-parts"><a href="javascript:void(0);" class="icon-btn btn-left" title="左揃え" onclick="aobata_editor.get().execCommand('justifyleft');"><em>左揃え</em></a></div> 
-			<div class="panel-parts"><a href="javascript:void(0);" class="icon-btn btn-center" title="中央揃え" onclick="aobata_editor.get().execCommand('justifycenter');"><em>中央揃え</em></a></div> 
-			<div class="panel-parts"><a href="javascript:void(0);" class="icon-btn btn-right interval" title="右揃え" onclick="aobata_editor.get().execCommand('justifyright');"><em>右揃え</em></a></div> 
-			<div class="panel-parts"><a href="javascript:void(0);" class="icon-btn btn-indent" title="インデント" onclick="aobata_editor.get().execCommand('indent');"><em>インデント</em></a></div> 
-			<div class="panel-parts"><a href="javascript:void(0);" class="icon-btn btn-delindent interval" title="インデント解除" onclick="aobata_editor.get().execCommand('outdent');"><em>インデント解除</em></a></div> 
 		</div>
 		
-	</div> 
+		<div class="panel-line">
+			<div class="panel-parts"><span class="label">位置</span></div>
+			<div class="panel-parts"><a href="javascript:void(0);" class="icon-btn btn-left" title="左揃え" onclick="aobata_editor.get().execCommand('justifyleft');"><em>左揃え</em></a></div>
+			<div class="panel-parts"><a href="javascript:void(0);" class="icon-btn btn-center" title="中央揃え" onclick="aobata_editor.get().execCommand('justifycenter');"><em>中央揃え</em></a></div>
+			<div class="panel-parts"><a href="javascript:void(0);" class="icon-btn btn-right interval" title="右揃え" onclick="aobata_editor.get().execCommand('justifyright');"><em>右揃え</em></a></div>
+			<div class="panel-parts"><a href="javascript:void(0);" class="icon-btn btn-indent" title="インデント" onclick="aobata_editor.get().execCommand('indent');"><em>インデント</em></a></div>
+			<div class="panel-parts"><a href="javascript:void(0);" class="icon-btn btn-delindent interval" title="インデント解除" onclick="aobata_editor.get().execCommand('outdent');"><em>インデント解除</em></a></div>
+		</div>
+		
+	</div>
 	<!--  // .panel -->
 	
 	<span id="aobata_debug"></span>
-</div> 
+</div>
 <!--  // #text-property-panel -->

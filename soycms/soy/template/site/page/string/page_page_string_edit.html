@@ -1,0 +1,173 @@
+<div id="dashboard-window" class="main-window">
+					
+	<div class="window-title">
+		<h2>文言の編集</h2>
+	</div>
+	
+	<div class="window-content">
+
+		<div class="section">
+			
+			<ul class="crumbs">
+				<li><a soy:link="./" title="管理画面トップ" class="home_btn">管理画面トップ</a></li>
+				<li><a soy:link="page/string">文言の管理</a></li>
+				<li>文言の編集</li>
+			</ul>
+		
+			<div class="title">
+				<h3>文言の編集</h3>
+			</div>
+			<div class="content">
+				
+			<form soy:id="form">
+			
+			<div class="form-section">
+				<div class="item">
+					<table id="string-table" class="list-table">
+						<thead>
+							<tr>
+								<th width="20%">キー</th>
+								<th width="40%">
+									<a href="javascript:void(0);" onclick="$(this).hide();$(this).next().show();"><!-- soy:id="lang1" /--></a>
+									<p style="display:none;">
+										<select name="lang[]" soy:id="language_select1" class="lang_select"></select>
+									</p>
+								</th>
+								<th width="40%">
+									<a href="javascript:void(0);" onclick="$(this).hide();$(this).next().show();"><!-- soy:id="lang2" /--></a>
+									<p soy:id="lang_select_wrap">
+										<select name="lang[]" soy:id="language_select2" class="lang_select">
+											<option value="">--</option>
+										</select>
+									</p>
+								</th>
+							</tr>
+						</thead>
+						<tbody>
+							<!-- soy:id="string_list" -->
+							<tr>
+								<th>
+									<span class="string-key"><!-- soy:id="string_key" /--></span>
+								</th>
+								<td>
+									<p class="text-preview"><!-- soy:id="string_text" /--></p>
+									<textarea class="text-edit m-area" cols="25" style="display:none;" soy:id="string_edit"></textarea>
+								</td>
+								<td>
+									<p class="text-preview"><!-- soy:id="string2_text" /--></p>
+									<textarea class="text-edit m-area" cols="25" style="display:none;" soy:id="string2_edit"></textarea>
+								</td>
+							</tr>
+							<!-- /soy:id="string_list" -->
+						</tbody>
+						
+						<tfoot>
+							<tr>
+								<td colspan="3">
+									<p>新しい文言を追加出来ます。複数行入力した場合、複数同時に追加することが出来ます。カンマ区切りで値を同時に設定可能です</p>
+									<textarea cols="80" rows="5" type="text" id="new_text_key" class="m-area" placeholder="キーを入力して下さい"></textarea>
+									<p class="ce">
+										<input type="button" class="m-btn" name="save" value="追加" onclick="append_new_string();" />
+									</p>
+								</td>
+							</tr>
+						</tfoot>
+					</table>
+				</div>
+			</div>
+			
+			<div class="form-btn ce">
+				<p class="intro">
+					<input type="submit" class="l-btn" name="save" value="保存" />
+				</p>
+			</div>
+			</form>
+			
+			</div><!-- //.content -->
+		</div>
+		
+	</div>
+	<!--  // .window-content -->
+</div>
+
+<style type="text/css">
+.text-preview{
+	cursor : pointer;
+}
+.text-preview:hover{
+	text-decoration:underline;
+}
+</style>
+<script type="text/javascript">
+$(function(){
+	$(".text-preview").click(function(){
+		var next = $(this).hide().next().show();
+		next.height($(this).height()).focus();
+	});
+
+	$(".lang_select").bind("change",function(){
+		console.log($(".lang_select").serialize());
+		location.search = $(".lang_select").serialize();
+	});
+
+	/*
+	$("#new_text_key").bind("keypress",function(e){
+		if(e.which == 13){
+			e.preventDefault();
+			var res = append_new_string();
+			if(res){
+				$("#new_text_key").focus()
+			}
+			return false;
+		}
+	});
+	*/
+});
+
+var append_new_string = function(){
+	var new_key = $("#new_text_key").val();
+	if(new_key.length < 1){
+		alert("キーが入力されていません");
+		$("#new_text_key").focus();
+		return;
+	}
+
+	new_keys = new_key.split("\n");
+	for(var i=0;i<new_keys.length;i++){
+		new_key = new_keys[i];
+		if(new_key.length < 1)return;
+
+		new_key_values = new_key.split(",");
+		new_key = new_key_values.shift();
+		
+		var flag = false;
+		$(".string-key").each(function(){
+			if($(this).text() == new_key){
+				flag = true;
+				return false;
+			}
+		});
+		
+		if(flag){
+			alert("「"+new_key+"」は既に使われています");
+			$("#new_text_key").select();
+			continue;
+		}
+
+		try{
+			var tr = $('<tr><th><span class="string-key"></span></th><td><textarea class="text-edit m-area" cols="25"></textarea></td><td><textarea class="text-edit m-area" cols="25" style="display:none;"></textarea></td></tr>');
+			var new_key = tr.find(".string-key").text(new_key).text();
+			var lang1 = $($(".lang_select").get(0)).val();
+			var lang2 = $($(".lang_select").get(1)).val();
+			$(tr.find("textarea").get(0)).attr("name","String["+lang1+"]["+new_key+"]").val(new_key_values.shift());
+			if(lang2)$(tr.find("textarea").get(1)).attr("name","String["+lang2+"]["+new_key+"]").show(new_key_values.shift());
+		}catch(e){
+			alert(e);
+		}
+				
+		$("#string-table").append(tr);
+		$("#new_text_key").val("");
+	}
+	return true;
+}
+</script>

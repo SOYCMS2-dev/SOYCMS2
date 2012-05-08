@@ -63,7 +63,6 @@ class SOYCMS_SiteController extends SOY2PageController{
 				SOY2PageController::redirect($uri);
 			}
 			
-			
 			define("SOYCMS_ADMIN_LOGINED", true);
 			
 			if(!isset($_GET["preview"]) && !isset($_GET["template_preview"])){
@@ -110,6 +109,7 @@ class SOYCMS_SiteController extends SOY2PageController{
 	}
 
 	function execute(){
+		
 		$this->prepare();
 		
 		if(isset($_GET["template_preview"])){
@@ -176,7 +176,7 @@ class SOYCMS_SiteController extends SOY2PageController{
 		
 		CMSExtension::execute($page,$args);
 		
-		$webPage = null;
+		$webPage = null; /* @var $webPage SOYCMS_SitePageBase */
 		$timer = array();$start = microtime(true);
 		try{
 			

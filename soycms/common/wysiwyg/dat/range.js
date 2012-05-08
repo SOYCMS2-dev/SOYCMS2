@@ -117,7 +117,7 @@ $.range = function(selection,_document){
 			var m;
 
 			 // DOM Level 2 Rangeをサポートしているブラウザ向けメソッド
-			 if (_document.createRange) {
+			 if (_document.createRange && Range.prototype.createContextualFragment != undefined) {
 				 m = {
 					_setStart :  function(node, offset) {
 						// 作業用Range作成
@@ -298,9 +298,14 @@ $.range = function(selection,_document){
 					
 					contents : function(node){
 						this.selectNodeContents(node);
-					}
+					},
+					
+					select : function(){
+						 //do nothing
+					 }
 					
 			 }	//m
+				 
 			 
 		 // IE用
 		 } else if (_document.body.createTextRange) {
@@ -479,6 +484,7 @@ $.range = function(selection,_document){
 					return this.item;
 				 }
 			};
+			 
 		 } else {
 			 alert('do not support range');
 			 throw 'Can not use exRange.js';
@@ -494,7 +500,7 @@ $.range = function(selection,_document){
  
 		var r = new Object();
 		
-		if (_document.createRange) {
+		if (_document.createRange && Range.prototype.createContextualFragment != undefined) {
 			r = (selection && selection.rangeCount) ? selection.getRangeAt(0) : _document.createRange();
 			
 		} else if (_document.body.createTextRange){

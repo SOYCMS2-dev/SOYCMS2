@@ -1,0 +1,74 @@
+<div id="dashboard-window" class="main-window">
+					
+	<div class="window-title">
+		<h2>履歴の表示</h2>
+	</div>
+	
+	<div class="window-content">
+
+		<div class="section">
+			
+			<ul class="crumbs">
+				<li><a soy:link="./" title="管理画面トップ" class="home_btn">管理画面トップ</a></li>
+				<li><a soy:link="page/string">文言の管理</a></li>
+				<li>履歴の表示(<!-- soy:id="selected_language" /-->)</li>
+			</ul>
+			
+		</div>
+		
+		<div class="section">
+		
+			<div class="title">
+				<h3>履歴一覧</h3>
+			</div>
+			
+			<div class="content">
+				<table class="form-table">
+					<tr>
+						<th class="ce" width="10%" scope="row">日付</th>
+						<th class="ce" width="19%">操作</th>
+						<th class="ce" width="19%" scope="row">更新者</th>
+						<th class="ce w24">復元</th>
+					</tr>
+					<!-- soy:id="history_list" -->
+					<tr>
+						<td nowrap="nowrap" scope="row">
+							<!-- soy:id="history_date" -->2010-08-05 17:49:19<!-- /soy:id="history_date" -->
+						</td>
+						<td class="ce">
+							<!-- soy:id="history_type_text" /-->
+						</td>
+						<td class="ce">
+							<!-- soy:id="history_username" /-->
+						</td>
+						<td><a soy:id="detail_link" class="sh-btn ce-b"><em>復元へ</em></a></td>
+					</tr>
+					<!-- /soy:id="history_list" -->
+				</table>
+			</div>
+		</div>
+	</div>
+	<!--  // .window-content -->
+</div>
+
+<style type="text/css">
+.text-preview{
+	cursor : pointer;
+}
+.text-preview:hover{
+	text-decoration:underline;
+}
+</style>
+<script type="text/javascript">
+$(function(){
+	$(".text-preview").click(function(){
+		var next = $(this).hide().next().show();
+		next.height($(this).height()).focus();
+	});
+
+	$(".lang_select").bind("change",function(){
+		console.log($(".lang_select").serialize());
+		location.search = $(".lang_select").serialize();
+	});
+});
+</script>

@@ -1,14 +1,14 @@
 <?php
 $session = SOY2Session::get("site.session.SiteLoginSession");
 if($session && $session->getId() && $session->hasSiteRole()){
-PluginManager::load("soycms.site.menu.*");	
+PluginManager::load("soycms.site.menu.*");
 $menus = PluginManager::invoke("soycms.site.menu.*")->getMenus();
 ?>
 
 <div id="cms-menu-section1" class="section">
 	<div class="title">
 		<h2><?php soycms_print_menu_head("site/","メインメニュー"); ?></h2>
-		<p class="btn" title="パネルを閉じる"><span title="パネルを開く"></span></p> 
+		<p class="btn" title="パネルを閉じる"><span title="パネルを開く"></span></p>
 	</div>
 	<div class="content">
 		<ul>
@@ -31,11 +31,11 @@ $menus = PluginManager::invoke("soycms.site.menu.*")->getMenus();
 </div>
 <!--  // #cms-menu-section1 -->
 	
-<?php if($session->hasRole("editor") || $session->hasRole("author") ) : ?>	
+<?php if($session->hasRole("editor") || $session->hasRole("author") ) : ?>
 <div id="cms-menu-section2" class="section">
 	<div class="title">
 		<h2><?php soycms_print_menu_head("site/entry/","コンテンツの管理"); ?></h2>
-		<p class="btn" title="パネルを閉じる"><span title="パネルを開く"></span></p> 
+		<p class="btn" title="パネルを閉じる"><span title="パネルを開く"></span></p>
 	</div>
 	<div class="content">
 		<ul>
@@ -61,19 +61,19 @@ $menus = PluginManager::invoke("soycms.site.menu.*")->getMenus();
 <div id="cms-menu-section3" class="section">
 	<div class="title">
 		<h2><?php soycms_print_menu_head("site/page/","WEBデザインの管理"); ?></h2>
-		<p class="btn" title="パネルを閉じる"><span title="パネルを開く"></span></p> 
+		<p class="btn" title="パネルを閉じる"><span title="パネルを開く"></span></p>
 	</div>
 	<div class="content">
 		<ul>
 			<?php soycms_print_menu("site/page/list","ディレクトリの管理",'/site/page/list.*|/site/page/detail.*'); ?>
-			<?php 
+			<?php
 				soycms_print_menu(
 					"site/page/template","テンプレートの管理","/site/page/template.*|/site/page/library.*|/site/page/navigation.*",
 					array(
 						array("site/page/library","ライブラリの管理","/site/page/library.*"),
 						array("site/page/navigation","ナビゲーションの管理","/site/page/navigation.*"),
 					)
-				); 
+				);
 			?>
 			
 			<?php soycms_print_menu("site/page/label","ラベル・タグの管理","/site/page/label.*"); ?>
@@ -90,6 +90,12 @@ $menus = PluginManager::invoke("soycms.site.menu.*")->getMenus();
 					}
 				}
 			?>
+			
+			<?php
+				if(file_exists(SOYCMS_SITE_DIRECTORY . ".i18n")){
+					soycms_print_menu("site/page/string","文言の管理","/site/page/string.*");
+				}
+			?>
 		</ul>
 	</div>
 </div>
@@ -100,7 +106,7 @@ $menus = PluginManager::invoke("soycms.site.menu.*")->getMenus();
 <div id="cms-menu-section4" class="section">
 	<div class="title">
 		<h2><?php soycms_print_menu_head("site/plugin/","プラグインの設定"); ?></h2>
-		<p class="btn" title="パネルを閉じる"><span title="パネルを開く"></span></p> 
+		<p class="btn" title="パネルを閉じる"><span title="パネルを開く"></span></p>
 	</div>
 	<div class="content">
 		<ul>
@@ -122,7 +128,7 @@ $menus = PluginManager::invoke("soycms.site.menu.*")->getMenus();
 <div id="cms-menu-section5" class="section">
 	<div class="title">
 		<h2><?php soycms_print_menu_head("site/user/","ユーザーの設定"); ?></h2>
-		<p class="btn" title="パネルを閉じる"><span title="パネルを開く"></span></p> 
+		<p class="btn" title="パネルを閉じる"><span title="パネルを開く"></span></p>
 	</div>
 	<div class="content">
 		<ul>
@@ -145,7 +151,7 @@ $menus = PluginManager::invoke("soycms.site.menu.*")->getMenus();
 <div id="cms-menu-section6" class="section">
 	<div class="title">
 		<h2><?php soycms_print_menu_head("site/manager/","サイトのデータ管理"); ?></h2>
-		<p class="btn" title="パネルを閉じる"><span title="パネルを開く"></span></p> 
+		<p class="btn" title="パネルを閉じる"><span title="パネルを開く"></span></p>
 	</div>
 	<div class="content">
 		<ul>

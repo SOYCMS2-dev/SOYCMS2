@@ -90,7 +90,7 @@ class SOYCMS_EditorManager extends SOY2LogicBase{
 		}else{
 			$classes[] = "aobata_preview";
 		}
-		$style = ($section->getSectionHeight()) ? "height:" . $entity->getSectionHeight() . "px" : "";
+		$style = ($section->getSectionHeight()) ? "height:" . $section->getSectionHeight() . "px" : "";
 		
 		$html[] = 		'<textarea name="section['.$key.'][content]" class="'.implode(" ",$classes).'" style="'.$style.'">'.$this->_h($section->getContent()).'</textarea>';
 		$html[] = 		'</div><!-- // .article-body -->';

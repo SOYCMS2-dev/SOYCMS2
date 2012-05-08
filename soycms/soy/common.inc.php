@@ -6,6 +6,9 @@
  * base周りの読み込み
  */
 
+//timezone config
+if(!ini_get("date.timezone"))date_default_timezone_set("Asia/Tokyo");
+
 //include libraries
 require(dirname(__FILE__) . "/lib/soy2_build.php");
 require(dirname(__FILE__) . "/lib/magic_quote_gpc.php");

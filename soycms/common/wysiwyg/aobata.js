@@ -28,7 +28,7 @@ aobata_editor.debug = false;
 aobata_editor.ukey = "";
 aobata_editor.error = function(e){
 	if(console != null){
-		console.debug(e);
+		console.log(e);
 	}
 }
 
@@ -323,6 +323,8 @@ aobata_editor.prototype = {
 										? aobata_editor.root + "dat/param_text_ie.html"
 										: aobata_editor.root + "dat/param_text.html";
 			
+			text_param_html += "?v=201205071712";
+			
 			$(".panel-layers",aobata_editor.paramView).append(
 				$("<div class='type_img'></div>").load(aobata_editor.root + "dat/param_img.html",function(){
 					$(this).find('input.input-link')
@@ -444,6 +446,10 @@ aobata_editor.prototype = {
 						
 					}).bind("mouseup", function(e){
 						
+						if(aobata_editor.active != t){
+							t.doActive(true);
+						}
+						
 						if (aobata_editor.is_IE) {
 							var offset = t.frame.offset();
 							tmp = offset.top + e.clientY - $(t_window).scrollTop();
@@ -533,7 +539,7 @@ aobata_editor.prototype = {
 						
 					});
 					
-					var on_paste = function(tet){
+					var on_paste = function(text){
 						//replace
 						text = text.replace(/<meta .*?>/gi,"")
 							.replace(/\s*style=".*?"/gi,"")
@@ -548,18 +554,17 @@ aobata_editor.prototype = {
 						//clar all comment
 						text = text.replace(/[\r\n]*<!--[^>]+-->[\r\n]*/gi,"");
 						
-						
 						//paste
 						t.insertHTML(text);
 					};
 					
 					if(aobata_editor.isWebkit){
 						t_window.addEventListener("paste",function(event){
-							
 							if(event.clipboardData){
 								text = event.clipboardData.getData("text/html");
 								if(!text)text = event.clipboardData.getData("Text");
 								event.preventDefault();
+								on_paste(text);
 								return;
 							}
 							
@@ -768,6 +773,7 @@ aobata_editor.prototype = {
 			}
 		}
 		t._currentfocuselement = ele[0];
+		this.saveCaret();
 	},
 	
 	updateTool : function(ele){
@@ -1755,7 +1761,12 @@ aobata_editor.prototype = {
 		//fix bug for IE( when paramView is clicked, iframe lost it's focus)
 		if(aobata_editor.is_IE && this.caret){
 			this.caret.select();
-			node = this._currentfocuselement = this.caret.start()[0];
+			var node = this.caret.start()[0];
+			if(node){
+				this._currentfocuselement = node;
+			}else{
+				alert(this._currentfocuselement);
+			}
 		}
 	},
 	

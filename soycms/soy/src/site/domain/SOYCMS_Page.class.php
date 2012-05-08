@@ -400,7 +400,6 @@ class SOYCMS_Page extends SOY2DAO_EntityBase{
 					break;
 			}
 			
-			
 			//index.htmlの時
 			if(strpos($this->getUri(),"index.html") !== false){
 				$object->order = 1;
