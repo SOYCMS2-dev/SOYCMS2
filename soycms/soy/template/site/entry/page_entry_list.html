@@ -1,31 +1,31 @@
-<div id="main-window1" class="main-window"> 
+<div id="main-window1" class="main-window">
 				
-<div class="window-title"> 
-	<h2><!-- soy:id="page_name*" /-->の記事一覧</h2> 
-</div> 
+<div class="window-title">
+	<h2><!-- soy:id="page_name*" /-->の記事一覧</h2>
+</div>
 
-<div class="window-content"> 
+<div class="window-content">
 	
-	<div id="main-section1" class="section"> 
+	<div id="main-section1" class="section">
 		<div class="title">
 			<h3><!-- soy:id="page_name*" /-->のメニュー</h3>
 		</div>
 
-		<div class="content"> 
+		<div class="content">
 
 			<form soy:id="form">
 				<input type="hidden" soy:id="directory_id" id="directory_id" value="" />
 			
-				<div class="form-section"> 
+				<div class="form-section">
 				
 
 				<p class="intro">
 					<a soy:id="page_config_link"><!-- soy:id="page_name*" /-->の設定</a> |
-					<a soy:id="index_config_link"><!-- soy:id="page_name*" /-->のindex.html設定</a> | 
+					<a soy:id="index_config_link"><!-- soy:id="page_name*" /-->のindex.html設定</a> |
 					<a soy:id="entry_export_link">記事をエクスポート</a> |
 					<a soy:id="entry_import_link">記事をインポート</a> |
-					<a soy:id="entry_create_link"><!-- soy:id="page_name*" /-->に記事作成</a> 
-				</p> 
+					<a soy:id="entry_create_link"><!-- soy:id="page_name*" /-->に記事作成</a>
+				</p>
 				
 				<p class="xl intro">
 					<!-- soy:id="page_topic_path" -->
@@ -41,55 +41,55 @@
 				
 				<!-- soy:display="directory" -->
 				<p class="ri">
-					<a soy:id="view_update">更新順</a>｜<a soy:id="view_order">表示順</a>　
+					<a soy:id="view_update">更新順</a>｜<a soy:id="view_order">表示順</a>
 				</p>
 				<!-- /soy:display="directory" -->
-				<table class="list-table"> 
-					<thead> 
-						<tr> 
-							<th width="4%" class="s-cell" scope="col"><input type="checkbox" onclick="$('.entry_check').attr('checked',$(this).attr('checked'));" /></th> 
-							<th width="39%" scope="col">記事名</th> 
-							<th width="10%" scope="col">公開状態</th> 
-							<th width="16%" scope="col">作成/編集者<span></span></th> 
-							<th width="13%" scope="col">種類</th> 
+				<table class="list-table">
+					<thead>
+						<tr>
+							<th width="4%" class="s-cell" scope="col"><input type="checkbox" onclick="$('.entry_check').attr('checked',$(this).attr('checked') != undefined);" /></th>
+							<th width="39%" scope="col">記事名</th>
+							<th width="10%" scope="col">公開状態</th>
+							<th width="16%" scope="col">作成/編集者<span></span></th>
+							<th width="13%" scope="col">種類</th>
 							<th width="9%" scope="col">更新時刻</th>
 							<!-- soy:display="sort_type_order" -->
 							<th width="9%" class="s-cell" scope="col">表示順</th>
-							<!-- /soy:display="sort_type_order" --> 
-							<th width="9%" class="s-cell" scope="col">設定</th> 
-						</tr> 
-					</thead> 
-					<tbody> 
+							<!-- /soy:display="sort_type_order" -->
+							<th width="9%" class="s-cell" scope="col">設定</th>
+						</tr>
+					</thead>
+					<tbody>
 						<!-- soy:id="entry_list" -->
-						<tr soy:id="entry_list_row"> 
+						<tr soy:id="entry_list_row">
 							<td class="ce">
 								<input soy:id="entry_checkbox" type="checkbox" class="entry_check" />
-							</td> 
+							</td>
 							<td>
 								<p>
-									<a class="entry_link" soy:id="entry_detail_link"><strong soy:id="entry_title">記事名A</strong></a><br> 
-									<a soy:id="entry_preview_link"><!-- soy:id="entry_url" /--></a><br> 
+									<a class="entry_link" soy:id="entry_detail_link"><strong soy:id="entry_title">記事名A</strong></a><br>
+									<a soy:id="entry_preview_link"><!-- soy:id="entry_url" /--></a><br>
 								</p>
-							</td> 
-							<td class="ce"><!-- soy:id="entry_status" /--></td> 
+							</td>
+							<td class="ce"><!-- soy:id="entry_status" /--></td>
 							<td>
 								<!-- soy:id="entry_author" /-->
 								<!-- soy:id="entry_editor" /-->
-							</td> 
+							</td>
 							<td>
 								<!-- soy:id="label_link_list" /-->
-							</td> 
+							</td>
 							<td>
 								<!-- soy:id="entry_update_date" -->2010-06-10 14:25:43<!-- /entry_update_date -->
-							</td> 
+							</td>
 							<!-- soy:display="sort_type_order" -->
 							<td>
 								<a soy:id="sort_up_link" class="sh-btn up_btn"><em>↑</em></a>
 								<a soy:id="sort_down_link" class="sh-btn down_btn"><em>↓</em></a>
 							</td>
 							<!-- /soy:display="sort_type_order" -->
-							<td><a soy:id="entry_detail_link*" class="sh-btn"><em>編集</em></a></td> 
-						</tr> 
+							<td><a soy:id="entry_detail_link*" class="sh-btn"><em>編集</em></a></td>
+						</tr>
 						<!-- /entry_list -->
 					</tbody>
 					<tfoot class="entry_check_option" style="display:none;">
@@ -100,15 +100,15 @@
 							</td>
 						</tr>
 					</tfoot>
-				</table> 
+				</table>
 				
 				<p class="ri intro"><!-- soy:id="count_max" /-->件中<!-- soy:id="count_start" /-->～<!-- soy:id="count_end" /-->件の記事を表示</p>
 
 				<p>
 					<input type="button" value="ごみ箱" class="m-btn set_trash" />
 					<input type="button" value="公開" class="m-btn set_open" />
-					<input type="button" value="非公開" class="m-btn set_close" /> 
-				</p> 
+					<input type="button" value="非公開" class="m-btn set_close" />
+				</p>
 
 
 				<!-- soy:id="pager" -->
@@ -116,65 +116,65 @@
 					<p class="back" soy:id="prev_link_wrap"><a soy:id="prev_link">&lt;&nbsp;前へ</a></p>
 					<ol><!-- soy:id="pager_list" --><li><a soy:id="page_link"><em><!-- soy:id="page_text" /--></em></a></li><!-- /soy:id="pager_list" --></ol>
 					<p class="next" soy:id="next_link_wrap"><a soy:id="next_link">次へ&nbsp;&gt;</a></p>
-				</div> 
+				</div>
 				<!-- /pager -->
 				
 				
 
-				</div> 
+				</div>
 				
 
-			</form> 
-		</div> 
-	</div> 
-	<!--  // #main-section1 --> 
+			</form>
+		</div>
+	</div>
+	<!--  // #main-section1 -->
 	
 	<!-- soy:display="directory" -->
 	<a name="page_entry"></a>
-	<div id="page-entry-section" class="section"> 
+	<div id="page-entry-section" class="section">
 		<div class="title">
 			<h3>ページ</h3>
 		</div>
 
 		<div class="content">
 			
-			<table class="list-table"> 
-					<thead> 
-						<tr> 
-							<th width="4%" class="s-cell" scope="col"><input type="checkbox" onclick="$('.entry_check').attr('checked',$(this).attr('checked'));" /></th> 
-							<th width="39%" scope="col">記事名</th> 
-							<th width="10%" scope="col">公開状態</th> 
-							<th width="16%" scope="col">作成/編集者<span></span></th> 
-							<th width="13%" scope="col">種類</th> 
+			<table class="list-table">
+					<thead>
+						<tr>
+							<th width="4%" class="s-cell" scope="col"><input type="checkbox" onclick="$('.entry_check').attr('checked',$(this).attr('checked') != undefined);" /></th>
+							<th width="39%" scope="col">記事名</th>
+							<th width="10%" scope="col">公開状態</th>
+							<th width="16%" scope="col">作成/編集者<span></span></th>
+							<th width="13%" scope="col">種類</th>
 							<th width="9%" scope="col">更新時刻</th>
-							<th width="9%" class="s-cell" scope="col">設定</th> 
-						</tr> 
-					</thead> 
-					<tbody> 
+							<th width="9%" class="s-cell" scope="col">設定</th>
+						</tr>
+					</thead>
+					<tbody>
 						<!-- soy:id="page_entry_list" -->
-						<tr soy:id="entry_list_row"> 
+						<tr soy:id="entry_list_row">
 							<td class="ce">
 								<input soy:id="entry_checkbox" type="checkbox" class="entry_check" />
-							</td> 
+							</td>
 							<td>
 								<p>
-									<a class="entry_link" soy:id="entry_detail_link"><strong soy:id="entry_title">記事名A</strong></a><br> 
-									<a soy:id="entry_preview_link"><!-- soy:id="entry_url" /--></a><br> 
+									<a class="entry_link" soy:id="entry_detail_link"><strong soy:id="entry_title">記事名A</strong></a><br>
+									<a soy:id="entry_preview_link"><!-- soy:id="entry_url" /--></a><br>
 								</p>
-							</td> 
-							<td class="ce"><!-- soy:id="entry_status" /--></td> 
+							</td>
+							<td class="ce"><!-- soy:id="entry_status" /--></td>
 							<td>
 								<!-- soy:id="entry_author" /-->
 								<!-- soy:id="entry_editor" /-->
-							</td> 
+							</td>
 							<td>
 								<!-- soy:id="label_link_list" /-->
-							</td> 
+							</td>
 							<td>
 								<!-- soy:id="entry_update_date" -->2010-06-10 14:25:43<!-- /entry_update_date -->
-							</td> 
-							<td><a soy:id="entry_detail_link*" class="sh-btn"><em>編集</em></a></td> 
-						</tr> 
+							</td>
+							<td><a soy:id="entry_detail_link*" class="sh-btn"><em>編集</em></a></td>
+						</tr>
 						<!-- /page_entry_list -->
 					</tbody>
 					<tfoot class="entry_check_option" style="display:none;">
@@ -185,16 +185,16 @@
 							</td>
 						</tr>
 					</tfoot>
-				</table> 
+				</table>
 			
 			
 		</div><!-- // .content -->
 	</div><!-- // #page-entry-section -->
 	<!-- /soy:display="directory" -->
 
-</div> 
-<!--  // .window-content --> 
-</div> 
+</div>
+<!--  // .window-content -->
+</div>
 <!--  // #main-window1 -->
 
 

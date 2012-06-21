@@ -37,7 +37,7 @@
 					<div class="item">
 						<ul class="check_list_wrap">
 							<li>
-								<input type="checkbox" id="toggle_template_check" class="toggle_check"  checked="checked" onclick="$('.template_check').attr('checked',$(this).attr('checked'));" />
+								<input type="checkbox" id="toggle_template_check" class="toggle_check"  checked="checked" onclick="$('.template_check').attr('checked',$(this).attr('checked') != undefined);" />
 								<label for="toggle_template_check">全て</label>
 							</li>
 							<!-- soy:id="template_list" -->
@@ -56,7 +56,7 @@
 					<div class="item">
 						<ul class="check_list_wrap">
 							<li>
-								<input type="checkbox" id="toggle_library_check" class="toggle_check"  checked="checked" onclick="$('.library_check').attr('checked',$(this).attr('checked'));" />
+								<input type="checkbox" id="toggle_library_check" class="toggle_check"  checked="checked" onclick="$('.library_check').attr('checked',$(this).attr('checked') != undefined);" />
 								<label for="toggle_library_check">全て</label>
 							</li>
 							<!-- soy:id="library_list" -->
@@ -76,7 +76,7 @@
 					<div class="item">
 						<ul class="check_list_wrap">
 							<li>
-								<input type="checkbox" id="toggle_snippet_check" class="toggle_check" onclick="$('.snippet_check').attr('checked',$(this).attr('checked'));" checked />
+								<input type="checkbox" id="toggle_snippet_check" class="toggle_check" onclick="$('.snippet_check').attr('checked',$(this).attr('checked') != undefined);" checked />
 								<label for="toggle_snippet_check">全て</label>
 							</li>
 						</ul>
@@ -102,7 +102,7 @@
 					<div class="item">
 						<ul class="check_list_wrap">
 							<li>
-								<input type="checkbox" id="toggle_navigation_check" class="toggle_check" checked="checked" onclick="$('.navigation_check').attr('checked',$(this).attr('checked'));" />
+								<input type="checkbox" id="toggle_navigation_check" class="toggle_check" checked="checked" onclick="$('.navigation_check').attr('checked',$(this).attr('checked') != undefined);" />
 								<label for="toggle_navigation_check">全て</label>
 							</li>
 							<!-- soy:id="navigation_list" -->
@@ -123,7 +123,7 @@
 						<p>"サイトディレクトリ/themes" 以下のディレクトリをエクスポート</p>
 						<ul class="check_list_wrap">
 							<li>
-								<input type="checkbox" id="toggle_theme_check" class="toggle_check" checked="checked" onclick="$('.theme_check').attr('checked',$(this).attr('checked'));" />
+								<input type="checkbox" id="toggle_theme_check" class="toggle_check" checked="checked" onclick="$('.theme_check').attr('checked',$(this).attr('checked') != undefined);" />
 								<label for="toggle_theme_check">全て</label>
 							</li>
 							<!-- soy:id="theme_list" -->
@@ -143,7 +143,7 @@
 					<div class="item">
 						<ul class="check_list_wrap">
 							<li>
-								<input type="checkbox" id="toggle_field_check" class="toggle_check" checked="checked" onclick="$('.field_check').attr('checked',$(this).attr('checked'));" />
+								<input type="checkbox" id="toggle_field_check" class="toggle_check" checked="checked" onclick="$('.field_check').attr('checked',$(this).attr('checked') != undefined);" />
 								<label for="toggle_field_check">全て</label>
 							</li>
 							<li class="check_list checked_list">

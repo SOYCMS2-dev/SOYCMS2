@@ -343,6 +343,13 @@ class SOYCMS_ObjectCustomFieldConfig{
 	 * 設定を取得
 	 */
 	public static function loadConfig($type){
+		
+		static $_cache = array();
+		
+		if(isset($_cache[$type])){
+			return $_cache[$type];
+		}
+		
 		$dir = self::getConfigDirectory();
 		$filepath = $dir . str_replace("/","-",$type);
 		
@@ -353,17 +360,17 @@ class SOYCMS_ObjectCustomFieldConfig{
 				foreach($res as $key => $array){
 					$result[$key] = SOY2::cast("SOYCMS_ObjectCustomFieldConfig",$array);
 				}
-				return $result;
+				$_cache[$type] = $result;
+			}
+		}else if(file_exists($filepath . ".ini")){
+			$res = soy2_unserialize(file_get_contents($filepath . ".ini"));
+			if($res && is_array($res)){
+				$_cache[$type] = $res;
 			}
 		}
 		
-		if(file_exists($filepath . ".ini")){
-			$res = soy2_unserialize(file_get_contents($filepath . ".ini"));
-			if($res && is_array($res)){
-				return $res;
-			}
-		}
-		return array();
+		if(!isset($_cache[$type]))$_cache[$type] = array();
+		return $_cache[$type];
 	}
 	
 	/**

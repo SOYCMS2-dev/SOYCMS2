@@ -295,6 +295,7 @@ class SOYCMS_SitePageBase extends WebPage{
 			"soy2prefix" => "block",
 			"visible" => $visible,
 			"directory" => $entry->getDirectory(),
+			"directoryUri" => ($this->getPageObject()->getType() == "detail") ? $this->getPageObject()->getUri() : $this->getPageObject()->getParentDirectoryUri(),
 			"link" => (defined("SOYCMS_ADMIN_ROOT_URL")) ? SOYCMS_ADMIN_ROOT_URL . "site/entry/detail/" : ""
 		));
 		

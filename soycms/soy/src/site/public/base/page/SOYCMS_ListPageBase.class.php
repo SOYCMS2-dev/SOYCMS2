@@ -112,6 +112,7 @@ class SOYCMS_ListPageBase extends SOYCMS_SitePageBase{
 		$this->createAdd("entry_list","SOYCMS_EntryListComponent",array(
 			"list" => $entries,
 			"directory" => $dirId,
+			"directoryUri" => $page->getParentDirectoryUri(),
 			"soy2prefix" => "block",
 			"link" => (defined("SOYCMS_ADMIN_ROOT_URL")) ? SOYCMS_ADMIN_ROOT_URL . "site/entry/create" . $query : "",
 			"configLink" => (defined("SOYCMS_ADMIN_ROOT_URL")) ? SOYCMS_ADMIN_ROOT_URL . "site/page/detail/" . $page->getId() . "#tab1/advance" : "",

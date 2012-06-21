@@ -18,7 +18,7 @@ class page_page_template_detail extends SOYCMS_WebPageBase{
 			
 			SOY2Logic::createInstance("site.logic.page.template.TemplateEditHelper")
 				->toggleItemConfig($this->template->getId(),$itemId,$_POST["toggle"]);
-				
+			
 			$this->jump("/page/template/check?id=" . $this->id . "&updated&suffix=" . $suffix);
 		}
 		

@@ -58,7 +58,7 @@ if(isset($_SERVER["CONFIG_DIR"]) && isset($_SERVER["CONFIG_DB_DIR"])){
 soy2_require(SOYCMSConfigUtil::get("config_dir") . "db.conf.php") or soycms_go_initialize();
 
 if(isset($_GET["soycms_pathinfo"])){
-	$_SERVER["PATH_INFO"] = "/" . $_GET["soycms_pathinfo"];
+	$_SERVER["PATH_INFO"] = soycms_union_uri("/",$_GET["soycms_pathinfo"]);
 	unset($_GET["soycms_pathinfo"]);
 }
 

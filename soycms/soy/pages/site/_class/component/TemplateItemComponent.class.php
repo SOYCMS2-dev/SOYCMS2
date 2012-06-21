@@ -37,7 +37,7 @@ class TemplateItemComponent extends HTMLPage{
 		));
 		
 		$this->addLabel("template_id",array("text" => $this->templateId));
-		$this->addLabel("navigation_id",array("text"=>$this->navigationId));	
+		$this->addLabel("navigation_id",array("text"=>$this->navigationId));
 		
 		parent::execute();
 	}
@@ -54,7 +54,7 @@ class TemplateItemComponent extends HTMLPage{
 		
 		if(empty($layout)){
 //			$link = soycms_create_link("page/template/detail") . "?id=" . $templateId . "&auto#tpl_template";
-//			
+//
 //			$html[] = '<div class="ce">';
 //			$html[] = '<p class="xl break">レイアウトが作成されていません。</p>';
 //			$html[] = '<p class="break"><a class="m-btn" href="'.$link.'">レイアウトを作成する</a></p>';
@@ -74,28 +74,28 @@ class TemplateItemComponent extends HTMLPage{
 			
 			if(!is_array($box) || !isset($box["name"])){
 				$box = array(
-					"name" => "widget-" . $key, 
+					"name" => "widget-" . $key,
 					"color" => "#CCFFCC"
 				);
 			}
 			
-			$html[] = '<div class="cell" style="background:'.$box["color"].'">'; 
+			$html[] = '<div class="cell" style="background:'.$box["color"].'">';
 			$html[] = 	'<div class="cell-title-wrap"> ';
 			$html[] = 	'	<p class="cell-title">'.$box["name"].'</p> ';
 			$html[] = 	'	<ul class="cell-title-btn"> ';
 			
 			if($mode != "navigation" && $key != "blank"){
 				$html[] = 	'		<li class="colorSelector" title="背景色変更"><em><input type="hidden" name="box['.$key.'][color]" value="'.$box["color"].'" /></em></li> ';
-				$html[] = 	'		<li class="close" title="閉じる"><span title="開く"></span></li>'; 
+				$html[] = 	'		<li class="close" title="閉じる"><span title="開く"></span></li>';
 			}
-			$html[] = 	'	</ul>'; 
-			$html[] = 	'</div>'; 
-			$html[] = 	'<div id="'.$id.'" class="inner" cell:pos="'.$key.'">'; 
-			$html[] = 	'	<div class="drop_box">ここに追加する</div>'; 
-			$html[] = 	'</div>'; 
+			$html[] = 	'	</ul>';
+			$html[] = 	'</div>';
+			$html[] = 	'<div id="'.$id.'" class="inner" cell:pos="'.$key.'">';
+			$html[] = 	'	<div class="drop_box">ここに追加する</div>';
+			$html[] = 	'</div>';
 			$html[] = '</div>';
 			
-			$count++; 
+			$count++;
 		}
 		
 		$html[] = '</div>';
@@ -213,7 +213,7 @@ class TemplateItemComponent_ItemList extends HTMLList{
 		//削除リンク
 		$this->addModel("remove_link",array(
 			"visible" => ($this->mode != "page")
-		));	
+		));
 		
 		//復元リンク
 		$this->addModel("recover_link",array(
@@ -222,13 +222,13 @@ class TemplateItemComponent_ItemList extends HTMLList{
 		
 		//一括表示、一括非表示
 		$this->addModel("whole_show_link_wrap",array(
-			"visible" => ($this->mode != "page") 
+			"visible" => ($this->mode == "template")
 		));
 		$this->addLink("whole_show_link",array(
 			"link" =>  $this->templateLink . "&item=" . $entity->getType() . ":" .$entity->getId() . "&toggle=1"
 		));
 		$this->addModel("whole_hide_link_wrap",array(
-			"visible" => ($this->mode != "page") 
+			"visible" => ($this->mode == "template")
 		));
 		$this->addLink("whole_hide_link",array(
 			"link" =>  $this->templateLink . "&item=" . $entity->getType() . ":" .$entity->getId() . "&toggle=0"

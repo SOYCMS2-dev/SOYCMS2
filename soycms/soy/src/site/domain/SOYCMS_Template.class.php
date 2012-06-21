@@ -83,7 +83,7 @@ class SOYCMS_Template implements SerialziedEntityInterface{
 		$dir = $targetDir . $_dir;
 		
 		//group
-		if($_dir[0] == "_" && strpos($_dir,"/")===false){
+		if(is_string($_dir) && $_dir[0] == "_" && strpos($_dir,"/")===false){
 			
 			$group = null;
 			if(file_exists($dir . "/group.ini")){

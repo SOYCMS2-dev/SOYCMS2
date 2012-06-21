@@ -84,7 +84,7 @@
 
 					<div class="cfg-menu-2">
 							<p>
-							<input type="checkbox" soy:id="is_use_ssl" id="is_use_ssl" onclick="$('#ssl_option').toggle($(this).attr('checked'));" />
+							<input type="checkbox" soy:id="is_use_ssl" id="is_use_ssl" onclick="$('#ssl_option').toggle($(this).attr('checked') != undefined);" />
 							<label for="is_use_ssl">SSLを使用する</label>
 							</p>
 							<table id="ssl_option" soy:id="ssl_config_wrap" style="width: 400px;">
@@ -201,7 +201,7 @@
 
 					<div class="cfg-menu-2">
 							<p>
-								<input type="checkbox" soy:id="mode_basic_auth" id="mode_basic_auth" onclick="$('#mode_basic_auth_option').toggle($(this).attr('checked'));" />
+								<input type="checkbox" soy:id="mode_basic_auth" id="mode_basic_auth" onclick="$('#mode_basic_auth_option').toggle($(this).attr('checked') != undefined);" />
 								<label for="mode_basic_auth">サイト全体にユーザー認証を設定する</label>
 							</p> 
 							<div>

@@ -21,7 +21,7 @@
 						<label for="is_overwrite">同名のファイルは上書きする</label>
 						
 						<br />
-						<input type="checkbox" id="create_thumbnail" soy:id="create_thumbnail" name="create_thumbnail" value="1" checked onclick="$('#thumbnail_option').toggle($(this).attr('checked'));save_make_thumbnail_config(this);" />
+						<input type="checkbox" id="create_thumbnail" soy:id="create_thumbnail" name="create_thumbnail" value="1" checked onclick="$('#thumbnail_option').toggle($(this).attr('checked') != undefined);save_make_thumbnail_config(this);" />
 						<label for="create_thumbnail">サムネイルを作成する（画像のみ）</label>
 						
 						<div id="thumbnail_option">
@@ -36,7 +36,7 @@
 								
 						</div>
 						<br />
-						<input type="checkbox" id="resize_auto" soy:id="resize_auto" name="resize_auto" value="1" checked onclick="$('#resize_auto_option').toggle($(this).attr('checked'));save_auto_resize_config(this);" />
+						<input type="checkbox" id="resize_auto" soy:id="resize_auto" name="resize_auto" value="1" checked onclick="$('#resize_auto_option').toggle($(this).attr('checked') != undefined);save_auto_resize_config(this);" />
 						<label for="resize_auto">大きすぎる画像は自動的に縮小する(画像のみ)</label>
 						
 						<div id="resize_auto_option">

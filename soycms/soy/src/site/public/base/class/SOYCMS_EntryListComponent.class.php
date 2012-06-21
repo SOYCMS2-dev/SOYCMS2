@@ -12,6 +12,8 @@ class SOYCMS_EntryListComponent extends HTMLList{
 	private $configLink = "";
 	
 	private $directory = null;
+	private $directoryUri = null;
+	
 	public static function getMapping(){
 		return SOYCMS_DataSets::load("site.page_mapping");
 	}
@@ -121,7 +123,7 @@ class SOYCMS_EntryListComponent extends HTMLList{
 		/* 名前 */
 		
 		$this->createAdd("author","HTMLLabel",array(
-			"text" => (strlen($entity->getAuthor()) > 0) ? $entity->getAuthor() : 
+			"text" => (strlen($entity->getAuthor()) > 0) ? $entity->getAuthor() :
 			((isset($users[$entity->getAuthorId()]) ? $users[$entity->getAuthorId()]->getName() : "-")),
 			"soy2prefix" => "cms"
 		));
@@ -266,14 +268,33 @@ class SOYCMS_EntryListComponent extends HTMLList{
 	
 	function buildCustomFields($entity){
 		static $commonConfig = array();
+		
 		if(!$commonConfig){
 			$commonConfig = SOYCMS_ObjectCustomFieldConfig::loadConfig("common");
 		}
 		
+		//個別設定
+		if($this->getDirectoryUri()){
+			$fields = SOYCMS_ObjectCustomFieldConfig::loadObjectConfig("entry-" . $this->getDirectoryUri());
+		}else{
+			$fields = SOYCMS_ObjectCustomFieldConfig::loadObjectConfig("entry");
+		}
+		
+		$components = $this->getComponentsList();
+		
 		//dummy
 		if($entity->getId() == -1 || !$entity->getId()){
 			$values = array();
-			foreach($commonConfig as $key => $config){
+			foreach($fields as $key => $config){
+				
+				//使わない奴はスキップする
+				if(!in_array($key,$components)
+				&& !in_array($key . "_sets",$components)
+				&& !in_array($key . "_image",$components)
+				&& !in_array($key . "_list",$components)){
+					continue;
+				}
+				
 				if(isset($values[$key])){
 					$value = $values[$key];
 				}else{
@@ -288,12 +309,21 @@ class SOYCMS_EntryListComponent extends HTMLList{
 		}
 		
 		$values = SOYCMS_ObjectCustomField::getValues("entry",$entity->getId());
+		
 		foreach($values as $key => $value){
-			if(!isset($commonConfig[$key]))continue;
-			$config = $commonConfig[$key];
+			if(!isset($fields[$key]))continue;
+			
+			//使わない奴はスキップする
+			if(!in_array($key,$components)
+			&& !in_array($key . "_sets",$components)
+			&& !in_array($key . "_image",$components)
+			&& !in_array($key . "_list",$components)){
+				continue;
+			}
+			
+			$config = $fields[$key];
 			SOYCMS_ObjectCustomFieldHelper::build($this,$config,$value);
 		}
-		
 	}
 	
 	
@@ -326,6 +356,17 @@ class SOYCMS_EntryListComponent extends HTMLList{
 	}
 	function setDirectory($directory) {
 		$this->directory = $directory;
+	}
+	
+	
+
+	public function getDirectoryUri(){
+		return $this->directoryUri;
+	}
+
+	public function setDirectoryUri($directoryUri){
+		$this->directoryUri = $directoryUri;
+		return $this;
 	}
 }
 

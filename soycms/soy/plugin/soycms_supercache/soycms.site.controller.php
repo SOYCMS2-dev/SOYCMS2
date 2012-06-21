@@ -6,6 +6,7 @@ class SOYCMS_SuperCachePlugin extends SOYCMS_SiteControllerExtension{
 	
 	function prepare($controller){
 		if(defined("SOYCMS_ADMIN_LOGINED"))return;
+		if(defined("SOYCMS_USER_LOGINED") && SOYCMS_USER_LOGINED)return;
 		
 		//POST時はキャッシュを生成しない
 		if(!empty($_POST)){
@@ -25,6 +26,8 @@ class SOYCMS_SuperCachePlugin extends SOYCMS_SiteControllerExtension{
 	
 	function tearDown($controller){
 		if(defined("SOYCMS_ADMIN_LOGINED"))return;
+		if(defined("SOYCMS_USER_LOGINED") && SOYCMS_USER_LOGINED)return;
+		
 		if(!$this->isBuildCache)return;
 		
 		$pages = $this->config["pages"];

@@ -13,7 +13,14 @@ class SOYCMS_SiteController extends SOY2PageController{
 	private $_binds = array();
 	private $webPage;
 	
+	private $mode = "";
+	private $ticks = array();
+	
 	function prepare(){
+		
+		if(defined("SOYCMS_MODE_BENCHMARK") && SOYCMS_MODE_BENCHMARK){
+			$this->tick("init",true);
+		}
 		
 		
 		//configure SOY2DAO
@@ -35,6 +42,8 @@ class SOYCMS_SiteController extends SOY2PageController{
 		//invoke events
 		PluginManager::load("soycms.site.controller.*");
 		$delg = PluginManager::invoke("soycms.site.controller.initialize",array("controller" => $this));
+		
+		$this->tick("plugin.intialize");
 		
 		//セッションIDの引き継ぎ
 		if(isset($_GET["SOYCMS_SSID"])){
@@ -86,6 +95,8 @@ class SOYCMS_SiteController extends SOY2PageController{
 			}
 			
 			register_shutdown_function(array($this,"onShutdown"));
+			
+			$this->tick("prepare.dynamic");
 		}
 		
 		//マネージモードはfalse
@@ -106,11 +117,14 @@ class SOYCMS_SiteController extends SOY2PageController{
 			}
 		}
 		
+		$this->tick("init.finish");
 	}
 
 	function execute(){
 		
 		$this->prepare();
+		
+		$this->tick("execute");
 		
 		if(isset($_GET["template_preview"])){
 			$session = SOY2Session::get("site.session.SiteLoginSession");
@@ -163,6 +177,7 @@ class SOYCMS_SiteController extends SOY2PageController{
 			return $this->onNotFound($uri,$e);
 		}
 		
+		$this->tick("execute.finish");
 		
 		//Helperに渡す
 		SOYCMS_Helper::set("page_id",$page->getId());
@@ -173,6 +188,8 @@ class SOYCMS_SiteController extends SOY2PageController{
 	}
 	
 	function displayWebPage($uri,$page,$args = array()){
+		
+		$this->tick("display");
 		
 		CMSExtension::execute($page,$args);
 		
@@ -186,15 +203,22 @@ class SOYCMS_SiteController extends SOY2PageController{
 			
 			CMSExtension::display($page,$webPage,$args);
 			
+			$this->tick("display.ext.display");
+			
 			$timer[] = microtime(true);
 			$webPage->common_build($args);
 			
+			$this->tick("display.common_build");
 			
 			$timer[] = microtime(true);
 			$webPage->main($args);
 			
+			$this->tick("display.main");
+			
 			$timer[] = microtime(true);
 			$webPage->common_execute();
+			
+			$this->tick("display.common_execute");
 			
 			error_reporting(0);
 			
@@ -214,11 +238,21 @@ class SOYCMS_SiteController extends SOY2PageController{
 				}
 			}
 			
-			echo $html;
+			if(defined("SOYCMS_MODE_BENCHMARK") && SOYCMS_MODE_BENCHMARK){
+				
+			}else{
+				echo $html;
+			}
 			
 			//終了
 			PluginManager::invoke("soycms.site.controller.teardown",array("controller" => $this));
-		
+			
+			$this->tick("display.finish");
+			
+			if(defined("SOYCMS_MODE_BENCHMARK") && SOYCMS_MODE_BENCHMARK){
+				$this->printTick();
+			}
+			
 		}catch(SOYCMS_NotFoundException $e){
 			return $this->onNotFound($uri,$e);
 		}catch(SOYCMS_EntryCloseException $e){
@@ -405,5 +439,28 @@ class SOYCMS_SiteController extends SOY2PageController{
 	 */
 	function bindPage($uri,$triggerPageUri){
 		$this->bind($uri,create_function('$uri','$_SERVER["ORIG_PATH_INFO"] = $_SERVER["PATH_INFO"];$_SERVER["PATH_INFO"] = $uri;'),$tiggerPageUri);
+	}
+	
+	function tick($type,$flag = false){
+		if($flag || $this->ticks){
+			$this->ticks[$type] = microtime(true);
+		}
+	}
+	
+	function printTick(){
+		$val = null;
+		echo "<dl>";
+		foreach($this->ticks as $label => $_val){
+			if(is_null($val)){
+				$val = $_val;
+				continue;
+			}
+			
+			echo "<dt>" . $label . "</dt>";
+			echo "<dd>";
+			echo ($_val - $val);
+			echo "</dd>";
+		}
+		echo "</dl>";
 	}
 }

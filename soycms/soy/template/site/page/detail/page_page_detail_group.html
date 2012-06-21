@@ -28,11 +28,11 @@
 						<th width="17%" scope="col">グループ名</th>
 						<th width="37%" scope="col">説明</th>
 						<th scope="col" class="s-cell">
-							<input type="checkbox" onclick="$('.is_readable_check').attr('checked',$(this).attr('checked'));" />
+							<input type="checkbox" onclick="$('.is_readable_check').attr('checked',$(this).attr('checked') != undefined);" />
 							読み取り
 						</th>
 						<th scope="col" class="s-cell">
-							<input type="checkbox" onclick="$('.is_writable_check').attr('checked',$(this).attr('checked'));" />
+							<input type="checkbox" onclick="$('.is_writable_check').attr('checked',$(this).attr('checked') != undefined);" />
 							書き込み
 						</th>
 					</tr>

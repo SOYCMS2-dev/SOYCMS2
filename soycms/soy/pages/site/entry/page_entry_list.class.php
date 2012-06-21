@@ -41,7 +41,7 @@ class page_entry_list extends SOYCMS_WebPageBase{
 			}
 		}catch(Exception $e){
 			$this->jump("/entry/list/" . $this->id);
-		}	
+		}
 	}
 
 	function page_entry_list($args){
@@ -63,6 +63,7 @@ class page_entry_list extends SOYCMS_WebPageBase{
 		//pager
 		$this->addPager("pager",array(
 			"start" => ($page - 1) * $this->limit + 1,
+			"end" => min($total, $page * $this->limit + 1),
 			"page" => $page,
 			"total" => $total,
 			"limit" => $this->limit,
@@ -76,7 +77,7 @@ class page_entry_list extends SOYCMS_WebPageBase{
 		$this->addInput("directory_id",array(
 			"name" => "directory_id",
 			"value" => $this->page->getId()
-		));	
+		));
 		
 		$this->addLink("view_update",array(
 			"link" => ($this->sort == "update") ? "" : "?sort=update",
@@ -98,7 +99,7 @@ class page_entry_list extends SOYCMS_WebPageBase{
 		
 		if($this->label){
 			$pages[":label"] = $this->label;
-			$tree[] = ":label"; 
+			$tree[] = ":label";
 		}
 		
 		$this->createAdd("page_topic_path","SOYCMS_EntryTopicPath",array(
@@ -118,7 +119,7 @@ class page_entry_list extends SOYCMS_WebPageBase{
 		$this->addLink("index_config_link",array("link" => soycms_create_link("/page/detail/" . $this->id ."?index")));
 		$this->addLink("entry_create_link",array("link" => soycms_create_link("/entry/create/" . $this->id)));
 		$this->addLink("entry_export_link",array("link" => soycms_create_link("/entry/export/" . $this->id)));
-		$this->addLink("entry_import_link",array("link" => soycms_create_link("/entry/import/" . $this->id)));	
+		$this->addLink("entry_import_link",array("link" => soycms_create_link("/entry/import/" . $this->id)));
 		
 		//記事を取得
 		$entries = $this->getEntries();
@@ -133,7 +134,7 @@ class page_entry_list extends SOYCMS_WebPageBase{
 		}
 		
 		$this->addLabel("current_directory_id",array(
-			"text" => $this->page->getId() 
+			"text" => $this->page->getId()
 		));
 		
 	}
@@ -201,8 +202,8 @@ class page_entry_list extends SOYCMS_WebPageBase{
 	}
 	
 	function getEntries(){
-		$dao = SOY2DAOFactory::create("SOYCMS_EntryDAO");
-		$dao->setLimit($this->limit);
+		$dao = SOY2DAOFactory::create("SOYCMS_EntryDAO"); /* @var $dao SOYCMS_EntryDAO */
+		$dao->setLimit($this->limit + 1);
 		$page = (@$_GET["page"]) ? $_GET["page"] : 1;
 		$dao->setOffset(($page-1) * $this->limit);
 		
@@ -221,12 +222,13 @@ class page_entry_list extends SOYCMS_WebPageBase{
 		//通常
 		}else{
 			
-			
 			if($this->sort == "order"){
 				$dao->setOrder("display_order");
 			}
+			
 			$list = $dao->getByDirectory($this->id);
 		}
+		
 		return $list;
 	}
 }

@@ -53,14 +53,14 @@ $entryDAO = SOY2DAOFactory::create("SOYCMS_EntryDAO");
 						<thead>
 							<tr>
 								<th width="40">
-									<input id="toggle_check" type="checkbox" onclick="$('.page_check').attr('checked',$(this).attr('checked'));" />
+									<input id="toggle_check" type="checkbox" onclick="$('.page_check').attr('checked',$(this).attr('checked') != undefined);" />
 									<label for="toggle_check">有効</label>
 								</th>
 								<th>ディレクトリ名</th>
 								<th width="80">有効期間</th>
 							</tr>
 						</thead>
-						<?php foreach($pages as $page){ 
+						<?php foreach($pages as $page){
 							if(!$page->isDirectory())continue;
 							$url = $page->getUri();
 							$conf = (isset($config["pages"]) && isset($config["pages"][$url])) ? $config["pages"][$url] : array(
@@ -95,6 +95,6 @@ $entryDAO = SOY2DAOFactory::create("SOYCMS_EntryDAO");
 				<input type="submit" name="generate" class="l-btn" value="設定" />
 			</div>
 		
-		</form>	
+		</form>
 	</div>
 </div>

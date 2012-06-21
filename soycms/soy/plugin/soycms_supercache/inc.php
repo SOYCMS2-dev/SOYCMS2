@@ -8,8 +8,8 @@ function soycms_supercache_clear_uri($uri = null){
 	foreach($dirs as $file){
 		if(is_null($uri)){
 			soy2_delete_dir($dir . $file);
-		}else if(false){
-			
+		}else if(strpos($file, $dirname) === 0){
+			soy2_delete_dir($dir . $file);
 		}
 	}
 }

@@ -150,16 +150,18 @@ class CMSExtensionImpl{
 			$url = str_replace("/","\\/",$url);
 			
 			if(preg_match("/^".$url."$/",$uri) || preg_match("/^".$url."$/",str_replace("index.html","",$uri))){
+				
 				if(isset($config["title"])){
 					$this->config["title"] = $config["title"];
 				}
 				if(isset($config["template"])){
 					$this->config["template"] = $config["template"];
-					$this->config["flag"] = false;
 					if(isset($config["flag"]))$this->config["flag"] = $config["flag"];
 				}
 				
 				if(isset($config["action"]) && isset($this->actions[$config["action"]])){
+					$this->config["flag"] = false;
+					if(isset($config["flag"]))$this->config["flag"] = $config["flag"];
 					$action_config = $this->actions[$config["action"]];
 					$action = $action_config["class"];
 					$args = (isset($action_config["arguments"])) ? $action_config["arguments"] : array();
@@ -175,7 +177,6 @@ class CMSExtensionImpl{
 						$this->action[$action_class] = new $action_class($args);
 						SOY2::cast($this->action[$action_class],$config);
 						$this->action[$action_class]->prepare($uri,$this);
-						$this->config["flag"] = false;
 						if(isset($action_config["last"]) && $action_config["last"] == true){
 							break;
 						}

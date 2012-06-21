@@ -792,6 +792,7 @@ aobata_editor.prototype = {
 		 	: ($(ele).parents("a").size() > 0) ? $(ele).parents("a").attr("href") : "";
 			
 		if(link === null)link = "";
+		link = t.convertUrlByBase(link, true);
 		
 		var class_val = $(ele).attr("class") + "";
 		
@@ -819,11 +820,10 @@ aobata_editor.prototype = {
 		}
 		
 		//link
-		if(link.match(/^http/)){
-			$(".property-panel a.btn-link").addClass("active");
-		}
 		if(link.match(/^mailto/)){
 			$(".property-panel a.btn-mail").addClass("active");
+		}else if(link.length > 0){
+			$(".property-panel a.btn-link").addClass("active");
 		}
 		
 		//bold
@@ -880,7 +880,7 @@ aobata_editor.prototype = {
 			if($("#img_preview").size() < 1){
 				$(".panel-image-preview").append($("<img />").attr("id","img_preview"));
 			}
-			$("#img_preview").attr("src",$("#img_attr_src").val()).show();
+			$("#img_preview").attr("src",t.convertUrlByBase($("#img_attr_src").val())).show();
 		}else{
 			$("#img_preview").hide();
 		}
@@ -971,12 +971,17 @@ aobata_editor.prototype = {
 		
 		/* convert relative url to absolute url in img */
 		$("img",d).each(function(){
-			var img = new Image;
-			img.src = $(this).attr("src");
-			src = img.src;
+			var src = $(this).attr("src");
 			src = t.convertUrlByBase(src, true);
 			$(this).attr("src",src);
 		});
+		
+		/* reconvert absolute url to relative url in a */
+		$("a",d).each(function(){
+			var link = t.convertUrlByBase($(this).attr("href"), true);
+			$(this).attr("href",link);
+		});
+		
 		
 		//create copy of body
 		var _body = this.getWindow().document.body.cloneNode(true);
@@ -1000,9 +1005,7 @@ aobata_editor.prototype = {
 		
 		/* reconvert absolute url to relative url in img */
 		$("img",d).each(function(){
-			var img = new Image;
-			img.src = $(this).attr("src");
-			src = img.src;
+			var src = $(this).attr("src");
 			src = t.convertUrlByBase(src);
 			$(this).attr("src",src);
 		});
@@ -1844,13 +1847,21 @@ aobata_editor.prototype = {
 			}
 		}
 		
-		
 		//end of base_url is always "/"
 		if(base_url[base_url.length -1] != "/")base_url += "/";
 		
+		if(url[0] == "."){
+			var tmpImg = new Image;
+			tmpImg.src = base_url + url;
+			url = tmpImg.src;
+		}
+		
+		
 		//http -> / 
 		if(flag){
-			url = url.replace(base_url, "/");
+			if(url.indexOf(base_url) > -1){
+				url = url.replace(base_url, "/").replace("//","/");
+			}
 		
 		// / -> http
 		}else{
@@ -1868,6 +1879,7 @@ aobata_editor.prototype = {
 			url = base_url + url.substring(1);
 			
 		}
+		
 		
 		return url;
 	},

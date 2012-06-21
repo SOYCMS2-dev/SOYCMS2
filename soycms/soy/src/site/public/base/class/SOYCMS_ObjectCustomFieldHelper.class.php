@@ -12,37 +12,8 @@ class SOYCMS_ObjectCustomFieldHelper {
 			$field = $field[-1];
 		}
 		
-		if(is_object($field)){
-			
-			if($field->getType() == "group"){
-				$_value = $field->getValueObject();
-				$fields = $config->getFields();
-				foreach($fields as $key => $_config){
-					if(strlen($key)<1)continue;
-					$value = (isset($_value[$key])) ? $_value[$key] : $_config->getValueObject();
-					
-					if(!$value instanceof SOYCMS_ObjectCustomField){
-						$obj = new SOYCMS_ObjectCustomField();
-						$obj->setType($_config->getType());
-						$obj->setValue($value);
-						$value = $obj;
-					}
-					
-					if($_config->getType() == "check"){
-						self::build($htmlObj,$_config,$value);
-						continue;
-					}
-					if(is_object($value))$value->setFieldId($key);
-					self::_build($htmlObj,$value);
-				}
-				
-				return;
-			}
-			
-			return self::_build($htmlObj,$field);
-		}
-		
 		if($config->getType() == "check"){
+			
 			$htmlObj->createAdd($fieldId, "SOYCMS_HTMLLabel",array(
 				"list" => $field,
 				"soy2prefix" => "cms",
@@ -54,6 +25,22 @@ class SOYCMS_ObjectCustomFieldHelper {
 				"config" => $config
 			));
 			return;
+		}
+		
+		if(is_object($field)){
+			
+			if($field->getType() == "group"){
+				
+				$htmlObj->createAdd($fieldId, "_SOYCMS_ObjectCustomFieldGroupComponent",array(
+					"config" => $config,
+					"value" => $field,
+					"childSoy2Prefix" => "cms"
+				));
+				
+				return;
+			}
+			
+			return self::_build($htmlObj,$field);
 		}
 		
 		//複数の場合
@@ -73,8 +60,7 @@ class SOYCMS_ObjectCustomFieldHelper {
 		));
 	}
 	
-	private static function _build($htmlObj,$field){
-		
+	public static function _build($htmlObj,$field){
 		$type = $field->getType();
 		$value = $field->getValue();
 		if(strlen($value)<1)$value = $field->getText();
@@ -134,7 +120,7 @@ class SOYCMS_ObjectCustomFieldHelper {
 			));
 			
 			return;
-		} 
+		}
 		
 		if($field->getType() == "check"){
 			
@@ -157,12 +143,12 @@ class SOYCMS_ObjectCustomFieldSetComponent extends SOYBodyComponentBase{
 		
 		$this->addModel("empty",array(
 			"visible" => (strlen($this->value)<1),
-			"soy2prefix" => $this->_soy2_prefix		
+			"soy2prefix" => $this->_soy2_prefix
 		));
 		
 		$this->addModel("not_empty",array(
 			"visible" => (strlen($this->value)>0),
-			"soy2prefix" => $this->_soy2_prefix		
+			"soy2prefix" => $this->_soy2_prefix
 		));
 		
 		$this->addLabel("field_value",array(
@@ -238,5 +224,67 @@ class SOYCMS_HTMLLabel extends HTMLLabel{
 		$this->separate = $value;
 	}
 	
+}
+
+class _SOYCMS_ObjectCustomFieldGroupComponent extends SOYBodyComponentBase{
+	
+	private $config;
+	private $value;
+	
+	
+	function execute(){
+		
+		$field = $this->value;
+		$config = $this->config;
+		
+		$_value = $field->getValueObject();
+		$fields = $config->getFields();
+		foreach($fields as $key => $_config){
+			if(strlen($key)<1)continue;
+			
+			if($_config->getType() == "check"){
+				$value = (isset($_value[$key])) ? $_value[$key] : array();
+				if(is_object($value))$value = array($value);
+				SOYCMS_ObjectCustomFieldHelper::build($this,$_config,$value);
+				continue;
+			}
+			
+			$value = (isset($_value[$key])) ? $_value[$key] : $_config->getValueObject();
+			
+			if(!$value instanceof SOYCMS_ObjectCustomField){
+				$obj = new SOYCMS_ObjectCustomField();
+				$obj->setType($_config->getType());
+				$obj->setValue($value);
+				$value = $obj;
+			}
+			
+			if(is_object($value))$value->setFieldId($key);
+			
+			SOYCMS_ObjectCustomFieldHelper::_build($this,$value);
+		
+		}
+		
+		parent::execute();
+	}
+	
+	
+
+	public function getConfig(){
+		return $this->config;
+	}
+
+	public function setConfig($config){
+		$this->config = $config;
+		return $this;
+	}
+
+	public function getValue(){
+		return $this->value;
+	}
+
+	public function setValue($value){
+		$this->value = $value;
+		return $this;
+	}
 }
 ?>
