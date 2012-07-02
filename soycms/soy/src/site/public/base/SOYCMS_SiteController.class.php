@@ -39,6 +39,14 @@ class SOYCMS_SiteController extends SOY2PageController{
 			define("SOYCMS_SITE_URL", SOYCMS_SITE_ROOT_URL);
 		}
 		
+		//タイムゾーン
+		$default = @date_default_timezone_get();
+		if(!$default)$default = "Asia/Tokyo";
+		$timezone = SOYCMS_DataSets::get("timezone",@date_default_timezone_get());
+		if($timezone != $default){
+			date_default_timezone_set($timezone);
+		}
+		
 		//invoke events
 		PluginManager::load("soycms.site.controller.*");
 		$delg = PluginManager::invoke("soycms.site.controller.initialize",array("controller" => $this));

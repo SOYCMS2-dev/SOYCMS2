@@ -32,6 +32,9 @@ SOY2::imports("base.func.*");
 SOY2::imports("base.class.*");
 SOY2::import("plugin.PluginManager");
 
+//configure document root
+@include_once(SOYCMS_COMMON_DIR . "conf/user/doc.conf.php");
+
 //configure url
 define("SOYCMS_ROOT_URL", soy2_path2url(dirname(dirname(__FILE__))));	//SOYCMS_ROOT_DIR
 define("SOYCMS_COMMON_URL", soy2_path2url(dirname(dirname(__FILE__))) . "common/");	//SOYCMS_ROOT_DIR + /common/
@@ -43,8 +46,6 @@ if(isset($_SERVER["CONFIG_DIR"]) && isset($_SERVER["CONFIG_DB_DIR"])){
 	SOYCMSConfigUtil::put("db_dir",soy2_realpath($_SERVER["CONFIG_DB_DIR"]));
 	
 }else{
-	
-	@include_once(SOYCMS_COMMON_DIR . "conf/user/doc.conf.php");
 	
 	//include_config
 	if(file_exists(SOYCMS_COMMON_DIR . "user.conf.php")){

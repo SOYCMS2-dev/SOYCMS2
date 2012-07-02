@@ -75,9 +75,9 @@ class SOYCMS_ZipHelper {
 				
 				//要素に追加
 				$allItems[] = array($src,$dst);
-			}	
+			}
 		}
-		var_dump(class_exists("ZipArchive"));
+		
 		//圧縮
 		if(class_exists("ZipArchive")){
 			$zip = new ZipArchive();

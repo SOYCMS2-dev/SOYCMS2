@@ -266,12 +266,16 @@ function advance_text_area(textarea){
 	};
 	
 	//タブの挿入
-	textarea.insertTab = function(e){
+	textarea.insertTab = function(e, newline_flag){
 		
 		if (document.selection != null){
 			textarea.selection = document.selection.createRange();
 			
 			var value = textarea.selection.text;
+			var insert_text = "\t";
+			if(newline_flag){
+				
+			}
 			
 			if(textarea.selection.compareEndPoints('StartToEnd',textarea.selection) == 0){		
 				textarea.selection.text = String.fromCharCode(9);
@@ -292,16 +296,26 @@ function advance_text_area(textarea){
 		}else{
 			var start = textarea.selectionStart;
 			var end = textarea.selectionEnd;
-			
 			var scroll = textarea.scrollTop;
+			var insert_text = "\t";
+			
+			if(newline_flag){
+				var lines = textarea.value.substr(0, textarea.selectionStart).split("\n");
+				var last_line = lines[lines.length-1];
+
+				insert_text = "\n";
+				if(last_line.match(/^(\t+)/)){
+					insert_text += RegExp.$1;
+				}
+			}
 			
 			var beforeString = textarea.value.substring(0,start);
 			var afterString = textarea.value.substring(end);
 			
 			if(start == end){
-				textarea.value = beforeString + "\t" + afterString;
+				textarea.value = beforeString + insert_text + afterString;
 				textarea.scrollTop = scroll;
-				textarea.setSelectionRange(start + 1,start + 1);
+				textarea.setSelectionRange(start + insert_text.length,start + insert_text.length);
 			}else{
 				var value = textarea.value.substring(start,end);
 				if(e.shiftKey){
@@ -377,7 +391,16 @@ function advance_text_area(textarea){
 			textarea.insertTab(e);
 			return false;
 		}	
-				
+		
+		if(e.keyCode == 13){
+			if(e.shiftKey || e.altKey){
+				return true;
+			}
+			textarea.insertTab(e, true);
+			return false;
+		}
+		
+		
 		return true;
 	}
 	

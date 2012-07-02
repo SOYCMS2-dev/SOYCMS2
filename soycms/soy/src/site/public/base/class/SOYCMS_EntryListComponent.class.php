@@ -277,7 +277,7 @@ class SOYCMS_EntryListComponent extends HTMLList{
 		if($this->getDirectoryUri()){
 			$fields = SOYCMS_ObjectCustomFieldConfig::loadObjectConfig("entry-" . $this->getDirectoryUri());
 		}else{
-			$fields = SOYCMS_ObjectCustomFieldConfig::loadObjectConfig("entry");
+			$fields = SOYCMS_ObjectCustomFieldConfig::loadObjectConfig("common");
 		}
 		
 		$components = $this->getComponentsList();
