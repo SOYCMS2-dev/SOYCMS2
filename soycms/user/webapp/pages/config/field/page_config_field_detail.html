@@ -1,0 +1,137 @@
+<div id="main-window1" class="main-window">
+	
+<div class="window-title">
+	<h2 class="title-text"><!-- soy:id="field_name" /-->のフィールド設定</h2>
+</div>
+
+<div class="window-content">
+	
+<div class="section">
+	
+	<ul class="crumbs">
+		<li><a soy:link="./" title="管理画面トップ" class="home_btn">管理画面トップ</a></li>
+		<li><a soy:link="">ユーザ管理</a></li>
+		<li><a soy:link="config">設定</a></li>
+		<li><a soy:link="config.field">カスタムフィールド管理</a></li>
+		<li>カスタムフィールド詳細</li>
+	</ul>
+	
+	
+	<div class="title">
+		<h3>フィールド設定</h3>
+	</div>
+	<div class="content">
+		<form soy:id="form">
+			
+		<table class="form-table">
+			<tr>
+				<th scope="row">タイプ</th>
+				<td>
+					<select soy:id="field_type_select"></select>
+				</td>
+			</tr>
+			<tr> 
+				<th scope="row">項目ID</th> 
+				<td>
+					<span class="xxl" soy:id="field_id_text">*************</span>	
+				</td>
+			</tr>
+			<tr> 
+				<th scope="row">項目名</th> 
+				<td>
+					<input soy:id="field_name" type="text" class="m-area" size="40" value="サムネイル" />	
+				</td>
+			</tr>
+			<tr> 
+				<th scope="row">ラベル</th> 
+				<td>
+					<input soy:id="field_label" type="text" class="m-area" size="40" value="サムネイル" />	
+				</td>
+			</tr>
+			<tr> 
+				<th scope="row">項目の説明</th> 
+				<td>
+					<textarea soy:id="field_description" class="m-area" cols="40"></textarea>	
+				</td>
+			</tr>
+			
+			<!-- soy:id="has_option" -->
+			<tr>
+				<th scope="row">オプション</th> 
+				<td>
+					<p class="intro">項目を改行して入力してください</p>
+					<textarea soy:id="field_option" type="text" value="" rows="5" class="m-area liq-area"></textarea>
+				</td> 
+			</tr>
+			<!-- /soy:id="has_option" -->
+			
+			<tr>
+				<th scope="row">初期値</th> 
+				<td>
+					<input soy:id="field_default_value" type="text" value="" class="s-area liq-area" />
+					<textarea soy:id="field_default_text" class="m-area liq-area" rows="5"></textarea>
+				</td> 
+			</tr>
+			
+		</table>
+		
+		<div class="form-btn ce">
+			<p class="break">
+				<input type="submit" class="l-btn" name="save_config" value="保存" />
+			</p>
+			<!-- soy:id="is_detail" -->
+			<p>
+				<input type="submit" value="削除" id="post1-submit" name="remove" class="m-btn ri" onclick="return confirm('この項目を削除して良いですか？');" />
+			</p>
+			<!-- /soy:id="is_detail" -->
+		</div>
+		
+		</form>
+		
+	</div>
+	
+	
+
+</div><!-- //.section -->
+
+<div class="section">
+	<div class="title">
+		<h3>表示設定</h3>
+	</div>
+	<div class="content">
+		<form soy:id="view_form">
+			
+			<table class="list-table break">
+				<col width="120" />
+				<thead>
+				<tr>
+					<th>グループ名称</th>
+					<th>設定</td>
+				</tr>
+				</thead>
+				<tr>
+					<td>共通</td>
+					<td>
+						<select soy:id="common_type_select"></select>
+					</td>
+				</tr>
+				<!-- soy:id="group_list" -->
+				<tr>
+					<td><!-- soy:id="group_name" /--></td>
+					<td>
+						<select soy:id="type_select"></select>
+					</td>
+				</tr>
+				<!-- /soy:id="group_list" -->
+			</table>
+			
+			<div class="form-btn ce">
+			<input type="submit" class="l-btn" name="save_view_config" value="保存" />
+			</div>
+		</form>
+	</div>
+</div><!-- //.section -->
+
+</div><!-- // .window-content -->
+
+</div><!-- // .main-window -->

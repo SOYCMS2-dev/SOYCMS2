@@ -491,25 +491,27 @@
 
 
 
-<!-- soy:id="is_entry" -->
 <div id="command-menu-section8" class="section">
 	<div class="title">
-		<h2>コメント＆トラックバック</h2>
+		<h2>その他</h2>
 	</div>
 	<div class="content">
 			<ul class="radio-list">
+				<!-- soy:id="is_entry" -->
 				<li class="li1"><input soy:id="allow_comment" type="checkbox" id="allow_comment" /><label for="allow_comment">コメントを許可</label></li>
 				<li class="li1"><input soy:id="allow_trackback" type="checkbox" id="allow_comment" /><label for="allow_trackback">トラックバックを許可</label></li>
 				<li class="li1"><input soy:id="send_ping" type="checkbox" id="send_ping" /><label for="send_ping">更新Pingを送信</label></li>
+				<!-- /soy:id="is_entry" -->
 				<li class="li1"><input soy:id="feed_entry" type="checkbox" id="feed_entry" /><label for="feed_entry">フィードに表示</label></li>
 			</ul>
-			
+		
+		<!-- soy:id="is_entry*" -->
 		<p class="ri s"><a soy:id="comment_link">コメントの管理(<!-- soy:id="comment_count" /-->)</a></p>
 		<p class="ri s"><a soy:id="trackback_link">トラックバックの管理(<!-- soy:id="trackback_count" /-->)</a></p>
 		<p class="ri s"><a href="#trakcbak-popup" class="popup-btn">トラックバックの送信</a></p>
+		<!-- /soy:id="is_entry*" -->
 	</div>
 </div>
-<!-- /soy:id="is_entry" -->
 
 	<div id="trakcbak-popup" class="popup-content">
 		<div class="title">

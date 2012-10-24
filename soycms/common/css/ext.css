@@ -45,6 +45,12 @@ label{
 	color:#999;
 }
 
+img.thumb-210{
+	width:210px;
+	cursor:pointer;
+}
+
+
 /* table sortable */
 table.sortable thead th{
 	cursor:pointer;

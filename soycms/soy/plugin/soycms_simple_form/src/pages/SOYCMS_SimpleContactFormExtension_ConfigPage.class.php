@@ -36,6 +36,7 @@ class SOYCMS_SimpleContactFormExtension_ConfigPage extends HTMLPage{
 	function buildForm(){
 		$config = $this->getConfig();
 		$items = $config["items"];
+		if(!is_array($items))$items = array();
 		
 		$this->createAdd("field_list","ContactFormFieldList",array(
 			"list" => (is_array($config["items"])) ? $config["items"] : array(),

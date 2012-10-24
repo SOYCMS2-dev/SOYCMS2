@@ -1,0 +1,90 @@
+<div id="main-window1" class="main-window"> 
+				
+<div class="window-title"> 
+	<h2>ユーザ管理の初期化(1/2)</h2> 
+</div>
+
+<div class="window-content"> 
+	
+	<div id="main-section1" class="section"> 
+
+		<div class="content"> 
+
+			<form soy:id="form"> 
+			
+				<div class="form-section">
+					
+					<p class="xl" style="color:red;" soy:id="connect_error">
+						データベースに接続出来ません。入力内容を確認して下さい。
+					</p>
+					
+					<h3>ユーザ管理の初期化</h3> 
+					<div class="label"> 
+						<h4>メンバーページの設定</h4> 
+					</div> 
+					<div class="item">
+						<p class="intro">ユーザがログイン後に操作する画面のURLを決めて下さい。</p>
+						<p>
+							<span soy:id="site_url"></span>
+							<input id="site_id_input" type="text" class="m-area" soy:id="mypage_url" size="40" />
+						</p>
+					</div>
+
+					<div class="label"> 
+						<h4>データベースの設定</h4> 
+					</div> 
+					<div class="item"> 
+						<p class="intro">MySQLの接続情報を設定してください。</p>
+						<table class="form-table">
+							<col style="width:250px;" />
+							<tr>
+								<th>MySQLサーバ情報</th>
+								<td>
+									<input type="text" class="m-area" soy:id="mysql_host" name="post1-1" value="" size="40" />
+									<p>(例, localhost, 127.0.0.1)</p>
+								</td>
+							</tr>
+							<tr>
+								<th>データベース名</th>
+								<td>
+									<p class="intro">作成済みのデータベース名を指定してください。</p>
+									<input type="text" class="m-area" soy:id="mysql_database">
+								</td>
+							</tr>
+							<tr>
+								<th>MySQLユーザ名</th>
+								<td>
+									<p><input type="text" class="m-area" soy:id="mysql_user" name="post1-1" value="" /></p>
+								</td>
+							</tr>
+							<tr>
+								<th>
+									MySQLパスワード
+								</th>
+								<td>
+									<p><input type="text" class="m-area" soy:id="mysql_password" name="post1-1" value="" /></p>	
+								</td>
+							</div>
+						</table>
+					</div><!-- // .item -->
+
+					<div class="form-btn ce"> 
+						<input type="submit" value="次へ" id="post1-submit" name="post1-submit" class="l-btn" /> 
+					</div> 
+
+			</div><!-- // .form-section --> 
+				
+			</form> 
+
+		</div> 
+	</div> 
+	<!--  // #main-section1 --> 
+
+</div> 
+<!--  // .window-content --> 
+</div> 
+<!--  // #main-window1 --> 
+
+<script type="text/javascript">
+
+</script>

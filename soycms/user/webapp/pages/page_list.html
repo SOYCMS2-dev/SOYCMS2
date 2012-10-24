@@ -1,0 +1,111 @@
+<div id="main-window1" class="main-window"> 
+					
+	<div class="window-title"> 
+		<h2>ユーザ一覧</h2>
+	</div>
+	<div class="window-content">
+		<form soy:id="form">
+		
+		<div class="section">
+			<div class="pagelist-menu"> 
+				<ul> 
+					<li class="edit"><a soy:id="create_link">新しいユーザの登録</a></li>
+				</ul> 
+			</div>
+			
+			<div class="title">
+				<h3>ユーザの検索</h3>
+			</div>
+			<table id="search-tbl" class="form-table">
+				<tr>
+					<th>グループ</th>
+					<td>
+						<select soy:id="search_group_select">
+							<option value="">---------------</option>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<th>ログインID</th>
+					<td>
+						<input soy:id="search_user_id" type="text" class="m-area" size="70" />
+					</td>
+				</tr>
+				<tr>
+					<th>ユーザ名</th>
+					<td>
+						<input soy:id="search_user_name" type="text" class="m-area" size="70" />
+					</td>
+				</tr>
+			</table>
+			
+			<p class="ce">
+				<input type="submit" value="検索" class="m-btn" />
+				<input type="submit" value="クリア" class="m-btn" onclick="$('#search-tbl input,#search-tbl select').val('');" />
+			</p>
+			
+		</div>
+		
+		<div class="section">
+		
+			<div class="title">
+				<h3>検索結果 - 全<!-- soy:id="count_max" /-->件中<!-- soy:id="count_start" /-->〜<!-- soy:id="count_end" /-->件</h3>
+			</div>
+			<table class="list-table">
+				<thead>
+					<tr>
+						<th width="8%" class="s-cell" scope="col">
+							<input type="checkbox" onclick="$('.user_check').attr('checked',$(this).attr('checked'));" />
+						</th>
+						<th>ID</th>
+						<th>ログインID</th>
+						<th>ユーザ名</th>
+						<th>グループ</th>
+						<th>更新日／作成日</th>
+						<th>&nbsp;</th>
+					</tr>
+				</thead>
+				<tbody>
+					<!-- soy:id="user_list" -->
+					<tr>
+						<td class="s-cell">
+							<input type="checkbox" soy:id="user_check" class="user_check" />
+						</td>
+						<td>
+							<strong><!-- soy:id="id_text" /--></strong>
+						</td>
+						<td><!-- soy:id="login_id" /--></td>
+						<td><!-- soy:id="name" /--></td>
+						<td><!-- soy:id="group_text" /--></td>
+						<td>
+							<!-- soy:id="update_date" /--> /
+							<!-- soy:id="create_date" /-->
+
+						</td>
+						<td>
+							<a soy:id="detail_link" class="s-btn">詳細</a>
+						</td>
+					</tr>
+					<!-- /soy:id="user_list" -->
+				</tbody>
+			</table>
+			
+			<!-- soy:id="pager" -->
+			<div class="pager">
+				<p class="back" soy:id="prev_link_wrap"><a soy:id="prev_link">&lt;&nbsp;前へ</a></p>
+				<ol><!-- soy:id="pager_list" --><li><a soy:id="page_link"><em><!-- soy:id="page_text" /--></em></a></li><!-- /soy:id="pager_list" --></ol>
+				<p class="next" soy:id="next_link_wrap"><a soy:id="next_link">次へ&nbsp;&gt;</a></p>
+			</div> 
+			<!-- /pager -->
+			
+			<p class="ce">
+				<input type="submit" name="csv_download" value="CSVのダウンロード" class="m-btn" /><br />
+				<input type="checkbox" id="include_delete_user" name="include_delete_user" value="1" />
+				<label for="include_delete_user">退会したユーザもCSVに含む</label>
+			</p>
+			
+		</div>
+		
+		</form>
+	</div>
+</div>

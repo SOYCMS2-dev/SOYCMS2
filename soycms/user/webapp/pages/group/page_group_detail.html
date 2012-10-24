@@ -1,0 +1,108 @@
+<div id="main-window1" class="main-window"> 
+					
+	<div class="window-title"> 
+		<h2>グループ詳細設定</h2>
+	</div>
+	<div class="window-content">
+		
+		<div class="section">
+			<div class="pagelist-menu"> 
+				<ul> 
+					<li class="back"><a soy:link="group">グループ一覧に戻る</a></li> 
+				</ul>
+			</div>
+			
+			<div class="title">
+				<h3>「<!-- soy:id="group_name_text" /-->」設定</h3>
+			</div>
+			<div class="content">
+				
+				<form soy:id="form">
+					
+					<table class="form-table">
+						<tr>
+							<th>グループID</th>
+							<td><span class="l"><!-- soy:id="group_id_text" /--></span></td>
+						</tr>
+						
+						
+						<th>グループ名</th>
+						<td>
+							<input soy:id="group_name" type="text" class="m-area" size="45" />
+						</td>
+						</tr>
+						<tr>
+							<th>グループ説明</th>
+							<td>
+								<textarea soy:id="group_description" class="m-area liq-area"></textarea>
+							</td>
+						</tr>
+						
+						<tr>
+							<th>新規ユーザ登録を行う</th>
+							<td>
+								<input type="checkbox" soy:id="group_register" />
+								<label for="group_register">新規ユーザ登録を行う</label>
+								
+								<!-- soy:id="is_group_register" -->
+								<p>
+									<a soy:id="group_register_template_link">テンプレートの編集</a>
+								</p>
+								<!-- /soy:id="is_group_register" -->
+							</td>
+						</tr>
+						
+					</table>
+				
+					<div class="form-btn ce"> 
+						<p class="lbreak">
+							<input type="submit" name="save" value="保存" class="l-btn" />
+							<input type="submit" name="remove" value="削除" class="l-btn" onclick="return confirm('このグループを削除しても良いですか？');" />
+						</p>
+					</div>
+				</form>
+			</div>
+		</div>
+		
+		
+		<div class="section">
+			<div class="title">
+				<h3>「<!-- soy:id="group_name_text" /-->」カスタムフィールド設定</h3>
+			</div>
+			<div class="content">
+				<form soy:id="field_form">
+				
+					<table class="list-table break">
+						<col width="120" />
+						<thead>
+						<tr>
+							<th>フィールド名称</th>
+							<th>プロフィール設定</td>
+							<th>登録時の設定</td>
+						</tr>
+						</thead>
+						<!-- soy:id="field_list" -->
+						<tr>
+							<td><!-- soy:id="field_name" /--></td>
+							<td>
+								<select soy:id="profile_type_select"></select>
+							</td>
+							<td>
+								<select soy:id="register_type_select"></select>
+							</td>
+						</tr>
+						<!-- /soy:id="field_list" -->
+					</table>
+					
+					<div class="form-btn ce"> 
+						<p class="lbreak">
+							<input type="submit" name="save_view_config" value="保存" class="l-btn" />
+						</p>
+					</div>
+				</form>
+			</div>
+		</div>
+		
+	</div>
+</div>
+

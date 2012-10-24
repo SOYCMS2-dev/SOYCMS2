@@ -1,0 +1,123 @@
+<div id="main-window1" class="main-window">
+	
+<div class="window-title">
+	<h2 class="title-text"><!-- soy:id="user_name_text" /--> - 詳細</h2>
+</div>
+
+<div class="window-content">
+<div class="section">
+	
+	<div class="pagelist-menu"> 
+		<ul> 
+			<li class="back"><a soy:link="list?back">戻る</a></li> 
+		</ul> 
+	</div>
+	
+	<div class="content">
+	
+	<form soy:id="detail_form">
+		<table id="user-detail-table" class="form-table">
+			<tr>
+				<th>ユーザーID</th>
+				<td>
+					<p class="error m" style="color:red;" soy:id="login_id_error">ユーザIDは必須です</p>
+					<input type="text" class="m-area" value="" size="50" soy:id="login_id" />
+				</td>
+			</tr>
+			
+			<tr>
+				<th>ユーザー名</th>
+				<td>
+					<p class="error m" style="color:red;" soy:id="name_error">ユーザ名は必須です</p>
+					<input type="text" class="m-area" value="" size="50" soy:id="user_name" />
+				</td>
+			</tr>
+			
+			<tr>
+				<th>メールアドレス</th>
+				<td>
+					<p class="error m" style="color:red;" soy:id="mail_address_error">メールアドレスは必須です</p>
+					<input type="text" class="m-area" value="" size="50" soy:id="mail_address" />
+				</td>
+			</tr>
+			
+			<tr>
+				<th>グループ</th>
+				<td>
+					<!-- soy:id="group_list" -->
+					<input type="checkbox" soy:id="group_check" />
+					<!-- /soy:id="group_list" -->
+				</td>
+			</tr>
+			
+			<tr>
+				<th>ユーザの状態</th>
+				<td>
+					<select soy:id="user_status"></select>
+				</td>
+			</tr>
+			
+			<tr>
+				<th>新しいパスワード</th>
+				<td>
+					<input name="new_password" type="text" class="m-area" value="" size="50" />
+					<input type="submit" class="m-btn" name="change_password" value="変更" />
+				</td>
+			</tr>
+			
+			
+			
+		</table>
+		
+		<div class="field-list-wrap">
+		
+			<!-- soy:id="field_list" -->
+			<div soy:id="field_wrap" class="form-section">
+				<div class="label">
+					<h4><!-- soy:id="field_name" /--></h4>
+				</div>
+				<div class="item">
+					<p class="intro"><!-- soy:id="field_description" /--></p>
+					<!-- soy:id="field_form" /-->
+				</div>
+			</div soy:id="field_wrap">
+			<!-- /soy:id="field_list" -->
+			
+		</div>
+		
+		
+		<!-- soy:id="ext_field_form" /-->
+		
+		
+		<div class="form-btn ce">
+			<input class="l-btn" type="submit" value="更新" id="post1-btn1" name="post1-btn1" />
+		</div>
+		
+		</form soy:id="detail_form">
+	</div>
+</div>
+<div class="section">
+	<div class="title">
+		<h3>関連記事</h3>
+	</div>
+	<div class="content">
+		<ul>
+		<!-- soy:id="entry_list" -->
+		<li> 
+			<a soy:id="entry_detail_link">
+				<!-- soy:id="entry_title" /-->
+			</a>
+		</li>
+		<!-- /soy:id="entry_list" -->
+		</ul>
+		
+		<div class="ce under">
+			<span><a class="m-btn" soy:id="create_entry_link" href="#">関連記事を書く</a></span>
+		</div>
+
+	</div>
+</div><!-- //.section -->
+
+</div>
+
+</div>

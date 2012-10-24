@@ -357,7 +357,8 @@ aobata_editor.prototype = {
 			this.tool = $("<div id='" + this.textarea.attr("id") + "_editor_param_tool' class='aobata_editor_param_tool'></div>");
 			this.header.find(".wysiwyg-mode-panel").append(this.tool);
 			
-			this.tool.load(aobata_editor.root + "dat/tool.html");
+			var tool_html = (aobata_editor.option.tool) ? aobata_editor.option.tool : aobata_editor.root + "dat/tool.html";
+			this.tool.load(tool_html);
 			this.tool.bind("click",function(){inst.closeParam();});
 		}
 		
@@ -1153,7 +1154,9 @@ aobata_editor.prototype = {
 				return false;
 			}
 			
-			if($(start).prev() && $(start).prev().html() != null && $(start).prev().html().replace(/[\r\n]/,"").length < 1){
+			if($(start).prev() && 
+				!$(start).prev().get(0).tagName.match(/img|hr|br/i)
+				&& $(start).prev().html() != null && $(start).prev().html().replace(/[\r\n]/,"").length < 1){
 				event.preventDefault();
 				$(start).prev().remove();
 				return false;

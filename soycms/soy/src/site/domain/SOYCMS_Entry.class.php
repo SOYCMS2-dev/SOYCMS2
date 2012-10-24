@@ -719,9 +719,8 @@ abstract class SOYCMS_EntryDAO extends SOY2DAO{
 	 * 公開しているEntryに限定するQueryを追加
 	 */
 	function executeOpenEntryQuery($query,$binds){
-		
 		if(is_object($query)){
-		
+			$query = clone($query);
 			if(strpos($query->where,"entry_publish = 1")===false){
 				$query->where .= (strlen($query->where) > 0) ? " AND " : "";
 				$query->where .= "entry_publish = 1 AND open_until >= :now AND open_from <= :now";

@@ -1,0 +1,111 @@
+<div id="main-window1" class="main-window"> 
+					
+	<div class="window-title"> 
+		<h2>設定</h2>
+	</div>
+	<div class="window-content">
+		<div class="section">
+			
+			<div class="pagelist-menu"> 
+				<ul>
+					<li><a soy:link="config.mail">メールの設定</a></li>
+				</ul>
+			</div>
+			
+			
+			<div class="title">
+				<h3>基本設定</h3>
+			</div>
+			
+			<div class="content">
+				<form method="post">
+			
+					<table class="form-table">
+						<tr>
+							<th>ログインしていない時の遷移先</th>
+							<td>
+								<!-- soy:id="site_url" /-->
+								<input type="text" soy:id="not_login_uri" class="m-area" size="16" value="" />
+							</td>
+						</tr>
+						<tr>
+							<th>ログアウト後の遷移先</th>
+							<td>
+								<!-- soy:id="site_url" /-->
+								<input type="text" soy:id="logout_uri" class="m-area" size="16" value="" />
+							</td>
+						</tr>
+						<tr>
+							<th>ログインが必要なURL<br />(マイページ以外)</th>
+							<td>
+								<p class="s">例)「news/member*.html」「content/member_page」「*」(全てのページがログイン必須となります)</p>
+							<textarea soy:id="login_url_list" class="m-area liq-area" rows="5"></textarea>
+							</td>
+						</tr>
+					</table>
+					
+					<div class="form-btn ce">
+						<input type="submit" value="保存" class="l-btn" />
+					</div>
+				</form>
+			</div><!-- // .content -->
+		</div>
+		
+		<div class="section">
+			<div class="title">
+				<h3>モジュールの配置</h3>
+			</div>
+			
+			<div class="content">
+				<form method="post">
+					<div class="form-section break">
+						<table class="list-table">
+							<thead>
+								<tr>
+									<th>有効</th>
+									<th>モジュール名称</th>
+									<th>URL</th>
+									<th>&nbsp;</th>
+								</tr>
+							</thead>
+							<!-- soy:id="module_list" -->
+							<tr>
+								<td rowspan="2" class="ce mid">
+									<input type="checkbox" soy:id="module_check" />
+								</td>
+								<td class="mid">
+									<!-- soy:id="module_name" -->ログインモジュール<!-- /soy:id="module_name" -->
+								</td>
+								<td>
+									<span>
+										<!-- soy:id="module_page_prefix" /-->
+										<input type="text" soy:id="module_url" class="m-area" size="16" value="login" />
+									</span>
+								</td>
+								<td class="mid">
+									<a soy:id="module_detail_link" class="m-btn"><em>設定</em></a>
+								</td>
+							</tr>
+							<tr>
+								<td colspan="3">
+									<!-- soy:id="module_description" /-->
+								</td>
+							</tr>
+							<!-- /soy:id="module_list" -->
+						</table>
+					</div><!-- // .form-section -->
+			
+			
+					<div class="form-btn ce">
+						<input type="submit" value="保存" class="l-btn" />
+						<p>
+							<input type="checkbox" id="init_check" name="init" value="1" />
+							<label for="init_check">テンプレートを初期化する</label>
+						</p>
+					</div>
+				</form>
+			</div><!-- // .content -->
+		</div>
+		
+	</div>
+</div>

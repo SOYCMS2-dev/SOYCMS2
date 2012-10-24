@@ -50,6 +50,7 @@ class SOYCMS_FeedPageBase extends SOYCMS_SitePageBase{
 		$this->createAdd("entry_list","SOYCMS_EntryListComponent",array(
 			"list" => $entries,
 			"soy2prefix" => "block",
+			"mode" => "feed",
 			"summary" => ($obj->getType() == "excerpt") ? $obj->getExcerpt() : -1
 		));
 		
@@ -65,19 +66,16 @@ class SOYCMS_FeedPageBase extends SOYCMS_SitePageBase{
 		
 		//子ディレクトリを全て対象とする
 		$mapping = SOYCMS_DataSets::load("site.page_mapping");
-		$urls = SOYCMS_DataSets::load("site.url_mapping");
+		$feed_config = SOYCMS_DataSets::load("site.feed_config", array());
 		
 		$directories = array($dirId);
 		$dirUrl = $mapping[$dirId]["uri"];
+		$isIncludeChild = $feed_config[$dirId]["child"];
 		
-		foreach($urls as $url => $id){
-			if(strpos($url,$dirUrl) !== false || $dirUrl == "_home"){
-				if($mapping[$id]["type"] == "detail"){
-					$directories[] = $id;		
-				}
-				continue;
-			}
-			break;
+		if($isIncludeChild){
+			$relation = SOYCMS_DataSets::load("site.page_relation");
+			$page_ids = $this->getDirectoryIds($dirId, $relation, $mapping, $feed_config);
+			$directories = array_merge($directories, $page_ids);
 		}
 		
 		$dao = SOY2DAOFactory::create("SOYCMS_EntryDAO");
@@ -87,6 +85,38 @@ class SOYCMS_FeedPageBase extends SOYCMS_SitePageBase{
 		
 		return $dao->searchFeedEntryByDirectories($directories);
 		
+	}
+	
+	function getDirectoryIds($dirId, $list, $mapping, $feed_config, $incChildFlag = false){
+		$pageIds = array();
+		
+		$dirUrl = $mapping[$dirId]["uri"];
+		$child = $list[$dirId];
+		
+		if($dirUrl == "_home")$dirUrl = ".";
+		
+		foreach($child as $pageId){
+			$type = $mapping[$pageId]["type"];
+			if($type[0] ==".")continue;
+			$pageUrl = $mapping[$pageId]["uri"];
+			if($dirUrl != dirname($pageUrl))continue;
+			
+			if($type == "detail"){
+				if($incChildFlag)continue;
+				
+				$isOutput = $feed_config[$pageId]["output"];
+				if(!$isOutput)continue;
+				
+				$pageIds[] = $pageId;
+				$incChild = $feed_config[$pageId]["child"];
+				$pageIds = array_merge($pageIds,$this->getDirectoryIds($pageId, $list, $mapping, $feed_config, $incChild));
+				
+			}else{
+				$pageIds[] = $pageId;
+			}
+		}
+		
+		return $pageIds;
 	}
 
 }

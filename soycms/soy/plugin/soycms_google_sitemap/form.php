@@ -3,6 +3,39 @@ $pages = SOY2DAO::find("SOYCMS_Page");
 $entryDAO = SOY2DAOFactory::create("SOYCMS_EntryDAO");
 $config = array();
 ?>
+<?php if(file_exists(SOYCMS_SITE_DIRECTORY . "sitemap.xml")){ ?>
+<div class="section">
+	<div class="title">
+		<h3>XMLサイトマップの更新</h3>
+	</div>
+	<div class="content">
+	
+		<p>【更新】ボタンを押した後、Googleにサイトマップを送信するを押して下さい</p>
+		
+		<form method="post">
+			
+			<div class="form-btn lbreak">
+				<input type="submit" name="generate" class="l-btn" value="サイトマップを更新する" />
+			</div>
+		
+		</form>
+		
+		
+		<p class="break"><span class="l">最終更新時刻：<b><?php echo date("Y-m-d H:i:s",filemtime(SOYCMS_SITE_DIRECTORY . "sitemap.xml"))?></b></span>
+			<br />
+			<a class="m-btn" href="http://www.google.com/webmasters/tools/ping?sitemap=<?php echo SOYCMS_SITE_URL . "sitemap.xml"; ?>" target="_blank">
+				<em>SitemapをGoogleに送信する(新しいWindowが開きます)</em>
+			</a>
+		</p>
+		
+		
+	
+	</div>
+	
+	
+</div>
+
+<?php } ?>
 <div class="section">
 	<div class="title">
 		<h3>XMLサイトマップの条件を設定してください</h3>
@@ -21,21 +54,6 @@ $config = array();
 				</div>
 			</div>
 			
-			<p>最終更新時刻：<?php echo date("Y-m-d H:i:s",filemtime(SOYCMS_SITE_DIRECTORY . "sitemap.xml"))?></p>
-			
-			<?php
-				if(file_exists(SOYCMS_SITE_DIRECTORY . ".plugin/sitemap.conf")){
-					$config = soy2_unserialize(file_get_contents(SOYCMS_SITE_DIRECTORY . ".plugin/sitemap.conf"));
-					
-				}else{
-					$xml = simplexml_load_file(SOYCMS_SITE_DIRECTORY . "sitemap.xml");
-					$urlset = $xml->children("http://www.sitemaps.org/schemas/sitemap/0.9");
-					
-					foreach($urlset->url as $url){
-						$config[(string)$url->loc] = $url;
-					}
-				}
-			?>
 		<?php }else{ ?>
 			<p class="intro xl">XMLサイトマップは現在作成されていません。「作成」を押してXMLサイトマップを作成してください。</p>
 		<?php } ?>
@@ -52,7 +70,7 @@ $config = array();
 				</tr>
 			</thead>
 			<tbody>
-			<?php 
+			<?php
 				
 				//homeのデフォルト
 				if(!isset($config[soycms_get_page_url("_home")])){
@@ -93,7 +111,7 @@ $config = array();
 				</td>
 				<td>
 					<select name="urlset[<?php echo $id; ?>][freq]">
-						<?php 
+						<?php
 							if(!@$pageConfig["changefreq"])@$pageConfig["changefreq"] = "weekly";
 							foreach(array("always","hourly","daily","weekly","monthly","yearly","never") as $value){
 								$checked = ($value == (string)@$pageConfig["changefreq"]) ? "selected" : "";
@@ -104,7 +122,7 @@ $config = array();
 				</td>
 				<td>
 					<select name="urlset[<?php echo $id; ?>][priority]">
-						<?php 
+						<?php
 							foreach(range(0,10) as $value){
 								$value = $value / 10;
 								$checked = ($value == $pageConfig["priority"]) ? "selected" : "";
@@ -149,7 +167,7 @@ $config = array();
 						</td>
 						<td>
 							<select name="urlset[<?php echo $id . "_" . $entryId; ?>][freq]">
-								<?php 
+								<?php
 									if(!@$entryConfig["changefreq"])@$entryConfig["changefreq"] = "weekly";
 									foreach(array("always","hourly","daily","weekly","monthly","yearly","never") as $value){
 										$checked = ($value == (string)@$pageConfig["changefreq"]) ? "selected" : "";
@@ -160,7 +178,7 @@ $config = array();
 						</td>
 						<td>
 							<select name="urlset[<?php echo $id . "_" . $entryId; ?>][priority]">
-								<?php 
+								<?php
 									foreach(range(0,10) as $value){
 										$value = $value / 10;
 										$checked = ($value == $entryConfig["priority"]) ? "selected" : "";
@@ -177,7 +195,7 @@ $config = array();
 						
 						
 						<?php
-					}	
+					}
 				}
 			?>
 			<?php } ?>
@@ -188,6 +206,6 @@ $config = array();
 			<input type="submit" name="generate" class="l-btn" value="作成" />
 		</div>
 		
-		</form>	
+		</form>
 	</div>
 </div>

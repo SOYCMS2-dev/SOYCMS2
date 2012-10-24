@@ -1,0 +1,32 @@
+<div>
+	<h3>ログイン</h3>
+	
+	<p cms:id="login_error">ログインに失敗しました。ログインID／パスワードを確認して下さい。</p>
+	
+	<form cms:id="login_form">
+		<dl>
+			<dt>ログインID</dt>
+			<dd>
+				<input cms:id="login_id" type="text" class="m-area" />
+			</dd>
+			<dt>パスワード</dt>
+			<dd>
+				<input cms:id="login_password" type="password" class="m-area" />
+			</dd>
+			<dd>
+				<input id="remeber_login" type="checkbox" cms:id="remeber_login" />
+				<label for="remeber_login">ログイン状態を継続する</label>
+			</dd>
+		</dl>
+	
+		<p class="ce">
+			<input type="submit" name="login" value="ログイン" />
+		</p>
+	
+	</form>
+	
+	<!-- cms:id="is_allowed_register" -->
+	<a cms:id="register_link">新規登録</a>
+	<!-- /cms:id="is_allowed_register" -->
+	
+</div>

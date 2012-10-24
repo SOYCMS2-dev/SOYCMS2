@@ -7,7 +7,8 @@ class SOYCMS_ContactFormHelper {
 		foreach($config["items"] as $array){
 			$items[$array->getId()] = $array;
 		}
-		$config["items"] = serialize($items);
+		$items = serialize($items);
+		$config["items"] = base64_encode($items);
 		
 		$pageObj = $page->getPageObject();
 		$pageObj->setConfig($config);
@@ -30,10 +31,10 @@ class SOYCMS_ContactFormHelper {
 				"items" => self::getDefaultItems(),
 				"admin_addr" => "",
 				"is_send_confirm_mail" => true,
-				"confirm_mail_input" => "your-mail", 
+				"confirm_mail_input" => "your-mail",
 				"is_show_confirm" => true,
 				"form_html" => file_get_contents(dirname(__FILE__) . "/template/form.html"),
-				"confirm_html" => file_get_contents(dirname(__FILE__) . "/template/confirm.html"), 
+				"confirm_html" => file_get_contents(dirname(__FILE__) . "/template/confirm.html"),
 				"complete_html" => file_get_contents(dirname(__FILE__) . "/template/complete.html"),
 				"admin_mail_title" => "【問い合わせがあります】from: #name# (#mail#)",
 				"admin_mail_body" => file_get_contents(dirname(__FILE__) . "/template/admin_mail.html"),
@@ -47,8 +48,12 @@ class SOYCMS_ContactFormHelper {
 		}
 		
 		if(is_string($config["items"])){
-			$config["items"] = @unserialize($config["items"]);
+			$items = @unserialize(base64_decode($config["items"]));
+			if($items === false)$items = unserialize($config["items"]);
+			$config["items"] = $items;
 		}
+		
+		
 		
 		return $config;
 	}

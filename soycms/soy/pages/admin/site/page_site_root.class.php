@@ -66,7 +66,7 @@ class page_site_root extends SOYCMS_WebPageBase{
 		if(file_exists($root . "index.php")){
 			$writable = is_writable($root . "index.php") ;
 		}else{
-			$writable = is_writable($root);	
+			$writable = is_writable($root);
 		}
 		
 		if(file_exists($root . ".htaccess")){
@@ -98,7 +98,7 @@ class page_site_root extends SOYCMS_WebPageBase{
 		
 		$index_php = @file_get_contents($root . "index.php");
 		$siteId = SOYCMS_CommonConfig::get("DomainRootSite",null);
-		$isDomain = ($siteId == $this->site->getSiteId()); 
+		$isDomain = ($siteId == $this->site->getSiteId());
 		
 		
 		//不要な箇所を切り取る
@@ -115,9 +115,9 @@ class page_site_root extends SOYCMS_WebPageBase{
 		}
 		
 		//index.phpを作成する
-		$index_php .= 	$token_start . "\n" . 
+		$index_php .= 	$token_start . "\n" .
 						(($siteId) ?
-							'define("SOYCMS_DOMAIN_ROOT", true);' . "\n" .  
+							'define("SOYCMS_DOMAIN_ROOT", true);' . "\n" .
 							'include("'.$this->site->getPath().'index.php");'
 						 : "") . "\n" .
 						$token_end . "\n";
@@ -140,6 +140,7 @@ class page_site_root extends SOYCMS_WebPageBase{
 							"RewriteCond %{REQUEST_FILENAME}/index.html !-f\n" .
 							"RewriteCond %{REQUEST_FILENAME}/index.htm !-f\n" .
 							"RewriteCond %{REQUEST_URI} !/index.php/\n" .
+							"RewriteCond %{REQUEST_URI} !.(jpg|png|jpeg|gif|css|js)$\n" .
 							'RewriteRule ^(.*)$ index.php?soycms_pathinfo=$1 [QSA,L]' ."\n"
 						: "").
 						$token_end;

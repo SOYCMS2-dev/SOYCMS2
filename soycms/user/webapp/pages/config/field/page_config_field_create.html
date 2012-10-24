@@ -1,0 +1,83 @@
+<div id="main-window1" class="main-window">
+	
+<div class="window-title">
+	<h2 class="title-text">カスタムフィールド項目の追加</h2>
+</div>
+
+<div class="window-content">
+		
+	<div class="section">
+
+		<ul class="crumbs">
+			<li><a soy:link="./" title="管理画面トップ" class="home_btn">管理画面トップ</a></li>
+			<li><a soy:link="">ユーザ管理</a></li>
+			<li><a soy:link="config">設定</a></li>
+			<li><a soy:link="config.field">カスタムフィールド管理</a></li>
+			<li>カスタムフィールドの追加</li>
+		</ul>
+
+		
+			<div class="content">
+				<form soy:id="new_field_form">
+				
+
+				
+				<div class="form-section">
+
+					<div class="item">
+
+						
+						<div class="label_directory_option">
+							<table class="form-table"> 
+								<tbody>
+									<tr>
+										<th scope="row">タイプ</th>
+										<td><select soy:id="field_type_select">
+										</select></td>
+									</tr>
+									<tr>
+										<th scope="row">項目名</th>
+										<td><input name="NewField[name]" type="text" value="" class="m-area" style="width:320px;" placeholder="項目名" /></td>
+									</tr>
+									<tr>
+										<th scope="row">項目ID</th>
+										<td><input name="NewField[fieldId]" class="m-area" style="width:320px;" placeholder="name" /></td>
+									</tr>
+									<tr> 
+										<th scope="row">共通・<br />グループ</th>
+										<td>
+											<p>追加先を設定してください。</p>
+											
+											<ul>
+												<li>
+													<input type="radio" soy:id="field_add_common" /><label for="field_add_common">共通のフィールドに追加</label>
+												</li>
+												<!-- soy:id="group_list" -->
+												<li>
+													<input type="radio" soy:id="group_check">
+												</li>
+												<!-- /soy:id="group_list" -->
+											</ul>
+										</td>
+									</tr>
+								</tbody>
+								</table>
+							</div>
+					</div>
+				
+					
+				</div>
+				
+				<div class="form-btn ce">
+					<input type="submit" name="create" value="追加" class="l-btn" />
+				</div>
+				
+				</form>
+				
+				
+			</div><!-- // .content -->
+		</div><!-- // .section -->
+
+</div><!-- // .window-content -->
+
+</div><!-- // .main-window -->

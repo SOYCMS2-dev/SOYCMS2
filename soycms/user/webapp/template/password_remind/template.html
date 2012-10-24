@@ -1,0 +1,159 @@
+<!-- cms:id="mode_form" -->
+<div class="main-window">
+<div class="window-title"> 
+	<h2>ログインパスワードの変更</h2>
+</div>
+
+<div class="window-content"> 
+<div class="section">
+<div class="content">
+
+	<h3>ログインパスワードの変更</h3>
+	
+	<p>メールアドレスを入力して下さい。パスワード変更用のURLをお送りします。</p>
+	
+	<form cms:id="password_remind_form">
+		<dl>
+			<dt>メールアドレス</dt>
+			<dd>
+				<p cms:id="password_remind_mailaddress_error">このメールアドレスは使われていません</p>
+				<input cms:id="password_remind_mailaddress" type="text" class="m-area" />
+			</dd>
+		</dl>
+	
+		<p class="ce">
+			<input type="submit" name="send" value="送信" class="m-btn" />
+		</p>
+	
+	</form cms:id="password_remind_form">
+	
+
+</div>
+</div>
+</div>
+</div>
+<!-- /cms:id="mode_form" -->
+
+
+<!-- cms:id="mode_send" -->
+<div class="main-window">
+<div class="window-title"> 
+	<h2>ログインパスワードの変更</h2>
+</div>
+
+<div class="window-content"> 
+<div class="section">
+<div class="content">
+	<h3>確認コード</h3>
+	
+	<p>
+	下記メールアドレスにパスワード再設定リンクを記載したメールを送信しました。
+	届かない場合は再送信ボタンを押して下さい。
+	</p>
+	
+	<p>
+		<!--  cms:id="password_remind_target_mailaddress*" /-->
+	</p>
+	
+	<form cms:id="password_resend_form">
+		<input cms:id="password_remind_resend_mailaddress" type="hidden" class="m-area" />
+		
+		<p class="ce">
+			<input type="submit" name="save" value="再送信" class="m-btn" />
+		</p>
+	</form cms:id="password_resend_form">
+	
+
+</div>
+</div>
+</div>
+</div>
+<!-- /cms:id="mode_send" -->
+
+<!-- cms:id="mode_reset" -->
+<div class="main-window">
+<div class="window-title"> 
+	<h2>ログインパスワードの変更</h2>
+</div>
+
+<div class="window-content"> 
+<div class="section">
+<div class="content">
+	<h3>新しいパスワードの設定</h3>
+	
+	<p>
+	新しいパスワードを入力して下さい。
+	</p>
+	
+	<form cms:id="password_reset_form">
+		<dl>
+			<dt>メールアドレス</dt>
+			<dd>
+				<!--  cms:id="password_remind_target_mailaddress*" /-->
+			</dd>
+			<dt>新しいパスワード(半角英数字6文字以上)</dt>
+			<dd>
+				<p cms:id="password_remind_password_error">パスワードは6文字以上入力して下さい</p>
+				<input cms:id="password_remind_password" type="password" class="m-area" />
+			</dd>
+			<dt>新しいパスワード(確認)</dt>
+			<dd>
+				<p cms:id="password_remind_password_confirm_error">パスワードが一致しません</p>
+				<input cms:id="password_remind_password_confirm" type="password" class="m-area" />
+			</dd>
+		</dl>
+		
+		<p class="ce">
+			<input type="submit" name="reset_password" value="設定" class="m-btn" />
+		</p>
+	</form cms:id="password_reset_form">
+	
+
+</div>
+</div>
+</div>
+</div>
+<!-- /cms:id="mode_reset" -->
+
+
+<!-- cms:id="mode_complete" -->
+<div class="main-window">
+<div class="window-title"> 
+	<h2>ログインパスワードの変更</h2>
+</div>
+
+<div class="window-content"> 
+<div class="section">
+<div class="content">
+	<h3>新しいパスワードを設定しました</h3>
+	
+	<p>
+	下記リンクよりログイン画面へ移動し、ログインして下さい。
+	</p>
+	
+	<p>
+		<a href="@@SITE_PATH@@login">ログイン画面に移動</a>
+	</p>
+
+</div>
+</div>
+</div>
+</div>
+<!-- /cms:id="mode_complete" -->
+
+<!-- cms:id="mode_error" -->
+<div class="main-window">
+
+<div class="window-content"> 
+<div class="section">
+<div class="content">
+	<h3>エラーが発生しました</h3>
+	<p>
+		<a href="@@SITE_PATH@@remind_password">パスワードリマインド画面</a>
+	</p>
+
+</div>
+</div>
+</div>
+</div>
+<!-- /cms:id="mode_error" -->

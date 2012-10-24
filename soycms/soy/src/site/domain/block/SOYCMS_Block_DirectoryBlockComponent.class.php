@@ -56,7 +56,7 @@ class SOYCMS_Block_DirectoryBlockComponent extends SOYCMS_Block_BlockComponentBa
 		//ラベル
 		if($this->getIsGroupByLabel()){
 			//現在のディレクトリを指定かつ、子ディレクトリは含まない場合
-			if(($this->getDirectoryType() == 0 && $this->getIncludeChildDirectory()) 
+			if(($this->getDirectoryType() == 0 && $this->getIncludeChildDirectory())
 				|| count($this->getDirectories()) == 1
 			){
 				
@@ -148,7 +148,7 @@ class SOYCMS_Block_DirectoryBlockComponent extends SOYCMS_Block_BlockComponentBa
 			
 			
 			$labelList[$id] = $label;
-			$labelList[$id]->setEntries($entries); 
+			$labelList[$id]->setEntries($entries);
 			$counter++;
 			if(!is_null($limit) && $counter >= $limit){
 				break;
@@ -260,9 +260,10 @@ class SOYCMS_Block_DirectoryBlockComponent extends SOYCMS_Block_BlockComponentBa
 	/**
 	 * 検索実行
 	 */
-	function searchEntry($directories,$labels,$isAndLabel,$tags,$isAndTag){ 
+	function searchEntry($directories,$labels,$isAndLabel,$tags,$isAndTag){
 		$entries = array();
 		
+		/* @var $searchLogic SOYCMS_EntrySearchLogic */
 		$searchLogic = SOY2Logic::createInstance("site.logic.entry.SOYCMS_EntrySearchLogic");
 		
 		//build query
