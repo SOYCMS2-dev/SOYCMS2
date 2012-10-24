@@ -73,7 +73,7 @@ class SOYCMS_ObjectCustomFieldBuilder{
 			}
 			
 			if($config->isMulti()){
-				$_html .= $this->buildFormHTML($type,array(
+				$_html .= "\n" . $this->buildFormHTML($type,array(
 							"name" => $nameAttribute,
 							"label" => $config->getLabel(),
 							"class" => "field-template",
@@ -118,14 +118,13 @@ class SOYCMS_ObjectCustomFieldBuilder{
 		$h_text = ($value && is_object($value)) ? htmlspecialchars($value->getText(),ENT_QUOTES) : null;
 		$h_value = ($value && is_object($value)) ? htmlspecialchars($value->getValue(),ENT_QUOTES) : null;
 		
-		
 		switch($type){
 			case "group":
 				$fields = $config["fields"];
 				$_value = (is_object($value)) ? $value->getValueObject() : array();
 				
 				$oldFormName = $this->formName;
-				$this->formName = $nameAttribute;
+				$this->formName = $h_formName;
 				
 				$body = "<div class=\"field-child-list\">";
 				foreach($fields as $key => $_config){
@@ -214,16 +213,17 @@ class SOYCMS_ObjectCustomFieldBuilder{
 				break;
 		
 			case "select":
-				$value = (is_null($h_value)) ? $config["defaultValue"] : $h_value ;
-		
+				if(is_object($value))$value = $value->getValue();
+				$value = (!$value) ? $config["defaultValue"] : $value;
+				
 				$body = '<select class="'.$prefix.'select" name="'.$h_formName.'" id="'.$idAttribute.'">';
-				$body .= '<option value="">----</option>';
-				foreach($options as $_option){
+				if(!$config["defaultValue"])$body .= '<option value="">----</option>';
+				foreach($options as $key => $_option){
 					$_option = trim($_option);
 					if(strlen($_option)>0){
 						$h_option = htmlspecialchars($_option,ENT_QUOTES,"UTF-8");
-						$body .= '<option value="'.$h_option.'" ' .
-						(($_option == $value) ? 'selected="selected"' : "") .
+						$body .= '<option value="'.$key.'" ' .
+						(($key == $value) ? 'selected="selected"' : "") .
 										 '>' . $h_option . '</option>' . "\n";
 					}
 				}
@@ -233,7 +233,7 @@ class SOYCMS_ObjectCustomFieldBuilder{
 			case "multi":
 				$h_value = (empty($h_value)) ? $config["defaultValue"] : $h_value ;
 					
-				$body = '<textarea class="textarea m-area liq-area"'
+				$body = '<textarea class="textarea m-area liq-area resizable"'
 				.' id="'.$idAttribute.'"'
 				.' name="'.$h_formName.'"'
 				.' placeholder="'.$label.'">'
@@ -270,7 +270,7 @@ class SOYCMS_ObjectCustomFieldBuilder{
 				}
 		
 		
-				$body .=((strlen(@$h_value["src"])>0) ? '<dd><br /><img id="'.$idAttribute.'_img" src="'.htmlspecialchars($h_value["src"],ENT_QUOTES).'" /></dd>' : "") ;
+				$body .=((strlen(@$h_value["src"])>0) ? '<dd><br /><img id="'.$idAttribute.'_img" class="thumb-210" src="'.htmlspecialchars($h_value["src"],ENT_QUOTES).'" /></dd>' : "") ;
 				$body .= "</dl>";
 		
 				break;

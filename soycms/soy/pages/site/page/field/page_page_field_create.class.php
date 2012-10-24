@@ -11,10 +11,24 @@ class page_page_field_create extends SOYCMS_WebPageBase{
 			$fields[$field->getFieldId()] = $field;
 			SOYCMS_ObjectCustomFieldConfig::saveConfig("common",$fields);
 			
-			$type = (empty($_POST["type"])) ? "entry" : "entry-" . $_POST["type"];
-			$fields = SOYCMS_ObjectCustomFieldConfig::loadConfig($type);
-			$fields[$field->getFieldId()] = $field;
-			SOYCMS_ObjectCustomFieldConfig::saveConfig($type,$fields);
+			$type = "entry";
+			if(!empty($_POST["type"])){
+				
+				if(is_numeric($_POST["type"])){
+					try{
+						$page = SOY2DAO::find("SOYCMS_Page", $_POST["type"]);
+						$type = "entry-" . $page->getUri();
+					}catch(Exception $e){
+						$type = null;
+					}
+				}
+				
+				if($type){
+					$fields = SOYCMS_ObjectCustomFieldConfig::loadConfig($type);
+					$fields[$field->getFieldId()] = $field;
+					SOYCMS_ObjectCustomFieldConfig::saveConfig($type,$fields);
+				}
+			}
 			
 			
 			if(isset($_GET["page"])){
@@ -49,7 +63,7 @@ class page_page_field_create extends SOYCMS_WebPageBase{
 		));
 		
 		$this->createAdd("field_tree","_class.list.PageTreeComponent",array(
-			"checkboxName" => "type", 
+			"checkboxName" => "type",
 			"visible" => (!isset($_GET["page"]))
 		));
 		
@@ -58,6 +72,11 @@ class page_page_field_create extends SOYCMS_WebPageBase{
 		));
 		$this->addModel("page_not_selected",array(
 			"visible" => (!isset($_GET["page"]))
+		));
+		$this->addCheckbox("entry_elect",array(
+			"name" => "type",
+			"value" => "entry",
+			"selected" => (isset($_GET["type"]) && $_GET["type"] == "entry")
 		));
 		
 		$pageId = (isset($_GET["page"]) && is_numeric($_GET["page"])) ? $_GET["page"] : "";

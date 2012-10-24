@@ -1,0 +1,138 @@
+<!-- cms:id="mode_mail" -->
+<div>
+	<h3>新規登録画面</h3>
+	
+	<p>メールアドレスを入れて送信ボタンを押して下さい</p>
+	
+	<form cms:id="mail_form">
+		<input type="hidden" mode="mail" />
+		<dl>
+			<dt>*メールアドレス</dt>
+			<dd>
+				<p cms:id="mailaddress_require_error" class="error">メールアドレスを入力してください/p>
+				<p cms:id="mailaddress_format_error" class="error">メールアドレスの書式が正しくありません</p>
+				<p cms:id="mailaddress_unique_error" class="error">このメールアドレスは使われているため使用出来ません。</p>
+				<input cms:id="mailaddress" type="text" class="m-area" />
+			</dd>
+		</dl>
+	
+		<p class="ce">
+			<input type="submit" value="送信" />
+		</p>
+	
+	</form cms:id="mail_form">
+	
+</div>
+<!-- /cms:id="mode_mail" -->
+
+<!-- cms:id="mode_code" -->
+<div>
+	<h3>仮登録完了画面</h3>
+	
+	<p><!-- cms:id="mailaddress_text*" /-->宛にメールを送信しました。記載されているURLにアクセスするか、下記フォームより確認コードを入力してください。</p>
+	
+	<form cms:id="code_form">
+		<dl>
+			<dt>確認コード</dt>
+			<dd>
+				<p cms:id="code_error" class="error">確認コードが無効です。</p>
+				<input cms:id="code" type="text" class="m-area" />
+			</dd>
+		</dl>
+		
+		<p class="ce">
+			<input type="submit" value="登録" />
+		</p>
+	</form cms:id="code_form">
+		
+</div>
+<!-- /cms:id="mode_code" -->
+
+<!-- cms:id="mode_register" -->
+<div>
+	<h3>登録内容入力画面</h3>
+	
+	<form cms:id="register_form">
+		<input type="hidden" mode="register" />
+		<dl>
+			<dt>*メールアドレス</dt>
+			<dd>
+				<!-- cms:id="mailaddress_text*" /-->
+			</dd>
+			
+			<dt>*ログインパスワード(半角英数字＋記号)</dt>
+			<dd>
+				<p cms:id="password_require_error" class="error">パスワードは必須です</p>
+				<p cms:id="password_format_error" class="error">パスワードの書式が正しくありません</p>
+				<input cms:id="password" type="password" class="m-area" />
+			</dd>
+			
+			<dt>*名前</dt>
+			<dd>
+				<p cms:id="name_require_error" class="error">名前は必須です。</p>
+				<input cms:id="name" type="text" class="m-area" />
+			</dd>
+			
+			<!-- GROUP_CUSTOM_FIELD_FORM -->
+		</dl>
+	
+		<p class="ce">
+			<input type="submit" value="入力内容の確認" />
+		</p>
+	
+	</form cms:id="register_form">
+	
+</div>
+<!-- /cms:id="mode_register" -->
+
+<!-- cms:id="mode_confirm" -->
+<div>
+	<h3>登録内容確認画面</h3>
+	
+	<form cms:id="confirm_form">
+		<dl>
+			<dt>メールアドレス</dt>
+			<dd><!-- cms:id="mailaddress_text*" /--></dd>
+			<dt>パスワード</dt>
+			<dd><!-- cms:id="password_text" /--></dd>
+			<dt>名前</dt>
+			<dd><!-- cms:id="name_text" /--></dd>
+			<!-- GROUP_CUSTOM_FIELD_CONFIRM -->
+		</dl>
+	
+		<p class="ce">
+			<input type="submit" name="back" value="戻る" />
+			<input type="submit" value="登録" />
+		</p>
+	
+	</form cms:id="confirm_form">
+	
+</div>
+<!-- /cms:id="mode_confirm" -->
+
+<!-- cms:id="mode_complete" -->
+<div>
+	<h3>登録完了画面</h3>
+	
+	<p>登録が完了しました。下記フォームよりログインを行って下さい</p>
+	
+	<form cms:id="login_form">
+		<dl>
+			<dt>メールアドレス</dt>
+			<dd>
+				<input name="id" type="text" class="m-area" />
+			</dd>
+			<dt>パスワード</dt>
+			<dd>
+				<input name="password" type="password" class="m-area" />
+			</dd>
+		</dl>
+	
+		<p class="ce">
+			<input type="submit" name="save" value="ログイン" />
+		</p>
+	
+	</form>
+	
+</div>
+<!-- /cms:id="mode_complete" -->

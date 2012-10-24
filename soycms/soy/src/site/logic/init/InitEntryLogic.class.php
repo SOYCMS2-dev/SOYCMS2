@@ -57,7 +57,7 @@ class InitEntryLogic extends SOY2LogicBase{
 			"_default/",
 			"_default/",
 			"_blank/"
-		); 
+		);
 		$template = $templates[$type];
 		
 		//HOME
@@ -84,6 +84,9 @@ class InitEntryLogic extends SOY2LogicBase{
 		$feed = $object->getFeedAtom();
 		$feed["title"] = "#SiteName# - Atom";
 		$object->setFeedAtom($feed);
+		
+		//2012-09-14 子のRSSを出力する
+		$object->setIsOutputChildFeed(true);
 		
 		$object->save();
 		
@@ -256,7 +259,7 @@ class InitEntryLogic extends SOY2LogicBase{
 			"_default/",
 			"_default/",
 			"_blank/"
-		); 
+		);
 		$template = $templates[$type];
 		
 		
@@ -340,7 +343,7 @@ class InitEntryLogic extends SOY2LogicBase{
 			
 			
 				
-			}	
+			}
 		}
 			
 	}

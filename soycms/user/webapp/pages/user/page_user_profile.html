@@ -1,0 +1,141 @@
+<div id="main-window1" class="main-window">
+	
+<div class="window-title">
+	<h2 class="title-text">プロフィール変更</h2>
+</div>
+
+<div class="window-content content">
+<div id="main-section1" class="section">
+		
+		<form soy:id="detail_form">
+		
+		<div class="form-section">
+			<div class="label">
+				<h4><label for="post1-1">ユーザーID</label></h4>
+			</div>
+			<div class="item">
+				<p>
+					<input name="post1-1" type="text" class="xm-area" value="" size="50" soy:id="user_id" />
+				</p>
+			</div>
+		</div>
+		
+		<div class="form-section">
+			<div class="label">
+				<h4><label for="post1-4">ユーザー名</label></h4>
+			</div>
+			<div class="item">
+				<p>
+					<input name="post1-4" type="text" class="xm-area" value="" size="50" soy:id="user_name" />
+				</p>
+			</div>
+		</div>
+		
+		<div class="form-section">
+			<div class="label">
+				<h4><label for="post1-2">メールアドレス</label></h4>
+			</div>
+			<div class="item">
+				<p><input name="post1-2" type="text" class="xm-area" value="" size="50" soy:id="mail_address" /></p>
+			</div>
+		</div>
+		
+		<div class="form-section">
+			<div class="label">
+				<h4><label for="post1-2">リンク</label></h4>
+			</div>
+			<div class="item">
+				<table class="form-table">
+					<tr>
+						<th>リンク先テキスト</th>
+						<td>
+							<input class="s-area" soy:id="config_link_text" size="50" />
+						</td>
+					</tr>
+					<tr>
+						<th>リンク先URL</th>
+						<td>
+							<input class="s-area" soy:id="config_link_url" size="70" />
+						</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+		
+		<div class="form-btn ce">
+			<input class="l-btn" type="submit" value="更新" id="post1-btn1" name="post1-btn1" />
+		</div>
+			
+		</form soy:id="detail_form">
+</div>
+</div>
+
+</div><!-- //#main-window1 -->
+
+<div id="main-window2" class="main-window">
+
+<div class="window-title">
+	<h2 class="title-text">パスワードを変更する</h2>
+</div>
+
+<div class="window-content content">
+<div id="main-section1" class="section">
+	
+		<a name="password_form"></a>
+		
+		<!-- soy:id="passwrod_error" -->
+		
+		<p class="intro xl">入力内容を確認してください</p>
+		<script type="text/javascript">
+		$(window).scrollTop($('#main-window2').offset().top);
+		</script>
+		<!-- /soy:id="passwrod_error" -->
+		
+		<form soy:id="password_form">
+		
+		<!-- 
+		<div class="form-section">
+			<div class="label">
+				<h4><label for="post1-1">古いパスワード</label></h4>
+			</div>
+			<div class="item">
+				<p>
+					<input  soy:id="old_password" type="text" class="m-area" value="" size="50" />
+				</p>
+			</div>
+		</div>
+		-->
+		
+		<div class="form-section">
+			<div class="label">
+				<h4><label for="post1-1">新しいパスワード</label></h4>
+			</div>
+			<div class="item">
+				<p class="intro">4文字以上</p>
+				<p>
+					<input soy:id="new_password" type="text" class="m-area" value="" size="50" />
+				</p>
+			</div>
+		</div>
+		
+		<div class="form-section">
+			<div class="label">
+				<h4><label for="post1-1">新しいパスワード(確認)</label></h4>
+			</div>
+			<div class="item">
+				<p>
+					<input soy:id="new_password_confirm" type="text" class="m-area" value="" size="50" />
+				</p>
+			</div>
+		</div>
+		
+		
+		<div class="form-btn ce">
+			<input class="l-btn" type="submit" value="パスワードを変更する" id="post1-btn1" name="update_password" />
+		</div>
+			
+		</form soy:id="password_form">
+</div>
+</div>
+
+</div><!-- //#main-window2 -->

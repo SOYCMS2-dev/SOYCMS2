@@ -94,7 +94,8 @@ class SOYCMS_ListPageBase extends SOYCMS_SitePageBase{
 			}
 			
 			if($this->label){
-				$pagerUrl = soycms_get_page_url($page->getParentDirectoryUri(),$this->label->getAlias()) . "/";
+				$pagerUrl = soycms_get_page_url($page->getParentDirectoryUri(),$this->label->getAlias());
+				if($pagerUrl[strlen($pagerUrl)-1] != "/")$pagerUrl .= "/";
 			}
 		}
 		

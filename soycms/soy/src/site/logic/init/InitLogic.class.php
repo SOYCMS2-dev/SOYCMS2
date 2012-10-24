@@ -260,7 +260,7 @@ class InitLogic extends SOY2LogicBase{
 		if(is_numeric($config["template"])){
 			$this->generatePages($site,$config);
 			$this->generateEntries($site,$config);
-			$this->generateBlocks($site,$config);	
+			$this->generateBlocks($site,$config);
 		}
 		
 		$this->initPlugins($site,$config);
@@ -388,6 +388,7 @@ class InitLogic extends SOY2LogicBase{
 		$tmp[] = "RewriteCond %{REQUEST_FILENAME}/index.html !-f";
 		$tmp[] = "RewriteCond %{REQUEST_FILENAME}/index.htm !-f";
 		$tmp[] = "RewriteCond %{REQUEST_URI} !/index.php/";
+		$tmp[] = "RewriteCond %{REQUEST_URI} !.(jpg|png|jpeg|gif|css|js)$";
 		$tmp[] = 'RewriteRule ^(.*)$ index.php?soycms_pathinfo=$1 [QSA,L]';
 		
 		file_put_contents($siteDirectory.".htaccess", implode("\n",$tmp));
@@ -424,7 +425,7 @@ class InitLogic extends SOY2LogicBase{
 			soy2_copy($iconDir . $file, $targetDir . $file);
 		}
 		
-		return true;	
+		return true;
 	}
 	
 	/**
@@ -570,7 +571,7 @@ class InitLogic extends SOY2LogicBase{
 		
 		$plugins = array(
 			"soycms_simple_search",
-			"soycms_simple_form", 
+			"soycms_simple_form",
 			"soycms_common_parts",
 			"soycms_entry_thumbnail_field",
 			

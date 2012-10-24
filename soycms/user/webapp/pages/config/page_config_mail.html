@@ -1,0 +1,94 @@
+<div id="main-window1" class="main-window"> 
+					
+	<div class="window-title"> 
+		<h2>メールの設定</h2>
+	</div>
+	<div class="window-content">
+		<div class="section">
+			
+			<ul class="crumbs">
+				<li><a soy:link="./" title="管理画面トップ" class="home_btn">管理画面トップ</a></li>
+				<li><a soy:link="">ユーザ管理</a></li>
+				<li><a soy:link="config">設定</a></li>
+				<li>メール設定</li>
+			</ul>
+			
+			<div class="content">
+				<form soy:id="form">
+					
+					<!-- soy:id="group_list" -->
+					<div class="form-section">
+						<div class="label">
+							<h3><!-- soy:id="group_name" /-->のメール設定</h3>
+						</div>
+						<div class="item">
+							<div class="form-section">
+								<div class="label">
+									<h4><!-- soy:id="group_name*" /--> 仮登録メール</h4>
+								</div>
+								<div class="item">
+									<p class="break"><span>件名: </span><input soy:id="register_mail_title" type="text" class="m-area" size="50" /></p>
+									<textarea soy:id="register_mail" class="m-area liq-area resiable" rows="5"></textarea>
+								</div>
+							</div>
+							
+							<div class="form-section">
+								<div class="label">
+									<h4><!-- soy:id="group_name*" /--> 登録完了メール</h4>
+								</div>
+								<div class="item">
+									<p class="break"><span>件名: </span><input soy:id="complete_mail_title" type="text" class="m-area" size="50" /></p>
+									<textarea soy:id="complete_mail" class="m-area liq-area resiable" rows="5"></textarea>
+								</div>
+							</div>
+							
+							<div class="form-section">
+								<div class="label">
+									<h4><!-- soy:id="group_name*" /--> 退会完了メール</h4>
+								</div>
+								<div class="item">
+									<p class="break"><span>件名: </span><input soy:id="withdraw_mail_title" type="text" class="m-area" size="50" /></p>
+									<textarea soy:id="withdraw_mail" class="m-area liq-area resiable" rows="5"></textarea>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- /soy:id="group_list" -->
+					
+					<div class="form-section">
+						<div class="label">
+							<h3>管理側メール</h3>
+						</div>
+						<div class="item">
+							<div class="form-section">
+								<div class="label">
+									<h4>登録通知メール</h4>
+								</div>
+								<div class="item">
+									<p class="break"><span>件名: </span><input soy:id="register_notify_mail_title" type="text" class="m-area" size="50" /></p>
+									<textarea soy:id="register_notify_mail" class="m-area liq-area resiable" rows="5"></textarea>
+								</div>
+							</div>
+							
+							<div class="form-section">
+								<div class="label">
+									<h4>退会通知メール</h4>
+								</div>
+								<div class="item">
+									<p class="break"><span>件名: </span><input soy:id="withdraw_notify_mail_title" type="text" class="m-area" size="50" /></p>
+									<textarea soy:id="withdraw_notify_mail" class="m-area liq-area resiable" rows="5"></textarea>
+								</div>
+							</div>
+						</div>
+					</div>
+					
+					<div class="form-btn ce">
+						<input type="submit" value="保存" class="l-btn" />
+					</div>
+				</form>
+			</div><!-- // .content -->
+		</div>
+		
+		
+	</div><!-- //.section -->
+</div>

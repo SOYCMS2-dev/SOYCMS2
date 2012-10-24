@@ -1,0 +1,57 @@
+<div id="main-window1" class="main-window">
+	
+<div class="window-title">
+	<h2 class="title-m-area">新しいグループの追加</h2>
+</div>
+
+<div class="window-content">
+<div id="main-section1" class="section">
+	
+	<div class="pagelist-menu"> 
+		<ul> 
+			<li class="back"><a soy:link="group">戻る</a></li> 
+		</ul> 
+	</div>
+	
+	<div class="title">
+		<h3>グループ追加</h3>
+	</div>
+	<div class="content">
+		<form soy:id="create_form">
+					
+		<table class="form-table">
+			<tr>
+				<th>グループID</th>
+				<td>
+					<input soy:id="group_id" type="text" class="m-area" size="5" />
+				</td>
+			</tr>
+			<th>グループ名</th>
+			<td>
+				<input soy:id="group_name" type="text" class="m-area" size="45" />
+			</td>
+			</tr>
+			<tr>
+				<th>グループ説明</th>
+				<td>
+					<textarea soy:id="group_description" class="m-area liq-area"></textarea>
+				</td>
+			</tr>
+		</table>
+		
+		
+		<div class="form-btn ce"> 
+			<p class="lbreak">
+				<input type="submit" value="追加" class="l-btn" />
+			</p>
+		</div>
+		
+		</form>
+			</div>
+
+</div><!-- //.section -->
+		
+</div><!-- //.window-content -->
+</div><!-- //.main-window -->
+
+

@@ -5,8 +5,8 @@
 				</div>
 
 	<!--
-	<div class="label"> 
-		<h4>インデックスのURI</h4> 
+	<div class="label">
+		<h4>インデックスのURI</h4>
 	</div>
 	<div class="item">
 		<input type="text" class="s-area" size="30" soy:id="index_uri" />
@@ -45,7 +45,7 @@
 
 					<div class="cfg-menu-2">
 						<ul class="radio-list">
-							<li class="li0"><input soy:id="url_type_0" type="radio" value="0" name="entry-cfg" id="entry-cfg-0" checked="checked" /> 
+							<li class="li0"><input soy:id="url_type_0" type="radio" value="0" name="entry-cfg" id="entry-cfg-0" checked="checked" />
 								<label for="entry-cfg-0"><strong>固定(entry.html)</strong></label>
 								<!-- soy:id="page_url" /--><strong>entry.html</strong>
 							</li>
@@ -128,6 +128,9 @@
 							<label for="is_output_feed">フィードを出力する</label>： <input soy:id="is_output_feed" type="checkbox" value="1" name="feed-public-cfg" id="feed-public-cfg1" checked="checked" />
 						</p>
 						<p>
+							<label for="is_output_child_feed">下層ディレクトリのフィードを含む</label>： <input soy:id="is_output_child_feed" type="checkbox" value="1" name="feed-public-cfg" checked="checked" />
+						</p>
+						<p>
 						フィードに出力する記事数： <input soy:id="feed_entry_count" type="text" class="m-area" style="width:40px;" /> 件
 						</p>
 					</div><!--  // .cfg-menu-2 -->
@@ -146,7 +149,7 @@
 
 					<div class="cfg-menu-2">
 						<div class="content">
-						<p><span class="h4">RSS1.0</span> <label for="feed-rdf-output">フィードを出力する</label>： 
+						<p><span class="h4">RSS1.0</span> <label for="feed-rdf-output">フィードを出力する</label>：
 							<input soy:id="rdf_output" name="feed-output" type="checkbox" id="rss1" value="rss1" checked="checked" />
 						</p>
 						<table class="form-table break" style="width:500px;">
@@ -179,14 +182,14 @@
 							</tr>
 						</table>
 						<hr style="color:#CCC; background-color:#CCC;" />
-						<p><span class="h4">RSS2.0</span> <label for="feed-rss-output">フィードを出力する</label>： 
+						<p><span class="h4">RSS2.0</span> <label for="feed-rss-output">フィードを出力する</label>：
 							<input soy:id="rss_output" name="feed-output" type="checkbox" id="rss2" value="rss1" checked="checked" />
 						</p>
 						<table class="form-table break" style="width:500px;">
 							
-							<tr> 
-								<th scope="row">URL</th> 
-								<td><span style="font-size: 10px;"><!-- soy:id="page_url" /--></span> <input soy:id="rss_uri" type="text" class="s-area " style="width:70px;" /></td> 
+							<tr>
+								<th scope="row">URL</th>
+								<td><span style="font-size: 10px;"><!-- soy:id="page_url" /--></span> <input soy:id="rss_uri" type="text" class="s-area " style="width:70px;" /></td>
 							</tr>
 							<tr>
 								<th scope="row">タイトル</th>
@@ -195,12 +198,12 @@
 							<tr>
 								<th scope="row">要約設定</th>
 								<td>
-										<input soy:id="rss_output_excerpt" type="radio" value="1" id="feed-rss2-cfg1" /> 
+										<input soy:id="rss_output_excerpt" type="radio" value="1" id="feed-rss2-cfg1" />
 										<span style="margin-right: 4px;"><label for="feed-rss-cfg1"><strong>要約を出力</strong></label> (先頭
-									<input  soy:id="rss_excerpt_size" type="text" class="s-area" style="width:30px;" /> 
+									<input  soy:id="rss_excerpt_size" type="text" class="s-area" style="width:30px;" />
 									文字)</span>
 										
-										<input soy:id="rss_output_all" type="radio" id="feed-rss-cfg2" /> 
+										<input soy:id="rss_output_all" type="radio" id="feed-rss-cfg2" />
 										<span style="margin-right: 4px;">
 										<label for="feed-rss-cfg2"><strong>全文を出力</strong></label></span>
 										<span><a soy:id="rss_url"class="s-btn" target="_blank">URL確認</a></span>
@@ -212,7 +215,7 @@
 							</tr>
 						</table>
 						<hr style="color:#CCC; background-color:#CCC;" />
-						<p><span class="h4">Atom</span> <label for="feed-atom-output">フィードを出力する</label>： 
+						<p><span class="h4">Atom</span> <label for="feed-atom-output">フィードを出力する</label>：
 							<input soy:id="atom_output" name="feed-output" type="checkbox" id="atom" value="atom1" checked="checked" />
 						</p>
 						<table class="form-table break" style="width:500px;">
@@ -251,8 +254,8 @@
 
 
 
-			<div class="form-btn ce"> 
-				<input type="submit" value="設定する" id="post1-submit" name="save_basic" class="l-btn" /> 
+			<div class="form-btn ce">
+				<input type="submit" value="設定する" id="post1-submit" name="save_basic" class="l-btn" />
 			</div>
 
 

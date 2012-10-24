@@ -15,12 +15,12 @@ class DetailPageFormPage extends HTMLPage{
 	
 	function main(){
 		$this->addLabel("page_url",array(
-			"text" => $this->getUrl() 
+			"text" => $this->getUrl()
 		));
 		
 		$this->addInput("default_title",array(
 			"name" => "object[defaultTitle]",
-			"value" => $this->obj->getDefaultTitle() 
+			"value" => $this->obj->getDefaultTitle()
 		));
 		
 		$this->addInput("index_uri",array(
@@ -50,6 +50,13 @@ class DetailPageFormPage extends HTMLPage{
 			"value" => 1,
 			"isBoolean" => true,
 			"selected" => $this->obj->getIsOutputFeed()
+		));
+		$this->addCheckbox("is_output_child_feed",array(
+			"elementId" => "is_output_child_feed",
+			"name" => "object[isOutputChildFeed]",
+			"value" => 1,
+			"isBoolean" => true,
+			"selected" => $this->obj->getIsOutputChildFeed()
 		));
 		
 		$this->addInput("feed_entry_count",array(

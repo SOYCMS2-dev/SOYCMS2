@@ -16,9 +16,15 @@ class SOYCMS_GoogleSoiteMapXMLConfigPage extends SOYCMS_SitePageExtension{
 	function doPost(){
 		
 		//generate
-		$this->generate(@$_POST["urlset"]);
-		
-		SOY2PageController::redirect(soycms_create_link("/ext/soycms_google_sitemap?created"));
+		if(isset($_POST["urlset"])){
+			$this->generate($_POST["urlset"]);
+			
+			SOY2PageController::redirect(soycms_create_link("/ext/soycms_google_sitemap?created"));
+		}else{
+			$this->generate($this->getConfigure());
+			
+			SOY2PageController::redirect(soycms_create_link("/ext/soycms_google_sitemap?updated"));
+		}
 	}
 	
 	/**
@@ -26,11 +32,32 @@ class SOYCMS_GoogleSoiteMapXMLConfigPage extends SOYCMS_SitePageExtension{
 	 */
 	function getPage(){
 		
+		$config = $this->getConfigure();
+		
 		ob_start();
 		include(dirname(__FILE__) . "/form.php");
 		$html = ob_get_contents();
 		ob_end_clean();
 		return $html;
+	}
+	
+	function getConfigure(){
+		$config = array();
+		
+		if(file_exists(SOYCMS_SITE_DIRECTORY . ".plugin/sitemap.conf")){
+			$config = soy2_unserialize(file_get_contents(SOYCMS_SITE_DIRECTORY . ".plugin/sitemap.conf"));
+			
+		//XMLファイルを確認
+		}else if(file_exists(SOYCMS_SITE_DIRECTORY . "sitemap.xml")){
+			$xml = simplexml_load_file(SOYCMS_SITE_DIRECTORY . "sitemap.xml");
+			$urlset = $xml->children("http://www.sitemaps.org/schemas/sitemap/0.9");
+			
+			foreach($urlset->url as $url){
+				$config[(string)$url->loc] = $url;
+			}
+		}
+		
+		return $config;
 	}
 	
 	function generate($config){

@@ -9,9 +9,9 @@
 <form soy:id="form">
 	
 <div class="section">
-	<div class="pagelist-menu"> 
-		<ul> 
-			<li class="back"><a soy:link="page/field">カスタムフィールド管理に戻る</a></li> 
+	<div class="pagelist-menu">
+		<ul>
+			<li class="back"><a soy:link="page/field">カスタムフィールド管理に戻る</a></li>
 		</ul>
 	</div>
 	
@@ -28,33 +28,33 @@
 					<select soy:id="field_type_select"></select>
 				</td>
 			</tr>
-			<tr> 
-				<th scope="row">項目ID</th> 
+			<tr>
+				<th scope="row">項目ID</th>
 				<td>
-					<span class="xxl" soy:id="field_id_text">*************</span>	
+					<span class="xxl" soy:id="field_id_text">*************</span>
 				</td>
 			</tr>
-			<tr> 
-				<th scope="row">項目名</th> 
+			<tr>
+				<th scope="row">項目名</th>
 				<td>
-					<input soy:id="field_name" type="text" class="m-area" size="40" value="サムネイル" />	
+					<input soy:id="field_name" type="text" class="m-area" size="40" value="サムネイル" />
 				</td>
 			</tr>
-			<tr> 
-				<th scope="row">ラベル</th> 
+			<tr>
+				<th scope="row">ラベル</th>
 				<td>
-					<input soy:id="field_label" type="text" class="m-area" size="40" value="サムネイル" />	
+					<input soy:id="field_label" type="text" class="m-area" size="40" value="サムネイル" />
 				</td>
 			</tr>
-			<tr> 
-				<th scope="row">項目の説明</th> 
+			<tr>
+				<th scope="row">項目の説明</th>
 				<td>
-					<textarea soy:id="field_description" class="m-area" cols="40"></textarea>	
+					<textarea soy:id="field_description" class="m-area resizable" cols="40"></textarea>
 				</td>
 			</tr>
 			<!-- soy:id="allow_multi" -->
-			<tr>	 
-				<th scope="row">複数設定</th> 
+			<tr>
+				<th scope="row">複数設定</th>
 				<td>
 					<p class="intro">
 						<input type="checkbox" soy:id="field_multi" id="field_multi" /> <label for="field_multi">この項目の複数追加を可能にする</label>
@@ -68,28 +68,28 @@
 			
 			<!-- soy:id="has_option" -->
 			<tr>
-				<th scope="row">オプション</th> 
+				<th scope="row">オプション</th>
 				<td>
 					<p class="intro">項目を改行して入力してください</p>
-					<textarea soy:id="field_option" type="text" value="" rows="5" class="m-area liq-area"></textarea>
-				</td> 
+					<textarea soy:id="field_option" type="text" value="" rows="5" class="m-area liq-area resizable"></textarea>
+				</td>
 			</tr>
 			<!-- /soy:id="has_option" -->
 			
 			<!-- soy:id="is_not_group" -->
 			<tr>
-				<th scope="row">初期値</th> 
+				<th scope="row">初期値</th>
 				<td>
 					<input soy:id="field_default_value" type="text" value="" class="s-area liq-area" />
 					<textarea soy:id="field_default_text" class="m-area liq-area" rows="5"></textarea>
-				</td> 
+				</td>
 			</tr>
 			<!-- /soy:id="is_not_group" -->
 			
-			<?php /* 
+			<?php /*
 			<!-- soy:id="has_template" -->
 			<tr>
-				<th scope="row">テンプレート</th> 
+				<th scope="row">テンプレート</th>
 				<td>
 					<input type="checkbox" soy:id="field_template_check" />
 					<div id="field_template_config" style="display:none;">
@@ -106,7 +106,7 @@
 						);
 					});
 					</script>
-				</td> 
+				</td>
 			</tr>
 			<!-- /soy:id="has_template" -->
 			*/ ?>
@@ -134,63 +134,63 @@
 		
 		<p class="fr">
 			<a class="popup-btn s-btn" href="#field_order">表示順を変更する</a>
-		</p> 
-	</div>	
-	<div class="content"> 
+		</p>
+	</div>
+	<div class="content">
 		<!-- soy:id="field_list" -->
 			<h4><!-- soy:id="list_field_name" -->hoge<!-- /soy:id="list_field_name" --> - (<!-- soy:id="list_field_id*" /-->)</h4>
 			
 			<div soy:id="column_config">
 			<form soy:id="config_form">
 				
-				<table class="form-table"> 
-					<tr> 
-						<th scope="row">種別</label></th> 
+				<table class="form-table">
+					<tr>
+						<th scope="row">種別</label></th>
 						<td>
 							<select soy:id="child_field_type_select"></select>
 						</td>
 					</tr>
 					
 					<tr>
-						<th scope="row">項目ID</th> 
+						<th scope="row">項目ID</th>
 						<td>
 							<input soy:id="field_id_old" type="hidden" />
 							<input soy:id="field_id" type="text" id="post1-1" name="post1-1" value="" class="s-area liq-area" />
 						</td>
 					</tr>
 					<tr>
-						<th scope="row">名前</th> 
+						<th scope="row">名前</th>
 						<td>
 							<input soy:id="field_name" type="text" value="" class="s-area liq-area" />
-						</td> 
+						</td>
 					</tr>
 					<tr>
-						<th scope="row">ラベル</th> 
+						<th scope="row">ラベル</th>
 						<td>
 							<input soy:id="field_label" type="text" value="" class="s-area liq-area" />
-						</td> 
+						</td>
 					</tr>
-					<tr>	 
-						<th scope="row">説明</th> 
+					<tr>
+						<th scope="row">説明</th>
 						<td>
-							<textarea class="m-area liq-area" soy:id="field_description" rows="3"></textarea>
-						</td> 
+							<textarea class="m-area liq-area resizable" soy:id="field_description" rows="3"></textarea>
+						</td>
 					</tr>
 					
 					<!-- soy:id="has_option" -->
 					<tr>
-						<th scope="row">オプション</th> 
+						<th scope="row">オプション</th>
 						<td>
-							<textarea soy:id="field_option" type="text" value="" class="s-area liq-area"></textarea>
-						</td> 
+							<textarea soy:id="field_option" type="text" value="" class="s-area liq-area resizable"></textarea>
+						</td>
 					</tr>
 					<!-- /soy:id="has_option" -->
 					
 					<tr>
-						<th scope="row">初期値</th> 
+						<th scope="row">初期値</th>
 						<td>
 							<input soy:id="field_default_value" type="text" value="" class="s-area liq-area" />
-						</td> 
+						</td>
 					</tr>
 				</table>
 				
@@ -211,9 +211,9 @@
 				</div>
 				
 				<table class="list-table">
-					<thead> 
+					<thead>
 						<tr>
-							<th scope="col" width="13%">種別</th> 
+							<th scope="col" width="13%">種別</th>
 							<th scope="col">項目ID</th>
 							<th scope="col">ラベル</th>
 							<th width="13%;" scope="col">表示順</th>
@@ -233,7 +233,7 @@
 						</td>
 						<td class="ce">
 							<input type="hidden" soy:id="order_input" />
-							<input type="button" value="▲" id="post1-btn3" name="post1-btn3" class="s-btn up_btn" /> 
+							<input type="button" value="▲" id="post1-btn3" name="post1-btn3" class="s-btn up_btn" />
 							<input type="button" value="▼" id="post1-btn3" name="post1-btn3" class="s-btn down_btn" />
 						</td>
 					</tr>
@@ -250,36 +250,36 @@
 		
 	</div><!-- // .content -->
 	
-	<div class="title"> 
-		<h3>新しい項目の追加</h3> 
-	</div>	
+	<div class="title">
+		<h3>新しい項目の追加</h3>
+	</div>
 	<div class="content">
 		
 	
-	<form soy:id="add_form"> 
+	<form soy:id="add_form">
 				
-		<div class="form-section"> 
+		<div class="form-section">
 			
-			<table class="form-table"> 
-				<tr> 
-					<th scope="row">種別</th> 
+			<table class="form-table">
+				<tr>
+					<th scope="row">種別</th>
 					<td>
 						<select soy:id="new_field_type_select"></select>
 					</td>
 				</tr>
 				<tr>
-					<th scope="row">項目ID</th> 
-					<td><input name="NewField[fieldId]" class="s-area liq-area" /></td> 
+					<th scope="row">項目ID</th>
+					<td><input name="NewField[fieldId]" class="s-area liq-area" /></td>
 				</tr>
 				<tr>
-					<th scope="row">フィールド名</th> 
-					<td><input name="NewField[name]" value="" class="s-area liq-area" /></td> 
-				</tr> 
+					<th scope="row">フィールド名</th>
+					<td><input name="NewField[name]" value="" class="s-area liq-area" /></td>
+				</tr>
 			</table>
 			
-			<div class="form-btn ce"> 
-				<input type="submit" value="追加" id="post1-submit" name="add" class="m-btn" /> 
-			</div> 
+			<div class="form-btn ce">
+				<input type="submit" value="追加" id="post1-submit" name="add" class="m-btn" />
+			</div>
 		</div>
 		
 	</form>

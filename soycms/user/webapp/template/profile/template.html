@@ -1,0 +1,28 @@
+<div>
+	<h3>プロフィール変更</h3>
+	
+	<form cms:id="profile_form">
+		<dl>
+			<dt>名前</dt>
+			<dd>
+				<input cms:id="profile_user_name" type="text" class="m-area" />
+				<a cms:id="profile_link">確認</a>
+			</dd>
+			<dt>プロフィール画像</dt>
+			<dd>
+				<a cms:id="profile_link"><img cms:id="profile_user_image" /></a>
+				<input type="file" name="profile_image" />
+			</dd>
+		</dl>
+		
+		<!-- cms:id="ext_field_form" -->
+		拡張
+		<!-- /cms:id="ext_field_form" -->
+	
+		<p class="ce">
+			<input type="submit" name="save" value="変更" />
+		</p>
+	
+	</form cms:id="profile_form">
+	
+</div>

@@ -78,11 +78,12 @@ class SOYCMS_ObjectCustomField extends SOY2DAO_EntityBase{
 				$obj->setText($value);
 				$dao->insert($obj);
 			}else{
-				$obj->setValue($value);
+				$obj->setValue($value,$configs[$key]);
 				$obj->setText($value);
 				$dao->insert($obj);
 			}
 		}
+		
 	}
 	
 	/**
@@ -197,7 +198,7 @@ class SOYCMS_ObjectCustomField extends SOY2DAO_EntityBase{
 	function getValue() {
 		return $this->value;
 	}
-	function setValue($value) {
+	function setValue($value, $config = null) {
 		if($value instanceof SOYCMS_ObjectCustomField){
 			$value = $value->getValue();
 		}
@@ -219,6 +220,17 @@ class SOYCMS_ObjectCustomField extends SOY2DAO_EntityBase{
 				$value = strtotime($value);
 			}else{
 				$value = null;
+			}
+		}
+		
+		if($this->type == "select" && $config){
+			$options = $config->getOptionsArray();
+			foreach($options as $key => $option){
+				if($key == $value || $option == $value){
+					$this->setValue($key);
+					$this->setText($option);
+					return;
+				}
 			}
 		}
 		
@@ -247,9 +259,10 @@ class SOYCMS_ObjectCustomField extends SOY2DAO_EntityBase{
 				
 				$_valueObj = new SOYCMS_ObjectCustomField();
 				$_valueObj->setType($config->getType());
-				$_valueObj->setValue($_value);
+				$_valueObj->setValue($_value, $config);
 				$value[$key] = $_valueObj;
 			}
+			
 		}
 		
 		if(is_array($value)){
@@ -545,6 +558,8 @@ class SOYCMS_ObjectCustomFieldConfig{
 			if(strlen($value) < 1)continue;
 			if(strpos($value,":")){
 				list($key,$value) = explode(":",$value);
+			}else{
+				$key = $value;
 			}
 			
 			$res[$key] = $value;

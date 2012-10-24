@@ -1,0 +1,43 @@
+<div id="main-window1" class="main-window"> 
+					
+	<div class="window-title"> 
+		<h2>グループ管理</h2>
+	</div>
+	<div class="window-content">
+		
+		<div class="section">
+			
+			<div class="pagelist-menu"> 
+				<ul> 
+					<li class="edit"><a soy:link="group/create">新しいグループの登録</a></li>
+				</ul> 
+			</div>
+			
+			<div class="title">
+				<h3>グループ一覧</h3>
+			</div>
+			<div class="content">
+				
+				<table class="list-table">
+					<thead>
+						<tr>
+							<th>グループID</th>
+							<th>名称</th>
+							<th width="50">設定</th>
+						</tr>
+					</thead>
+					<tbody>
+						<!-- soy:id="group_list" -->
+						<tr>
+							<td soy:id="group_id">グループID</td>
+							<td><!-- soy:id="group_name" /--></td>
+							<td class="ce"><a soy:id="detail_link" class="s-btn">設定</a></td>
+						</tr>
+						<!-- /soy:id="group_list" -->
+					</tbody>
+				</table>
+			</div>
+		</div>
+		
+	</div>
+</div>

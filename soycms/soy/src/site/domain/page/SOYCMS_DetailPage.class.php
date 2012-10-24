@@ -7,6 +7,7 @@ class SOYCMS_DetailPage extends SOYCMS_PageBase{
 	private $urlTypeOption = "";
 	
 	private $isOutputFeed = true;
+	private $isOutputChildFeed = false;
 	private $feedEntryCount = 10;
 	
 	private $feedRDF = array(
@@ -205,7 +206,7 @@ class SOYCMS_DetailPage extends SOYCMS_PageBase{
 			
 			if(isset($mapping[$uri]) && $page->getId() && $mapping[$uri] != $page->getId()){
 				throw new Exception("");
-			} 
+			}
 		}
 		
 		
@@ -329,6 +330,15 @@ class SOYCMS_DetailPage extends SOYCMS_PageBase{
 	}
 	function setIndexUri($indexUri) {
 		$this->indexUri = $indexUri;
+	}
+
+	public function getIsOutputChildFeed(){
+		return $this->isOutputChildFeed;
+	}
+
+	public function setIsOutputChildFeed($isOutputChildFeed){
+		$this->isOutputChildFeed = $isOutputChildFeed;
+		return $this;
 	}
 }
 ?>

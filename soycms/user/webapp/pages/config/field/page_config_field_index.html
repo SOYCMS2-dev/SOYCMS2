@@ -1,0 +1,86 @@
+<div id="main-window1" class="main-window">
+	
+<div class="window-title">
+	<h2 class="title-text">カスタムフィールド管理</h2>
+</div>
+
+<div class="window-content">
+		
+	<div class="section">
+
+		<ul class="crumbs">
+			<li><a soy:link="./" title="管理画面トップ" class="home_btn">管理画面トップ</a></li>
+			<li><a soy:link="">ユーザ管理</a></li>
+			<li><a soy:link="config">設定</a></li>
+			<li>カスタムフィールド管理</li>
+		</ul>
+
+		
+		<div class="pagelist-menu"> 
+			<ul> 
+				<li class="plus-btn"><a soy:link="config/field/create">カスタムフィールド項目の追加</a></li> 
+			</ul>
+		</div>
+	
+		<div class="title">
+			<h3>カスタムフィールド</h3>
+		</div>
+		<div class="content">
+			
+			<form soy:id="form">
+			
+			<div class="under form-btn ce save_order_wrap" style="display:none;">
+				<input type="submit" class="m-btn-red" name="save_order" value="表示順を保存" />
+			</div>
+			
+			<table class="list-table break">
+				<thead>
+				<tr>
+					<th>項目名</th>
+					<th>項目ID</th>
+					<th>タイプ</th>
+					<th>使用中</th>
+					<th>表示順</th>
+					<th>操作</th>
+				</tr>
+				</thead>
+				<tbody>
+					<!-- soy:id="field_list" -->
+					<tr>
+						<td><!-- soy:id="list_field_name" /--></td>
+						<td><!-- soy:id="list_field_id" /--></td>
+						<td><!-- soy:id="list_field_type" /--></td>
+						<td>
+							<!-- soy:id="list_field_directories" /-->
+						</td>
+						<td>
+							<input type="hidden" soy:id="order_input" />
+							<input type="button" value="▲" class="s-btn up_btn" /> 
+							<input type="button" value="▼" class="s-btn down_btn" />
+						</td>
+						<td>
+							<a soy:id="field_detail_link">詳細</a>
+							<a class="s-btn fr" soy:id="field_remove_link">削除</a>
+						</td>
+					</tr>
+					<!-- /soy:id="field_list" -->
+				</tbody>
+			</table>
+			
+			<p class="under ce">
+				<a class="s-btn" onclick="return common_open_popup($(this).attr('href'));" soy:link="page/field/code"><em>テンプレート用HTML生成</em></a>
+			</p>
+			
+			<div class="under form-btn ce save_order_wrap" style="display:none;">
+				<input type="submit" class="m-btn-red" name="save_order" value="表示順を保存" />
+			</div>
+			
+			</form>
+				
+		</div><!-- // .content -->
+	</div><!-- // .section -->
+	
+
+</div><!-- // .window-content -->
+
+</div><!-- // .main-window -->

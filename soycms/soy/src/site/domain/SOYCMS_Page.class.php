@@ -438,9 +438,12 @@ class SOYCMS_Page extends SOY2DAO_EntityBase{
 		if(empty($this->object)){
 			$filepath = $this->getConfigFilePath();
 			if(file_exists($filepath)){
-				$plain = @parse_ini_file($filepath,true);
+				$plain = parse_ini_file($filepath,true);
 				if($plain !== false){
 					$this->object = SOY2::cast($this->getPageObjectClassName(),(object)$plain);
+				}else{
+					$class = $this->getPageObjectClassName();
+					$this->object = new $class();
 				}
 			}else{
 				$class = $this->getPageObjectClassName();

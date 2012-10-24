@@ -23,7 +23,8 @@
 					for (var i=0;i<z.length;i++){
 						var y
 						, zSaved = z[i]
-						, attrRE = /\=[a-zA-Z\.\:\[\]_\(\)\&\$\%#\@\!0-9\-]+[?\s+|?>]/g;
+						, attrRE = /\=[a-zA-Z\.\:\[\]_\(\)\&\$\%#\@\!0-9\-]+[?\s+|?>]/g
+						, emptyAttrRE = /\s+\w+=""/;
 						z[i] = z[i].replace(/(<?\w+)|(<\/?\w+)\s/,function(a){return a.toLowerCase();});
 						y = z[i].match(attrRE);//deze match
 						if (y){
@@ -43,6 +44,16 @@
 								j++;
 							}
 						}
+						
+						y = z[i].match(emptyAttrRE);
+						if(y){
+							var j = 0,len = y.length
+							while(j<len){
+								z[i] = z[i].replace(y[j], "");
+								j++
+							}
+						}
+						
 						zz = zz.replace(zSaved,z[i]);
 					}
 				}

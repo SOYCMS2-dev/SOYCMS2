@@ -25,7 +25,7 @@ class SOYCMS_EntryThumbnailField extends SOYCMS_EntryCustomFieldBase{
 		$html .= '<input type="hidden" name="soycms_entry_thumbnail_field[enabled]" value="0" />';
 				
 		$html .= '<div class="item">' .
-					'<input type="checkbox" name="soycms_entry_thumbnail_field[enabled]" onclick="$(\'#soycms_entry_thumbnail_wrap\').toggle($(this).attr(\'checked\'));" value="1" '.$checked.'/>' .
+					'<input type="checkbox" name="soycms_entry_thumbnail_field[enabled]" onclick="$(\'#soycms_entry_thumbnail_wrap\').toggle($(this).prop(\'checked\'));" value="1" '.$checked.'/>' .
 					'<label for="">サムネイルを設定する</label>' .
 					'</div>';
 		
@@ -36,7 +36,7 @@ class SOYCMS_EntryThumbnailField extends SOYCMS_EntryCustomFieldBase{
 				'<tr>' .
 					'<th>画像URL</th>' .
 					'<td><input type="text" id="soycms_thumbnail_input" class="s-area intro" size="40" name="soycms_entry_thumbnail_field[image]" value="'.htmlspecialchars($value["image"],ENT_QUOTES).'" /> ' .
-					'<span><input type="button" class="s-btn" value="参照" onclick="entry_editor_show_attachments(function(img,link){$(\'#soycms_thumbnail_input\').val(img);$(\'#soycms_thumbnail_img\').attr(\'src\',img)});" /></span>' . 
+					'<span><input type="button" class="s-btn" value="参照" onclick="entry_editor_show_attachments(function(img,link){$(\'#soycms_thumbnail_input\').val(img);$(\'#soycms_thumbnail_img\').attr(\'src\',img)});" /></span>' .
 					((strlen($value["image"])>0) ? '<br /><img id="soycms_thumbnail_img" src="'.htmlspecialchars($value["image"],ENT_QUOTES).'" />' : "") .
 					'</td>' .
 				'</tr>' .
@@ -63,7 +63,7 @@ class SOYCMS_EntryThumbnailField extends SOYCMS_EntryCustomFieldBase{
 	function doPost(SOYCMS_Entry $entry){
 		if(isset($_POST["soycms_entry_thumbnail_field"])){
 			if(isset($_POST["soycms_entry_thumbnail_field"]["image"]) &&
-			   isset($_POST["soycms_entry_thumbnail_field"]["text"]) 
+			   isset($_POST["soycms_entry_thumbnail_field"]["text"])
 			){
 				SOYCMS_EntryThumbnailFieldHelper::putValue($entry->getId(),$_POST["soycms_entry_thumbnail_field"]);
 			}

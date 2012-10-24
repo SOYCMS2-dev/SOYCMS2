@@ -355,18 +355,33 @@ class SOYCMS_PageLogic extends SOY2LogicBase{
 
 		$mapping = array();
 		$uriMapping = array();
+		$feedConfig = array();
+		
 		foreach($pages as $page){
 			$id = $page->getId();
 			$config = $page->getConfigObject();
+			$obj = $page->getPageObject();
+			
 			$mapping[$page->getId()] = array(
 				"id" => $id,
 				"type" => $page->getType(),
-				"uri" => $page->getUri(),
+				"uri" => $page->getUri() . "",
 				"name" => $page->getName(),
 				"order" => $config["order"]
 			);
-			
 			$uriMapping[$page->getUri()] = $page->getId();
+			
+			if($page->getType() == "detail"){
+				$feedConfig[$page->getId()] = array(
+					"output" => $obj->getIsOutputFeed(),
+					"child" => $obj->getIsOutputChildFeed()
+				);
+			}else{
+				$feedConfig[$page->getId()] = array(
+					"output" => true,
+					"child" => false
+				);
+			}
 		}
 		
 		//mappingを並べる
@@ -380,6 +395,7 @@ class SOYCMS_PageLogic extends SOY2LogicBase{
 		
 		//IDとURIのマッピングを保存
 		SOYCMS_DataSets::put("site.page_mapping",$mapping);
+		SOYCMS_DataSets::put("site.feed_config",$feedConfig);
 		SOYCMS_DataSets::put("site.url_mapping",$uriMapping);
 		
 		//treeを作成
@@ -391,11 +407,14 @@ class SOYCMS_PageLogic extends SOY2LogicBase{
 		
 		foreach($uriMapping as $uri => $id){
 			if(!isset($tree[$id]))$tree[$id] = array();
+			$uri = $uri . "";
 			foreach($uriMapping as $_uri => $_id){
-				if($_uri == $uri)continue;
+				$_uri = $_uri . "";
+				if($_uri === $uri)continue;
 				if($uri == "_home"){
 					$tree[$id][] = $_id;
 				}
+				
 				if(strpos($_uri,$uri) === 0 && $_uri[strlen($uri)] == "/"){
 					$tree[$id][] = $_id;
 				}

@@ -77,6 +77,20 @@ aobata_editor.insert_new_section = function(ele,_section,_snippet,_form){
 			editor.caret.select();
 		}
 		
+		var element = editor.caret.parent();
+		while(true){
+			if(element.nodeType != 3 /*Node.TEXT_NODE */){
+				break;
+			}
+			element = element.parentNode;
+		}
+		
+		if(!element.tagName.toLowerCase().match(/div|li|dt|dd/)){
+			var next = $("<span></span>");
+			next.insertAfter($(element));
+			editor.caret.move(next.get(0));
+		}
+
 		editor.insertHTML(html);
 		editor.adjustSize(true);
 		

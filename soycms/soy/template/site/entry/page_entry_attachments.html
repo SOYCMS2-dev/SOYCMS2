@@ -106,7 +106,6 @@ if(window.parent){
 <!-- /soy:id="is_action" -->
 <script type="text/javascript">
 var notify = function(d){
-	
 	$("#attachment_list").html($($(d).find("#attachment_list").html()));
 	$("#upload_file").val("");
 	
@@ -136,7 +135,7 @@ var notify = function(d){
 				var title = $(this).attr("title");
 				if (func) {
 					if(title == "image")title = img;
-					func(title, img);
+					func(img, title);
 				}
 			} catch (e) {
 			
