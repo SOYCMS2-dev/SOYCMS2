@@ -390,14 +390,6 @@ function advance_text_area(textarea){
 			}
 			textarea.insertTab(e);
 			return false;
-		}	
-		
-		if(e.keyCode == 13){
-			if(e.shiftKey || e.altKey){
-				return true;
-			}
-			textarea.insertTab(e, true);
-			return false;
 		}
 		
 		

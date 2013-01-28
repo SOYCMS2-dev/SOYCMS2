@@ -86,7 +86,7 @@ class page_page_field_create extends SOYCMS_WebPageBase{
 		));
 		$this->addInput("selected_page_value",array(
 			"name" => "type",
-			"value" => ($pageId) ? $page->getUri() : null
+			"value" => ($pageId) ? $page->getId() : "entry"
 		));
 	}
 }

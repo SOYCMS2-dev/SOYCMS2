@@ -8,6 +8,13 @@ class Plus_User extends SOY2DAO_EntityBase{
 		if(strlen($this->loginId)<4)return false;
 		if(!$this->updateDate)$this->createDate = time();
 		$this->updateDate = time();
+		
+		//profile url
+		if(preg_match("/https?:\/\//",$this->profileUrl)){
+			$res = parse_url($this->profileUrl);
+			$this->profileUrl = $res["path"];
+		}
+		
 		return true;
 	}
 	

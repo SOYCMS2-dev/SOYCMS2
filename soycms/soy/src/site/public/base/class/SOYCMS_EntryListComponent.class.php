@@ -96,7 +96,7 @@ class SOYCMS_EntryListComponent extends HTMLList{
 		));
 
 		$this->createAdd("title","HTMLLabel",array(
-			"html" => ($this->mode == "feed") ? htmlspecialchars($entity->getTitle()) : $entity->getTitle(),
+			"text" => $entity->getTitle(),
 			"soy2prefix" => "cms"
 		));
 		

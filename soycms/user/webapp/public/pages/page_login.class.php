@@ -104,10 +104,10 @@ class page_login extends PlusUserWebPageBase{
 			"link" => $this->config->getModulePageUrl("plus_user_connector.register")
 		));
 		
-		$this->addInput("remeber_login",array(
+		$this->addCheckbox("remember_login",array(
 			"name" => "autologin",
 			"value" => 1,
-			"attr:checked" => 1,
+			"selected" => true,
 			"soy2prefix" => "cms",
 		));
 	}

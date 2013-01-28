@@ -67,7 +67,7 @@ class page_menu_index extends SOYCMS_WebPageBase{
 	}
 
 	function page_menu_index($args = array()){
-		if(count($args)>0)$this->mode = $args[0];
+		if(count($args)>0 && isset($args[0]))$this->mode = $args[0];
 		if($this->mode == "remove"){
 			$menus = $this->getMenus();
 			unset($menus[$_GET["id"]]);

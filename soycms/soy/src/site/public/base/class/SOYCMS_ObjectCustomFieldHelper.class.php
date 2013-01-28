@@ -64,7 +64,8 @@ class SOYCMS_ObjectCustomFieldHelper {
 		$type = $field->getType();
 		$value = $field->getValue();
 		if(strlen($value)<1)$value = $field->getText();
-		if($type == "multi")$value = nl2br($value);
+		if($type == "input")$value = htmlspecialchars($value);
+		if($type == "multi")$value = nl2br(htmlspecialchars($value));
 		
 		//画像のみ
 		if($field->getType() == "image"){
@@ -72,7 +73,7 @@ class SOYCMS_ObjectCustomFieldHelper {
 			$src = @$array["src"];
 			$title = @$array["title"];
 			$alt = @$array["alt"];
-			$value = $src;
+			$value = htmlspecialchars($src,ENT_QUOTES);
 			$htmlObj->addImage($field->getFieldId() . "_image",array(
 				"src" => $value,
 				"attr:title" => $title,

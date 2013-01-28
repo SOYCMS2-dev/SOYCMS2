@@ -14,9 +14,9 @@
 		</ul>
 
 		
-		<div class="pagelist-menu"> 
-			<ul> 
-				<li class="plus-btn"><a soy:link="page/field/create">カスタムフィールド項目の追加</a></li> 
+		<div class="pagelist-menu">
+			<ul>
+				<li class="plus-btn"><a soy:link="page/field/create">カスタムフィールド項目の追加</a></li>
 			</ul>
 		</div>
 		
@@ -29,7 +29,7 @@
 				<ul>
 					<!-- soy:id="field_tree" -->
 					<li soy:id="page_list_wrap">
-						<dl> 
+						<dl>
 							<dt class="image">
 								<a soy:id="field_config_link">
 									<img soy:id="page_icon" style="width:32px;height:32px;" />
@@ -65,8 +65,8 @@
 		</div>
 
 
-		<div class="pagelist-menu"> 
-			<ul> 
+		<div class="pagelist-menu">
+			<ul>
 				<li class="plus-btn"><a soy:link="page/field/create?type=entry">カスタムフィールド項目の追加</a></li>
 				<li class="plus-btn"><a onclick="common_open_popup($(this).attr('href'),{onclose:function(){location.reload();}});return false;" soy:link="page/field/select">すべてのカスタムフィールド項目から追加</a></li>
 			</ul>
@@ -97,7 +97,7 @@
 						<td><!-- soy:id="list_field_type" /--></td>
 						<td>
 							<input type="hidden" soy:id="order_input" />
-							<input type="button" value="▲" class="s-btn up_btn" /> 
+							<input type="button" value="▲" class="s-btn up_btn" />
 							<input type="button" value="▼" class="s-btn down_btn" />
 						</td>
 						<td>
@@ -153,12 +153,12 @@
 						</td>
 						<td>
 							<input type="hidden" soy:id="order_input" />
-							<input type="button" value="▲" class="s-btn up_btn" /> 
+							<input type="button" value="▲" class="s-btn up_btn" />
 							<input type="button" value="▼" class="s-btn down_btn" />
 						</td>
 						<td>
 							<a soy:id="field_detail_link">詳細</a>
-							<a class="s-btn fr" soy:id="field_remove_link">削除</a>
+							<a class="s-btn fr" soy:id="field_remove_link" onclick="return confirm('この項目を削除します。よろしいですか？');">削除</a>
 						</td>
 					</tr>
 					<!-- /soy:id="field_list" -->
