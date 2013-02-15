@@ -77,9 +77,13 @@ class SOYCMS_EntryLogic extends SOY2LogicBase{
 		}else{
 			$entry->setUri($entry->getUri());
 			
-			$page = SOY2DAO::find("SOYCMS_Page",$entry->getDirectory());
-			$dirUri = $page->getUri();
-			$entry->setDirectoryUri($dirUri);
+			try{
+				$page = SOY2DAO::find("SOYCMS_Page",$entry->getDirectory());
+				$dirUri = $page->getUri();
+				$entry->setDirectoryUri($dirUri);
+			}catch(Exception $e){
+				//do nothing
+			}
 		}
 		
 		

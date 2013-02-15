@@ -8,7 +8,7 @@ SOY2::import("plugin.PluginInfo");
  */
 class PluginManager extends SOY2Plugin{
 	
-	public static function getInstance(){
+	public static function getInstance($className = NULL){
 		static $_inst;
 		
 		if(!$_inst){

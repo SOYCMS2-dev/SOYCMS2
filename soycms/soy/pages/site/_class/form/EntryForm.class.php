@@ -37,7 +37,7 @@ class EntryForm extends HTMLForm{
 			"html" => SOYCMS_EditorManager::buildSections($sections)
 		));
 		
-		$this->createAdd("create_date","_class.component.HTMLDateInput",array(
+		$this->createAdd("create_date","HTMLDateInput",array(
 			"name" => "Entry[createDate]",
 			"value" => $entry->getCreateDate(),
 		));

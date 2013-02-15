@@ -176,7 +176,7 @@ abstract class SOYCMS_EntryTemplateDAO extends SOY2DAO{
 	/**
 	 * @trigger onUpdate
 	 */
-	abstract function update(SOYCMS_EntryTemplate $bean);	
+	abstract function update(SOYCMS_EntryTemplate $bean);
 	
 	abstract function delete($id);
 	
@@ -210,7 +210,7 @@ abstract class SOYCMS_EntryTemplateDAO extends SOY2DAO{
 	 * @final
 	 * @override
 	 */
-	function getDataSource(){
+	function &getDataSource(){
 		$dsn = "sqlite:" . $this->getDBPath();
 		
 		if(!file_exists($this->getDBPath())){
@@ -225,7 +225,7 @@ abstract class SOYCMS_EntryTemplateDAO extends SOY2DAO{
 			$this->init($dsn);
 		}
 		
-		return $pdo;	
+		return $pdo;
 	}
 	
 	/**

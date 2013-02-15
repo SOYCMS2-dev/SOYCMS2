@@ -105,7 +105,7 @@ class SOYCMS_EntryHistory extends SOY2DAO_EntityBase{
 	}
 	
 	function getTypeText(){
- 	  	return @self::$TYPES[$this->getType()];	
+ 	  	return @self::$TYPES[$this->getType()];
 	}
 	
 	/* getter setter */
@@ -246,7 +246,7 @@ abstract class SOYCMS_EntryHistoryDAO extends SOY2DAO{
 	 * @final
 	 * @override
 	 */
-	function getDataSource(){
+	function &getDataSource(){
 		$dsn = "sqlite:" . $this->getDBPath();
 		
 		if(!file_exists($this->getDBPath())){
@@ -261,7 +261,7 @@ abstract class SOYCMS_EntryHistoryDAO extends SOY2DAO{
 			$this->init($dsn);
 		}
 		
-		return $pdo;	
+		return $pdo;
 	}
 	
 	/**

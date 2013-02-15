@@ -1,7 +1,7 @@
 <?php
 /**
  * UserLevelは0がスーパーユーザ(初期管理者は0)
- * 
+ *
  * @table soycms_user
  */
 class SOYCMS_User extends SOY2DAO_EntityBase{
@@ -115,7 +115,7 @@ class SOYCMS_User extends SOY2DAO_EntityBase{
 			$this->name = $this->userId;
 		}
 		
-		return true;	
+		return true;
 	}
 
 	function getLevel() {
@@ -199,7 +199,7 @@ abstract class SOYCMS_UserDAO extends SOY2DAO{
 	 */
 	abstract function insert(SOYCMS_User $bean);
 
-	abstract function update(SOYCMS_User $bean);	
+	abstract function update(SOYCMS_User $bean);
 	
 	abstract function delete($id);
 	
@@ -234,7 +234,7 @@ abstract class SOYCMS_UserDAO extends SOY2DAO{
 	/**
 	 * @final
 	 */
-	function getDataSource(){
+	function &getDataSource(){
 		return SOY2DAO::_getDataSource(SOYCMS_DB_DSN,SOYCMS_DB_USER,SOYCMS_DB_PASS);
 	}
 }
@@ -332,7 +332,7 @@ abstract class SOYCMS_UserDataDAO extends SOY2DAO{
 	/**
 	 * @override
 	 */
-	function getDataSource(){
+	function &getDataSource(){
 		$dsn = "sqlite:" . $this->getDBPath();
 		
 		if(!file_exists($this->getDBPath())){

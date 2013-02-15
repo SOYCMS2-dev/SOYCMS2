@@ -127,7 +127,7 @@ abstract class SOYCMS_UserTokenDAO extends SOY2DAO{
 	/**
 	 * @override
 	 */
-	function getDataSource(){
+	function &getDataSource(){
 		$dsn = "sqlite:" . $this->getDBPath();
 		
 		if(!file_exists($this->getDBPath())){

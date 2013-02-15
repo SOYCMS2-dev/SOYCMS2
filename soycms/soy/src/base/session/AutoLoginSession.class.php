@@ -260,7 +260,7 @@ abstract class AutoLoginSessionEntityDAO extends SOY2DAO{
 	/**
 	 * @final
 	 */
-	function getDataSource(){
+	function &getDataSource(){
 		$path = "sqlite:" . SOYCMSConfigUtil::get("db_dir") . "session.db";
 		return SOY2DAO::_getDataSource($path,"","");
 	}

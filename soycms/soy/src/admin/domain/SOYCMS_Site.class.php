@@ -129,7 +129,7 @@ abstract class SOYCMS_SiteDAO extends SOY2DAO{
 	 */
 	abstract function insert(SOYCMS_Site $bean);
 
-	abstract function update(SOYCMS_Site $bean);	
+	abstract function update(SOYCMS_Site $bean);
 	
 	abstract function delete($id);
 	
@@ -151,7 +151,7 @@ abstract class SOYCMS_SiteDAO extends SOY2DAO{
 	/**
 	 * @final
 	 */
-	function getDataSource(){
+	function &getDataSource(){
 		return SOY2DAO::_getDataSource(SOYCMS_DB_DSN,SOYCMS_DB_USER,SOYCMS_DB_PASS);
 	}
 }

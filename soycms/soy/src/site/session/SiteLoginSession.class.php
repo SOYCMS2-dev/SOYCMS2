@@ -443,7 +443,7 @@ abstract class SOYCMS_SiteUserActivityDAO extends SOY2DAO{
 	 * @final
 	 * AutoLoginSessionと同じ
 	 */
-	function getDataSource(){
+	function &getDataSource(){
 		if(!defined("SOYCMS_LOGIN_SITE_ID"))return null;
 		$path = "sqlite:" . SOYCMSConfigUtil::get("db_dir") . SOYCMS_LOGIN_SITE_ID . "_session.db";
 		return SOY2DAO::_getDataSource($path,"","");

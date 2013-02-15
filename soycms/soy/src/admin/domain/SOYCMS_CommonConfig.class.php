@@ -102,7 +102,7 @@ abstract class SOYCMS_CommonConfigDAO extends SOY2DAO{
 	/**
 	 * @final
 	 */
-	function getDataSource(){
+	function &getDataSource(){
 		return SOY2DAO::_getDataSource(SOYCMS_DB_DSN,SOYCMS_DB_USER,SOYCMS_DB_PASS);
 	}
 }

@@ -299,7 +299,7 @@ abstract class SOYCMS_HistoryDAO extends SOY2DAO{
 	 * @final
 	 * @override
 	 */
-	function getDataSource(){
+	function &getDataSource(){
 		$dsn = "sqlite:" . $this->getDBPath();
 		
 		if(!file_exists($this->getDBPath())){
