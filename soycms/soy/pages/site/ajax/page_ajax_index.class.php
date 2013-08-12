@@ -54,10 +54,10 @@ class page_ajax_index extends SOYCMS_WebPageBase{
 	function updateUserTrack(){
  		if(!defined("SOYCMS_LOGIN_SITE_ID"))return;
  		
- 		$token = $_POST["token"];
- 		$uri = $_POST["uri"];
- 		$query = $_POST["query"];
- 		$counter = $_POST["counter"];
+ 		$token = @$_POST["token"];
+ 		$uri = @$_POST["uri"];
+ 		$query = @$_POST["query"];
+ 		$counter = @$_POST["counter"];
 		
 		$obj = new SOYCMS_SiteUserActivity();
 		$obj->setToken($token);

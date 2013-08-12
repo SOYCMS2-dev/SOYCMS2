@@ -187,10 +187,8 @@ class SOYCMS_SitePageBase extends WebPage{
 		if(strpos($current_url,"/index.html") !== false)$current_url = substr($current_url, 0, strpos($current_url,"/index.html"));
 		if(strpos($current_url, ".") === false && strlen($current_url) > 1 && $current_url[strlen($current_url)-1] != "/")$current_url .= "/";
 		
-		$this->addModel("page_link",array(
-			"link" => $current_url,
-			"soy2prefix" => "cms"
-		));
+		$this->addLink("page_link",array("link" => $current_url,"soy2prefix" => "cms"));
+		$this->addLabel("page_url",array("text" => soycms_get_page_url($pageObj->getUri()),"soy2prefix" => "cms"));
 		
 		//meta
 		$this->buildPageInfo($config,$dirConfig);
@@ -422,14 +420,14 @@ class SOYCMS_SitePageBase extends WebPage{
 		
 		$this->addMeta("meta_keyword",array(
 			"attr:name" => "keywords",
-			"attr:content" => (@$config["keyword"]) ? @$config["keyword"] : "",
+			"attr:content" => (@$config["keyword"]) ? @$config["keyword"] : SOYCMS_DataSets::get("site_keyword",""),
 			"soy2prefix" => "cms",
 			//"visible" => (strlen((@$config["keyword"])))
 		));
 		
 		$this->addMeta("meta_description",array(
 			"attr:name" => "description",
-			"attr:content" => (@$config["description"]) ? @$config["description"] : "",
+			"attr:content" => (@$config["description"]) ? @$config["description"] : SOYCMS_DataSets::get("site_description",""),
 			"soy2prefix" => "cms",
 			//"visible" => (strlen((@$config["description"])))
 		));

@@ -67,6 +67,7 @@ class SOYCMS_SiteController extends SOY2PageController{
 			}
 		}
 		
+		/* @var $session SiteUserLoginSession */
 		$session = SOY2Session::get("site.session.SiteUserLoginSession");
 		if($session->getSiteId() == SOYCMS_SITE_ID){
 			//ダイナミック終了
@@ -262,7 +263,7 @@ class SOYCMS_SiteController extends SOY2PageController{
 			}
 			
 		}catch(SOYCMS_NotFoundException $e){
-			return $this->onNotFound($uri,$e);
+			return $this->onPageNotFound($uri,$e);
 		}catch(SOYCMS_EntryCloseException $e){
 			return $this->onEntryCloseError($uri,$e);
 		}catch(Exception $e){
@@ -270,11 +271,11 @@ class SOYCMS_SiteController extends SOY2PageController{
 				$this->onDefaultError(-1,500,$e);
 				exit;
 			}
-			return $this->onError($uri,$e);
+			return $this->onPageError($uri,$e);
 		}
 	}
 	
-	function onError($uri,$e){
+	function onPageError($uri,$e){
 		PluginManager::invoke("soycms.site.controller.error",array("execption" => $e));
 		$this->onDefaultError($uri,500,$e);
 	}
@@ -284,7 +285,7 @@ class SOYCMS_SiteController extends SOY2PageController{
 		$this->onDefaultError($uri,403,$e);
 	}
 	
-	function onNotFound($uri,$e){
+	function onPageNotFound($uri,$e){
 		PluginManager::invoke("soycms.site.controller.notfound",array("controller" => $this,"exception" => $e));
 		$this->onDefaultError($uri,404,$e);
 	}

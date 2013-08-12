@@ -116,12 +116,12 @@ class CMS_ApplicationController extends SOYCMS_SiteController{
 			PluginManager::invoke("soycms.site.controller.teardown",array("controller" => $this));
 		
 		}catch(Exception $e){
-			return $this->onError($uri,$e);
+			return $this->onAppError($uri,$e);
 		}
 		
 	}
 	
-	function onError($uri,$e){
+	function onAppError($uri,$e){
 		PluginManager::invoke("soycms.site.controller.error",array("execption" => $e));
 		var_dump($e);
 		exit;
@@ -177,7 +177,7 @@ class CMS_ApplicationControllerPage extends SOYCMS_SitePageBase{
 		return $this->_layout;
 	}
 	
-	function main(){
+	function main($args = array()){
 		$pageObj = $this->getPageObject();
 		$config = $pageObj->getConfigObject();
 		

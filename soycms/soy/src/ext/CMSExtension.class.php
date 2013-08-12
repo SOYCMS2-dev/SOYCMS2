@@ -159,26 +159,29 @@ class CMSExtensionImpl{
 					if(isset($config["flag"]))$this->config["flag"] = $config["flag"];
 				}
 				
-				if(isset($config["action"]) && isset($this->actions[$config["action"]])){
-					$this->config["flag"] = false;
-					if(isset($config["flag"]))$this->config["flag"] = $config["flag"];
-					$action_config = $this->actions[$config["action"]];
-					$action = $action_config["class"];
-					$args = (isset($action_config["arguments"])) ? $action_config["arguments"] : array();
-					
-					if(isset($action_config["path"])){
-						SOY2::import(array($action_config["path"],$action));
-					}else{
-						SOY2::import($action);
-					}
-					$actions = explode(".",$action);
-					$action_class = array_pop($actions);
-					if(class_exists($action_class)){
-						$this->action[$action_class] = new $action_class($args);
-						SOY2::cast($this->action[$action_class],$config);
-						$this->action[$action_class]->prepare($uri,$this);
-						if(isset($action_config["last"]) && $action_config["last"] == true){
-							break;
+				if(isset($config["action"])){
+					$action_name = (is_array($config["action"])) ? $config["action"][0] : $config["action"];
+					$args = (is_array($config["action"])) ? array_slice($config["action"], 1) : array();
+					if(isset($this->actions[$action_name])){
+						$this->config["flag"] = false;
+						if(isset($config["flag"]))$this->config["flag"] = $config["flag"];
+						$action_config = $this->actions[$action_name];
+						$action = $action_config["class"];
+						
+						if(isset($action_config["path"])){
+							SOY2::import(array($action_config["path"],$action));
+						}else{
+							SOY2::import($action);
+						}
+						$actions = explode(".",$action);
+						$action_class = array_pop($actions);
+						if(class_exists($action_class)){
+							$this->action[$action_class] = new $action_class($args);
+							SOY2::cast($this->action[$action_class],$config);
+							$this->action[$action_class]->prepare($uri,$this);
+							if(isset($action_config["last"]) && $action_config["last"] == true){
+								break;
+							}
 						}
 					}
 				}

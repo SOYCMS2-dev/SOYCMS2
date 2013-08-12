@@ -51,8 +51,7 @@ class SOYCMS_SuperCachePlugin extends SOYCMS_SiteControllerExtension{
 				
 				if($page->getType() != "app" && $page->getType() != "search"){
 					//create cache
-					$this->createCache($html,(@$this->config["footprint"] > 0),$pages[$uri]["limit"]);
-					$cache_created = true;
+					$cache_created = $this->createCache($html,(@$this->config["footprint"] > 0),$pages[$uri]["limit"]);
 				}
 			}
 		}
@@ -92,11 +91,13 @@ class SOYCMS_SuperCachePlugin extends SOYCMS_SiteControllerExtension{
 		$res = soycms_supercache_header();
 		if(!$res)return;
 		
+		$html = file_get_contents($cacheFilePath);
+		if(!$html)return false;
 		
 		//キャッシュを出力する
 		ob_start();
 			$ob = ob_start("ob_gzhandler");
-			readfile($cacheFilePath);
+			echo $html;
 			$time = microtime(true) - $time;
 			if(function_exists("soycms_supercache_footer"))soycms_supercache_footer($time);
 		
@@ -108,9 +109,12 @@ class SOYCMS_SuperCachePlugin extends SOYCMS_SiteControllerExtension{
 	}
 	
 	function createCache($html, $footprint, $limit = 30){
+		
+		if(empty($html))return false;
+		if($limit == 0)$limit = 30;
+		
 		//キャッシュの保存
 		$cacheFilePath = $this->getCacheFilePath();
-		
 		
 		if(!file_exists(dirname($cacheFilePath))){
 			soy2_mkdir(dirname($cacheFilePath));
@@ -151,6 +155,7 @@ class SOYCMS_SuperCachePlugin extends SOYCMS_SiteControllerExtension{
 		//headerの保存
 		file_put_contents($headerPath,"<?php\n".implode("\n", $h)."\n");
 		
+		return true;
 	}
 	
 	function getCacheFilePath(){

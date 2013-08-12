@@ -80,7 +80,15 @@ class SOYCMS_Template implements SerialziedEntityInterface{
 	 */
 	public static function load($_dir,$targetDir = null){
 		$targetDir = ($targetDir) ? $targetDir : self::getTemplateDirectory();
-		$dir = $targetDir . $_dir;
+		$type = null;
+		$templateId = $_dir;
+		if(is_array($_dir)){
+			$dir = $targetDir . $_dir[0];
+			$type = $_dir[1];
+			$templateId = $_dir[0];
+		}else{
+			$dir = $targetDir . $_dir;
+		}
 		
 		//group
 		if(is_string($_dir) && $_dir[0] == "_" && strpos($_dir,"/")===false){
@@ -119,7 +127,7 @@ class SOYCMS_Template implements SerialziedEntityInterface{
 		}
 		
 		$obj = new SOYCMS_Template();
-		$obj->setId($_dir);
+		$obj->setId($templateId);
 		$array = parse_ini_file($dir . "/template.ini",true);
 		if(@$array["type"])$obj->setType(@$array["type"]);
 		if(@$array["type-text"])$obj->setTypeText(@$array["type-text"]);
@@ -156,6 +164,9 @@ class SOYCMS_Template implements SerialziedEntityInterface{
 		$obj->setUpdateDate(filemtime($dir . "/template.ini"));
 		$obj->setProperties(@parse_ini_file($obj->getPropertyFilePath()));
 		
+		if($type){
+			$obj->setTemplateType($type);
+		}
 		
 		return $obj;
 	}

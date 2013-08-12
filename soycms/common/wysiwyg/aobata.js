@@ -565,6 +565,11 @@ aobata_editor.prototype = {
 								text = event.clipboardData.getData("text/html");
 								if(!text)text = event.clipboardData.getData("Text");
 								event.preventDefault();
+								
+								text = text.replace(/\r\n/g,"\n");
+								text = text.replace(/\r/g,"\n");
+								text = text.replace(/\n/g,"<br />\n");
+								
 								on_paste(text);
 								return;
 							}

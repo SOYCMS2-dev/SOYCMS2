@@ -1,45 +1,45 @@
-<div id="main-window1" class="main-window"> 
+<div id="main-window1" class="main-window">
 				
-<div class="window-title"> 
-	<h2>新しいサイトの作成</h2> 
-</div> 
+<div class="window-title">
+	<h2>新しいサイトの作成</h2>
+</div>
 
-<div class="window-content"> 
+<div class="window-content">
 	
-	<div id="main-section1" class="section"> 
+	<div id="main-section1" class="section">
 
-		<div class="content"> 
+		<div class="content">
 
-			<form soy:id="create_form"> 
+			<form soy:id="create_form">
 			
-				<div id="post1-section1" class="form-section"> 
+				<div id="post1-section1" class="form-section">
 				
 					<p class="xxl" style="color:red;" soy:id="error_message">エラー</p>
 					
-					<h3>新しいサイトの作成 (1/4)</h3> 
-					<div class="label"> 
-						<h4> 
-							<label for="post1-1">サイトID (設定後変更出来ません) 利用できる文字：半角英数,ハイフン</label></h4> 
-					</div> 
-					<div class="item"> 
+					<h3>新しいサイトの作成 (1/4)</h3>
+					<div class="label">
+						<h4>
+							<label for="post1-1">サイトID (設定後変更出来ません) 利用できる文字：半角英数,ハイフン</label></h4>
+					</div>
+					<div class="item">
 						<p><input id="site_id_input" type="text" class="text" soy:id="site_id" size="40" class="xm-area" /></p>
-					</div> 
+					</div>
 
 
-					<div class="label"> 
-						<h4> 
+					<div class="label">
+						<h4>
 							<label for="post1-1">サイトの名前</label>
-						</h4> 
-					</div> 
-					<div class="item"> 
-						<p><input type="text" class="text" soy:id="site_name" class="xm-area" size="40" /></p> 
-					</div> 
+						</h4>
+					</div>
+					<div class="item">
+						<p><input type="text" class="text" soy:id="site_name" class="xm-area" size="40" /></p>
+					</div>
 					
 
-					<div class="label"> 
-						<h4> 
-							<label for="post1-1">サイトディレクトリ</label></h4> 
-					</div> 
+					<div class="label">
+						<h4>
+							<label for="post1-1">サイトディレクトリ</label></h4>
+					</div>
 					<div class="item">
 						<p class="xl">
 						<!-- soy:id="site_path_text_div" -->
@@ -48,15 +48,15 @@
 						<!-- /soy:id="site_path_text_div" -->
 						</p>
 						<input type="text" id="site_path_input" class="m-area liq-area" soy:id="site_path" size="40" />
-					</div> 
+					</div>
 
 
 
-					<div class="label"> 
-						<h4> 
-							<label for="post1-1">サイトのURL</label></h4> 
-					</div> 
-					<div class="item"> 
+					<div class="label">
+						<h4>
+							<label for="post1-1">サイトのURL</label></h4>
+					</div>
+					<div class="item">
 						<p class="xl">
 						<!-- soy:id="site_url_text_div" -->
 						<span id="site_url_text" soy:id="site_url_text"></span>
@@ -64,21 +64,21 @@
 						<!-- /soy:id="site_url_text_div" -->
 						</p>
 						<input type="text" id="site_url_input" class="text m-area liq-area" soy:id="site_url" />
-					</div> 
+					</div>
 	
 
-					<div class="label"> 
-						<h4> 
-							<label for="post1-1">データベース種別</label></h4> 
-					</div> 
-					<div class="item"> 
-						<p class="xl"> 
+					<div class="label">
+						<h4>
+							<label for="post1-1">データベース種別</label></h4>
+					</div>
+					<div class="item">
+						<p class="xl">
 							<input type="radio" id="db_type_sqlite" class="db_type_radio" soy:id="db_type_sqlite" name="dbtype"　checked="checked" />
 							<label for="db_type_sqlite">SQLite</label>
 							
 							<input type="radio" id="db_type_mysql" class="db_type_radio" soy:id="db_type_mysql" name="dbtype" />
 							<label for="db_type_mysql">MySQL</label>
-						</p> 
+						</p>
 						<p>※小規模サイト、一般的なWEBサイトであればSQLiteをお勧めいたします。</p>
 						
 						<script type="text/javascript">
@@ -90,7 +90,7 @@
 						});
 						
 						$("input.db_type_radio").bind("click",function(){
-							$('#mysql_option').toggle($('#db_type_mysql').attr("checked"));
+							$('#mysql_option').toggle($('#db_type_mysql').prop("checked"));
 						});
 						</script>
 						
@@ -141,19 +141,19 @@
 							if($('#db_type_mysql').attr("checked")){
 								$("#mysql_option").show();
 							}
-						</script> 
+						</script>
 					</div>
 
 
-				<div class="form-btn ce"> 
-					<input type="submit" value="次へ" id="post1-submit" name="post1-submit" class="l-btn" /> 
-				</div> 
+				<div class="form-btn ce">
+					<input type="submit" value="次へ" id="post1-submit" name="post1-submit" class="l-btn" />
+				</div>
 
 
 
-				</div> 
+				</div>
 				
-			</form> 
+			</form>
 
 
 
@@ -161,17 +161,17 @@
 
 
 
-		</div> 
-	</div> 
-	<!--  // #main-section1 --> 
+		</div>
+	</div>
+	<!--  // #main-section1 -->
 
 	
 
 
-</div> 
-<!--  // .window-content --> 
-</div> 
-<!--  // #main-window1 --> 
+</div>
+<!--  // .window-content -->
+</div>
+<!--  // #main-window1 -->
 
 <script type="text/javascript">
 $(function(){

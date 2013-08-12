@@ -40,7 +40,7 @@ class AutoLoginSession extends SOY2Session{
 			//SiteUserLoginSession
 			$userLoginSession = SOY2Session::get("site.session.SiteUserLoginSession");
 			$userLoginSession->setSiteId($site->getSiteId());
-			$userLoginSession->setSoycmsRoot(SOY2FancyURIController::createRelativeLink("../../",true));
+			$userLoginSession->setSoycmsRoot(SOY2FancyURIController::createRelativeLink("../",true));
 			
 			return true;
 		}catch(Exception $e){
