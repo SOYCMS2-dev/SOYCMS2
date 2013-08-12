@@ -36,7 +36,7 @@ class SOYCMS_EntryThumbnailField extends SOYCMS_EntryCustomFieldBase{
 				'<tr>' .
 					'<th>画像URL</th>' .
 					'<td><input type="text" id="soycms_thumbnail_input" class="s-area intro" size="40" name="soycms_entry_thumbnail_field[image]" value="'.htmlspecialchars($value["image"],ENT_QUOTES).'" /> ' .
-					'<span><input type="button" class="s-btn" value="参照" onclick="entry_editor_show_attachments(function(img,link){$(\'#soycms_thumbnail_input\').val(img);$(\'#soycms_thumbnail_img\').attr(\'src\',img)});" /></span>' .
+					'<span><input type="button" class="s-btn" value="参照" onclick="aobata_editor.show_attachments(function(img,link){$(\'#soycms_thumbnail_input\').val(img);$(\'#soycms_thumbnail_img\').attr(\'src\',img)});" /></span>' .
 					((strlen($value["image"])>0) ? '<br /><img id="soycms_thumbnail_img" src="'.htmlspecialchars($value["image"],ENT_QUOTES).'" />' : "") .
 					'</td>' .
 				'</tr>' .
